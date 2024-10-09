@@ -1,0 +1,227 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:filescom="http://www.mulesoft.org/schema/mule/filescom"
+    xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+                        http://www.mulesoft.org/schema/mule/filescom http://www.mulesoft.org/schema/mule/filescom/current/mule-filescom.xsd">
+
+    <configuration-properties file="filescom-test.properties" />
+
+    <filescom:config name="FilesCom">
+        <filescom:connection apiKey="${apiKey}" baseUrl="${baseUrl}" />
+    </filescom:config>
+
+    <flow name="listShareLinksFlow">
+        <filescom:list-share-links config-ref="FilesCom" />
+    </flow>
+
+    <flow name="showShareLinkFlow">
+        <filescom:show-share-link config-ref="FilesCom" id="1" />
+    </flow>
+
+    <flow name="createShareLinkFlow">
+        <filescom:create-share-link config-ref="FilesCom"
+         paths='#[["file.txt"]]'
+         password="Password"
+         expiresAt="2000-01-01T01:00:00Z"
+         maxUses="1"
+         description="The public description of the bundle."
+         note="The internal note on the bundle."
+         requireRegistration="true"
+        />
+    </flow>
+
+    <flow name="updateShareLinkFlow">
+        <filescom:update-share-link config-ref="FilesCom"
+         id="1"
+         expiresAt="2000-01-01T01:00:00Z"
+        />
+    </flow>
+
+    <flow name="deleteShareLinkFlow">
+        <filescom:delete-share-link config-ref="FilesCom" id="1" />
+    </flow>
+
+    <flow name="listShareLinkDownloadsFlow">
+        <filescom:list-share-link-downloads config-ref="FilesCom" bundleId="1" />
+    </flow>
+
+    <flow name="listShareLinkNotificationsFlow">
+        <filescom:list-share-link-notifications config-ref="FilesCom" />
+    </flow>
+
+    <flow name="showShareLinkNotificationFlow">
+        <filescom:show-share-link-notification config-ref="FilesCom" id="1" />
+    </flow>
+
+    <flow name="createShareLinkNotificationFlow">
+        <filescom:create-share-link-notification config-ref="FilesCom"
+         bundleId="1"
+         userId="1"
+        />
+    </flow>
+
+    <flow name="updateShareLinkNotificationFlow">
+        <filescom:update-share-link-notification config-ref="FilesCom"
+         id="1"
+         notifyOnRegistration="true"
+         notifyOnUpload="true"
+        />
+    </flow>
+
+    <flow name="deleteShareLinkNotificationFlow">
+        <filescom:delete-share-link-notification config-ref="FilesCom" id="1" />
+    </flow>
+
+    <flow name="listShareLinkRecipientsFlow">
+        <filescom:list-share-link-recipients config-ref="FilesCom" bundleId="1" />
+    </flow>
+
+    <flow name="createShareLinkRecipientFlow">
+        <filescom:create-share-link-recipient config-ref="FilesCom"
+         bundleId="1"
+         recipient="johndoe@gmail.com"
+         name="John Smith"
+         company="Acme Ltd"
+         note="Just a note."
+        />
+    </flow>
+
+    <flow name="listShareLinkRegistrationsFlow">
+        <filescom:list-share-link-registrations config-ref="FilesCom" bundleId="1" />
+    </flow>
+
+    <flow name="downloadFileFlow">
+        <filescom:download-file config-ref="FilesCom" path="path" />
+    </flow>
+
+    <flow name="uploadFileFlow">
+        <filescom:upload-file config-ref="FilesCom" path="path" />
+    </flow>
+
+    <flow name="deleteFileFlow">
+        <filescom:delete-file config-ref="FilesCom" path="path" />
+    </flow>
+
+    <flow name="showFileFlow">
+        <filescom:show-file config-ref="FilesCom" path="path" />
+    </flow>
+
+    <flow name="copyFileFlow">
+        <filescom:copy-file config-ref="FilesCom"
+         path="path"
+         destination="destination"
+        />
+    </flow>
+
+    <flow name="moveFileFlow">
+        <filescom:move-file config-ref="FilesCom"
+         path="path"
+         destination="destination"
+        />
+    </flow>
+
+    <flow name="listFoldersFlow">
+        <filescom:list-folders config-ref="FilesCom" path="path" />
+    </flow>
+
+    <flow name="createFolderFlow">
+        <filescom:create-folder config-ref="FilesCom" path="path" />
+    </flow>
+
+    <flow name="deleteFolderFlow">
+        <filescom:delete-folder config-ref="FilesCom" path="path" />
+    </flow>
+
+    <flow name="showFolderFlow">
+        <filescom:show-folder config-ref="FilesCom" path="path" />
+    </flow>
+
+    <flow name="copyFolderFlow">
+        <filescom:copy-folder config-ref="FilesCom"
+         path="path"
+         destination="destination"
+        />
+    </flow>
+
+    <flow name="moveFolderFlow">
+        <filescom:move-folder config-ref="FilesCom"
+         path="path"
+         destination="destination"
+        />
+    </flow>
+
+    <flow name="listGroupsFlow">
+        <filescom:list-groups config-ref="FilesCom" />
+    </flow>
+
+    <flow name="showGroupFlow">
+        <filescom:show-group config-ref="FilesCom" id="1" />
+    </flow>
+
+    <flow name="createGroupFlow">
+        <filescom:create-group config-ref="FilesCom"
+         name="name"
+         notes="example"
+         userIds="1"
+         adminIds="1"
+        />
+    </flow>
+
+    <flow name="updateGroupFlow">
+        <filescom:update-group config-ref="FilesCom"
+         id="1"
+         notes="example"
+         userIds="1"
+         adminIds="1"
+         name="owners"
+        />
+    </flow>
+
+    <flow name="deleteGroupFlow">
+        <filescom:delete-group config-ref="FilesCom" id="1" />
+    </flow>
+
+    <flow name="listUsersFlow">
+        <filescom:list-users config-ref="FilesCom" />
+    </flow>
+
+    <flow name="showUserFlow">
+        <filescom:show-user config-ref="FilesCom" id="1" />
+    </flow>
+
+    <flow name="createUserFlow">
+        <filescom:create-user config-ref="FilesCom"
+         username="user"
+         email="example"
+         groupIds="example"
+         authenticationMethod="password"
+         name="John Doe"
+         company="ACME Corp."
+         notes="Internal notes on this user."
+         requirePasswordChange="true"
+         userRoot="example"
+         userHome="example"
+        />
+    </flow>
+
+    <flow name="updateUserFlow">
+        <filescom:update-user config-ref="FilesCom"
+         id="1"
+         email="example"
+         groupIds="example"
+         authenticationMethod="password"
+         name="John Doe"
+         company="ACME Corp."
+         notes="Internal notes on this user."
+         requirePasswordChange="true"
+         userRoot="example"
+         userHome="example"
+         username="user"
+        />
+    </flow>
+
+    <flow name="deleteUserFlow">
+        <filescom:delete-user config-ref="FilesCom" id="1" />
+    </flow>
+
+</mule>
