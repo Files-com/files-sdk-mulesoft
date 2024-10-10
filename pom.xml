@@ -71,7 +71,7 @@
         <dependency>
             <groupId>com.files</groupId>
             <artifactId>files-sdk</artifactId>
-            <version>1.4.62</version>
+            <version>1.4.63</version>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
