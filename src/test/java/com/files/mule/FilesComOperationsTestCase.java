@@ -18,6 +18,36 @@ public class FilesComOperationsTestCase extends MuleArtifactFunctionalTestCase {
   }
 
   @Test
+  public void testShareLinkOperations() throws Exception {
+    final Optional<Error> error = flowRunner("ShareLinkFlow").run().getError();
+    assertThat(error.isPresent(), is(false));
+  }
+
+  @Test
+  public void testFileOperations() throws Exception {
+    final Optional<Error> error = flowRunner("FileFlow").run().getError();
+    assertThat(error.isPresent(), is(false));
+  }
+
+  @Test
+  public void testFolderOperations() throws Exception {
+    final Optional<Error> error = flowRunner("FolderFlow").run().getError();
+    assertThat(error.isPresent(), is(false));
+  }
+
+  @Test
+  public void testGroupOperations() throws Exception {
+    final Optional<Error> error = flowRunner("GroupFlow").run().getError();
+    assertThat(error.isPresent(), is(false));
+  }
+
+  @Test
+  public void testUserOperations() throws Exception {
+    final Optional<Error> error = flowRunner("UserFlow").run().getError();
+    assertThat(error.isPresent(), is(false));
+  }
+
+  @Test
   public void testListShareLinkOperation() throws Exception {
     final Optional<Error> error = flowRunner("listShareLinksFlow").run().getError();
     assertThat(error.isPresent(), is(false));
