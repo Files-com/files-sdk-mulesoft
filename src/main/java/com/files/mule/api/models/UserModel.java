@@ -27,6 +27,7 @@ public class UserModel implements Serializable {
     this.authenticateUntil = user.authenticateUntil;
     this.authenticationMethod = user.authenticationMethod;
     this.avatarUrl = user.avatarUrl;
+    this.billable = user.billable;
     this.billingPermission = user.billingPermission;
     this.bypassSiteAllowedIps = user.bypassSiteAllowedIps;
     this.bypassInactiveDisable = user.bypassInactiveDisable;
@@ -182,6 +183,16 @@ public class UserModel implements Serializable {
 
   public String getAvatarUrl() {
     return avatarUrl;
+  }
+
+  /**
+   * Is this a billable user record?
+   */
+  @Parameter
+  public Boolean billable;
+
+  public Boolean getBillable() {
+    return billable;
   }
 
   /**
