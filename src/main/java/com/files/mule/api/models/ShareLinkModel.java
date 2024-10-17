@@ -60,6 +60,7 @@ public class ShareLinkModel implements Serializable {
     }
     this.watermarkValue = bundle.watermarkValue;
     this.hasInbox = bundle.hasInbox;
+    this.dontAllowFoldersInUploads = bundle.dontAllowFoldersInUploads;
     this.paths = bundle.paths;
     this.bundlepaths = bundle.bundlepaths;
     this.password = bundle.password;
@@ -437,6 +438,16 @@ public class ShareLinkModel implements Serializable {
 
   public Boolean getHasInbox() {
     return hasInbox;
+  }
+
+  /**
+   * Should folder uploads be prevented?
+   */
+  @Parameter
+  public Boolean dontAllowFoldersInUploads;
+
+  public Boolean getDontAllowFoldersInUploads() {
+    return dontAllowFoldersInUploads;
   }
 
   /**
