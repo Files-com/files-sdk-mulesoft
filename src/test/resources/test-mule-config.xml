@@ -4,8 +4,10 @@
     xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
                         http://www.mulesoft.org/schema/mule/filescom http://www.mulesoft.org/schema/mule/filescom/current/mule-filescom.xsd">
 
-    <global-property name="baseUrl" value="https://app.files.com"/>
-    <global-property name="mockServer" value="false"/>
+    <global-property name="FILES_MOCK_SERVER_HOST" value="localhost"/>
+    <global-property name="FILES_MOCK_SERVER_PORT" value="4041"/>
+    <global-property name="baseUrl" value="http://${FILES_MOCK_SERVER_HOST}:${FILES_MOCK_SERVER_PORT}"/>
+    <global-property name="mockServer" value="true"/>
     <configuration-properties file="filescom-test.properties" />
 
     <filescom:config name="FilesCom">
