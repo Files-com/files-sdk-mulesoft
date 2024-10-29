@@ -37,6 +37,8 @@ public class FileModel implements Serializable {
     this.providedMtime = file.providedMtime;
     this.crc32 = file.crc32;
     this.md5 = file.md5;
+    this.sha1 = file.sha1;
+    this.sha256 = file.sha256;
     this.mimeType = file.mimeType;
     this.region = file.region;
     this.permissions = file.permissions;
@@ -297,6 +299,26 @@ public class FileModel implements Serializable {
 
   public String getMd5() {
     return md5;
+  }
+
+  /**
+   * File SHA1 checksum. This is sometimes delayed, so if you get a blank response, wait and try again.
+   */
+  @Parameter
+  public String sha1;
+
+  public String getSha1() {
+    return sha1;
+  }
+
+  /**
+   * File SHA256 checksum. This is sometimes delayed, so if you get a blank response, wait and try again.
+   */
+  @Parameter
+  public String sha256;
+
+  public String getSha256() {
+    return sha256;
   }
 
   /**
