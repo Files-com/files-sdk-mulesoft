@@ -8,7 +8,7 @@
     <global-property name="FILES_MOCK_SERVER_PORT" value="4041"/>
     <global-property name="baseUrl" value="http://${FILES_MOCK_SERVER_HOST}:${FILES_MOCK_SERVER_PORT}"/>
     <global-property name="mockServer" value="true"/>
-    <configuration-properties file="filescom-test.properties" />
+    <configuration-properties file="automation-credentials.properties" />
 
     <filescom:config name="FilesCom">
         <filescom:connection apiKey="${apiKey}" baseUrl="${baseUrl}" />

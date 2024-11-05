@@ -13,7 +13,7 @@
     <groupId>com.files</groupId>
     <artifactId>mule-filescom-connector</artifactId>
     <packaging>mule-extension</packaging>
-    <version>0.1.0</version>
+    <version>0.1.26</version>
 
     <name>Files.com Connector</name>
     <description>The Files.com MuleSoft Connector</description>
