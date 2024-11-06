@@ -19,7 +19,7 @@ public class FilesComConnectionProvider implements CachedConnectionProvider<File
   @Parameter
   @DisplayName("API Key")
   @Summary("The API key used to authenticate with Files.com.")
-  @Placement
+  @Placement(tab = Placement.DEFAULT_TAB)
   private String apiKey;
 
   @Parameter

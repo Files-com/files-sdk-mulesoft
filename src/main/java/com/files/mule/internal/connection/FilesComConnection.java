@@ -12,9 +12,9 @@ import com.files.models.*;
 import com.files.mule.internal.config.FilesComConfig;
 
 public class FilesComConnection {
-
   private static final Logger LOGGER = LoggerFactory.getLogger(FilesComConnection.class);
 
+  private final FilesComConfig config = new FilesComConfig();
   private final String apiKey;
   private String apiRoot;
 
@@ -22,7 +22,7 @@ public class FilesComConnection {
     this.apiKey = apiKey;
     setApiRoot(apiRoot);
 
-    FilesClient.setProperty("userAgent", FilesComConfig.getInstance().getUserAgent());
+    FilesClient.setProperty("userAgent", config.getUserAgent());
   }
 
   private HashMap<String, Object> getRequestOptions() {

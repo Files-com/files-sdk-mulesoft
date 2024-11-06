@@ -26,7 +26,7 @@ public class FormFieldSetModel implements Serializable {
     this.id = formFieldSet.id;
     this.title = formFieldSet.title;
     if (formFieldSet.formLayout != null) {
-      this.formLayout = Arrays.asList(formFieldSet.formLayout);
+      this.formLayouts = Arrays.asList(formFieldSet.formLayout);
     }
     if (formFieldSet.formFields != null) {
       this.formFields = Arrays.asList(formFieldSet.formFields);
@@ -49,10 +49,10 @@ public class FormFieldSetModel implements Serializable {
     return title;
   }
 
-  private List<Long> formLayout;
+  private List<Long> formLayouts;
 
-  public List<Long> getFormLayout() {
-    return formLayout;
+  public List<Long> getFormLayouts() {
+    return formLayouts;
   }
 
   private List<Object> formFields;

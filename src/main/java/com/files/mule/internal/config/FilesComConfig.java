@@ -9,28 +9,15 @@ import org.slf4j.LoggerFactory;
 
 public class FilesComConfig {
   private static final Logger LOGGER = LoggerFactory.getLogger(FilesComConfig.class);
-  private static volatile FilesComConfig instance;
 
-  private final Properties properties;
+  private final Properties properties = new Properties();
 
-  protected FilesComConfig() {
-    properties = new Properties();
+  public FilesComConfig() {
     try (final InputStream file = FilesComConfig.class.getResourceAsStream("/filescom-connector.properties")) {
       properties.load(file);
     } catch (IOException e) {
       LOGGER.warn("could not load configurator properties");
     }
-  }
-
-  public static FilesComConfig getInstance() {
-    if (instance == null) {
-      synchronized (FilesComConfig.class) {
-        if (instance == null) {
-          instance = new FilesComConfig();
-        }
-      }
-    }
-    return instance;
   }
 
   public String getConnectorVersion() {
