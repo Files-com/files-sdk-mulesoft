@@ -31,7 +31,7 @@ import com.files.mule.internal.error.exception.*;
 import com.files.models.*;
 import com.files.mule.api.models.*;
 import com.files.mule.internal.connection.FilesComConnection;
-import com.files.mule.internal.error.provider.FilesComErrorProvider;
+import com.files.mule.internal.error.provider.FilesComErrorsProvider;
 import com.files.mule.internal.values.*;
 
 public class FilesComOperations {
@@ -43,7 +43,7 @@ public class FilesComOperations {
    */
   @DisplayName("Share Link - List")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public PagingProvider<FilesComConnection, ShareLinkModel> listShareLinks(
   ) {
     return new PagingProvider<FilesComConnection, ShareLinkModel>() {
@@ -101,7 +101,7 @@ public class FilesComOperations {
    */
   @DisplayName("Share Link - Show")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public ShareLinkModel showShareLink(
       final @Connection FilesComConnection connection,
       final @Summary("Bundle ID.") @Example("1") Long id) {
@@ -132,7 +132,7 @@ public class FilesComOperations {
    */
   @DisplayName("Share Link - Create")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public ShareLinkModel createShareLink(
       final @Connection FilesComConnection connection,
       final @Summary("A list of paths to include in this bundle.") @Example("[\"file.txt\"]") List<String> paths,
@@ -191,7 +191,7 @@ public class FilesComOperations {
    */
   @DisplayName("Share Link - Update")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public ShareLinkModel updateShareLink(
       final @Connection FilesComConnection connection,
       final @Summary("Bundle ID.") @Example("1") Long id,
@@ -226,7 +226,7 @@ public class FilesComOperations {
    * Delete Share Link
    */
   @DisplayName("Share Link - Delete")
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public void deleteShareLink(
       final @Connection FilesComConnection connection,
       final @Summary("Bundle ID.") @Example("1") Long id) {
@@ -257,7 +257,7 @@ public class FilesComOperations {
    */
   @DisplayName("Share Link - List Downloads")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public PagingProvider<FilesComConnection, ShareLinkDownloadModel> listShareLinkDownloads(
       final @Optional @Summary("Bundle ID") @Example("1") Long bundleId) {
     return new PagingProvider<FilesComConnection, ShareLinkDownloadModel>() {
@@ -318,7 +318,7 @@ public class FilesComOperations {
    */
   @DisplayName("Share Link - List Notifications")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public PagingProvider<FilesComConnection, ShareLinkNotificationModel> listShareLinkNotifications(
   ) {
     return new PagingProvider<FilesComConnection, ShareLinkNotificationModel>() {
@@ -376,7 +376,7 @@ public class FilesComOperations {
    */
   @DisplayName("Share Link - Show Notification")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public ShareLinkNotificationModel showShareLinkNotification(
       final @Connection FilesComConnection connection,
       final @Summary("Bundle Notification ID.") @Example("1") Long id) {
@@ -407,7 +407,7 @@ public class FilesComOperations {
    */
   @DisplayName("Share Link - Create Notification")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public ShareLinkNotificationModel createShareLinkNotification(
       final @Connection FilesComConnection connection,
       final @Summary("Bundle ID to notify on") @Example("1") Long bundleId,
@@ -445,7 +445,7 @@ public class FilesComOperations {
    */
   @DisplayName("Share Link - Update Notification")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public ShareLinkNotificationModel updateShareLinkNotification(
       final @Connection FilesComConnection connection,
       final @Summary("Bundle Notification ID.") @Example("1") Long id,
@@ -479,7 +479,7 @@ public class FilesComOperations {
    * Delete Share Link Notification
    */
   @DisplayName("Share Link - Delete Notification")
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public void deleteShareLinkNotification(
       final @Connection FilesComConnection connection,
       final @Summary("Bundle Notification ID.") @Example("1") Long id) {
@@ -510,7 +510,7 @@ public class FilesComOperations {
    */
   @DisplayName("Share Link - List Recipients")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public PagingProvider<FilesComConnection, ShareLinkRecipientModel> listShareLinkRecipients(
       final @Summary("List recipients for the bundle with this ID.") @Example("1") Long bundleId) {
     return new PagingProvider<FilesComConnection, ShareLinkRecipientModel>() {
@@ -571,7 +571,7 @@ public class FilesComOperations {
    */
   @DisplayName("Share Link - Create Recipient")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public ShareLinkRecipientModel createShareLinkRecipient(
       final @Connection FilesComConnection connection,
       final @Summary("Bundle to share.") @Example("1") Long bundleId,
@@ -623,7 +623,7 @@ public class FilesComOperations {
    */
   @DisplayName("Share Link - List Registrations")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public PagingProvider<FilesComConnection, ShareLinkRegistrationModel> listShareLinkRegistrations(
       final @Optional @Summary("ID of the associated Bundle") @Example("1") Long bundleId) {
     return new PagingProvider<FilesComConnection, ShareLinkRegistrationModel>() {
@@ -684,7 +684,7 @@ public class FilesComOperations {
    */
   @DisplayName("File - Download")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public InputStream downloadFile(
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path) {
@@ -715,7 +715,7 @@ public class FilesComOperations {
    */
   @DisplayName("File - Upload")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public FileModel uploadFile(
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path,
@@ -747,7 +747,7 @@ public class FilesComOperations {
    * Delete file/folder
    */
   @DisplayName("File - Delete")
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public void deleteFile(
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path) {
@@ -778,7 +778,7 @@ public class FilesComOperations {
    */
   @DisplayName("File - Show")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public FileModel showFile(
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path) {
@@ -809,7 +809,7 @@ public class FilesComOperations {
    */
   @DisplayName("File - Copy")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public FileActionModel copyFile(
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path,
@@ -845,7 +845,7 @@ public class FilesComOperations {
    */
   @DisplayName("File - Move")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public FileActionModel moveFile(
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path,
@@ -881,7 +881,7 @@ public class FilesComOperations {
    */
   @DisplayName("Folder - List")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public PagingProvider<FilesComConnection, FileModel> listFolders(
       final @Summary("Path to operate on.") @Example("path") String path) {
     return new PagingProvider<FilesComConnection, FileModel>() {
@@ -942,7 +942,7 @@ public class FilesComOperations {
    */
   @DisplayName("Folder - Create")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public FolderModel createFolder(
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path) {
@@ -973,7 +973,7 @@ public class FilesComOperations {
    * Delete file/folder
    */
   @DisplayName("Folder - Delete")
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public void deleteFolder(
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path) {
@@ -1004,7 +1004,7 @@ public class FilesComOperations {
    */
   @DisplayName("Folder - Show")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public FileModel showFolder(
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path) {
@@ -1035,7 +1035,7 @@ public class FilesComOperations {
    */
   @DisplayName("Folder - Copy")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public FileActionModel copyFolder(
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path,
@@ -1071,7 +1071,7 @@ public class FilesComOperations {
    */
   @DisplayName("Folder - Move")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public FileActionModel moveFolder(
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path,
@@ -1107,7 +1107,7 @@ public class FilesComOperations {
    */
   @DisplayName("Group - List")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public PagingProvider<FilesComConnection, GroupModel> listGroups(
   ) {
     return new PagingProvider<FilesComConnection, GroupModel>() {
@@ -1165,7 +1165,7 @@ public class FilesComOperations {
    */
   @DisplayName("Group - Show")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public GroupModel showGroup(
       final @Connection FilesComConnection connection,
       final @Summary("Group ID.") @Example("1") Long id) {
@@ -1196,7 +1196,7 @@ public class FilesComOperations {
    */
   @DisplayName("Group - Create")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public GroupModel createGroup(
       final @Connection FilesComConnection connection,
       final @Summary("Group name.") @Example("name") String name,
@@ -1242,7 +1242,7 @@ public class FilesComOperations {
    */
   @DisplayName("Group - Update")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public GroupModel updateGroup(
       final @Connection FilesComConnection connection,
       final @Summary("Group ID.") @Example("1") Long id,
@@ -1292,7 +1292,7 @@ public class FilesComOperations {
    * Delete Group
    */
   @DisplayName("Group - Delete")
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public void deleteGroup(
       final @Connection FilesComConnection connection,
       final @Summary("Group ID.") @Example("1") Long id) {
@@ -1323,7 +1323,7 @@ public class FilesComOperations {
    */
   @DisplayName("User - List")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public PagingProvider<FilesComConnection, UserModel> listUsers(
   ) {
     return new PagingProvider<FilesComConnection, UserModel>() {
@@ -1381,7 +1381,7 @@ public class FilesComOperations {
    */
   @DisplayName("User - Show")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public UserModel showUser(
       final @Connection FilesComConnection connection,
       final @Summary("User ID.") @Example("1") Long id) {
@@ -1412,7 +1412,7 @@ public class FilesComOperations {
    */
   @DisplayName("User - Create")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public UserModel createUser(
       final @Connection FilesComConnection connection,
       final @Summary("User's username") @Example("user") String username,
@@ -1494,7 +1494,7 @@ public class FilesComOperations {
    */
   @DisplayName("User - Update")
   @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public UserModel updateUser(
       final @Connection FilesComConnection connection,
       final @Summary("User ID.") @Example("1") Long id,
@@ -1580,7 +1580,7 @@ public class FilesComOperations {
    * Delete User
    */
   @DisplayName("User - Delete")
-  @Throws(FilesComErrorProvider.class)
+  @Throws(FilesComErrorsProvider.class)
   public void deleteUser(
       final @Connection FilesComConnection connection,
       final @Summary("User ID.") @Example("1") Long id) {
