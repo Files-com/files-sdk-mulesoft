@@ -1,10 +1,13 @@
 package com.files.mule.api.models;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
-
-import org.mule.runtime.extension.api.annotation.param.Parameter;
 
 import com.files.models.BundleRecipient;
 
@@ -22,78 +25,52 @@ public class ShareLinkRecipientModel implements Serializable {
     this.name = bundleRecipient.name;
     this.note = bundleRecipient.note;
     this.recipient = bundleRecipient.recipient;
-    this.sentAt = bundleRecipient.sentAt;
+    if (bundleRecipient.sentAt != null) {
+      this.sentAt = ZonedDateTime.ofInstant(bundleRecipient.sentAt.toInstant(), ZoneId.systemDefault());
+    }
     this.bundleId = bundleRecipient.bundleId;
-    this.shareAfterCreate = bundleRecipient.shareAfterCreate;
+    this.shareAfterCreate = Boolean.TRUE.equals(bundleRecipient.shareAfterCreate);
   }
 
-  /**
-   * The recipient's company.
-   */
-  @Parameter
-  public String company;
+  private String company;
 
   public String getCompany() {
     return company;
   }
 
-  /**
-   * The recipient's name.
-   */
-  @Parameter
-  public String name;
+  private String name;
 
   public String getName() {
     return name;
   }
 
-  /**
-   * A note sent to the recipient with the bundle.
-   */
-  @Parameter
-  public String note;
+  private String note;
 
   public String getNote() {
     return note;
   }
 
-  /**
-   * The recipient's email address.
-   */
-  @Parameter
-  public String recipient;
+  private String recipient;
 
   public String getRecipient() {
     return recipient;
   }
 
-  /**
-   * When the Bundle was shared with this recipient.
-   */
-  @Parameter
-  public Date sentAt;
+  private ZonedDateTime sentAt;
 
-  public Date getSentAt() {
+  public ZonedDateTime getSentAt() {
     return sentAt;
   }
 
-  /**
-   * Bundle to share.
-   */
-  @Parameter
-  public Long bundleId;
+  private Long bundleId;
 
   public Long getBundleId() {
     return bundleId;
   }
 
-  /**
-   * Set to true to share the link with the recipient upon creation.
-   */
-  @Parameter
-  public Boolean shareAfterCreate;
+  private boolean shareAfterCreate;
 
-  public Boolean getShareAfterCreate() {
+  public boolean getShareAfterCreate() {
     return shareAfterCreate;
   }
 

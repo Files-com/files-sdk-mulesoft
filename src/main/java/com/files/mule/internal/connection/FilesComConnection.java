@@ -1,4 +1,4 @@
-package com.files.mule.internal;
+package com.files.mule.internal.connection;
 
 import java.util.HashMap;
 
@@ -9,6 +9,7 @@ import com.files.FilesClient;
 import com.files.ListIterator;
 import com.files.exceptions.ApiErrorException.LockoutRegionMismatchException;
 import com.files.models.*;
+import com.files.mule.internal.config.FilesComConfig;
 
 public class FilesComConnection {
 

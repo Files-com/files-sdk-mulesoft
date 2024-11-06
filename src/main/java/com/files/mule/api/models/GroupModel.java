@@ -1,10 +1,13 @@
 package com.files.mule.api.models;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
-
-import org.mule.runtime.extension.api.annotation.param.Parameter;
 
 import com.files.models.Group;
 
@@ -27,119 +30,75 @@ public class GroupModel implements Serializable {
     this.notes = group.notes;
     this.userIds = group.userIds;
     this.usernames = group.usernames;
-    this.ftpPermission = group.ftpPermission;
-    this.sftpPermission = group.sftpPermission;
-    this.davPermission = group.davPermission;
-    this.restapiPermission = group.restapiPermission;
+    this.ftpPermission = Boolean.TRUE.equals(group.ftpPermission);
+    this.sftpPermission = Boolean.TRUE.equals(group.sftpPermission);
+    this.davPermission = Boolean.TRUE.equals(group.davPermission);
+    this.restapiPermission = Boolean.TRUE.equals(group.restapiPermission);
   }
 
-  /**
-   * Group ID
-   */
-  @Parameter
-  public Long id;
+  private Long id;
 
   public Long getId() {
     return id;
   }
 
-  /**
-   * Group name
-   */
-  @Parameter
-  public String name;
+  private String name;
 
   public String getName() {
     return name;
   }
 
-  /**
-   * A list of allowed IPs if applicable.  Newline delimited
-   */
-  @Parameter
-  public String allowedIps;
+  private String allowedIps;
 
   public String getAllowedIps() {
     return allowedIps;
   }
 
-  /**
-   * Comma-delimited list of user IDs who are group administrators (separated by commas)
-   */
-  @Parameter
-  public String adminIds;
+  private String adminIds;
 
   public String getAdminIds() {
     return adminIds;
   }
 
-  /**
-   * Notes about this group
-   */
-  @Parameter
-  public String notes;
+  private String notes;
 
   public String getNotes() {
     return notes;
   }
 
-  /**
-   * Comma-delimited list of user IDs who belong to this group (separated by commas)
-   */
-  @Parameter
-  public String userIds;
+  private String userIds;
 
   public String getUserIds() {
     return userIds;
   }
 
-  /**
-   * Comma-delimited list of usernames who belong to this group (separated by commas)
-   */
-  @Parameter
-  public String usernames;
+  private String usernames;
 
   public String getUsernames() {
     return usernames;
   }
 
-  /**
-   * If true, users in this group can use FTP to login.  This will override a false value of `ftp_permission` on the user level.
-   */
-  @Parameter
-  public Boolean ftpPermission;
+  private boolean ftpPermission;
 
-  public Boolean getFtpPermission() {
+  public boolean getFtpPermission() {
     return ftpPermission;
   }
 
-  /**
-   * If true, users in this group can use SFTP to login.  This will override a false value of `sftp_permission` on the user level.
-   */
-  @Parameter
-  public Boolean sftpPermission;
+  private boolean sftpPermission;
 
-  public Boolean getSftpPermission() {
+  public boolean getSftpPermission() {
     return sftpPermission;
   }
 
-  /**
-   * If true, users in this group can use WebDAV to login.  This will override a false value of `dav_permission` on the user level.
-   */
-  @Parameter
-  public Boolean davPermission;
+  private boolean davPermission;
 
-  public Boolean getDavPermission() {
+  public boolean getDavPermission() {
     return davPermission;
   }
 
-  /**
-   * If true, users in this group can use the REST API to login.  This will override a false value of `restapi_permission` on the user level.
-   */
-  @Parameter
-  public Boolean restapiPermission;
+  private boolean restapiPermission;
 
-  public Boolean getRestapiPermission() {
+  public boolean getRestapiPermission() {
     return restapiPermission;
   }
 

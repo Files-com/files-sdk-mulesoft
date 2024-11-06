@@ -1,4 +1,4 @@
-package com.files.mule.internal;
+package com.files.mule.internal.extension;
 
 import static org.mule.runtime.api.meta.Category.CERTIFIED;
 
@@ -9,7 +9,9 @@ import org.mule.runtime.extension.api.annotation.dsl.xml.Xml;
 import org.mule.runtime.extension.api.annotation.error.ErrorTypes;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 
-import com.files.mule.internal.errors.FilesComError;
+import com.files.mule.internal.connection.provider.FilesComConnectionProvider;
+import com.files.mule.internal.error.FilesComErrorType;
+import com.files.mule.internal.operation.FilesComOperations;
 
 /**
  * EVERY FILE IN YOUR BUSINESS THROUGH ONE API AND APP Files.com is one single
@@ -19,7 +21,7 @@ import com.files.mule.internal.errors.FilesComError;
 @Extension(name = "Files.com", category = CERTIFIED, vendor = "Files.com")
 @Operations(FilesComOperations.class)
 @ConnectionProviders(FilesComConnectionProvider.class)
-@ErrorTypes(FilesComError.class)
+@ErrorTypes(FilesComErrorType.class)
 @Summary("Configuration for Files.com")
-public class FilesComExtension {
+public class FilesComConnector {
 }

@@ -1,10 +1,13 @@
 package com.files.mule.api.models;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
-
-import org.mule.runtime.extension.api.annotation.param.Parameter;
 
 import com.files.models.Bundle;
 
@@ -27,29 +30,35 @@ public class ShareLinkModel implements Serializable {
     this.colorTopText = bundle.colorTopText;
     this.url = bundle.url;
     this.description = bundle.description;
-    this.expiresAt = bundle.expiresAt;
-    this.passwordProtected = bundle.passwordProtected;
+    if (bundle.expiresAt != null) {
+      this.expiresAt = ZonedDateTime.ofInstant(bundle.expiresAt.toInstant(), ZoneId.systemDefault());
+    }
+    this.passwordProtected = Boolean.TRUE.equals(bundle.passwordProtected);
     this.permissions = bundle.permissions;
-    this.previewOnly = bundle.previewOnly;
-    this.requireRegistration = bundle.requireRegistration;
-    this.requireShareRecipient = bundle.requireShareRecipient;
-    this.requireLogout = bundle.requireLogout;
+    this.previewOnly = Boolean.TRUE.equals(bundle.previewOnly);
+    this.requireRegistration = Boolean.TRUE.equals(bundle.requireRegistration);
+    this.requireShareRecipient = Boolean.TRUE.equals(bundle.requireShareRecipient);
+    this.requireLogout = Boolean.TRUE.equals(bundle.requireLogout);
     this.clickwrapBody = bundle.clickwrapBody;
     if (bundle.formFieldSet != null) {
       this.formFieldSet = new FormFieldSetModel(bundle.formFieldSet);
     }
-    this.skipName = bundle.skipName;
-    this.skipEmail = bundle.skipEmail;
-    this.startAccessOnDate = bundle.startAccessOnDate;
-    this.skipCompany = bundle.skipCompany;
+    this.skipName = Boolean.TRUE.equals(bundle.skipName);
+    this.skipEmail = Boolean.TRUE.equals(bundle.skipEmail);
+    if (bundle.startAccessOnDate != null) {
+      this.startAccessOnDate = ZonedDateTime.ofInstant(bundle.startAccessOnDate.toInstant(), ZoneId.systemDefault());
+    }
+    this.skipCompany = Boolean.TRUE.equals(bundle.skipCompany);
     this.id = bundle.id;
-    this.createdAt = bundle.createdAt;
-    this.dontSeparateSubmissionsByFolder = bundle.dontSeparateSubmissionsByFolder;
+    if (bundle.createdAt != null) {
+      this.createdAt = ZonedDateTime.ofInstant(bundle.createdAt.toInstant(), ZoneId.systemDefault());
+    }
+    this.dontSeparateSubmissionsByFolder = Boolean.TRUE.equals(bundle.dontSeparateSubmissionsByFolder);
     this.maxUses = bundle.maxUses;
     this.note = bundle.note;
     this.pathTemplate = bundle.pathTemplate;
     this.pathTemplateTimeZone = bundle.pathTemplateTimeZone;
-    this.sendEmailReceiptToUploader = bundle.sendEmailReceiptToUploader;
+    this.sendEmailReceiptToUploader = Boolean.TRUE.equals(bundle.sendEmailReceiptToUploader);
     this.snapshotId = bundle.snapshotId;
     this.userId = bundle.userId;
     this.username = bundle.username;
@@ -59,474 +68,297 @@ public class ShareLinkModel implements Serializable {
       this.watermarkAttachment = new ImageModel(bundle.watermarkAttachment);
     }
     this.watermarkValue = bundle.watermarkValue;
-    this.hasInbox = bundle.hasInbox;
-    this.dontAllowFoldersInUploads = bundle.dontAllowFoldersInUploads;
-    this.paths = bundle.paths;
-    this.bundlepaths = bundle.bundlepaths;
+    this.hasInbox = Boolean.TRUE.equals(bundle.hasInbox);
+    this.dontAllowFoldersInUploads = Boolean.TRUE.equals(bundle.dontAllowFoldersInUploads);
+    if (bundle.paths != null) {
+      this.paths = Arrays.asList(bundle.paths);
+    }
+    if (bundle.bundlepaths != null) {
+      this.bundlepaths = Arrays.asList(bundle.bundlepaths);
+    }
     this.password = bundle.password;
     this.formFieldSetId = bundle.formFieldSetId;
-    this.createSnapshot = bundle.createSnapshot;
-    this.finalizeSnapshot = bundle.finalizeSnapshot;
-    this.watermarkAttachmentFile = bundle.watermarkAttachmentFile;
-    this.watermarkAttachmentDelete = bundle.watermarkAttachmentDelete;
+    this.createSnapshot = Boolean.TRUE.equals(bundle.createSnapshot);
+    this.finalizeSnapshot = Boolean.TRUE.equals(bundle.finalizeSnapshot);
+    if (bundle.watermarkAttachmentFile != null) {
+      this.watermarkAttachmentFile = new ByteArrayInputStream(bundle.watermarkAttachmentFile);
+    }
+    this.watermarkAttachmentDelete = Boolean.TRUE.equals(bundle.watermarkAttachmentDelete);
   }
 
-  /**
-   * Bundle code.  This code forms the end part of the Public URL.
-   */
-  @Parameter
-  public String code;
+  private String code;
 
   public String getCode() {
     return code;
   }
 
-  /**
-   * Page link and button color
-   */
-  @Parameter
-  public String colorLeft;
+  private String colorLeft;
 
   public String getColorLeft() {
     return colorLeft;
   }
 
-  /**
-   * Top bar link color
-   */
-  @Parameter
-  public String colorLink;
+  private String colorLink;
 
   public String getColorLink() {
     return colorLink;
   }
 
-  /**
-   * Page link and button color
-   */
-  @Parameter
-  public String colorText;
+  private String colorText;
 
   public String getColorText() {
     return colorText;
   }
 
-  /**
-   * Top bar background color
-   */
-  @Parameter
-  public String colorTop;
+  private String colorTop;
 
   public String getColorTop() {
     return colorTop;
   }
 
-  /**
-   * Top bar text color
-   */
-  @Parameter
-  public String colorTopText;
+  private String colorTopText;
 
   public String getColorTopText() {
     return colorTopText;
   }
 
-  /**
-   * Public URL of Share Link
-   */
-  @Parameter
-  public String url;
+  private String url;
 
   public String getUrl() {
     return url;
   }
 
-  /**
-   * Public description
-   */
-  @Parameter
-  public String description;
+  private String description;
 
   public String getDescription() {
     return description;
   }
 
-  /**
-   * Bundle expiration date/time
-   */
-  @Parameter
-  public Date expiresAt;
+  private ZonedDateTime expiresAt;
 
-  public Date getExpiresAt() {
+  public ZonedDateTime getExpiresAt() {
     return expiresAt;
   }
 
-  /**
-   * Is this bundle password protected?
-   */
-  @Parameter
-  public Boolean passwordProtected;
+  private boolean passwordProtected;
 
-  public Boolean getPasswordProtected() {
+  public boolean getPasswordProtected() {
     return passwordProtected;
   }
 
-  /**
-   * Permissions that apply to Folders in this Share Link.
-   */
-  @Parameter
-  public String permissions;
+  private String permissions;
 
   public String getPermissions() {
     return permissions;
   }
 
-  /**
-   */
-  @Parameter
-  public Boolean previewOnly;
+  private boolean previewOnly;
 
-  public Boolean getPreviewOnly() {
+  public boolean getPreviewOnly() {
     return previewOnly;
   }
 
-  /**
-   * Show a registration page that captures the downloader's name and email address?
-   */
-  @Parameter
-  public Boolean requireRegistration;
+  private boolean requireRegistration;
 
-  public Boolean getRequireRegistration() {
+  public boolean getRequireRegistration() {
     return requireRegistration;
   }
 
-  /**
-   * Only allow access to recipients who have explicitly received the share via an email sent through the Files.com UI?
-   */
-  @Parameter
-  public Boolean requireShareRecipient;
+  private boolean requireShareRecipient;
 
-  public Boolean getRequireShareRecipient() {
+  public boolean getRequireShareRecipient() {
     return requireShareRecipient;
   }
 
-  /**
-   * If true, we will hide the 'Remember Me' box on the Bundle registration page, requiring that the user logout and log back in every time they visit the page.
-   */
-  @Parameter
-  public Boolean requireLogout;
+  private boolean requireLogout;
 
-  public Boolean getRequireLogout() {
+  public boolean getRequireLogout() {
     return requireLogout;
   }
 
-  /**
-   * Legal text that must be agreed to prior to accessing Bundle.
-   */
-  @Parameter
-  public String clickwrapBody;
+  private String clickwrapBody;
 
   public String getClickwrapBody() {
     return clickwrapBody;
   }
 
-  /**
-   * Custom Form to use
-   */
-  @Parameter
-  public FormFieldSetModel formFieldSet;
+  private FormFieldSetModel formFieldSet;
 
   public FormFieldSetModel getFormFieldSet() {
     return formFieldSet;
   }
 
-  /**
-   * BundleRegistrations can be saved without providing name?
-   */
-  @Parameter
-  public Boolean skipName;
+  private boolean skipName;
 
-  public Boolean getSkipName() {
+  public boolean getSkipName() {
     return skipName;
   }
 
-  /**
-   * BundleRegistrations can be saved without providing email?
-   */
-  @Parameter
-  public Boolean skipEmail;
+  private boolean skipEmail;
 
-  public Boolean getSkipEmail() {
+  public boolean getSkipEmail() {
     return skipEmail;
   }
 
-  /**
-   * Date when share will start to be accessible. If `nil` access granted right after create.
-   */
-  @Parameter
-  public Date startAccessOnDate;
+  private ZonedDateTime startAccessOnDate;
 
-  public Date getStartAccessOnDate() {
+  public ZonedDateTime getStartAccessOnDate() {
     return startAccessOnDate;
   }
 
-  /**
-   * BundleRegistrations can be saved without providing company?
-   */
-  @Parameter
-  public Boolean skipCompany;
+  private boolean skipCompany;
 
-  public Boolean getSkipCompany() {
+  public boolean getSkipCompany() {
     return skipCompany;
   }
 
-  /**
-   * Bundle ID
-   */
-  @Parameter
-  public Long id;
+  private Long id;
 
   public Long getId() {
     return id;
   }
 
-  /**
-   * Bundle created at date/time
-   */
-  @Parameter
-  public Date createdAt;
+  private ZonedDateTime createdAt;
 
-  public Date getCreatedAt() {
+  public ZonedDateTime getCreatedAt() {
     return createdAt;
   }
 
-  /**
-   * Do not create subfolders for files uploaded to this share. Note: there are subtle security pitfalls with allowing anonymous uploads from multiple users to live in the same folder. We strongly discourage use of this option unless absolutely required.
-   */
-  @Parameter
-  public Boolean dontSeparateSubmissionsByFolder;
+  private boolean dontSeparateSubmissionsByFolder;
 
-  public Boolean getDontSeparateSubmissionsByFolder() {
+  public boolean getDontSeparateSubmissionsByFolder() {
     return dontSeparateSubmissionsByFolder;
   }
 
-  /**
-   * Maximum number of times bundle can be accessed
-   */
-  @Parameter
-  public Long maxUses;
+  private Long maxUses;
 
   public Long getMaxUses() {
     return maxUses;
   }
 
-  /**
-   * Bundle internal note
-   */
-  @Parameter
-  public String note;
+  private String note;
 
   public String getNote() {
     return note;
   }
 
-  /**
-   * Template for creating submission subfolders. Can use the uploader's name, email address, ip, company, `strftime` directives, and any custom form data.
-   */
-  @Parameter
-  public String pathTemplate;
+  private String pathTemplate;
 
   public String getPathTemplate() {
     return pathTemplate;
   }
 
-  /**
-   * Timezone to use when rendering timestamps in path templates.
-   */
-  @Parameter
-  public String pathTemplateTimeZone;
+  private String pathTemplateTimeZone;
 
   public String getPathTemplateTimeZone() {
     return pathTemplateTimeZone;
   }
 
-  /**
-   * Send delivery receipt to the uploader. Note: For writable share only
-   */
-  @Parameter
-  public Boolean sendEmailReceiptToUploader;
+  private boolean sendEmailReceiptToUploader;
 
-  public Boolean getSendEmailReceiptToUploader() {
+  public boolean getSendEmailReceiptToUploader() {
     return sendEmailReceiptToUploader;
   }
 
-  /**
-   * ID of the snapshot containing this bundle's contents.
-   */
-  @Parameter
-  public Long snapshotId;
+  private Long snapshotId;
 
   public Long getSnapshotId() {
     return snapshotId;
   }
 
-  /**
-   * Bundle creator user ID
-   */
-  @Parameter
-  public Long userId;
+  private Long userId;
 
   public Long getUserId() {
     return userId;
   }
 
-  /**
-   * Bundle creator username
-   */
-  @Parameter
-  public String username;
+  private String username;
 
   public String getUsername() {
     return username;
   }
 
-  /**
-   * ID of the clickwrap to use with this bundle.
-   */
-  @Parameter
-  public Long clickwrapId;
+  private Long clickwrapId;
 
   public Long getClickwrapId() {
     return clickwrapId;
   }
 
-  /**
-   * ID of the associated inbox, if available.
-   */
-  @Parameter
-  public Long inboxId;
+  private Long inboxId;
 
   public Long getInboxId() {
     return inboxId;
   }
 
-  /**
-   * Preview watermark image applied to all bundle items.
-   */
-  @Parameter
-  public ImageModel watermarkAttachment;
+  private ImageModel watermarkAttachment;
 
   public ImageModel getWatermarkAttachment() {
     return watermarkAttachment;
   }
 
-  /**
-   * Preview watermark settings applied to all bundle items. Uses the same keys as Behavior.value
-   */
-  @Parameter
-  public Map<String, String> watermarkValue;
+  private Map<String, String> watermarkValue;
 
   public Map<String, String> getWatermarkValue() {
     return watermarkValue;
   }
 
-  /**
-   * Does this bundle have an associated inbox?
-   */
-  @Parameter
-  public Boolean hasInbox;
+  private boolean hasInbox;
 
-  public Boolean getHasInbox() {
+  public boolean getHasInbox() {
     return hasInbox;
   }
 
-  /**
-   * Should folder uploads be prevented?
-   */
-  @Parameter
-  public Boolean dontAllowFoldersInUploads;
+  private boolean dontAllowFoldersInUploads;
 
-  public Boolean getDontAllowFoldersInUploads() {
+  public boolean getDontAllowFoldersInUploads() {
     return dontAllowFoldersInUploads;
   }
 
-  /**
-   * A list of paths in this bundle.  For performance reasons, this is not provided when listing bundles.
-   */
-  @Parameter
-  public String[] paths;
+  private List<String> paths;
 
-  public String[] getPaths() {
+  public List<String> getPaths() {
     return paths;
   }
 
-  /**
-   * A list of bundlepaths in this bundle.  For performance reasons, this is not provided when listing bundles.
-   */
-  @Parameter
-  public Object[] bundlepaths;
+  private List<Object> bundlepaths;
 
-  public Object[] getBundlepaths() {
+  public List<Object> getBundlepaths() {
     return bundlepaths;
   }
 
-  /**
-   * Password for this bundle.
-   */
-  @Parameter
-  public String password;
+  private String password;
 
   public String getPassword() {
     return password;
   }
 
-  /**
-   * Id of Form Field Set to use with this bundle
-   */
-  @Parameter
-  public Long formFieldSetId;
+  private Long formFieldSetId;
 
   public Long getFormFieldSetId() {
     return formFieldSetId;
   }
 
-  /**
-   * If true, create a snapshot of this bundle's contents.
-   */
-  @Parameter
-  public Boolean createSnapshot;
+  private boolean createSnapshot;
 
-  public Boolean getCreateSnapshot() {
+  public boolean getCreateSnapshot() {
     return createSnapshot;
   }
 
-  /**
-   * If true, finalize the snapshot of this bundle's contents. Note that `create_snapshot` must also be true.
-   */
-  @Parameter
-  public Boolean finalizeSnapshot;
+  private boolean finalizeSnapshot;
 
-  public Boolean getFinalizeSnapshot() {
+  public boolean getFinalizeSnapshot() {
     return finalizeSnapshot;
   }
 
-  /**
-   * Preview watermark image applied to all bundle items.
-   */
-  @Parameter
-  public byte[] watermarkAttachmentFile;
+  private InputStream watermarkAttachmentFile;
 
-  public byte[] getWatermarkAttachmentFile() {
+  public InputStream getWatermarkAttachmentFile() {
     return watermarkAttachmentFile;
   }
 
-  /**
-   * If true, will delete the file stored in watermark_attachment
-   */
-  @Parameter
-  public Boolean watermarkAttachmentDelete;
+  private boolean watermarkAttachmentDelete;
 
-  public Boolean getWatermarkAttachmentDelete() {
+  public boolean getWatermarkAttachmentDelete() {
     return watermarkAttachmentDelete;
   }
 

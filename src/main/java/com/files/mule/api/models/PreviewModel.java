@@ -1,10 +1,13 @@
 package com.files.mule.api.models;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
-
-import org.mule.runtime.extension.api.annotation.param.Parameter;
 
 import com.files.models.Preview;
 
@@ -23,51 +26,31 @@ public class PreviewModel implements Serializable {
     this.size = preview.size;
   }
 
-  /**
-   * Preview ID
-   */
-  @Parameter
-  public Long id;
+  private Long id;
 
   public Long getId() {
     return id;
   }
 
-  /**
-   * Preview status.  Can be invalid, not_generated, generating, complete, or file_too_large
-   */
-  @Parameter
-  public String status;
+  private String status;
 
   public String getStatus() {
     return status;
   }
 
-  /**
-   * Link to download preview
-   */
-  @Parameter
-  public String downloadUri;
+  private String downloadUri;
 
   public String getDownloadUri() {
     return downloadUri;
   }
 
-  /**
-   * Preview type. Can be image, pdf, pdf_native, video, or audio
-   */
-  @Parameter
-  public String type;
+  private String type;
 
   public String getType() {
     return type;
   }
 
-  /**
-   * Preview size
-   */
-  @Parameter
-  public String size;
+  private String size;
 
   public String getSize() {
     return size;

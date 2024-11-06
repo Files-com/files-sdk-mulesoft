@@ -1,8 +1,8 @@
-package com.files.mule.internal.errors;
+package com.files.mule.internal.error;
 
 import org.mule.runtime.extension.api.error.ErrorTypeDefinition;
 
-public enum FilesComError implements ErrorTypeDefinition<FilesComError> {
+public enum FilesComErrorType implements ErrorTypeDefinition<FilesComErrorType> {
   BAD_REQUEST("bad-request"),
   NOT_AUTHENTICATED("not-authenticated"),
   NOT_AUTHORIZED("not-authorized"),
@@ -11,18 +11,18 @@ public enum FilesComError implements ErrorTypeDefinition<FilesComError> {
   RATE_LIMITED("rate-limited"),
   SERVICE_UNAVAILABLE("service-unavailable"),
   SITE_CONFIGURATION("site-configuration"),
-  UNKNOWN,
+  OTHER,
   ARGUMENT,
   RESPONSE,
   CONNECTIVITY;
 
   public final String apiErrorGroup;
 
-  FilesComError(final String apiErrorGroup) {
+  FilesComErrorType(final String apiErrorGroup) {
     this.apiErrorGroup = apiErrorGroup;
   }
 
-  FilesComError() {
+  FilesComErrorType() {
     this.apiErrorGroup = null;
   }
 }

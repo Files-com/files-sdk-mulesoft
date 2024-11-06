@@ -1,10 +1,13 @@
 package com.files.mule.api.models;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
-
-import org.mule.runtime.extension.api.annotation.param.Parameter;
 
 import com.files.models.FormFieldSet;
 
@@ -22,89 +25,61 @@ public class FormFieldSetModel implements Serializable {
   public FormFieldSetModel(final FormFieldSet formFieldSet) {
     this.id = formFieldSet.id;
     this.title = formFieldSet.title;
-    this.formLayout = formFieldSet.formLayout;
-    this.formFields = formFieldSet.formFields;
-    this.skipName = formFieldSet.skipName;
-    this.skipEmail = formFieldSet.skipEmail;
-    this.skipCompany = formFieldSet.skipCompany;
+    if (formFieldSet.formLayout != null) {
+      this.formLayout = Arrays.asList(formFieldSet.formLayout);
+    }
+    if (formFieldSet.formFields != null) {
+      this.formFields = Arrays.asList(formFieldSet.formFields);
+    }
+    this.skipName = Boolean.TRUE.equals(formFieldSet.skipName);
+    this.skipEmail = Boolean.TRUE.equals(formFieldSet.skipEmail);
+    this.skipCompany = Boolean.TRUE.equals(formFieldSet.skipCompany);
     this.userId = formFieldSet.userId;
   }
 
-  /**
-   * Form field set id
-   */
-  @Parameter
-  public Long id;
+  private Long id;
 
   public Long getId() {
     return id;
   }
 
-  /**
-   * Title to be displayed
-   */
-  @Parameter
-  public String title;
+  private String title;
 
   public String getTitle() {
     return title;
   }
 
-  /**
-   * Layout of the form
-   */
-  @Parameter
-  public Long[] formLayout;
+  private List<Long> formLayout;
 
-  public Long[] getFormLayout() {
+  public List<Long> getFormLayout() {
     return formLayout;
   }
 
-  /**
-   * Associated form fields
-   */
-  @Parameter
-  public Object[] formFields;
+  private List<Object> formFields;
 
-  public Object[] getFormFields() {
+  public List<Object> getFormFields() {
     return formFields;
   }
 
-  /**
-   * Any associated InboxRegistrations or BundleRegistrations can be saved without providing name
-   */
-  @Parameter
-  public Boolean skipName;
+  private boolean skipName;
 
-  public Boolean getSkipName() {
+  public boolean getSkipName() {
     return skipName;
   }
 
-  /**
-   * Any associated InboxRegistrations or BundleRegistrations can be saved without providing email
-   */
-  @Parameter
-  public Boolean skipEmail;
+  private boolean skipEmail;
 
-  public Boolean getSkipEmail() {
+  public boolean getSkipEmail() {
     return skipEmail;
   }
 
-  /**
-   * Any associated InboxRegistrations or BundleRegistrations can be saved without providing company
-   */
-  @Parameter
-  public Boolean skipCompany;
+  private boolean skipCompany;
 
-  public Boolean getSkipCompany() {
+  public boolean getSkipCompany() {
     return skipCompany;
   }
 
-  /**
-   * User ID.  Provide a value of `0` to operate the current session's user.
-   */
-  @Parameter
-  public Long userId;
+  private Long userId;
 
   public Long getUserId() {
     return userId;

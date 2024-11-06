@@ -148,7 +148,7 @@ Connector groups all API errors into the following types:
 | `FILESCOM:RATE_LIMITED` | Rate Limited |
 | `FILESCOM:SERVICE_UNAVAILABLE` | Service Unavailable |
 | `FILESCOM:SITE_CONFIGURATION` | Site Configuration |
-| `FILESCOM:UNKNOWN` | Unknown API Error |
+| `FILESCOM:OTHER` | Unknown API Error |
 
 ## Mock Server
 

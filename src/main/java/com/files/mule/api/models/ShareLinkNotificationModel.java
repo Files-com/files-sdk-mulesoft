@@ -1,10 +1,13 @@
 package com.files.mule.api.models;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
-
-import org.mule.runtime.extension.api.annotation.param.Parameter;
 
 import com.files.models.BundleNotification;
 
@@ -18,56 +21,36 @@ public class ShareLinkNotificationModel implements Serializable {
   public ShareLinkNotificationModel(final BundleNotification bundleNotification) {
     this.bundleId = bundleNotification.bundleId;
     this.id = bundleNotification.id;
-    this.notifyOnRegistration = bundleNotification.notifyOnRegistration;
-    this.notifyOnUpload = bundleNotification.notifyOnUpload;
+    this.notifyOnRegistration = Boolean.TRUE.equals(bundleNotification.notifyOnRegistration);
+    this.notifyOnUpload = Boolean.TRUE.equals(bundleNotification.notifyOnUpload);
     this.userId = bundleNotification.userId;
   }
 
-  /**
-   * Bundle ID to notify on
-   */
-  @Parameter
-  public Long bundleId;
+  private Long bundleId;
 
   public Long getBundleId() {
     return bundleId;
   }
 
-  /**
-   * Bundle Notification ID
-   */
-  @Parameter
-  public Long id;
+  private Long id;
 
   public Long getId() {
     return id;
   }
 
-  /**
-   * Triggers bundle notification when a registration action occurs for it.
-   */
-  @Parameter
-  public Boolean notifyOnRegistration;
+  private boolean notifyOnRegistration;
 
-  public Boolean getNotifyOnRegistration() {
+  public boolean getNotifyOnRegistration() {
     return notifyOnRegistration;
   }
 
-  /**
-   * Triggers bundle notification when a upload action occurs for it.
-   */
-  @Parameter
-  public Boolean notifyOnUpload;
+  private boolean notifyOnUpload;
 
-  public Boolean getNotifyOnUpload() {
+  public boolean getNotifyOnUpload() {
     return notifyOnUpload;
   }
 
-  /**
-   * The id of the user to notify.
-   */
-  @Parameter
-  public Long userId;
+  private Long userId;
 
   public Long getUserId() {
     return userId;

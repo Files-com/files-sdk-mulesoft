@@ -1,10 +1,13 @@
 package com.files.mule.api.models;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
-
-import org.mule.runtime.extension.api.annotation.param.Parameter;
 
 import com.files.models.Folder;
 
@@ -26,15 +29,21 @@ public class FolderModel implements Serializable {
     this.displayName = folder.displayName;
     this.type = folder.type;
     this.size = folder.size;
-    this.createdAt = folder.createdAt;
+    if (folder.createdAt != null) {
+      this.createdAt = ZonedDateTime.ofInstant(folder.createdAt.toInstant(), ZoneId.systemDefault());
+    }
     this.lastModifiedById = folder.lastModifiedById;
     this.lastModifiedByApiKeyId = folder.lastModifiedByApiKeyId;
     this.lastModifiedByAutomationId = folder.lastModifiedByAutomationId;
     this.lastModifiedByBundleRegistrationId = folder.lastModifiedByBundleRegistrationId;
     this.lastModifiedByRemoteServerId = folder.lastModifiedByRemoteServerId;
     this.lastModifiedByRemoteServerSyncId = folder.lastModifiedByRemoteServerSyncId;
-    this.mtime = folder.mtime;
-    this.providedMtime = folder.providedMtime;
+    if (folder.mtime != null) {
+      this.mtime = ZonedDateTime.ofInstant(folder.mtime.toInstant(), ZoneId.systemDefault());
+    }
+    if (folder.providedMtime != null) {
+      this.providedMtime = ZonedDateTime.ofInstant(folder.providedMtime.toInstant(), ZoneId.systemDefault());
+    }
     this.crc32 = folder.crc32;
     this.md5 = folder.md5;
     this.sha1 = folder.sha1;
@@ -42,374 +51,230 @@ public class FolderModel implements Serializable {
     this.mimeType = folder.mimeType;
     this.region = folder.region;
     this.permissions = folder.permissions;
-    this.subfoldersLocked = folder.subfoldersLocked;
-    this.isLocked = folder.isLocked;
+    this.subfoldersLocked = Boolean.TRUE.equals(folder.subfoldersLocked);
+    this.isLocked = Boolean.TRUE.equals(folder.isLocked);
     this.downloadUri = folder.downloadUri;
     this.priorityColor = folder.priorityColor;
     this.previewId = folder.previewId;
     if (folder.preview != null) {
       this.preview = new PreviewModel(folder.preview);
     }
-    this.mkdirParents = folder.mkdirParents;
+    this.mkdirParents = Boolean.TRUE.equals(folder.mkdirParents);
   }
 
-  /**
-   * File/Folder path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
-   */
-  @Parameter
-  public String path;
+  private String path;
 
   public String getPath() {
     return path;
   }
 
-  /**
-   * User ID of the User who created the file/folder
-   */
-  @Parameter
-  public Long createdById;
+  private Long createdById;
 
   public Long getCreatedById() {
     return createdById;
   }
 
-  /**
-   * ID of the API key that created the file/folder
-   */
-  @Parameter
-  public Long createdByApiKeyId;
+  private Long createdByApiKeyId;
 
   public Long getCreatedByApiKeyId() {
     return createdByApiKeyId;
   }
 
-  /**
-   * ID of the AS2 Incoming Message that created the file/folder
-   */
-  @Parameter
-  public Long createdByAs2IncomingMessageId;
+  private Long createdByAs2IncomingMessageId;
 
   public Long getCreatedByAs2IncomingMessageId() {
     return createdByAs2IncomingMessageId;
   }
 
-  /**
-   * ID of the Automation that created the file/folder
-   */
-  @Parameter
-  public Long createdByAutomationId;
+  private Long createdByAutomationId;
 
   public Long getCreatedByAutomationId() {
     return createdByAutomationId;
   }
 
-  /**
-   * ID of the Bundle Registration that created the file/folder
-   */
-  @Parameter
-  public Long createdByBundleRegistrationId;
+  private Long createdByBundleRegistrationId;
 
   public Long getCreatedByBundleRegistrationId() {
     return createdByBundleRegistrationId;
   }
 
-  /**
-   * ID of the Inbox that created the file/folder
-   */
-  @Parameter
-  public Long createdByInboxId;
+  private Long createdByInboxId;
 
   public Long getCreatedByInboxId() {
     return createdByInboxId;
   }
 
-  /**
-   * ID of the Remote Server that created the file/folder
-   */
-  @Parameter
-  public Long createdByRemoteServerId;
+  private Long createdByRemoteServerId;
 
   public Long getCreatedByRemoteServerId() {
     return createdByRemoteServerId;
   }
 
-  /**
-   * ID of the Remote Server Sync that created the file/folder
-   */
-  @Parameter
-  public Long createdByRemoteServerSyncId;
+  private Long createdByRemoteServerSyncId;
 
   public Long getCreatedByRemoteServerSyncId() {
     return createdByRemoteServerSyncId;
   }
 
-  /**
-   * Custom metadata map of keys and values. Limited to 32 keys, 256 characters per key and 1024 characters per value.
-   */
-  @Parameter
-  public Map<String, String> customMetadata;
+  private Map<String, String> customMetadata;
 
   public Map<String, String> getCustomMetadata() {
     return customMetadata;
   }
 
-  /**
-   * File/Folder display name
-   */
-  @Parameter
-  public String displayName;
+  private String displayName;
 
   public String getDisplayName() {
     return displayName;
   }
 
-  /**
-   * Type: `directory` or `file`.
-   */
-  @Parameter
-  public String type;
+  private String type;
 
   public String getType() {
     return type;
   }
 
-  /**
-   * File/Folder size
-   */
-  @Parameter
-  public Long size;
+  private Long size;
 
   public Long getSize() {
     return size;
   }
 
-  /**
-   * File created date/time
-   */
-  @Parameter
-  public Date createdAt;
+  private ZonedDateTime createdAt;
 
-  public Date getCreatedAt() {
+  public ZonedDateTime getCreatedAt() {
     return createdAt;
   }
 
-  /**
-   * User ID of the User who last modified the file/folder
-   */
-  @Parameter
-  public Long lastModifiedById;
+  private Long lastModifiedById;
 
   public Long getLastModifiedById() {
     return lastModifiedById;
   }
 
-  /**
-   * ID of the API key that last modified the file/folder
-   */
-  @Parameter
-  public Long lastModifiedByApiKeyId;
+  private Long lastModifiedByApiKeyId;
 
   public Long getLastModifiedByApiKeyId() {
     return lastModifiedByApiKeyId;
   }
 
-  /**
-   * ID of the Automation that last modified the file/folder
-   */
-  @Parameter
-  public Long lastModifiedByAutomationId;
+  private Long lastModifiedByAutomationId;
 
   public Long getLastModifiedByAutomationId() {
     return lastModifiedByAutomationId;
   }
 
-  /**
-   * ID of the Bundle Registration that last modified the file/folder
-   */
-  @Parameter
-  public Long lastModifiedByBundleRegistrationId;
+  private Long lastModifiedByBundleRegistrationId;
 
   public Long getLastModifiedByBundleRegistrationId() {
     return lastModifiedByBundleRegistrationId;
   }
 
-  /**
-   * ID of the Remote Server that last modified the file/folder
-   */
-  @Parameter
-  public Long lastModifiedByRemoteServerId;
+  private Long lastModifiedByRemoteServerId;
 
   public Long getLastModifiedByRemoteServerId() {
     return lastModifiedByRemoteServerId;
   }
 
-  /**
-   * ID of the Remote Server Sync that last modified the file/folder
-   */
-  @Parameter
-  public Long lastModifiedByRemoteServerSyncId;
+  private Long lastModifiedByRemoteServerSyncId;
 
   public Long getLastModifiedByRemoteServerSyncId() {
     return lastModifiedByRemoteServerSyncId;
   }
 
-  /**
-   * File last modified date/time, according to the server.  This is the timestamp of the last Files.com operation of the file, regardless of what modified timestamp was sent.
-   */
-  @Parameter
-  public Date mtime;
+  private ZonedDateTime mtime;
 
-  public Date getMtime() {
+  public ZonedDateTime getMtime() {
     return mtime;
   }
 
-  /**
-   * File last modified date/time, according to the client who set it.  Files.com allows desktop, FTP, SFTP, and WebDAV clients to set modified at times.  This allows Desktop :Cloud syncing to preserve modified at times.
-   */
-  @Parameter
-  public Date providedMtime;
+  private ZonedDateTime providedMtime;
 
-  public Date getProvidedMtime() {
+  public ZonedDateTime getProvidedMtime() {
     return providedMtime;
   }
 
-  /**
-   * File CRC32 checksum. This is sometimes delayed, so if you get a blank response, wait and try again.
-   */
-  @Parameter
-  public String crc32;
+  private String crc32;
 
   public String getCrc32() {
     return crc32;
   }
 
-  /**
-   * File MD5 checksum. This is sometimes delayed, so if you get a blank response, wait and try again.
-   */
-  @Parameter
-  public String md5;
+  private String md5;
 
   public String getMd5() {
     return md5;
   }
 
-  /**
-   * File SHA1 checksum. This is sometimes delayed, so if you get a blank response, wait and try again.
-   */
-  @Parameter
-  public String sha1;
+  private String sha1;
 
   public String getSha1() {
     return sha1;
   }
 
-  /**
-   * File SHA256 checksum. This is sometimes delayed, so if you get a blank response, wait and try again.
-   */
-  @Parameter
-  public String sha256;
+  private String sha256;
 
   public String getSha256() {
     return sha256;
   }
 
-  /**
-   * MIME Type.  This is determined by the filename extension and is not stored separately internally.
-   */
-  @Parameter
-  public String mimeType;
+  private String mimeType;
 
   public String getMimeType() {
     return mimeType;
   }
 
-  /**
-   * Region location
-   */
-  @Parameter
-  public String region;
+  private String region;
 
   public String getRegion() {
     return region;
   }
 
-  /**
-   * A short string representing the current user's permissions.  Can be `r` (Read),`w` (Write),`d` (Delete), `l` (List) or any combination
-   */
-  @Parameter
-  public String permissions;
+  private String permissions;
 
   public String getPermissions() {
     return permissions;
   }
 
-  /**
-   * Are subfolders locked and unable to be modified?
-   */
-  @Parameter
-  public Boolean subfoldersLocked;
+  private boolean subfoldersLocked;
 
-  public Boolean getSubfoldersLocked() {
+  public boolean getSubfoldersLocked() {
     return subfoldersLocked;
   }
 
-  /**
-   * Is this folder locked and unable to be modified?
-   */
-  @Parameter
-  public Boolean isLocked;
+  private boolean isLocked;
 
-  public Boolean getIsLocked() {
+  public boolean getIsLocked() {
     return isLocked;
   }
 
-  /**
-   * Link to download file. Provided only in response to a download request.
-   */
-  @Parameter
-  public String downloadUri;
+  private String downloadUri;
 
   public String getDownloadUri() {
     return downloadUri;
   }
 
-  /**
-   * Bookmark/priority color of file/folder
-   */
-  @Parameter
-  public String priorityColor;
+  private String priorityColor;
 
   public String getPriorityColor() {
     return priorityColor;
   }
 
-  /**
-   * File preview ID
-   */
-  @Parameter
-  public Long previewId;
+  private Long previewId;
 
   public Long getPreviewId() {
     return previewId;
   }
 
-  /**
-   * File preview
-   */
-  @Parameter
-  public PreviewModel preview;
+  private PreviewModel preview;
 
   public PreviewModel getPreview() {
     return preview;
   }
 
-  /**
-   * Create parent directories if they do not exist?
-   */
-  @Parameter
-  public Boolean mkdirParents;
+  private boolean mkdirParents;
 
-  public Boolean getMkdirParents() {
+  public boolean getMkdirParents() {
     return mkdirParents;
   }
 

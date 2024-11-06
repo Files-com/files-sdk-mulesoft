@@ -1,10 +1,13 @@
 package com.files.mule.api.models;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
-
-import org.mule.runtime.extension.api.annotation.param.Parameter;
 
 import com.files.models.User;
 
@@ -20,71 +23,107 @@ public class UserModel implements Serializable {
   public UserModel(final User user) {
     this.id = user.id;
     this.username = user.username;
-    this.adminGroupIds = user.adminGroupIds;
+    if (user.adminGroupIds != null) {
+      this.adminGroupIds = Arrays.asList(user.adminGroupIds);
+    }
     this.allowedIps = user.allowedIps;
-    this.attachmentsPermission = user.attachmentsPermission;
+    this.attachmentsPermission = Boolean.TRUE.equals(user.attachmentsPermission);
     this.apiKeysCount = user.apiKeysCount;
-    this.authenticateUntil = user.authenticateUntil;
+    if (user.authenticateUntil != null) {
+      this.authenticateUntil = ZonedDateTime.ofInstant(user.authenticateUntil.toInstant(), ZoneId.systemDefault());
+    }
     this.authenticationMethod = user.authenticationMethod;
     this.avatarUrl = user.avatarUrl;
-    this.billable = user.billable;
-    this.billingPermission = user.billingPermission;
-    this.bypassSiteAllowedIps = user.bypassSiteAllowedIps;
-    this.bypassInactiveDisable = user.bypassInactiveDisable;
-    this.createdAt = user.createdAt;
-    this.davPermission = user.davPermission;
-    this.disabled = user.disabled;
-    this.disabledExpiredOrInactive = user.disabledExpiredOrInactive;
+    this.billable = Boolean.TRUE.equals(user.billable);
+    this.billingPermission = Boolean.TRUE.equals(user.billingPermission);
+    this.bypassSiteAllowedIps = Boolean.TRUE.equals(user.bypassSiteAllowedIps);
+    this.bypassInactiveDisable = Boolean.TRUE.equals(user.bypassInactiveDisable);
+    if (user.createdAt != null) {
+      this.createdAt = ZonedDateTime.ofInstant(user.createdAt.toInstant(), ZoneId.systemDefault());
+    }
+    this.davPermission = Boolean.TRUE.equals(user.davPermission);
+    this.disabled = Boolean.TRUE.equals(user.disabled);
+    this.disabledExpiredOrInactive = Boolean.TRUE.equals(user.disabledExpiredOrInactive);
     this.email = user.email;
-    this.firstLoginAt = user.firstLoginAt;
-    this.ftpPermission = user.ftpPermission;
+    if (user.firstLoginAt != null) {
+      this.firstLoginAt = ZonedDateTime.ofInstant(user.firstLoginAt.toInstant(), ZoneId.systemDefault());
+    }
+    this.ftpPermission = Boolean.TRUE.equals(user.ftpPermission);
     this.groupIds = user.groupIds;
     this.headerText = user.headerText;
     this.language = user.language;
-    this.lastLoginAt = user.lastLoginAt;
-    this.lastWebLoginAt = user.lastWebLoginAt;
-    this.lastFtpLoginAt = user.lastFtpLoginAt;
-    this.lastSftpLoginAt = user.lastSftpLoginAt;
-    this.lastDavLoginAt = user.lastDavLoginAt;
-    this.lastDesktopLoginAt = user.lastDesktopLoginAt;
-    this.lastRestapiLoginAt = user.lastRestapiLoginAt;
-    this.lastApiUseAt = user.lastApiUseAt;
-    this.lastActiveAt = user.lastActiveAt;
+    if (user.lastLoginAt != null) {
+      this.lastLoginAt = ZonedDateTime.ofInstant(user.lastLoginAt.toInstant(), ZoneId.systemDefault());
+    }
+    if (user.lastWebLoginAt != null) {
+      this.lastWebLoginAt = ZonedDateTime.ofInstant(user.lastWebLoginAt.toInstant(), ZoneId.systemDefault());
+    }
+    if (user.lastFtpLoginAt != null) {
+      this.lastFtpLoginAt = ZonedDateTime.ofInstant(user.lastFtpLoginAt.toInstant(), ZoneId.systemDefault());
+    }
+    if (user.lastSftpLoginAt != null) {
+      this.lastSftpLoginAt = ZonedDateTime.ofInstant(user.lastSftpLoginAt.toInstant(), ZoneId.systemDefault());
+    }
+    if (user.lastDavLoginAt != null) {
+      this.lastDavLoginAt = ZonedDateTime.ofInstant(user.lastDavLoginAt.toInstant(), ZoneId.systemDefault());
+    }
+    if (user.lastDesktopLoginAt != null) {
+      this.lastDesktopLoginAt = ZonedDateTime.ofInstant(user.lastDesktopLoginAt.toInstant(), ZoneId.systemDefault());
+    }
+    if (user.lastRestapiLoginAt != null) {
+      this.lastRestapiLoginAt = ZonedDateTime.ofInstant(user.lastRestapiLoginAt.toInstant(), ZoneId.systemDefault());
+    }
+    if (user.lastApiUseAt != null) {
+      this.lastApiUseAt = ZonedDateTime.ofInstant(user.lastApiUseAt.toInstant(), ZoneId.systemDefault());
+    }
+    if (user.lastActiveAt != null) {
+      this.lastActiveAt = ZonedDateTime.ofInstant(user.lastActiveAt.toInstant(), ZoneId.systemDefault());
+    }
     this.lastProtocolCipher = user.lastProtocolCipher;
-    this.lockoutExpires = user.lockoutExpires;
+    if (user.lockoutExpires != null) {
+      this.lockoutExpires = ZonedDateTime.ofInstant(user.lockoutExpires.toInstant(), ZoneId.systemDefault());
+    }
     this.name = user.name;
     this.company = user.company;
     this.notes = user.notes;
     this.notificationDailySendTime = user.notificationDailySendTime;
-    this.officeIntegrationEnabled = user.officeIntegrationEnabled;
-    this.passwordSetAt = user.passwordSetAt;
+    this.officeIntegrationEnabled = Boolean.TRUE.equals(user.officeIntegrationEnabled);
+    if (user.passwordSetAt != null) {
+      this.passwordSetAt = ZonedDateTime.ofInstant(user.passwordSetAt.toInstant(), ZoneId.systemDefault());
+    }
     this.passwordValidityDays = user.passwordValidityDays;
     this.publicKeysCount = user.publicKeysCount;
-    this.receiveAdminAlerts = user.receiveAdminAlerts;
+    this.receiveAdminAlerts = Boolean.TRUE.equals(user.receiveAdminAlerts);
     this.require2fa = user.require2fa;
-    this.requireLoginBy = user.requireLoginBy;
-    this.active2fa = user.active2fa;
-    this.requirePasswordChange = user.requirePasswordChange;
-    this.passwordExpired = user.passwordExpired;
-    this.readonlySiteAdmin = user.readonlySiteAdmin;
-    this.restapiPermission = user.restapiPermission;
-    this.selfManaged = user.selfManaged;
-    this.sftpPermission = user.sftpPermission;
-    this.siteAdmin = user.siteAdmin;
-    this.skipWelcomeScreen = user.skipWelcomeScreen;
+    if (user.requireLoginBy != null) {
+      this.requireLoginBy = ZonedDateTime.ofInstant(user.requireLoginBy.toInstant(), ZoneId.systemDefault());
+    }
+    this.active2fa = Boolean.TRUE.equals(user.active2fa);
+    this.requirePasswordChange = Boolean.TRUE.equals(user.requirePasswordChange);
+    this.passwordExpired = Boolean.TRUE.equals(user.passwordExpired);
+    this.readonlySiteAdmin = Boolean.TRUE.equals(user.readonlySiteAdmin);
+    this.restapiPermission = Boolean.TRUE.equals(user.restapiPermission);
+    this.selfManaged = Boolean.TRUE.equals(user.selfManaged);
+    this.sftpPermission = Boolean.TRUE.equals(user.sftpPermission);
+    this.siteAdmin = Boolean.TRUE.equals(user.siteAdmin);
+    this.skipWelcomeScreen = Boolean.TRUE.equals(user.skipWelcomeScreen);
     this.sslRequired = user.sslRequired;
     this.ssoStrategyId = user.ssoStrategyId;
-    this.subscribeToNewsletter = user.subscribeToNewsletter;
-    this.externallyManaged = user.externallyManaged;
+    this.subscribeToNewsletter = Boolean.TRUE.equals(user.subscribeToNewsletter);
+    this.externallyManaged = Boolean.TRUE.equals(user.externallyManaged);
     this.timeZone = user.timeZone;
     this.typeOf2fa = user.typeOf2fa;
     this.typeOf2faForDisplay = user.typeOf2faForDisplay;
     this.userRoot = user.userRoot;
     this.userHome = user.userHome;
     this.daysRemainingUntilPasswordExpire = user.daysRemainingUntilPasswordExpire;
-    this.passwordExpireAt = user.passwordExpireAt;
-    this.avatarFile = user.avatarFile;
-    this.avatarDelete = user.avatarDelete;
+    if (user.passwordExpireAt != null) {
+      this.passwordExpireAt = ZonedDateTime.ofInstant(user.passwordExpireAt.toInstant(), ZoneId.systemDefault());
+    }
+    if (user.avatarFile != null) {
+      this.avatarFile = new ByteArrayInputStream(user.avatarFile);
+    }
+    this.avatarDelete = Boolean.TRUE.equals(user.avatarDelete);
     this.changePassword = user.changePassword;
     this.changePasswordConfirmation = user.changePasswordConfirmation;
     this.grantPermission = user.grantPermission;
@@ -92,756 +131,456 @@ public class UserModel implements Serializable {
     this.importedPasswordHash = user.importedPasswordHash;
     this.password = user.password;
     this.passwordConfirmation = user.passwordConfirmation;
-    this.announcementsRead = user.announcementsRead;
+    this.announcementsRead = Boolean.TRUE.equals(user.announcementsRead);
   }
 
-  /**
-   * User ID
-   */
-  @Parameter
-  public Long id;
+  private Long id;
 
   public Long getId() {
     return id;
   }
 
-  /**
-   * User's username
-   */
-  @Parameter
-  public String username;
+  private String username;
 
   public String getUsername() {
     return username;
   }
 
-  /**
-   * List of group IDs of which this user is an administrator
-   */
-  @Parameter
-  public Long[] adminGroupIds;
+  private List<Long> adminGroupIds;
 
-  public Long[] getAdminGroupIds() {
+  public List<Long> getAdminGroupIds() {
     return adminGroupIds;
   }
 
-  /**
-   * A list of allowed IPs if applicable.  Newline delimited
-   */
-  @Parameter
-  public String allowedIps;
+  private String allowedIps;
 
   public String getAllowedIps() {
     return allowedIps;
   }
 
-  /**
-   * If `true`, the user can user create Bundles (aka Share Links). Use the bundle permission instead.
-   */
-  @Parameter
-  public Boolean attachmentsPermission;
+  private boolean attachmentsPermission;
 
-  public Boolean getAttachmentsPermission() {
+  public boolean getAttachmentsPermission() {
     return attachmentsPermission;
   }
 
-  /**
-   * Number of API keys associated with this user
-   */
-  @Parameter
-  public Long apiKeysCount;
+  private Long apiKeysCount;
 
   public Long getApiKeysCount() {
     return apiKeysCount;
   }
 
-  /**
-   * Scheduled Date/Time at which user will be deactivated
-   */
-  @Parameter
-  public Date authenticateUntil;
+  private ZonedDateTime authenticateUntil;
 
-  public Date getAuthenticateUntil() {
+  public ZonedDateTime getAuthenticateUntil() {
     return authenticateUntil;
   }
 
-  /**
-   * How is this user authenticated?
-   */
-  @Parameter
-  public String authenticationMethod;
+  private String authenticationMethod;
 
   public String getAuthenticationMethod() {
     return authenticationMethod;
   }
 
-  /**
-   * URL holding the user's avatar
-   */
-  @Parameter
-  public String avatarUrl;
+  private String avatarUrl;
 
   public String getAvatarUrl() {
     return avatarUrl;
   }
 
-  /**
-   * Is this a billable user record?
-   */
-  @Parameter
-  public Boolean billable;
+  private boolean billable;
 
-  public Boolean getBillable() {
+  public boolean getBillable() {
     return billable;
   }
 
-  /**
-   * Allow this user to perform operations on the account, payments, and invoices?
-   */
-  @Parameter
-  public Boolean billingPermission;
+  private boolean billingPermission;
 
-  public Boolean getBillingPermission() {
+  public boolean getBillingPermission() {
     return billingPermission;
   }
 
-  /**
-   * Allow this user to skip site-wide IP blacklists?
-   */
-  @Parameter
-  public Boolean bypassSiteAllowedIps;
+  private boolean bypassSiteAllowedIps;
 
-  public Boolean getBypassSiteAllowedIps() {
+  public boolean getBypassSiteAllowedIps() {
     return bypassSiteAllowedIps;
   }
 
-  /**
-   * Exempt this user from being disabled based on inactivity?
-   */
-  @Parameter
-  public Boolean bypassInactiveDisable;
+  private boolean bypassInactiveDisable;
 
-  public Boolean getBypassInactiveDisable() {
+  public boolean getBypassInactiveDisable() {
     return bypassInactiveDisable;
   }
 
-  /**
-   * When this user was created
-   */
-  @Parameter
-  public Date createdAt;
+  private ZonedDateTime createdAt;
 
-  public Date getCreatedAt() {
+  public ZonedDateTime getCreatedAt() {
     return createdAt;
   }
 
-  /**
-   * Can the user connect with WebDAV?
-   */
-  @Parameter
-  public Boolean davPermission;
+  private boolean davPermission;
 
-  public Boolean getDavPermission() {
+  public boolean getDavPermission() {
     return davPermission;
   }
 
-  /**
-   * Is user disabled? Disabled users cannot log in, and do not count for billing purposes. Users can be automatically disabled after an inactivity period via a Site setting or schedule to be deactivated after specific date.
-   */
-  @Parameter
-  public Boolean disabled;
+  private boolean disabled;
 
-  public Boolean getDisabled() {
+  public boolean getDisabled() {
     return disabled;
   }
 
-  /**
-   * Computed property that returns true if user disabled or expired or inactive.
-   */
-  @Parameter
-  public Boolean disabledExpiredOrInactive;
+  private boolean disabledExpiredOrInactive;
 
-  public Boolean getDisabledExpiredOrInactive() {
+  public boolean getDisabledExpiredOrInactive() {
     return disabledExpiredOrInactive;
   }
 
-  /**
-   * User email address
-   */
-  @Parameter
-  public String email;
+  private String email;
 
   public String getEmail() {
     return email;
   }
 
-  /**
-   * User's first login time
-   */
-  @Parameter
-  public Date firstLoginAt;
+  private ZonedDateTime firstLoginAt;
 
-  public Date getFirstLoginAt() {
+  public ZonedDateTime getFirstLoginAt() {
     return firstLoginAt;
   }
 
-  /**
-   * Can the user access with FTP/FTPS?
-   */
-  @Parameter
-  public Boolean ftpPermission;
+  private boolean ftpPermission;
 
-  public Boolean getFtpPermission() {
+  public boolean getFtpPermission() {
     return ftpPermission;
   }
 
-  /**
-   * Comma-separated list of group IDs of which this user is a member
-   */
-  @Parameter
-  public String groupIds;
+  private String groupIds;
 
   public String getGroupIds() {
     return groupIds;
   }
 
-  /**
-   * Text to display to the user in the header of the UI
-   */
-  @Parameter
-  public String headerText;
+  private String headerText;
 
   public String getHeaderText() {
     return headerText;
   }
 
-  /**
-   * Preferred language
-   */
-  @Parameter
-  public String language;
+  private String language;
 
   public String getLanguage() {
     return language;
   }
 
-  /**
-   * User's most recent login time via any protocol
-   */
-  @Parameter
-  public Date lastLoginAt;
+  private ZonedDateTime lastLoginAt;
 
-  public Date getLastLoginAt() {
+  public ZonedDateTime getLastLoginAt() {
     return lastLoginAt;
   }
 
-  /**
-   * User's most recent login time via web
-   */
-  @Parameter
-  public Date lastWebLoginAt;
+  private ZonedDateTime lastWebLoginAt;
 
-  public Date getLastWebLoginAt() {
+  public ZonedDateTime getLastWebLoginAt() {
     return lastWebLoginAt;
   }
 
-  /**
-   * User's most recent login time via FTP
-   */
-  @Parameter
-  public Date lastFtpLoginAt;
+  private ZonedDateTime lastFtpLoginAt;
 
-  public Date getLastFtpLoginAt() {
+  public ZonedDateTime getLastFtpLoginAt() {
     return lastFtpLoginAt;
   }
 
-  /**
-   * User's most recent login time via SFTP
-   */
-  @Parameter
-  public Date lastSftpLoginAt;
+  private ZonedDateTime lastSftpLoginAt;
 
-  public Date getLastSftpLoginAt() {
+  public ZonedDateTime getLastSftpLoginAt() {
     return lastSftpLoginAt;
   }
 
-  /**
-   * User's most recent login time via WebDAV
-   */
-  @Parameter
-  public Date lastDavLoginAt;
+  private ZonedDateTime lastDavLoginAt;
 
-  public Date getLastDavLoginAt() {
+  public ZonedDateTime getLastDavLoginAt() {
     return lastDavLoginAt;
   }
 
-  /**
-   * User's most recent login time via Desktop app
-   */
-  @Parameter
-  public Date lastDesktopLoginAt;
+  private ZonedDateTime lastDesktopLoginAt;
 
-  public Date getLastDesktopLoginAt() {
+  public ZonedDateTime getLastDesktopLoginAt() {
     return lastDesktopLoginAt;
   }
 
-  /**
-   * User's most recent login time via Rest API
-   */
-  @Parameter
-  public Date lastRestapiLoginAt;
+  private ZonedDateTime lastRestapiLoginAt;
 
-  public Date getLastRestapiLoginAt() {
+  public ZonedDateTime getLastRestapiLoginAt() {
     return lastRestapiLoginAt;
   }
 
-  /**
-   * User's most recent API use time
-   */
-  @Parameter
-  public Date lastApiUseAt;
+  private ZonedDateTime lastApiUseAt;
 
-  public Date getLastApiUseAt() {
+  public ZonedDateTime getLastApiUseAt() {
     return lastApiUseAt;
   }
 
-  /**
-   * User's most recent activity time, which is the latest of most recent login, most recent API use, enablement, or creation
-   */
-  @Parameter
-  public Date lastActiveAt;
+  private ZonedDateTime lastActiveAt;
 
-  public Date getLastActiveAt() {
+  public ZonedDateTime getLastActiveAt() {
     return lastActiveAt;
   }
 
-  /**
-   * The most recent protocol and cipher used
-   */
-  @Parameter
-  public String lastProtocolCipher;
+  private String lastProtocolCipher;
 
   public String getLastProtocolCipher() {
     return lastProtocolCipher;
   }
 
-  /**
-   * Time in the future that the user will no longer be locked out if applicable
-   */
-  @Parameter
-  public Date lockoutExpires;
+  private ZonedDateTime lockoutExpires;
 
-  public Date getLockoutExpires() {
+  public ZonedDateTime getLockoutExpires() {
     return lockoutExpires;
   }
 
-  /**
-   * User's full name
-   */
-  @Parameter
-  public String name;
+  private String name;
 
   public String getName() {
     return name;
   }
 
-  /**
-   * User's company
-   */
-  @Parameter
-  public String company;
+  private String company;
 
   public String getCompany() {
     return company;
   }
 
-  /**
-   * Any internal notes on the user
-   */
-  @Parameter
-  public String notes;
+  private String notes;
 
   public String getNotes() {
     return notes;
   }
 
-  /**
-   * Hour of the day at which daily notifications should be sent. Can be in range 0 to 23
-   */
-  @Parameter
-  public Long notificationDailySendTime;
+  private Long notificationDailySendTime;
 
   public Long getNotificationDailySendTime() {
     return notificationDailySendTime;
   }
 
-  /**
-   * Enable integration with Office for the web?
-   */
-  @Parameter
-  public Boolean officeIntegrationEnabled;
+  private boolean officeIntegrationEnabled;
 
-  public Boolean getOfficeIntegrationEnabled() {
+  public boolean getOfficeIntegrationEnabled() {
     return officeIntegrationEnabled;
   }
 
-  /**
-   * Last time the user's password was set
-   */
-  @Parameter
-  public Date passwordSetAt;
+  private ZonedDateTime passwordSetAt;
 
-  public Date getPasswordSetAt() {
+  public ZonedDateTime getPasswordSetAt() {
     return passwordSetAt;
   }
 
-  /**
-   * Number of days to allow user to use the same password
-   */
-  @Parameter
-  public Long passwordValidityDays;
+  private Long passwordValidityDays;
 
   public Long getPasswordValidityDays() {
     return passwordValidityDays;
   }
 
-  /**
-   * Number of public keys associated with this user
-   */
-  @Parameter
-  public Long publicKeysCount;
+  private Long publicKeysCount;
 
   public Long getPublicKeysCount() {
     return publicKeysCount;
   }
 
-  /**
-   * Should the user receive admin alerts such a certificate expiration notifications and overages?
-   */
-  @Parameter
-  public Boolean receiveAdminAlerts;
+  private boolean receiveAdminAlerts;
 
-  public Boolean getReceiveAdminAlerts() {
+  public boolean getReceiveAdminAlerts() {
     return receiveAdminAlerts;
   }
 
-  /**
-   * 2FA required setting
-   */
-  @Parameter
-  public String require2fa;
+  private String require2fa;
 
   public String getRequire2fa() {
     return require2fa;
   }
 
-  /**
-   * Require user to login by specified date otherwise it will be disabled.
-   */
-  @Parameter
-  public Date requireLoginBy;
+  private ZonedDateTime requireLoginBy;
 
-  public Date getRequireLoginBy() {
+  public ZonedDateTime getRequireLoginBy() {
     return requireLoginBy;
   }
 
-  /**
-   * Is 2fa active for the user?
-   */
-  @Parameter
-  public Boolean active2fa;
+  private boolean active2fa;
 
-  public Boolean getActive2fa() {
+  public boolean getActive2fa() {
     return active2fa;
   }
 
-  /**
-   * Is a password change required upon next user login?
-   */
-  @Parameter
-  public Boolean requirePasswordChange;
+  private boolean requirePasswordChange;
 
-  public Boolean getRequirePasswordChange() {
+  public boolean getRequirePasswordChange() {
     return requirePasswordChange;
   }
 
-  /**
-   * Is user's password expired?
-   */
-  @Parameter
-  public Boolean passwordExpired;
+  private boolean passwordExpired;
 
-  public Boolean getPasswordExpired() {
+  public boolean getPasswordExpired() {
     return passwordExpired;
   }
 
-  /**
-   * Is the user an allowed to view all (non-billing) site configuration for this site?
-   */
-  @Parameter
-  public Boolean readonlySiteAdmin;
+  private boolean readonlySiteAdmin;
 
-  public Boolean getReadonlySiteAdmin() {
+  public boolean getReadonlySiteAdmin() {
     return readonlySiteAdmin;
   }
 
-  /**
-   * Can this user access the Web app, Desktop app, SDKs, or REST API?  (All of these tools use the API internally, so this is one unified permission set.)
-   */
-  @Parameter
-  public Boolean restapiPermission;
+  private boolean restapiPermission;
 
-  public Boolean getRestapiPermission() {
+  public boolean getRestapiPermission() {
     return restapiPermission;
   }
 
-  /**
-   * Does this user manage it's own credentials or is it a shared/bot user?
-   */
-  @Parameter
-  public Boolean selfManaged;
+  private boolean selfManaged;
 
-  public Boolean getSelfManaged() {
+  public boolean getSelfManaged() {
     return selfManaged;
   }
 
-  /**
-   * Can the user access with SFTP?
-   */
-  @Parameter
-  public Boolean sftpPermission;
+  private boolean sftpPermission;
 
-  public Boolean getSftpPermission() {
+  public boolean getSftpPermission() {
     return sftpPermission;
   }
 
-  /**
-   * Is the user an administrator for this site?
-   */
-  @Parameter
-  public Boolean siteAdmin;
+  private boolean siteAdmin;
 
-  public Boolean getSiteAdmin() {
+  public boolean getSiteAdmin() {
     return siteAdmin;
   }
 
-  /**
-   * Skip Welcome page in the UI?
-   */
-  @Parameter
-  public Boolean skipWelcomeScreen;
+  private boolean skipWelcomeScreen;
 
-  public Boolean getSkipWelcomeScreen() {
+  public boolean getSkipWelcomeScreen() {
     return skipWelcomeScreen;
   }
 
-  /**
-   * SSL required setting
-   */
-  @Parameter
-  public String sslRequired;
+  private String sslRequired;
 
   public String getSslRequired() {
     return sslRequired;
   }
 
-  /**
-   * SSO (Single Sign On) strategy ID for the user, if applicable.
-   */
-  @Parameter
-  public Long ssoStrategyId;
+  private Long ssoStrategyId;
 
   public Long getSsoStrategyId() {
     return ssoStrategyId;
   }
 
-  /**
-   * Is the user subscribed to the newsletter?
-   */
-  @Parameter
-  public Boolean subscribeToNewsletter;
+  private boolean subscribeToNewsletter;
 
-  public Boolean getSubscribeToNewsletter() {
+  public boolean getSubscribeToNewsletter() {
     return subscribeToNewsletter;
   }
 
-  /**
-   * Is this user managed by a SsoStrategy?
-   */
-  @Parameter
-  public Boolean externallyManaged;
+  private boolean externallyManaged;
 
-  public Boolean getExternallyManaged() {
+  public boolean getExternallyManaged() {
     return externallyManaged;
   }
 
-  /**
-   * User time zone
-   */
-  @Parameter
-  public String timeZone;
+  private String timeZone;
 
   public String getTimeZone() {
     return timeZone;
   }
 
-  /**
-   * Type(s) of 2FA methods in use, for programmatic use.  Will be either `sms`, `totp`, `webauthn`, `yubi`, `email`, or multiple values sorted alphabetically and joined by an underscore.  Does not specify whether user has more than one of a given method.
-   */
-  @Parameter
-  public String typeOf2fa;
+  private String typeOf2fa;
 
   public String getTypeOf2fa() {
     return typeOf2fa;
   }
 
-  /**
-   * Type(s) of 2FA methods in use, formatted for displaying in the UI.  Unlike `type_of_2fa`, this value will make clear when a user has more than 1 of the same type of method.
-   */
-  @Parameter
-  public String typeOf2faForDisplay;
+  private String typeOf2faForDisplay;
 
   public String getTypeOf2faForDisplay() {
     return typeOf2faForDisplay;
   }
 
-  /**
-   * Root folder for FTP (and optionally SFTP if the appropriate site-wide setting is set).  Note that this is not used for API, Desktop, or Web interface.
-   */
-  @Parameter
-  public String userRoot;
+  private String userRoot;
 
   public String getUserRoot() {
     return userRoot;
   }
 
-  /**
-   * Home folder for FTP/SFTP.  Note that this is not used for API, Desktop, or Web interface.
-   */
-  @Parameter
-  public String userHome;
+  private String userHome;
 
   public String getUserHome() {
     return userHome;
   }
 
-  /**
-   * Number of days remaining until password expires
-   */
-  @Parameter
-  public Long daysRemainingUntilPasswordExpire;
+  private Long daysRemainingUntilPasswordExpire;
 
   public Long getDaysRemainingUntilPasswordExpire() {
     return daysRemainingUntilPasswordExpire;
   }
 
-  /**
-   * Password expiration datetime
-   */
-  @Parameter
-  public Date passwordExpireAt;
+  private ZonedDateTime passwordExpireAt;
 
-  public Date getPasswordExpireAt() {
+  public ZonedDateTime getPasswordExpireAt() {
     return passwordExpireAt;
   }
 
-  /**
-   * An image file for your user avatar.
-   */
-  @Parameter
-  public byte[] avatarFile;
+  private InputStream avatarFile;
 
-  public byte[] getAvatarFile() {
+  public InputStream getAvatarFile() {
     return avatarFile;
   }
 
-  /**
-   * If true, the avatar will be deleted.
-   */
-  @Parameter
-  public Boolean avatarDelete;
+  private boolean avatarDelete;
 
-  public Boolean getAvatarDelete() {
+  public boolean getAvatarDelete() {
     return avatarDelete;
   }
 
-  /**
-   * Used for changing a password on an existing user.
-   */
-  @Parameter
-  public String changePassword;
+  private String changePassword;
 
   public String getChangePassword() {
     return changePassword;
   }
 
-  /**
-   * Optional, but if provided, we will ensure that it matches the value sent in `change_password`.
-   */
-  @Parameter
-  public String changePasswordConfirmation;
+  private String changePasswordConfirmation;
 
   public String getChangePasswordConfirmation() {
     return changePasswordConfirmation;
   }
 
-  /**
-   * Permission to grant on the user root.  Can be blank or `full`, `read`, `write`, `list`, `read+write`, or `list+write`
-   */
-  @Parameter
-  public String grantPermission;
+  private String grantPermission;
 
   public String getGrantPermission() {
     return grantPermission;
   }
 
-  /**
-   * Group ID to associate this user with.
-   */
-  @Parameter
-  public Long groupId;
+  private Long groupId;
 
   public Long getGroupId() {
     return groupId;
   }
 
-  /**
-   * Pre-calculated hash of the user's password. If supplied, this will be used to authenticate the user on first login. Supported hash methods are MD5, SHA1, and SHA256.
-   */
-  @Parameter
-  public String importedPasswordHash;
+  private String importedPasswordHash;
 
   public String getImportedPasswordHash() {
     return importedPasswordHash;
   }
 
-  /**
-   * User password.
-   */
-  @Parameter
-  public String password;
+  private String password;
 
   public String getPassword() {
     return password;
   }
 
-  /**
-   * Optional, but if provided, we will ensure that it matches the value sent in `password`.
-   */
-  @Parameter
-  public String passwordConfirmation;
+  private String passwordConfirmation;
 
   public String getPasswordConfirmation() {
     return passwordConfirmation;
   }
 
-  /**
-   * Signifies that the user has read all the announcements in the UI.
-   */
-  @Parameter
-  public Boolean announcementsRead;
+  private boolean announcementsRead;
 
-  public Boolean getAnnouncementsRead() {
+  public boolean getAnnouncementsRead() {
     return announcementsRead;
   }
 

@@ -1,11 +1,11 @@
-package com.files.mule.internal.exceptions;
+package com.files.mule.internal.error.exception;
 
 import org.mule.runtime.extension.api.exception.ModuleException;
 
-import com.files.mule.internal.errors.FilesComError;
+import com.files.mule.internal.error.FilesComErrorType;
 
 public class FilesComArgumentException extends ModuleException {
   public FilesComArgumentException(final Throwable cause) {
-    super(FilesComError.ARGUMENT, cause);
+    super(FilesComErrorType.ARGUMENT, cause);
   }
 }

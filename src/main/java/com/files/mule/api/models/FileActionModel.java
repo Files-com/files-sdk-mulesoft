@@ -1,10 +1,13 @@
 package com.files.mule.api.models;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
-
-import org.mule.runtime.extension.api.annotation.param.Parameter;
 
 import com.files.models.FileAction;
 
@@ -20,21 +23,13 @@ public class FileActionModel implements Serializable {
     this.fileMigrationId = fileAction.fileMigrationId;
   }
 
-  /**
-   * Status of file operation.
-   */
-  @Parameter
-  public String status;
+  private String status;
 
   public String getStatus() {
     return status;
   }
 
-  /**
-   * If status is pending, this is the id of the File Migration to check for status updates.
-   */
-  @Parameter
-  public Long fileMigrationId;
+  private Long fileMigrationId;
 
   public Long getFileMigrationId() {
     return fileMigrationId;

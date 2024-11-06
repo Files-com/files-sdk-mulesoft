@@ -12,9 +12,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.files.ResponseError;
 import com.files.exceptions.ApiErrorException;
-import com.files.mule.internal.FilesComConnection;
-import com.files.mule.internal.FilesComOperations;
-import com.files.mule.internal.exceptions.FilesComApiException;
+import com.files.mule.internal.connection.FilesComConnection;
+import com.files.mule.internal.error.exception.FilesComApiException;
+import com.files.mule.internal.operation.FilesComOperations;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FilesComErrorsTestCase {
@@ -50,7 +50,7 @@ public class FilesComErrorsTestCase {
     try {
       operations.showUser(connection, 1L);
     } catch (final FilesComApiException e) {
-      assertThat(e.getType().getType(), is("UNKNOWN"));
+      assertThat(e.getType().getType(), is("OTHER"));
     }
   }
 }

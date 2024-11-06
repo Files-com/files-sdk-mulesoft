@@ -1,10 +1,13 @@
 package com.files.mule.api.models;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
-
-import org.mule.runtime.extension.api.annotation.param.Parameter;
 
 import com.files.models.BundleDownload;
 
@@ -21,45 +24,32 @@ public class ShareLinkDownloadModel implements Serializable {
     }
     this.downloadMethod = bundleDownload.downloadMethod;
     this.path = bundleDownload.path;
-    this.createdAt = bundleDownload.createdAt;
+    if (bundleDownload.createdAt != null) {
+      this.createdAt = ZonedDateTime.ofInstant(bundleDownload.createdAt.toInstant(), ZoneId.systemDefault());
+    }
   }
 
-  /**
-   */
-  @Parameter
-  public ShareLinkRegistrationModel bundleRegistration;
+  private ShareLinkRegistrationModel bundleRegistration;
 
   public ShareLinkRegistrationModel getBundleRegistration() {
     return bundleRegistration;
   }
 
-  /**
-   * Download method (file or full_zip)
-   */
-  @Parameter
-  public String downloadMethod;
+  private String downloadMethod;
 
   public String getDownloadMethod() {
     return downloadMethod;
   }
 
-  /**
-   * Download path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
-   */
-  @Parameter
-  public String path;
+  private String path;
 
   public String getPath() {
     return path;
   }
 
-  /**
-   * Download date/time
-   */
-  @Parameter
-  public Date createdAt;
+  private ZonedDateTime createdAt;
 
-  public Date getCreatedAt() {
+  public ZonedDateTime getCreatedAt() {
     return createdAt;
   }
 

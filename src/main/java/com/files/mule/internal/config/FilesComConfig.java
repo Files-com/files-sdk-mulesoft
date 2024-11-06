@@ -1,4 +1,4 @@
-package com.files.mule.internal;
+package com.files.mule.internal.config;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package com.files.mule.internal;
+package com.files.mule.internal.connection.provider;
 
 import java.util.HashMap;
 
@@ -12,12 +12,14 @@ import org.mule.runtime.extension.api.annotation.param.display.Placement;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 
 import com.files.exceptions.ApiErrorException;
+import com.files.mule.internal.connection.FilesComConnection;
 
 public class FilesComConnectionProvider implements CachedConnectionProvider<FilesComConnection> {
 
   @Parameter
   @DisplayName("API Key")
   @Summary("The API key used to authenticate with Files.com.")
+  @Placement
   private String apiKey;
 
   @Parameter

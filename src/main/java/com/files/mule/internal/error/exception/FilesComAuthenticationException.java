@@ -1,11 +1,11 @@
-package com.files.mule.internal.exceptions;
+package com.files.mule.internal.error.exception;
 
 import org.mule.runtime.extension.api.exception.ModuleException;
 
-import com.files.mule.internal.errors.FilesComError;
+import com.files.mule.internal.error.FilesComErrorType;
 
 public class FilesComAuthenticationException extends ModuleException {
   public FilesComAuthenticationException(final Throwable cause) {
-    super(FilesComError.NOT_AUTHENTICATED, cause);
+    super(FilesComErrorType.NOT_AUTHENTICATED, cause);
   }
 }

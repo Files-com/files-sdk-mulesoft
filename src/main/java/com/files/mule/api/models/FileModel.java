@@ -1,10 +1,13 @@
 package com.files.mule.api.models;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
-
-import org.mule.runtime.extension.api.annotation.param.Parameter;
 
 import com.files.models.File;
 
@@ -26,15 +29,21 @@ public class FileModel implements Serializable {
     this.displayName = file.displayName;
     this.type = file.type;
     this.size = file.size;
-    this.createdAt = file.createdAt;
+    if (file.createdAt != null) {
+      this.createdAt = ZonedDateTime.ofInstant(file.createdAt.toInstant(), ZoneId.systemDefault());
+    }
     this.lastModifiedById = file.lastModifiedById;
     this.lastModifiedByApiKeyId = file.lastModifiedByApiKeyId;
     this.lastModifiedByAutomationId = file.lastModifiedByAutomationId;
     this.lastModifiedByBundleRegistrationId = file.lastModifiedByBundleRegistrationId;
     this.lastModifiedByRemoteServerId = file.lastModifiedByRemoteServerId;
     this.lastModifiedByRemoteServerSyncId = file.lastModifiedByRemoteServerSyncId;
-    this.mtime = file.mtime;
-    this.providedMtime = file.providedMtime;
+    if (file.mtime != null) {
+      this.mtime = ZonedDateTime.ofInstant(file.mtime.toInstant(), ZoneId.systemDefault());
+    }
+    if (file.providedMtime != null) {
+      this.providedMtime = ZonedDateTime.ofInstant(file.providedMtime.toInstant(), ZoneId.systemDefault());
+    }
     this.crc32 = file.crc32;
     this.md5 = file.md5;
     this.sha1 = file.sha1;
@@ -42,8 +51,8 @@ public class FileModel implements Serializable {
     this.mimeType = file.mimeType;
     this.region = file.region;
     this.permissions = file.permissions;
-    this.subfoldersLocked = file.subfoldersLocked;
-    this.isLocked = file.isLocked;
+    this.subfoldersLocked = Boolean.TRUE.equals(file.subfoldersLocked);
+    this.isLocked = Boolean.TRUE.equals(file.isLocked);
     this.downloadUri = file.downloadUri;
     this.priorityColor = file.priorityColor;
     this.previewId = file.previewId;
@@ -52,451 +61,276 @@ public class FileModel implements Serializable {
     }
     this.action = file.action;
     this.length = file.length;
-    this.mkdirParents = file.mkdirParents;
+    this.mkdirParents = Boolean.TRUE.equals(file.mkdirParents);
     this.part = file.part;
     this.parts = file.parts;
     this.ref = file.ref;
     this.restart = file.restart;
     this.structure = file.structure;
-    this.withRename = file.withRename;
+    this.withRename = Boolean.TRUE.equals(file.withRename);
   }
 
-  /**
-   * File/Folder path. This must be slash-delimited, but it must neither start nor end with a slash. Maximum of 5000 characters.
-   */
-  @Parameter
-  public String path;
+  private String path;
 
   public String getPath() {
     return path;
   }
 
-  /**
-   * User ID of the User who created the file/folder
-   */
-  @Parameter
-  public Long createdById;
+  private Long createdById;
 
   public Long getCreatedById() {
     return createdById;
   }
 
-  /**
-   * ID of the API key that created the file/folder
-   */
-  @Parameter
-  public Long createdByApiKeyId;
+  private Long createdByApiKeyId;
 
   public Long getCreatedByApiKeyId() {
     return createdByApiKeyId;
   }
 
-  /**
-   * ID of the AS2 Incoming Message that created the file/folder
-   */
-  @Parameter
-  public Long createdByAs2IncomingMessageId;
+  private Long createdByAs2IncomingMessageId;
 
   public Long getCreatedByAs2IncomingMessageId() {
     return createdByAs2IncomingMessageId;
   }
 
-  /**
-   * ID of the Automation that created the file/folder
-   */
-  @Parameter
-  public Long createdByAutomationId;
+  private Long createdByAutomationId;
 
   public Long getCreatedByAutomationId() {
     return createdByAutomationId;
   }
 
-  /**
-   * ID of the Bundle Registration that created the file/folder
-   */
-  @Parameter
-  public Long createdByBundleRegistrationId;
+  private Long createdByBundleRegistrationId;
 
   public Long getCreatedByBundleRegistrationId() {
     return createdByBundleRegistrationId;
   }
 
-  /**
-   * ID of the Inbox that created the file/folder
-   */
-  @Parameter
-  public Long createdByInboxId;
+  private Long createdByInboxId;
 
   public Long getCreatedByInboxId() {
     return createdByInboxId;
   }
 
-  /**
-   * ID of the Remote Server that created the file/folder
-   */
-  @Parameter
-  public Long createdByRemoteServerId;
+  private Long createdByRemoteServerId;
 
   public Long getCreatedByRemoteServerId() {
     return createdByRemoteServerId;
   }
 
-  /**
-   * ID of the Remote Server Sync that created the file/folder
-   */
-  @Parameter
-  public Long createdByRemoteServerSyncId;
+  private Long createdByRemoteServerSyncId;
 
   public Long getCreatedByRemoteServerSyncId() {
     return createdByRemoteServerSyncId;
   }
 
-  /**
-   * Custom metadata map of keys and values. Limited to 32 keys, 256 characters per key and 1024 characters per value.
-   */
-  @Parameter
-  public Map<String, String> customMetadata;
+  private Map<String, String> customMetadata;
 
   public Map<String, String> getCustomMetadata() {
     return customMetadata;
   }
 
-  /**
-   * File/Folder display name
-   */
-  @Parameter
-  public String displayName;
+  private String displayName;
 
   public String getDisplayName() {
     return displayName;
   }
 
-  /**
-   * Type: `directory` or `file`.
-   */
-  @Parameter
-  public String type;
+  private String type;
 
   public String getType() {
     return type;
   }
 
-  /**
-   * File/Folder size
-   */
-  @Parameter
-  public Long size;
+  private Long size;
 
   public Long getSize() {
     return size;
   }
 
-  /**
-   * File created date/time
-   */
-  @Parameter
-  public Date createdAt;
+  private ZonedDateTime createdAt;
 
-  public Date getCreatedAt() {
+  public ZonedDateTime getCreatedAt() {
     return createdAt;
   }
 
-  /**
-   * User ID of the User who last modified the file/folder
-   */
-  @Parameter
-  public Long lastModifiedById;
+  private Long lastModifiedById;
 
   public Long getLastModifiedById() {
     return lastModifiedById;
   }
 
-  /**
-   * ID of the API key that last modified the file/folder
-   */
-  @Parameter
-  public Long lastModifiedByApiKeyId;
+  private Long lastModifiedByApiKeyId;
 
   public Long getLastModifiedByApiKeyId() {
     return lastModifiedByApiKeyId;
   }
 
-  /**
-   * ID of the Automation that last modified the file/folder
-   */
-  @Parameter
-  public Long lastModifiedByAutomationId;
+  private Long lastModifiedByAutomationId;
 
   public Long getLastModifiedByAutomationId() {
     return lastModifiedByAutomationId;
   }
 
-  /**
-   * ID of the Bundle Registration that last modified the file/folder
-   */
-  @Parameter
-  public Long lastModifiedByBundleRegistrationId;
+  private Long lastModifiedByBundleRegistrationId;
 
   public Long getLastModifiedByBundleRegistrationId() {
     return lastModifiedByBundleRegistrationId;
   }
 
-  /**
-   * ID of the Remote Server that last modified the file/folder
-   */
-  @Parameter
-  public Long lastModifiedByRemoteServerId;
+  private Long lastModifiedByRemoteServerId;
 
   public Long getLastModifiedByRemoteServerId() {
     return lastModifiedByRemoteServerId;
   }
 
-  /**
-   * ID of the Remote Server Sync that last modified the file/folder
-   */
-  @Parameter
-  public Long lastModifiedByRemoteServerSyncId;
+  private Long lastModifiedByRemoteServerSyncId;
 
   public Long getLastModifiedByRemoteServerSyncId() {
     return lastModifiedByRemoteServerSyncId;
   }
 
-  /**
-   * File last modified date/time, according to the server.  This is the timestamp of the last Files.com operation of the file, regardless of what modified timestamp was sent.
-   */
-  @Parameter
-  public Date mtime;
+  private ZonedDateTime mtime;
 
-  public Date getMtime() {
+  public ZonedDateTime getMtime() {
     return mtime;
   }
 
-  /**
-   * File last modified date/time, according to the client who set it.  Files.com allows desktop, FTP, SFTP, and WebDAV clients to set modified at times.  This allows Desktop :Cloud syncing to preserve modified at times.
-   */
-  @Parameter
-  public Date providedMtime;
+  private ZonedDateTime providedMtime;
 
-  public Date getProvidedMtime() {
+  public ZonedDateTime getProvidedMtime() {
     return providedMtime;
   }
 
-  /**
-   * File CRC32 checksum. This is sometimes delayed, so if you get a blank response, wait and try again.
-   */
-  @Parameter
-  public String crc32;
+  private String crc32;
 
   public String getCrc32() {
     return crc32;
   }
 
-  /**
-   * File MD5 checksum. This is sometimes delayed, so if you get a blank response, wait and try again.
-   */
-  @Parameter
-  public String md5;
+  private String md5;
 
   public String getMd5() {
     return md5;
   }
 
-  /**
-   * File SHA1 checksum. This is sometimes delayed, so if you get a blank response, wait and try again.
-   */
-  @Parameter
-  public String sha1;
+  private String sha1;
 
   public String getSha1() {
     return sha1;
   }
 
-  /**
-   * File SHA256 checksum. This is sometimes delayed, so if you get a blank response, wait and try again.
-   */
-  @Parameter
-  public String sha256;
+  private String sha256;
 
   public String getSha256() {
     return sha256;
   }
 
-  /**
-   * MIME Type.  This is determined by the filename extension and is not stored separately internally.
-   */
-  @Parameter
-  public String mimeType;
+  private String mimeType;
 
   public String getMimeType() {
     return mimeType;
   }
 
-  /**
-   * Region location
-   */
-  @Parameter
-  public String region;
+  private String region;
 
   public String getRegion() {
     return region;
   }
 
-  /**
-   * A short string representing the current user's permissions.  Can be `r` (Read),`w` (Write),`d` (Delete), `l` (List) or any combination
-   */
-  @Parameter
-  public String permissions;
+  private String permissions;
 
   public String getPermissions() {
     return permissions;
   }
 
-  /**
-   * Are subfolders locked and unable to be modified?
-   */
-  @Parameter
-  public Boolean subfoldersLocked;
+  private boolean subfoldersLocked;
 
-  public Boolean getSubfoldersLocked() {
+  public boolean getSubfoldersLocked() {
     return subfoldersLocked;
   }
 
-  /**
-   * Is this folder locked and unable to be modified?
-   */
-  @Parameter
-  public Boolean isLocked;
+  private boolean isLocked;
 
-  public Boolean getIsLocked() {
+  public boolean getIsLocked() {
     return isLocked;
   }
 
-  /**
-   * Link to download file. Provided only in response to a download request.
-   */
-  @Parameter
-  public String downloadUri;
+  private String downloadUri;
 
   public String getDownloadUri() {
     return downloadUri;
   }
 
-  /**
-   * Bookmark/priority color of file/folder
-   */
-  @Parameter
-  public String priorityColor;
+  private String priorityColor;
 
   public String getPriorityColor() {
     return priorityColor;
   }
 
-  /**
-   * File preview ID
-   */
-  @Parameter
-  public Long previewId;
+  private Long previewId;
 
   public Long getPreviewId() {
     return previewId;
   }
 
-  /**
-   * File preview
-   */
-  @Parameter
-  public PreviewModel preview;
+  private PreviewModel preview;
 
   public PreviewModel getPreview() {
     return preview;
   }
 
-  /**
-   * The action to perform.  Can be `append`, `attachment`, `end`, `upload`, `put`, or may not exist
-   */
-  @Parameter
-  public String action;
+  private String action;
 
   public String getAction() {
     return action;
   }
 
-  /**
-   * Length of file.
-   */
-  @Parameter
-  public Long length;
+  private Long length;
 
   public Long getLength() {
     return length;
   }
 
-  /**
-   * Create parent directories if they do not exist?
-   */
-  @Parameter
-  public Boolean mkdirParents;
+  private boolean mkdirParents;
 
-  public Boolean getMkdirParents() {
+  public boolean getMkdirParents() {
     return mkdirParents;
   }
 
-  /**
-   * Part if uploading a part.
-   */
-  @Parameter
-  public Long part;
+  private Long part;
 
   public Long getPart() {
     return part;
   }
 
-  /**
-   * How many parts to fetch?
-   */
-  @Parameter
-  public Long parts;
+  private Long parts;
 
   public Long getParts() {
     return parts;
   }
 
-  /**
-   */
-  @Parameter
-  public String ref;
+  private String ref;
 
   public String getRef() {
     return ref;
   }
 
-  /**
-   * File byte offset to restart from.
-   */
-  @Parameter
-  public Long restart;
+  private Long restart;
 
   public Long getRestart() {
     return restart;
   }
 
-  /**
-   * If copying folder, copy just the structure?
-   */
-  @Parameter
-  public String structure;
+  private String structure;
 
   public String getStructure() {
     return structure;
   }
 
-  /**
-   * Allow file rename instead of overwrite?
-   */
-  @Parameter
-  public Boolean withRename;
+  private boolean withRename;
 
-  public Boolean getWithRename() {
+  public boolean getWithRename() {
     return withRename;
   }
 

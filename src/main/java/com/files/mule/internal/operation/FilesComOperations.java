@@ -1,4 +1,4 @@
-package com.files.mule.internal;
+package com.files.mule.internal.operation;
 
 import static org.mule.runtime.extension.api.annotation.param.MediaType.ANY;
 
@@ -26,10 +26,12 @@ import org.slf4j.LoggerFactory;
 import com.files.ListIterator;
 import com.files.exceptions.ApiErrorException;
 import com.files.exceptions.ApiErrorException.*;
-import com.files.mule.internal.errors.*;
-import com.files.mule.internal.exceptions.*;
+import com.files.mule.internal.error.*;
+import com.files.mule.internal.error.exception.*;
 import com.files.models.*;
 import com.files.mule.api.models.*;
+import com.files.mule.internal.connection.FilesComConnection;
+import com.files.mule.internal.error.provider.FilesComErrorProvider;
 import com.files.mule.internal.values.*;
 
 public class FilesComOperations {
