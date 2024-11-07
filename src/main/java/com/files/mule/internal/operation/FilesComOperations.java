@@ -2,7 +2,6 @@ package com.files.mule.internal.operation;
 
 import static org.mule.runtime.extension.api.annotation.param.MediaType.ANY;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,10 +23,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.files.ListIterator;
-import com.files.exceptions.ApiErrorException;
-import com.files.exceptions.ApiErrorException.*;
-import com.files.mule.internal.error.*;
-import com.files.mule.internal.error.exception.*;
 import com.files.models.*;
 import com.files.mule.api.models.*;
 import com.files.mule.internal.connection.FilesComConnection;
@@ -52,36 +47,22 @@ public class FilesComOperations {
 
       @Override
       public List<ShareLinkModel> getPage(final FilesComConnection connection) {
-        try {
-          if (iterator == null) {
-            final HashMap<String, Object> requestParameters = new HashMap<>();
+        if (iterator == null) {
+          final HashMap<String, Object> requestParameters = new HashMap<>();
 
-            LOGGER.debug("Loading first page of ShareLinks...");
-            iterator = connection.listBundle(requestParameters);
+          LOGGER.debug("Loading first page of ShareLinks...");
+          iterator = connection.listBundle(requestParameters);
+        } else {
+          if (iterator.hasNextPage()) {
+            LOGGER.debug("Loading next page of ShareLinks...");
+            iterator = connection.listBundle(iterator);
           } else {
-            if (iterator.hasNextPage()) {
-              LOGGER.debug("Loading next page of ShareLinks...");
-              iterator = iterator.loadNextPage();
-            } else {
-              LOGGER.debug("No more pages of ShareLinks to load");
-              return new ArrayList<>();
-            }
+            LOGGER.debug("No more pages of ShareLinks to load");
+            return new ArrayList<>();
           }
-
-          return iterator.data.stream().map(ShareLinkModel::new).collect(Collectors.toList());
-        } catch (final ApiErrorException e) {
-          throw new FilesComApiException(e);
-        } catch (final AuthenticationException e) {
-          throw new FilesComAuthenticationException(e);
-        } catch (final ApiConnectionException e) {
-          throw new FilesComConnectionException(e);
-        } catch (final InvalidResponseException e) {
-          throw new FilesComResponseException(e);
-        } catch (final ServerErrorException e) {
-          throw new FilesComServerException(e);
-        } catch (final IllegalArgumentException | NullPointerException e) {
-          throw new FilesComArgumentException(e);
         }
+
+        return iterator.data.stream().map(ShareLinkModel::new).collect(Collectors.toList());
       }
 
       @Override
@@ -105,26 +86,12 @@ public class FilesComOperations {
   public ShareLinkModel showShareLink(
       final @Connection FilesComConnection connection,
       final @Summary("Bundle ID.") @Example("1") Long id) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (id != null) {
-        requestParameters.put("id", id);
-      }
-
-      return new ShareLinkModel(connection.findBundle(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (id != null) {
+      requestParameters.put("id", id);
     }
+
+    return new ShareLinkModel(connection.findBundle(requestParameters));
   }
 
   /**
@@ -142,48 +109,34 @@ public class FilesComOperations {
       final @Optional @Summary("Public description") @Example("The public description of the bundle.") String description,
       final @Optional @Summary("Bundle internal note") @Example("The internal note on the bundle.") String note,
       final @Optional @Summary("Show a registration page that captures the downloader's name and email address?") @Example("true") boolean requireRegistration) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (paths != null) {
-        requestParameters.put("paths", paths.toArray(new String[0]));
-      }
-
-      if (password != null) {
-        requestParameters.put("password", password);
-      }
-
-      if (expiresAt != null) {
-        requestParameters.put("expires_at", expiresAt);
-      }
-
-      if (maxUses != null) {
-        requestParameters.put("max_uses", maxUses);
-      }
-
-      if (description != null) {
-        requestParameters.put("description", description);
-      }
-
-      if (note != null) {
-        requestParameters.put("note", note);
-      }
-
-      requestParameters.put("require_registration", requireRegistration);
-      requestParameters.put("permissions", "read");
-      return new ShareLinkModel(connection.createBundle(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (paths != null) {
+      requestParameters.put("paths", paths.toArray(new String[0]));
     }
+
+    if (password != null) {
+      requestParameters.put("password", password);
+    }
+
+    if (expiresAt != null) {
+      requestParameters.put("expires_at", expiresAt);
+    }
+
+    if (maxUses != null) {
+      requestParameters.put("max_uses", maxUses);
+    }
+
+    if (description != null) {
+      requestParameters.put("description", description);
+    }
+
+    if (note != null) {
+      requestParameters.put("note", note);
+    }
+
+    requestParameters.put("require_registration", requireRegistration);
+    requestParameters.put("permissions", "read");
+    return new ShareLinkModel(connection.createBundle(requestParameters));
   }
 
   /**
@@ -196,30 +149,16 @@ public class FilesComOperations {
       final @Connection FilesComConnection connection,
       final @Summary("Bundle ID.") @Example("1") Long id,
       final @Optional @Summary("Bundle expiration date/time") @Example("2000-01-01T01:00:00Z") String expiresAt) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (id != null) {
-        requestParameters.put("id", id);
-      }
-
-      if (expiresAt != null) {
-        requestParameters.put("expires_at", expiresAt);
-      }
-
-      return new ShareLinkModel(connection.updateBundle(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (id != null) {
+      requestParameters.put("id", id);
     }
+
+    if (expiresAt != null) {
+      requestParameters.put("expires_at", expiresAt);
+    }
+
+    return new ShareLinkModel(connection.updateBundle(requestParameters));
   }
 
   /**
@@ -230,26 +169,12 @@ public class FilesComOperations {
   public void deleteShareLink(
       final @Connection FilesComConnection connection,
       final @Summary("Bundle ID.") @Example("1") Long id) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (id != null) {
-        requestParameters.put("id", id);
-      }
-
-      connection.deleteBundle(requestParameters);
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (id != null) {
+      requestParameters.put("id", id);
     }
+
+    connection.deleteBundle(requestParameters);
   }
 
   /**
@@ -266,39 +191,25 @@ public class FilesComOperations {
 
       @Override
       public List<ShareLinkDownloadModel> getPage(final FilesComConnection connection) {
-        try {
-          if (iterator == null) {
-            final HashMap<String, Object> requestParameters = new HashMap<>();
-            if (bundleId != null) {
-              requestParameters.put("bundle_id", bundleId);
-            }
-
-            LOGGER.debug("Loading first page of ShareLinkDownloads...");
-            iterator = connection.listBundleDownload(requestParameters);
-          } else {
-            if (iterator.hasNextPage()) {
-              LOGGER.debug("Loading next page of ShareLinkDownloads...");
-              iterator = iterator.loadNextPage();
-            } else {
-              LOGGER.debug("No more pages of ShareLinkDownloads to load");
-              return new ArrayList<>();
-            }
+        if (iterator == null) {
+          final HashMap<String, Object> requestParameters = new HashMap<>();
+          if (bundleId != null) {
+            requestParameters.put("bundle_id", bundleId);
           }
 
-          return iterator.data.stream().map(ShareLinkDownloadModel::new).collect(Collectors.toList());
-        } catch (final ApiErrorException e) {
-          throw new FilesComApiException(e);
-        } catch (final AuthenticationException e) {
-          throw new FilesComAuthenticationException(e);
-        } catch (final ApiConnectionException e) {
-          throw new FilesComConnectionException(e);
-        } catch (final InvalidResponseException e) {
-          throw new FilesComResponseException(e);
-        } catch (final ServerErrorException e) {
-          throw new FilesComServerException(e);
-        } catch (final IllegalArgumentException | NullPointerException e) {
-          throw new FilesComArgumentException(e);
+          LOGGER.debug("Loading first page of ShareLinkDownloads...");
+          iterator = connection.listBundleDownload(requestParameters);
+        } else {
+          if (iterator.hasNextPage()) {
+            LOGGER.debug("Loading next page of ShareLinkDownloads...");
+            iterator = connection.listBundleDownload(iterator);
+          } else {
+            LOGGER.debug("No more pages of ShareLinkDownloads to load");
+            return new ArrayList<>();
+          }
         }
+
+        return iterator.data.stream().map(ShareLinkDownloadModel::new).collect(Collectors.toList());
       }
 
       @Override
@@ -327,36 +238,22 @@ public class FilesComOperations {
 
       @Override
       public List<ShareLinkNotificationModel> getPage(final FilesComConnection connection) {
-        try {
-          if (iterator == null) {
-            final HashMap<String, Object> requestParameters = new HashMap<>();
+        if (iterator == null) {
+          final HashMap<String, Object> requestParameters = new HashMap<>();
 
-            LOGGER.debug("Loading first page of ShareLinkNotifications...");
-            iterator = connection.listBundleNotification(requestParameters);
+          LOGGER.debug("Loading first page of ShareLinkNotifications...");
+          iterator = connection.listBundleNotification(requestParameters);
+        } else {
+          if (iterator.hasNextPage()) {
+            LOGGER.debug("Loading next page of ShareLinkNotifications...");
+            iterator = connection.listBundleNotification(iterator);
           } else {
-            if (iterator.hasNextPage()) {
-              LOGGER.debug("Loading next page of ShareLinkNotifications...");
-              iterator = iterator.loadNextPage();
-            } else {
-              LOGGER.debug("No more pages of ShareLinkNotifications to load");
-              return new ArrayList<>();
-            }
+            LOGGER.debug("No more pages of ShareLinkNotifications to load");
+            return new ArrayList<>();
           }
-
-          return iterator.data.stream().map(ShareLinkNotificationModel::new).collect(Collectors.toList());
-        } catch (final ApiErrorException e) {
-          throw new FilesComApiException(e);
-        } catch (final AuthenticationException e) {
-          throw new FilesComAuthenticationException(e);
-        } catch (final ApiConnectionException e) {
-          throw new FilesComConnectionException(e);
-        } catch (final InvalidResponseException e) {
-          throw new FilesComResponseException(e);
-        } catch (final ServerErrorException e) {
-          throw new FilesComServerException(e);
-        } catch (final IllegalArgumentException | NullPointerException e) {
-          throw new FilesComArgumentException(e);
         }
+
+        return iterator.data.stream().map(ShareLinkNotificationModel::new).collect(Collectors.toList());
       }
 
       @Override
@@ -380,26 +277,12 @@ public class FilesComOperations {
   public ShareLinkNotificationModel showShareLinkNotification(
       final @Connection FilesComConnection connection,
       final @Summary("Bundle Notification ID.") @Example("1") Long id) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (id != null) {
-        requestParameters.put("id", id);
-      }
-
-      return new ShareLinkNotificationModel(connection.findBundleNotification(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (id != null) {
+      requestParameters.put("id", id);
     }
+
+    return new ShareLinkNotificationModel(connection.findBundleNotification(requestParameters));
   }
 
   /**
@@ -412,32 +295,18 @@ public class FilesComOperations {
       final @Connection FilesComConnection connection,
       final @Summary("Bundle ID to notify on") @Example("1") Long bundleId,
       final @Optional @Summary("The id of the user to notify.") @Example("1") Long userId) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (bundleId != null) {
-        requestParameters.put("bundle_id", bundleId);
-      }
-
-      if (userId != null) {
-        requestParameters.put("user_id", userId);
-      }
-
-      requestParameters.put("notify_on_registration", true);
-      requestParameters.put("notify_on_upload", true);
-      return new ShareLinkNotificationModel(connection.createBundleNotification(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (bundleId != null) {
+      requestParameters.put("bundle_id", bundleId);
     }
+
+    if (userId != null) {
+      requestParameters.put("user_id", userId);
+    }
+
+    requestParameters.put("notify_on_registration", true);
+    requestParameters.put("notify_on_upload", true);
+    return new ShareLinkNotificationModel(connection.createBundleNotification(requestParameters));
   }
 
   /**
@@ -451,28 +320,14 @@ public class FilesComOperations {
       final @Summary("Bundle Notification ID.") @Example("1") Long id,
       final @Optional @Summary("Triggers bundle notification when a registration action occurs for it.") @Example("true") boolean notifyOnRegistration,
       final @Optional @Summary("Triggers bundle notification when a upload action occurs for it.") @Example("true") boolean notifyOnUpload) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (id != null) {
-        requestParameters.put("id", id);
-      }
-
-      requestParameters.put("notify_on_registration", notifyOnRegistration);
-      requestParameters.put("notify_on_upload", notifyOnUpload);
-      return new ShareLinkNotificationModel(connection.updateBundleNotification(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (id != null) {
+      requestParameters.put("id", id);
     }
+
+    requestParameters.put("notify_on_registration", notifyOnRegistration);
+    requestParameters.put("notify_on_upload", notifyOnUpload);
+    return new ShareLinkNotificationModel(connection.updateBundleNotification(requestParameters));
   }
 
   /**
@@ -483,26 +338,12 @@ public class FilesComOperations {
   public void deleteShareLinkNotification(
       final @Connection FilesComConnection connection,
       final @Summary("Bundle Notification ID.") @Example("1") Long id) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (id != null) {
-        requestParameters.put("id", id);
-      }
-
-      connection.deleteBundleNotification(requestParameters);
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (id != null) {
+      requestParameters.put("id", id);
     }
+
+    connection.deleteBundleNotification(requestParameters);
   }
 
   /**
@@ -519,39 +360,25 @@ public class FilesComOperations {
 
       @Override
       public List<ShareLinkRecipientModel> getPage(final FilesComConnection connection) {
-        try {
-          if (iterator == null) {
-            final HashMap<String, Object> requestParameters = new HashMap<>();
-            if (bundleId != null) {
-              requestParameters.put("bundle_id", bundleId);
-            }
-
-            LOGGER.debug("Loading first page of ShareLinkRecipients...");
-            iterator = connection.listBundleRecipient(requestParameters);
-          } else {
-            if (iterator.hasNextPage()) {
-              LOGGER.debug("Loading next page of ShareLinkRecipients...");
-              iterator = iterator.loadNextPage();
-            } else {
-              LOGGER.debug("No more pages of ShareLinkRecipients to load");
-              return new ArrayList<>();
-            }
+        if (iterator == null) {
+          final HashMap<String, Object> requestParameters = new HashMap<>();
+          if (bundleId != null) {
+            requestParameters.put("bundle_id", bundleId);
           }
 
-          return iterator.data.stream().map(ShareLinkRecipientModel::new).collect(Collectors.toList());
-        } catch (final ApiErrorException e) {
-          throw new FilesComApiException(e);
-        } catch (final AuthenticationException e) {
-          throw new FilesComAuthenticationException(e);
-        } catch (final ApiConnectionException e) {
-          throw new FilesComConnectionException(e);
-        } catch (final InvalidResponseException e) {
-          throw new FilesComResponseException(e);
-        } catch (final ServerErrorException e) {
-          throw new FilesComServerException(e);
-        } catch (final IllegalArgumentException | NullPointerException e) {
-          throw new FilesComArgumentException(e);
+          LOGGER.debug("Loading first page of ShareLinkRecipients...");
+          iterator = connection.listBundleRecipient(requestParameters);
+        } else {
+          if (iterator.hasNextPage()) {
+            LOGGER.debug("Loading next page of ShareLinkRecipients...");
+            iterator = connection.listBundleRecipient(iterator);
+          } else {
+            LOGGER.debug("No more pages of ShareLinkRecipients to load");
+            return new ArrayList<>();
+          }
         }
+
+        return iterator.data.stream().map(ShareLinkRecipientModel::new).collect(Collectors.toList());
       }
 
       @Override
@@ -579,43 +406,29 @@ public class FilesComOperations {
       final @Optional @Summary("Name of recipient.") @Example("John Smith") String name,
       final @Optional @Summary("Company of recipient.") @Example("Acme Ltd") String company,
       final @Optional @Summary("Note to include in email.") @Example("Just a note.") String note) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (bundleId != null) {
-        requestParameters.put("bundle_id", bundleId);
-      }
-
-      if (recipient != null) {
-        requestParameters.put("recipient", recipient);
-      }
-
-      if (name != null) {
-        requestParameters.put("name", name);
-      }
-
-      if (company != null) {
-        requestParameters.put("company", company);
-      }
-
-      if (note != null) {
-        requestParameters.put("note", note);
-      }
-
-      requestParameters.put("share_after_create", true);
-      return new ShareLinkRecipientModel(connection.createBundleRecipient(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (bundleId != null) {
+      requestParameters.put("bundle_id", bundleId);
     }
+
+    if (recipient != null) {
+      requestParameters.put("recipient", recipient);
+    }
+
+    if (name != null) {
+      requestParameters.put("name", name);
+    }
+
+    if (company != null) {
+      requestParameters.put("company", company);
+    }
+
+    if (note != null) {
+      requestParameters.put("note", note);
+    }
+
+    requestParameters.put("share_after_create", true);
+    return new ShareLinkRecipientModel(connection.createBundleRecipient(requestParameters));
   }
 
   /**
@@ -632,39 +445,25 @@ public class FilesComOperations {
 
       @Override
       public List<ShareLinkRegistrationModel> getPage(final FilesComConnection connection) {
-        try {
-          if (iterator == null) {
-            final HashMap<String, Object> requestParameters = new HashMap<>();
-            if (bundleId != null) {
-              requestParameters.put("bundle_id", bundleId);
-            }
-
-            LOGGER.debug("Loading first page of ShareLinkRegistrations...");
-            iterator = connection.listBundleRegistration(requestParameters);
-          } else {
-            if (iterator.hasNextPage()) {
-              LOGGER.debug("Loading next page of ShareLinkRegistrations...");
-              iterator = iterator.loadNextPage();
-            } else {
-              LOGGER.debug("No more pages of ShareLinkRegistrations to load");
-              return new ArrayList<>();
-            }
+        if (iterator == null) {
+          final HashMap<String, Object> requestParameters = new HashMap<>();
+          if (bundleId != null) {
+            requestParameters.put("bundle_id", bundleId);
           }
 
-          return iterator.data.stream().map(ShareLinkRegistrationModel::new).collect(Collectors.toList());
-        } catch (final ApiErrorException e) {
-          throw new FilesComApiException(e);
-        } catch (final AuthenticationException e) {
-          throw new FilesComAuthenticationException(e);
-        } catch (final ApiConnectionException e) {
-          throw new FilesComConnectionException(e);
-        } catch (final InvalidResponseException e) {
-          throw new FilesComResponseException(e);
-        } catch (final ServerErrorException e) {
-          throw new FilesComServerException(e);
-        } catch (final IllegalArgumentException | NullPointerException e) {
-          throw new FilesComArgumentException(e);
+          LOGGER.debug("Loading first page of ShareLinkRegistrations...");
+          iterator = connection.listBundleRegistration(requestParameters);
+        } else {
+          if (iterator.hasNextPage()) {
+            LOGGER.debug("Loading next page of ShareLinkRegistrations...");
+            iterator = connection.listBundleRegistration(iterator);
+          } else {
+            LOGGER.debug("No more pages of ShareLinkRegistrations to load");
+            return new ArrayList<>();
+          }
         }
+
+        return iterator.data.stream().map(ShareLinkRegistrationModel::new).collect(Collectors.toList());
       }
 
       @Override
@@ -688,26 +487,12 @@ public class FilesComOperations {
   public InputStream downloadFile(
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (path != null) {
-        requestParameters.put("path", path);
-      }
-
-      return connection.downloadFile(requestParameters).getInputStream();
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException | IOException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (path != null) {
+      requestParameters.put("path", path);
     }
+
+    return connection.downloadFile(requestParameters);
   }
 
   /**
@@ -720,27 +505,13 @@ public class FilesComOperations {
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path,
       final @Content @Summary("Content to be written into the file.") InputStream content) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (path != null) {
-        requestParameters.put("path", path);
-      }
-
-      requestParameters.put("mkdir_parents", true);
-      return new FileModel(connection.createFile(requestParameters).putInputStream(content, null, 1));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException | IOException | InterruptedException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (path != null) {
+      requestParameters.put("path", path);
     }
+
+    requestParameters.put("mkdir_parents", true);
+    return new FileModel(connection.createFile(requestParameters, content));
   }
 
   /**
@@ -751,26 +522,12 @@ public class FilesComOperations {
   public void deleteFile(
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (path != null) {
-        requestParameters.put("path", path);
-      }
-
-      connection.deleteFile(requestParameters);
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (path != null) {
+      requestParameters.put("path", path);
     }
+
+    connection.deleteFile(requestParameters);
   }
 
   /**
@@ -782,26 +539,12 @@ public class FilesComOperations {
   public FileModel showFile(
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (path != null) {
-        requestParameters.put("path", path);
-      }
-
-      return new FileModel(connection.findFile(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (path != null) {
+      requestParameters.put("path", path);
     }
+
+    return new FileModel(connection.findFile(requestParameters));
   }
 
   /**
@@ -814,30 +557,16 @@ public class FilesComOperations {
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path,
       final @Summary("Copy destination path.") @Example("destination") String destination) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (path != null) {
-        requestParameters.put("path", path);
-      }
-
-      if (destination != null) {
-        requestParameters.put("destination", destination);
-      }
-
-      return new FileActionModel(connection.copyFile(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (path != null) {
+      requestParameters.put("path", path);
     }
+
+    if (destination != null) {
+      requestParameters.put("destination", destination);
+    }
+
+    return new FileActionModel(connection.copyFile(requestParameters));
   }
 
   /**
@@ -850,30 +579,16 @@ public class FilesComOperations {
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path,
       final @Summary("Move destination path.") @Example("destination") String destination) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (path != null) {
-        requestParameters.put("path", path);
-      }
-
-      if (destination != null) {
-        requestParameters.put("destination", destination);
-      }
-
-      return new FileActionModel(connection.moveFile(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (path != null) {
+      requestParameters.put("path", path);
     }
+
+    if (destination != null) {
+      requestParameters.put("destination", destination);
+    }
+
+    return new FileActionModel(connection.moveFile(requestParameters));
   }
 
   /**
@@ -890,39 +605,25 @@ public class FilesComOperations {
 
       @Override
       public List<FileModel> getPage(final FilesComConnection connection) {
-        try {
-          if (iterator == null) {
-            final HashMap<String, Object> requestParameters = new HashMap<>();
-            if (path != null) {
-              requestParameters.put("path", path);
-            }
-
-            LOGGER.debug("Loading first page of Folders...");
-            iterator = connection.listForFolder(requestParameters);
-          } else {
-            if (iterator.hasNextPage()) {
-              LOGGER.debug("Loading next page of Folders...");
-              iterator = iterator.loadNextPage();
-            } else {
-              LOGGER.debug("No more pages of Folders to load");
-              return new ArrayList<>();
-            }
+        if (iterator == null) {
+          final HashMap<String, Object> requestParameters = new HashMap<>();
+          if (path != null) {
+            requestParameters.put("path", path);
           }
 
-          return iterator.data.stream().map(FileModel::new).collect(Collectors.toList());
-        } catch (final ApiErrorException e) {
-          throw new FilesComApiException(e);
-        } catch (final AuthenticationException e) {
-          throw new FilesComAuthenticationException(e);
-        } catch (final ApiConnectionException e) {
-          throw new FilesComConnectionException(e);
-        } catch (final InvalidResponseException e) {
-          throw new FilesComResponseException(e);
-        } catch (final ServerErrorException e) {
-          throw new FilesComServerException(e);
-        } catch (final IllegalArgumentException | NullPointerException e) {
-          throw new FilesComArgumentException(e);
+          LOGGER.debug("Loading first page of Folders...");
+          iterator = connection.listForFolder(requestParameters);
+        } else {
+          if (iterator.hasNextPage()) {
+            LOGGER.debug("Loading next page of Folders...");
+            iterator = connection.listForFolder(iterator);
+          } else {
+            LOGGER.debug("No more pages of Folders to load");
+            return new ArrayList<>();
+          }
         }
+
+        return iterator.data.stream().map(FileModel::new).collect(Collectors.toList());
       }
 
       @Override
@@ -946,27 +647,13 @@ public class FilesComOperations {
   public FolderModel createFolder(
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (path != null) {
-        requestParameters.put("path", path);
-      }
-
-      requestParameters.put("mkdir_parents", true);
-      return new FolderModel(connection.createFolder(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (path != null) {
+      requestParameters.put("path", path);
     }
+
+    requestParameters.put("mkdir_parents", true);
+    return new FolderModel(connection.createFolder(requestParameters));
   }
 
   /**
@@ -977,26 +664,12 @@ public class FilesComOperations {
   public void deleteFolder(
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (path != null) {
-        requestParameters.put("path", path);
-      }
-
-      connection.deleteFile(requestParameters);
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (path != null) {
+      requestParameters.put("path", path);
     }
+
+    connection.deleteFile(requestParameters);
   }
 
   /**
@@ -1008,26 +681,12 @@ public class FilesComOperations {
   public FileModel showFolder(
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (path != null) {
-        requestParameters.put("path", path);
-      }
-
-      return new FileModel(connection.findFile(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (path != null) {
+      requestParameters.put("path", path);
     }
+
+    return new FileModel(connection.findFile(requestParameters));
   }
 
   /**
@@ -1040,30 +699,16 @@ public class FilesComOperations {
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path,
       final @Summary("Copy destination path.") @Example("destination") String destination) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (path != null) {
-        requestParameters.put("path", path);
-      }
-
-      if (destination != null) {
-        requestParameters.put("destination", destination);
-      }
-
-      return new FileActionModel(connection.copyFile(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (path != null) {
+      requestParameters.put("path", path);
     }
+
+    if (destination != null) {
+      requestParameters.put("destination", destination);
+    }
+
+    return new FileActionModel(connection.copyFile(requestParameters));
   }
 
   /**
@@ -1076,30 +721,16 @@ public class FilesComOperations {
       final @Connection FilesComConnection connection,
       final @Summary("Path to operate on.") @Example("path") String path,
       final @Summary("Move destination path.") @Example("destination") String destination) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (path != null) {
-        requestParameters.put("path", path);
-      }
-
-      if (destination != null) {
-        requestParameters.put("destination", destination);
-      }
-
-      return new FileActionModel(connection.moveFile(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (path != null) {
+      requestParameters.put("path", path);
     }
+
+    if (destination != null) {
+      requestParameters.put("destination", destination);
+    }
+
+    return new FileActionModel(connection.moveFile(requestParameters));
   }
 
   /**
@@ -1116,36 +747,22 @@ public class FilesComOperations {
 
       @Override
       public List<GroupModel> getPage(final FilesComConnection connection) {
-        try {
-          if (iterator == null) {
-            final HashMap<String, Object> requestParameters = new HashMap<>();
+        if (iterator == null) {
+          final HashMap<String, Object> requestParameters = new HashMap<>();
 
-            LOGGER.debug("Loading first page of Groups...");
-            iterator = connection.listGroup(requestParameters);
+          LOGGER.debug("Loading first page of Groups...");
+          iterator = connection.listGroup(requestParameters);
+        } else {
+          if (iterator.hasNextPage()) {
+            LOGGER.debug("Loading next page of Groups...");
+            iterator = connection.listGroup(iterator);
           } else {
-            if (iterator.hasNextPage()) {
-              LOGGER.debug("Loading next page of Groups...");
-              iterator = iterator.loadNextPage();
-            } else {
-              LOGGER.debug("No more pages of Groups to load");
-              return new ArrayList<>();
-            }
+            LOGGER.debug("No more pages of Groups to load");
+            return new ArrayList<>();
           }
-
-          return iterator.data.stream().map(GroupModel::new).collect(Collectors.toList());
-        } catch (final ApiErrorException e) {
-          throw new FilesComApiException(e);
-        } catch (final AuthenticationException e) {
-          throw new FilesComAuthenticationException(e);
-        } catch (final ApiConnectionException e) {
-          throw new FilesComConnectionException(e);
-        } catch (final InvalidResponseException e) {
-          throw new FilesComResponseException(e);
-        } catch (final ServerErrorException e) {
-          throw new FilesComServerException(e);
-        } catch (final IllegalArgumentException | NullPointerException e) {
-          throw new FilesComArgumentException(e);
         }
+
+        return iterator.data.stream().map(GroupModel::new).collect(Collectors.toList());
       }
 
       @Override
@@ -1169,26 +786,12 @@ public class FilesComOperations {
   public GroupModel showGroup(
       final @Connection FilesComConnection connection,
       final @Summary("Group ID.") @Example("1") Long id) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (id != null) {
-        requestParameters.put("id", id);
-      }
-
-      return new GroupModel(connection.findGroup(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (id != null) {
+      requestParameters.put("id", id);
     }
+
+    return new GroupModel(connection.findGroup(requestParameters));
   }
 
   /**
@@ -1203,38 +806,24 @@ public class FilesComOperations {
       final @Optional @Summary("Group notes.") @Example("example") String notes,
       final @Optional @Summary("A list of user ids. If sent as a string, should be comma-delimited.") @Example("1") String userIds,
       final @Optional @Summary("A list of group admin user ids. If sent as a string, should be comma-delimited.") @Example("1") String adminIds) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (name != null) {
-        requestParameters.put("name", name);
-      }
-
-      if (notes != null) {
-        requestParameters.put("notes", notes);
-      }
-
-      if (userIds != null) {
-        requestParameters.put("user_ids", userIds);
-      }
-
-      if (adminIds != null) {
-        requestParameters.put("admin_ids", adminIds);
-      }
-
-      return new GroupModel(connection.createGroup(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (name != null) {
+      requestParameters.put("name", name);
     }
+
+    if (notes != null) {
+      requestParameters.put("notes", notes);
+    }
+
+    if (userIds != null) {
+      requestParameters.put("user_ids", userIds);
+    }
+
+    if (adminIds != null) {
+      requestParameters.put("admin_ids", adminIds);
+    }
+
+    return new GroupModel(connection.createGroup(requestParameters));
   }
 
   /**
@@ -1250,42 +839,28 @@ public class FilesComOperations {
       final @Optional @Summary("A list of user ids. If sent as a string, should be comma-delimited.") @Example("1") String userIds,
       final @Optional @Summary("A list of group admin user ids. If sent as a string, should be comma-delimited.") @Example("1") String adminIds,
       final @Optional @Summary("Group name.") @Example("owners") String name) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (id != null) {
-        requestParameters.put("id", id);
-      }
-
-      if (notes != null) {
-        requestParameters.put("notes", notes);
-      }
-
-      if (userIds != null) {
-        requestParameters.put("user_ids", userIds);
-      }
-
-      if (adminIds != null) {
-        requestParameters.put("admin_ids", adminIds);
-      }
-
-      if (name != null) {
-        requestParameters.put("name", name);
-      }
-
-      return new GroupModel(connection.updateGroup(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (id != null) {
+      requestParameters.put("id", id);
     }
+
+    if (notes != null) {
+      requestParameters.put("notes", notes);
+    }
+
+    if (userIds != null) {
+      requestParameters.put("user_ids", userIds);
+    }
+
+    if (adminIds != null) {
+      requestParameters.put("admin_ids", adminIds);
+    }
+
+    if (name != null) {
+      requestParameters.put("name", name);
+    }
+
+    return new GroupModel(connection.updateGroup(requestParameters));
   }
 
   /**
@@ -1296,26 +871,12 @@ public class FilesComOperations {
   public void deleteGroup(
       final @Connection FilesComConnection connection,
       final @Summary("Group ID.") @Example("1") Long id) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (id != null) {
-        requestParameters.put("id", id);
-      }
-
-      connection.deleteGroup(requestParameters);
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (id != null) {
+      requestParameters.put("id", id);
     }
+
+    connection.deleteGroup(requestParameters);
   }
 
   /**
@@ -1332,36 +893,22 @@ public class FilesComOperations {
 
       @Override
       public List<UserModel> getPage(final FilesComConnection connection) {
-        try {
-          if (iterator == null) {
-            final HashMap<String, Object> requestParameters = new HashMap<>();
+        if (iterator == null) {
+          final HashMap<String, Object> requestParameters = new HashMap<>();
 
-            LOGGER.debug("Loading first page of Users...");
-            iterator = connection.listUser(requestParameters);
+          LOGGER.debug("Loading first page of Users...");
+          iterator = connection.listUser(requestParameters);
+        } else {
+          if (iterator.hasNextPage()) {
+            LOGGER.debug("Loading next page of Users...");
+            iterator = connection.listUser(iterator);
           } else {
-            if (iterator.hasNextPage()) {
-              LOGGER.debug("Loading next page of Users...");
-              iterator = iterator.loadNextPage();
-            } else {
-              LOGGER.debug("No more pages of Users to load");
-              return new ArrayList<>();
-            }
+            LOGGER.debug("No more pages of Users to load");
+            return new ArrayList<>();
           }
-
-          return iterator.data.stream().map(UserModel::new).collect(Collectors.toList());
-        } catch (final ApiErrorException e) {
-          throw new FilesComApiException(e);
-        } catch (final AuthenticationException e) {
-          throw new FilesComAuthenticationException(e);
-        } catch (final ApiConnectionException e) {
-          throw new FilesComConnectionException(e);
-        } catch (final InvalidResponseException e) {
-          throw new FilesComResponseException(e);
-        } catch (final ServerErrorException e) {
-          throw new FilesComServerException(e);
-        } catch (final IllegalArgumentException | NullPointerException e) {
-          throw new FilesComArgumentException(e);
         }
+
+        return iterator.data.stream().map(UserModel::new).collect(Collectors.toList());
       }
 
       @Override
@@ -1385,26 +932,12 @@ public class FilesComOperations {
   public UserModel showUser(
       final @Connection FilesComConnection connection,
       final @Summary("User ID.") @Example("1") Long id) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (id != null) {
-        requestParameters.put("id", id);
-      }
-
-      return new UserModel(connection.findUser(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (id != null) {
+      requestParameters.put("id", id);
     }
+
+    return new UserModel(connection.findUser(requestParameters));
   }
 
   /**
@@ -1426,67 +959,53 @@ public class FilesComOperations {
       final @Optional @Summary("Is a password change required upon next user login?") @Example("true") boolean requirePasswordChange,
       final @Optional @Summary("Root folder for FTP (and optionally SFTP if the appropriate site-wide setting is set).  Note that this is not used for API, Desktop, or Web interface.") @Example("example") String userRoot,
       final @Optional @Summary("Home folder for FTP/SFTP.  Note that this is not used for API, Desktop, or Web interface.") @Example("example") String userHome) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (username != null) {
-        requestParameters.put("username", username);
-      }
-
-      if (email != null) {
-        requestParameters.put("email", email);
-      }
-
-      if (groupIds != null) {
-        requestParameters.put("group_ids", groupIds);
-      }
-
-      if (password != null) {
-        requestParameters.put("password", password);
-      }
-
-      if (authenticationMethod != null) {
-        requestParameters.put("authentication_method", authenticationMethod);
-      }
-
-      if (name != null) {
-        requestParameters.put("name", name);
-      }
-
-      if (company != null) {
-        requestParameters.put("company", company);
-      }
-
-      if (notes != null) {
-        requestParameters.put("notes", notes);
-      }
-
-      requestParameters.put("require_password_change", requirePasswordChange);
-      if (userRoot != null) {
-        requestParameters.put("user_root", userRoot);
-      }
-
-      if (userHome != null) {
-        requestParameters.put("user_home", userHome);
-      }
-
-      requestParameters.put("dav_permission", true);
-      requestParameters.put("ftp_permission", true);
-      requestParameters.put("restapi_permission", true);
-      requestParameters.put("sftp_permission", true);
-      return new UserModel(connection.createUser(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (username != null) {
+      requestParameters.put("username", username);
     }
+
+    if (email != null) {
+      requestParameters.put("email", email);
+    }
+
+    if (groupIds != null) {
+      requestParameters.put("group_ids", groupIds);
+    }
+
+    if (password != null) {
+      requestParameters.put("password", password);
+    }
+
+    if (authenticationMethod != null) {
+      requestParameters.put("authentication_method", authenticationMethod);
+    }
+
+    if (name != null) {
+      requestParameters.put("name", name);
+    }
+
+    if (company != null) {
+      requestParameters.put("company", company);
+    }
+
+    if (notes != null) {
+      requestParameters.put("notes", notes);
+    }
+
+    requestParameters.put("require_password_change", requirePasswordChange);
+    if (userRoot != null) {
+      requestParameters.put("user_root", userRoot);
+    }
+
+    if (userHome != null) {
+      requestParameters.put("user_home", userHome);
+    }
+
+    requestParameters.put("dav_permission", true);
+    requestParameters.put("ftp_permission", true);
+    requestParameters.put("restapi_permission", true);
+    requestParameters.put("sftp_permission", true);
+    return new UserModel(connection.createUser(requestParameters));
   }
 
   /**
@@ -1509,71 +1028,57 @@ public class FilesComOperations {
       final @Optional @Summary("Root folder for FTP (and optionally SFTP if the appropriate site-wide setting is set).  Note that this is not used for API, Desktop, or Web interface.") @Example("example") String userRoot,
       final @Optional @Summary("Home folder for FTP/SFTP.  Note that this is not used for API, Desktop, or Web interface.") @Example("example") String userHome,
       final @Optional @Summary("User's username") @Example("user") String username) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (id != null) {
-        requestParameters.put("id", id);
-      }
-
-      if (email != null) {
-        requestParameters.put("email", email);
-      }
-
-      if (groupIds != null) {
-        requestParameters.put("group_ids", groupIds);
-      }
-
-      if (password != null) {
-        requestParameters.put("password", password);
-      }
-
-      if (authenticationMethod != null) {
-        requestParameters.put("authentication_method", authenticationMethod);
-      }
-
-      if (name != null) {
-        requestParameters.put("name", name);
-      }
-
-      if (company != null) {
-        requestParameters.put("company", company);
-      }
-
-      if (notes != null) {
-        requestParameters.put("notes", notes);
-      }
-
-      requestParameters.put("require_password_change", requirePasswordChange);
-      if (userRoot != null) {
-        requestParameters.put("user_root", userRoot);
-      }
-
-      if (userHome != null) {
-        requestParameters.put("user_home", userHome);
-      }
-
-      if (username != null) {
-        requestParameters.put("username", username);
-      }
-
-      requestParameters.put("dav_permission", true);
-      requestParameters.put("ftp_permission", true);
-      requestParameters.put("restapi_permission", true);
-      requestParameters.put("sftp_permission", true);
-      return new UserModel(connection.updateUser(requestParameters));
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (id != null) {
+      requestParameters.put("id", id);
     }
+
+    if (email != null) {
+      requestParameters.put("email", email);
+    }
+
+    if (groupIds != null) {
+      requestParameters.put("group_ids", groupIds);
+    }
+
+    if (password != null) {
+      requestParameters.put("password", password);
+    }
+
+    if (authenticationMethod != null) {
+      requestParameters.put("authentication_method", authenticationMethod);
+    }
+
+    if (name != null) {
+      requestParameters.put("name", name);
+    }
+
+    if (company != null) {
+      requestParameters.put("company", company);
+    }
+
+    if (notes != null) {
+      requestParameters.put("notes", notes);
+    }
+
+    requestParameters.put("require_password_change", requirePasswordChange);
+    if (userRoot != null) {
+      requestParameters.put("user_root", userRoot);
+    }
+
+    if (userHome != null) {
+      requestParameters.put("user_home", userHome);
+    }
+
+    if (username != null) {
+      requestParameters.put("username", username);
+    }
+
+    requestParameters.put("dav_permission", true);
+    requestParameters.put("ftp_permission", true);
+    requestParameters.put("restapi_permission", true);
+    requestParameters.put("sftp_permission", true);
+    return new UserModel(connection.updateUser(requestParameters));
   }
 
   /**
@@ -1584,25 +1089,11 @@ public class FilesComOperations {
   public void deleteUser(
       final @Connection FilesComConnection connection,
       final @Summary("User ID.") @Example("1") Long id) {
-    try {
-      final HashMap<String, Object> requestParameters = new HashMap<>();
-      if (id != null) {
-        requestParameters.put("id", id);
-      }
-
-      connection.deleteUser(requestParameters);
-    } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
-    } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
-    } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
-    } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
-    } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (id != null) {
+      requestParameters.put("id", id);
     }
+
+    connection.deleteUser(requestParameters);
   }
 }

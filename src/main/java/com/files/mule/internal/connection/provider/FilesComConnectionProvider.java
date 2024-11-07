@@ -46,10 +46,7 @@ public class FilesComConnectionProvider implements CachedConnectionProvider<File
     requestParameters.put("per_page", 1L);
 
     try {
-      final String apiRoot = connection.getApiRoot();
-      if (apiRoot == null || !apiRoot.equals("http://files-mock-server:4041")) {
-        connection.listForFolder(requestParameters);
-      }
+      connection.listForFolder(requestParameters);
       return ConnectionValidationResult.success();
     } catch (final Exception e) {
       String message = e.getMessage();

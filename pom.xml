@@ -13,7 +13,7 @@
     <groupId>com.files</groupId>
     <artifactId>mule-filescom-connector</artifactId>
     <packaging>mule-extension</packaging>
-    <version>0.1.31</version>
+    <version>0.1.32</version>
 
     <name>Files.com Connector</name>
     <description>The Files.com MuleSoft Connector</description>
@@ -72,12 +72,6 @@
             <groupId>com.files</groupId>
             <artifactId>files-sdk</artifactId>
             <version>1.4.91</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>3.12.4</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
