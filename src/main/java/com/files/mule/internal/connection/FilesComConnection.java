@@ -2,8 +2,10 @@ package com.files.mule.internal.connection;
 
 import java.io.InputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 
+import org.mule.runtime.extension.api.exception.ModuleException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +15,7 @@ import com.files.exceptions.ApiErrorException;
 import com.files.exceptions.ApiErrorException.*;
 import com.files.models.*;
 import com.files.mule.internal.config.FilesComConfig;
-import com.files.mule.internal.error.exception.*;
+import com.files.mule.internal.error.FilesComErrorType;
 
 public class FilesComConnection {
   private static final Logger LOGGER = LoggerFactory.getLogger(FilesComConnection.class);
@@ -52,17 +54,17 @@ public class FilesComConnection {
         return Bundle.list(parameters, getRequestOptions()).loadNextPage();
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -75,17 +77,17 @@ public class FilesComConnection {
         return iterator.loadNextPage();
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -98,17 +100,17 @@ public class FilesComConnection {
         return Bundle.find(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -121,17 +123,17 @@ public class FilesComConnection {
         return Bundle.create(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -144,17 +146,17 @@ public class FilesComConnection {
         return Bundle.update(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -167,17 +169,17 @@ public class FilesComConnection {
         Bundle.delete(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -190,17 +192,17 @@ public class FilesComConnection {
         return BundleDownload.list(parameters, getRequestOptions()).loadNextPage();
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -213,17 +215,17 @@ public class FilesComConnection {
         return iterator.loadNextPage();
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -236,17 +238,17 @@ public class FilesComConnection {
         return BundleNotification.list(parameters, getRequestOptions()).loadNextPage();
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -259,17 +261,17 @@ public class FilesComConnection {
         return iterator.loadNextPage();
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -282,17 +284,17 @@ public class FilesComConnection {
         return BundleNotification.find(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -305,17 +307,17 @@ public class FilesComConnection {
         return BundleNotification.create(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -328,17 +330,17 @@ public class FilesComConnection {
         return BundleNotification.update(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -351,17 +353,17 @@ public class FilesComConnection {
         BundleNotification.delete(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -374,17 +376,17 @@ public class FilesComConnection {
         return BundleRecipient.list(parameters, getRequestOptions()).loadNextPage();
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -397,17 +399,17 @@ public class FilesComConnection {
         return iterator.loadNextPage();
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -420,17 +422,17 @@ public class FilesComConnection {
         return BundleRecipient.create(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -443,17 +445,17 @@ public class FilesComConnection {
         return BundleRegistration.list(parameters, getRequestOptions()).loadNextPage();
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -466,17 +468,17 @@ public class FilesComConnection {
         return iterator.loadNextPage();
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -489,17 +491,17 @@ public class FilesComConnection {
         return File.download(parameters, getRequestOptions()).getInputStream();
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException | IOException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -512,17 +514,17 @@ public class FilesComConnection {
         return File.create(parameters, getRequestOptions()).putInputStream(content, null, 1);
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException | IOException | InterruptedException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -535,17 +537,17 @@ public class FilesComConnection {
         File.delete(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -558,17 +560,17 @@ public class FilesComConnection {
         return File.find(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -581,17 +583,17 @@ public class FilesComConnection {
         return File.copy(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -604,17 +606,17 @@ public class FilesComConnection {
         return File.move(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -627,17 +629,17 @@ public class FilesComConnection {
         return Folder.listFor(parameters, getRequestOptions()).loadNextPage();
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -650,17 +652,17 @@ public class FilesComConnection {
         return iterator.loadNextPage();
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -673,17 +675,17 @@ public class FilesComConnection {
         return Folder.create(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -696,17 +698,17 @@ public class FilesComConnection {
         return Group.list(parameters, getRequestOptions()).loadNextPage();
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -719,17 +721,17 @@ public class FilesComConnection {
         return iterator.loadNextPage();
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -742,17 +744,17 @@ public class FilesComConnection {
         return Group.find(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -765,17 +767,17 @@ public class FilesComConnection {
         return Group.create(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -788,17 +790,17 @@ public class FilesComConnection {
         return Group.update(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -811,17 +813,17 @@ public class FilesComConnection {
         Group.delete(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -834,17 +836,17 @@ public class FilesComConnection {
         return User.list(parameters, getRequestOptions()).loadNextPage();
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -857,17 +859,17 @@ public class FilesComConnection {
         return iterator.loadNextPage();
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -880,17 +882,17 @@ public class FilesComConnection {
         return User.find(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -903,17 +905,17 @@ public class FilesComConnection {
         return User.create(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -926,17 +928,17 @@ public class FilesComConnection {
         return User.update(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
@@ -949,18 +951,26 @@ public class FilesComConnection {
         User.delete(parameters, getRequestOptions());
       }
     } catch (final ApiErrorException e) {
-      throw new FilesComApiException(e);
+      throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
-      throw new FilesComAuthenticationException(e);
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
     } catch (final ApiConnectionException e) {
-      throw new FilesComConnectionException(e);
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
     } catch (final InvalidResponseException e) {
-      throw new FilesComResponseException(e);
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
-      throw new FilesComServerException(e);
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
     } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new FilesComArgumentException(e);
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 
+
+  private FilesComErrorType getErrorType(final ApiErrorException e) {
+    return Arrays.stream(FilesComErrorType.values())
+        .filter(error -> error.apiErrorGroup != null)
+        .filter(error -> e.getType().startsWith(error.apiErrorGroup))
+        .findFirst()
+        .orElse(FilesComErrorType.OTHER);
+  }
 }
