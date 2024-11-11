@@ -1,12 +1,8 @@
 package com.files.mule.api.models;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import com.files.models.BundleRegistration;
@@ -31,9 +27,7 @@ public class ShareLinkRegistrationModel implements Serializable {
     this.bundleCode = bundleRegistration.bundleCode;
     this.bundleId = bundleRegistration.bundleId;
     this.bundleRecipientId = bundleRegistration.bundleRecipientId;
-    if (bundleRegistration.createdAt != null) {
-      this.createdAt = ZonedDateTime.ofInstant(bundleRegistration.createdAt.toInstant(), ZoneId.systemDefault());
-    }
+    this.createdAt = bundleRegistration.createdAt != null ? ZonedDateTime.ofInstant(bundleRegistration.createdAt.toInstant(), ZoneId.systemDefault()) : null;
   }
 
   private String code;

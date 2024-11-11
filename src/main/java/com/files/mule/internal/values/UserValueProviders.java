@@ -7,6 +7,9 @@ import org.mule.runtime.extension.api.values.ValueBuilder;
 import org.mule.runtime.extension.api.values.ValueProvider;
 
 public class UserValueProviders {
+  private UserValueProviders() {
+  }
+
   public static class AuthenticationMethod implements ValueProvider {
 
     @Override

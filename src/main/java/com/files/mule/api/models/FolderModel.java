@@ -1,12 +1,8 @@
 package com.files.mule.api.models;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import com.files.models.Folder;
@@ -29,21 +25,15 @@ public class FolderModel implements Serializable {
     this.displayName = folder.displayName;
     this.type = folder.type;
     this.size = folder.size;
-    if (folder.createdAt != null) {
-      this.createdAt = ZonedDateTime.ofInstant(folder.createdAt.toInstant(), ZoneId.systemDefault());
-    }
+    this.createdAt = folder.createdAt != null ? ZonedDateTime.ofInstant(folder.createdAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastModifiedById = folder.lastModifiedById;
     this.lastModifiedByApiKeyId = folder.lastModifiedByApiKeyId;
     this.lastModifiedByAutomationId = folder.lastModifiedByAutomationId;
     this.lastModifiedByBundleRegistrationId = folder.lastModifiedByBundleRegistrationId;
     this.lastModifiedByRemoteServerId = folder.lastModifiedByRemoteServerId;
     this.lastModifiedByRemoteServerSyncId = folder.lastModifiedByRemoteServerSyncId;
-    if (folder.mtime != null) {
-      this.mtime = ZonedDateTime.ofInstant(folder.mtime.toInstant(), ZoneId.systemDefault());
-    }
-    if (folder.providedMtime != null) {
-      this.providedMtime = ZonedDateTime.ofInstant(folder.providedMtime.toInstant(), ZoneId.systemDefault());
-    }
+    this.mtime = folder.mtime != null ? ZonedDateTime.ofInstant(folder.mtime.toInstant(), ZoneId.systemDefault()) : null;
+    this.providedMtime = folder.providedMtime != null ? ZonedDateTime.ofInstant(folder.providedMtime.toInstant(), ZoneId.systemDefault()) : null;
     this.crc32 = folder.crc32;
     this.md5 = folder.md5;
     this.sha1 = folder.sha1;

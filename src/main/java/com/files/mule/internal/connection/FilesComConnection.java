@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.function.Supplier;
 
 import org.mule.runtime.extension.api.exception.ModuleException;
 import org.slf4j.Logger;
@@ -12,8 +13,21 @@ import org.slf4j.LoggerFactory;
 import com.files.FilesClient;
 import com.files.ListIterator;
 import com.files.exceptions.ApiErrorException;
-import com.files.exceptions.ApiErrorException.*;
-import com.files.models.*;
+import com.files.exceptions.ApiErrorException.ApiConnectionException;
+import com.files.exceptions.ApiErrorException.AuthenticationException;
+import com.files.exceptions.ApiErrorException.InvalidResponseException;
+import com.files.exceptions.ApiErrorException.LockoutRegionMismatchException;
+import com.files.exceptions.ApiErrorException.ServerErrorException;
+import com.files.models.Bundle;
+import com.files.models.BundleDownload;
+import com.files.models.BundleNotification;
+import com.files.models.BundleRecipient;
+import com.files.models.BundleRegistration;
+import com.files.models.File;
+import com.files.models.FileAction;
+import com.files.models.Folder;
+import com.files.models.Group;
+import com.files.models.User;
 import com.files.mule.internal.config.FilesComConfig;
 import com.files.mule.internal.error.FilesComErrorType;
 
@@ -47,12 +61,7 @@ public class FilesComConnection {
 
   public ListIterator<Bundle> listBundle(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return Bundle.list(parameters, getRequestOptions()).loadNextPage();
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return Bundle.list(parameters, getRequestOptions()).loadNextPage();
-      }
+      return executeWithRegionRetry(() -> Bundle.list(parameters, getRequestOptions()).loadNextPage());
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -70,12 +79,7 @@ public class FilesComConnection {
 
   public ListIterator<Bundle> listBundle(final ListIterator<Bundle> iterator) {
     try {
-      try {
-        return iterator.loadNextPage();
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return iterator.loadNextPage();
-      }
+      return executeWithRegionRetry(() -> iterator.loadNextPage());
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -93,12 +97,7 @@ public class FilesComConnection {
 
   public Bundle findBundle(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return Bundle.find(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return Bundle.find(parameters, getRequestOptions());
-      }
+      return executeWithRegionRetry(() -> Bundle.find(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -116,12 +115,7 @@ public class FilesComConnection {
 
   public Bundle createBundle(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return Bundle.create(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return Bundle.create(parameters, getRequestOptions());
-      }
+      return executeWithRegionRetry(() -> Bundle.create(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -139,12 +133,7 @@ public class FilesComConnection {
 
   public Bundle updateBundle(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return Bundle.update(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return Bundle.update(parameters, getRequestOptions());
-      }
+      return executeWithRegionRetry(() -> Bundle.update(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -162,12 +151,7 @@ public class FilesComConnection {
 
   public void deleteBundle(final HashMap<String, Object> parameters) {
     try {
-      try {
-        Bundle.delete(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        Bundle.delete(parameters, getRequestOptions());
-      }
+      executeWithRegionRetry(() -> Bundle.delete(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -185,12 +169,7 @@ public class FilesComConnection {
 
   public ListIterator<BundleDownload> listBundleDownload(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return BundleDownload.list(parameters, getRequestOptions()).loadNextPage();
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return BundleDownload.list(parameters, getRequestOptions()).loadNextPage();
-      }
+      return executeWithRegionRetry(() -> BundleDownload.list(parameters, getRequestOptions()).loadNextPage());
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -208,12 +187,7 @@ public class FilesComConnection {
 
   public ListIterator<BundleDownload> listBundleDownload(final ListIterator<BundleDownload> iterator) {
     try {
-      try {
-        return iterator.loadNextPage();
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return iterator.loadNextPage();
-      }
+      return executeWithRegionRetry(() -> iterator.loadNextPage());
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -231,12 +205,7 @@ public class FilesComConnection {
 
   public ListIterator<BundleNotification> listBundleNotification(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return BundleNotification.list(parameters, getRequestOptions()).loadNextPage();
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return BundleNotification.list(parameters, getRequestOptions()).loadNextPage();
-      }
+      return executeWithRegionRetry(() -> BundleNotification.list(parameters, getRequestOptions()).loadNextPage());
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -254,12 +223,7 @@ public class FilesComConnection {
 
   public ListIterator<BundleNotification> listBundleNotification(final ListIterator<BundleNotification> iterator) {
     try {
-      try {
-        return iterator.loadNextPage();
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return iterator.loadNextPage();
-      }
+      return executeWithRegionRetry(() -> iterator.loadNextPage());
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -277,12 +241,7 @@ public class FilesComConnection {
 
   public BundleNotification findBundleNotification(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return BundleNotification.find(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return BundleNotification.find(parameters, getRequestOptions());
-      }
+      return executeWithRegionRetry(() -> BundleNotification.find(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -300,12 +259,7 @@ public class FilesComConnection {
 
   public BundleNotification createBundleNotification(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return BundleNotification.create(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return BundleNotification.create(parameters, getRequestOptions());
-      }
+      return executeWithRegionRetry(() -> BundleNotification.create(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -323,12 +277,7 @@ public class FilesComConnection {
 
   public BundleNotification updateBundleNotification(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return BundleNotification.update(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return BundleNotification.update(parameters, getRequestOptions());
-      }
+      return executeWithRegionRetry(() -> BundleNotification.update(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -346,12 +295,7 @@ public class FilesComConnection {
 
   public void deleteBundleNotification(final HashMap<String, Object> parameters) {
     try {
-      try {
-        BundleNotification.delete(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        BundleNotification.delete(parameters, getRequestOptions());
-      }
+      executeWithRegionRetry(() -> BundleNotification.delete(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -369,12 +313,7 @@ public class FilesComConnection {
 
   public ListIterator<BundleRecipient> listBundleRecipient(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return BundleRecipient.list(parameters, getRequestOptions()).loadNextPage();
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return BundleRecipient.list(parameters, getRequestOptions()).loadNextPage();
-      }
+      return executeWithRegionRetry(() -> BundleRecipient.list(parameters, getRequestOptions()).loadNextPage());
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -392,12 +331,7 @@ public class FilesComConnection {
 
   public ListIterator<BundleRecipient> listBundleRecipient(final ListIterator<BundleRecipient> iterator) {
     try {
-      try {
-        return iterator.loadNextPage();
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return iterator.loadNextPage();
-      }
+      return executeWithRegionRetry(() -> iterator.loadNextPage());
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -415,12 +349,7 @@ public class FilesComConnection {
 
   public BundleRecipient createBundleRecipient(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return BundleRecipient.create(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return BundleRecipient.create(parameters, getRequestOptions());
-      }
+      return executeWithRegionRetry(() -> BundleRecipient.create(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -438,12 +367,7 @@ public class FilesComConnection {
 
   public ListIterator<BundleRegistration> listBundleRegistration(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return BundleRegistration.list(parameters, getRequestOptions()).loadNextPage();
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return BundleRegistration.list(parameters, getRequestOptions()).loadNextPage();
-      }
+      return executeWithRegionRetry(() -> BundleRegistration.list(parameters, getRequestOptions()).loadNextPage());
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -461,12 +385,7 @@ public class FilesComConnection {
 
   public ListIterator<BundleRegistration> listBundleRegistration(final ListIterator<BundleRegistration> iterator) {
     try {
-      try {
-        return iterator.loadNextPage();
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return iterator.loadNextPage();
-      }
+      return executeWithRegionRetry(() -> iterator.loadNextPage());
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -484,12 +403,7 @@ public class FilesComConnection {
 
   public InputStream downloadFile(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return File.download(parameters, getRequestOptions()).getInputStream();
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return File.download(parameters, getRequestOptions()).getInputStream();
-      }
+      return executeWithRegionRetry(() -> File.download(parameters, getRequestOptions())).getInputStream();
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -507,12 +421,7 @@ public class FilesComConnection {
 
   public File createFile(final HashMap<String, Object> parameters, final InputStream content) {
     try {
-      try {
-        return File.create(parameters, getRequestOptions()).putInputStream(content, null, 1);
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return File.create(parameters, getRequestOptions()).putInputStream(content, null, 1);
-      }
+      return executeWithRegionRetry(() -> File.create(parameters, getRequestOptions())).putInputStream(content, null, 1);
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -523,19 +432,17 @@ public class FilesComConnection {
       throw new ModuleException(FilesComErrorType.RESPONSE, e);
     } catch (final ServerErrorException e) {
       throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException | IOException | InterruptedException e) {
+    } catch (final IllegalArgumentException | NullPointerException | IOException e) {
       throw new ModuleException(FilesComErrorType.ARGUMENT, e);
+    } catch (final InterruptedException e) { // Handle interruption, but it should never get thrown in this context
+      Thread.currentThread().interrupt();
+      throw new ModuleException("Upload was interrupted", FilesComErrorType.ARGUMENT, e);
     }
   }
 
   public void deleteFile(final HashMap<String, Object> parameters) {
     try {
-      try {
-        File.delete(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        File.delete(parameters, getRequestOptions());
-      }
+      executeWithRegionRetry(() -> File.delete(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -553,12 +460,7 @@ public class FilesComConnection {
 
   public File findFile(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return File.find(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return File.find(parameters, getRequestOptions());
-      }
+      return executeWithRegionRetry(() -> File.find(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -576,12 +478,7 @@ public class FilesComConnection {
 
   public FileAction copyFile(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return File.copy(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return File.copy(parameters, getRequestOptions());
-      }
+      return executeWithRegionRetry(() -> File.copy(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -599,12 +496,7 @@ public class FilesComConnection {
 
   public FileAction moveFile(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return File.move(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return File.move(parameters, getRequestOptions());
-      }
+      return executeWithRegionRetry(() -> File.move(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -622,12 +514,7 @@ public class FilesComConnection {
 
   public ListIterator<File> listForFolder(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return Folder.listFor(parameters, getRequestOptions()).loadNextPage();
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return Folder.listFor(parameters, getRequestOptions()).loadNextPage();
-      }
+      return executeWithRegionRetry(() -> Folder.listFor(parameters, getRequestOptions()).loadNextPage());
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -645,12 +532,7 @@ public class FilesComConnection {
 
   public ListIterator<File> listForFolder(final ListIterator<File> iterator) {
     try {
-      try {
-        return iterator.loadNextPage();
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return iterator.loadNextPage();
-      }
+      return executeWithRegionRetry(() -> iterator.loadNextPage());
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -668,12 +550,7 @@ public class FilesComConnection {
 
   public Folder createFolder(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return Folder.create(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return Folder.create(parameters, getRequestOptions());
-      }
+      return executeWithRegionRetry(() -> Folder.create(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -691,12 +568,7 @@ public class FilesComConnection {
 
   public ListIterator<Group> listGroup(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return Group.list(parameters, getRequestOptions()).loadNextPage();
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return Group.list(parameters, getRequestOptions()).loadNextPage();
-      }
+      return executeWithRegionRetry(() -> Group.list(parameters, getRequestOptions()).loadNextPage());
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -714,12 +586,7 @@ public class FilesComConnection {
 
   public ListIterator<Group> listGroup(final ListIterator<Group> iterator) {
     try {
-      try {
-        return iterator.loadNextPage();
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return iterator.loadNextPage();
-      }
+      return executeWithRegionRetry(() -> iterator.loadNextPage());
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -737,12 +604,7 @@ public class FilesComConnection {
 
   public Group findGroup(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return Group.find(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return Group.find(parameters, getRequestOptions());
-      }
+      return executeWithRegionRetry(() -> Group.find(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -760,12 +622,7 @@ public class FilesComConnection {
 
   public Group createGroup(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return Group.create(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return Group.create(parameters, getRequestOptions());
-      }
+      return executeWithRegionRetry(() -> Group.create(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -783,12 +640,7 @@ public class FilesComConnection {
 
   public Group updateGroup(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return Group.update(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return Group.update(parameters, getRequestOptions());
-      }
+      return executeWithRegionRetry(() -> Group.update(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -806,12 +658,7 @@ public class FilesComConnection {
 
   public void deleteGroup(final HashMap<String, Object> parameters) {
     try {
-      try {
-        Group.delete(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        Group.delete(parameters, getRequestOptions());
-      }
+      executeWithRegionRetry(() -> Group.delete(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -829,12 +676,7 @@ public class FilesComConnection {
 
   public ListIterator<User> listUser(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return User.list(parameters, getRequestOptions()).loadNextPage();
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return User.list(parameters, getRequestOptions()).loadNextPage();
-      }
+      return executeWithRegionRetry(() -> User.list(parameters, getRequestOptions()).loadNextPage());
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -852,12 +694,7 @@ public class FilesComConnection {
 
   public ListIterator<User> listUser(final ListIterator<User> iterator) {
     try {
-      try {
-        return iterator.loadNextPage();
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return iterator.loadNextPage();
-      }
+      return executeWithRegionRetry(() -> iterator.loadNextPage());
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -875,12 +712,7 @@ public class FilesComConnection {
 
   public User findUser(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return User.find(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return User.find(parameters, getRequestOptions());
-      }
+      return executeWithRegionRetry(() -> User.find(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -898,12 +730,7 @@ public class FilesComConnection {
 
   public User createUser(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return User.create(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return User.create(parameters, getRequestOptions());
-      }
+      return executeWithRegionRetry(() -> User.create(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -921,12 +748,7 @@ public class FilesComConnection {
 
   public User updateUser(final HashMap<String, Object> parameters) {
     try {
-      try {
-        return User.update(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        return User.update(parameters, getRequestOptions());
-      }
+      return executeWithRegionRetry(() -> User.update(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -944,12 +766,7 @@ public class FilesComConnection {
 
   public void deleteUser(final HashMap<String, Object> parameters) {
     try {
-      try {
-        User.delete(parameters, getRequestOptions());
-      } catch (final LockoutRegionMismatchException e) {
-        setApiRoot(e.getData().get("host").toString());
-        User.delete(parameters, getRequestOptions());
-      }
+      executeWithRegionRetry(() -> User.delete(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -965,6 +782,22 @@ public class FilesComConnection {
     }
   }
 
+
+  private void executeWithRegionRetry(final Runnable task) {
+    executeWithRegionRetry(() -> {
+      task.run();
+      return null;
+    });
+  }
+
+  private <T> T executeWithRegionRetry(final Supplier<T> task) {
+    try {
+      return task.get();
+    } catch (final LockoutRegionMismatchException e) {
+      setApiRoot(e.getData().get("host").toString());
+      return task.get();
+    }
+  }
 
   private FilesComErrorType getErrorType(final ApiErrorException e) {
     return Arrays.stream(FilesComErrorType.values())

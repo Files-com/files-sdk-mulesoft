@@ -7,7 +7,6 @@ import java.time.ZonedDateTime;
 import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import com.files.models.User;
 
@@ -23,81 +22,49 @@ public class UserModel implements Serializable {
   public UserModel(final User user) {
     this.id = user.id;
     this.username = user.username;
-    if (user.adminGroupIds != null) {
-      this.adminGroupIds = Arrays.asList(user.adminGroupIds);
-    }
+    this.adminGroupIds = user.adminGroupIds != null ? Arrays.asList(user.adminGroupIds) : null;
     this.allowedIps = user.allowedIps;
     this.attachmentsPermission = Boolean.TRUE.equals(user.attachmentsPermission);
     this.apiKeysCount = user.apiKeysCount;
-    if (user.authenticateUntil != null) {
-      this.authenticateUntil = ZonedDateTime.ofInstant(user.authenticateUntil.toInstant(), ZoneId.systemDefault());
-    }
+    this.authenticateUntil = user.authenticateUntil != null ? ZonedDateTime.ofInstant(user.authenticateUntil.toInstant(), ZoneId.systemDefault()) : null;
     this.authenticationMethod = user.authenticationMethod;
     this.avatarUrl = user.avatarUrl;
     this.billable = Boolean.TRUE.equals(user.billable);
     this.billingPermission = Boolean.TRUE.equals(user.billingPermission);
     this.bypassSiteAllowedIps = Boolean.TRUE.equals(user.bypassSiteAllowedIps);
     this.bypassInactiveDisable = Boolean.TRUE.equals(user.bypassInactiveDisable);
-    if (user.createdAt != null) {
-      this.createdAt = ZonedDateTime.ofInstant(user.createdAt.toInstant(), ZoneId.systemDefault());
-    }
+    this.createdAt = user.createdAt != null ? ZonedDateTime.ofInstant(user.createdAt.toInstant(), ZoneId.systemDefault()) : null;
     this.davPermission = Boolean.TRUE.equals(user.davPermission);
     this.disabled = Boolean.TRUE.equals(user.disabled);
     this.disabledExpiredOrInactive = Boolean.TRUE.equals(user.disabledExpiredOrInactive);
     this.email = user.email;
-    if (user.firstLoginAt != null) {
-      this.firstLoginAt = ZonedDateTime.ofInstant(user.firstLoginAt.toInstant(), ZoneId.systemDefault());
-    }
+    this.firstLoginAt = user.firstLoginAt != null ? ZonedDateTime.ofInstant(user.firstLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.ftpPermission = Boolean.TRUE.equals(user.ftpPermission);
     this.groupIds = user.groupIds;
     this.headerText = user.headerText;
     this.language = user.language;
-    if (user.lastLoginAt != null) {
-      this.lastLoginAt = ZonedDateTime.ofInstant(user.lastLoginAt.toInstant(), ZoneId.systemDefault());
-    }
-    if (user.lastWebLoginAt != null) {
-      this.lastWebLoginAt = ZonedDateTime.ofInstant(user.lastWebLoginAt.toInstant(), ZoneId.systemDefault());
-    }
-    if (user.lastFtpLoginAt != null) {
-      this.lastFtpLoginAt = ZonedDateTime.ofInstant(user.lastFtpLoginAt.toInstant(), ZoneId.systemDefault());
-    }
-    if (user.lastSftpLoginAt != null) {
-      this.lastSftpLoginAt = ZonedDateTime.ofInstant(user.lastSftpLoginAt.toInstant(), ZoneId.systemDefault());
-    }
-    if (user.lastDavLoginAt != null) {
-      this.lastDavLoginAt = ZonedDateTime.ofInstant(user.lastDavLoginAt.toInstant(), ZoneId.systemDefault());
-    }
-    if (user.lastDesktopLoginAt != null) {
-      this.lastDesktopLoginAt = ZonedDateTime.ofInstant(user.lastDesktopLoginAt.toInstant(), ZoneId.systemDefault());
-    }
-    if (user.lastRestapiLoginAt != null) {
-      this.lastRestapiLoginAt = ZonedDateTime.ofInstant(user.lastRestapiLoginAt.toInstant(), ZoneId.systemDefault());
-    }
-    if (user.lastApiUseAt != null) {
-      this.lastApiUseAt = ZonedDateTime.ofInstant(user.lastApiUseAt.toInstant(), ZoneId.systemDefault());
-    }
-    if (user.lastActiveAt != null) {
-      this.lastActiveAt = ZonedDateTime.ofInstant(user.lastActiveAt.toInstant(), ZoneId.systemDefault());
-    }
+    this.lastLoginAt = user.lastLoginAt != null ? ZonedDateTime.ofInstant(user.lastLoginAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.lastWebLoginAt = user.lastWebLoginAt != null ? ZonedDateTime.ofInstant(user.lastWebLoginAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.lastFtpLoginAt = user.lastFtpLoginAt != null ? ZonedDateTime.ofInstant(user.lastFtpLoginAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.lastSftpLoginAt = user.lastSftpLoginAt != null ? ZonedDateTime.ofInstant(user.lastSftpLoginAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.lastDavLoginAt = user.lastDavLoginAt != null ? ZonedDateTime.ofInstant(user.lastDavLoginAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.lastDesktopLoginAt = user.lastDesktopLoginAt != null ? ZonedDateTime.ofInstant(user.lastDesktopLoginAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.lastRestapiLoginAt = user.lastRestapiLoginAt != null ? ZonedDateTime.ofInstant(user.lastRestapiLoginAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.lastApiUseAt = user.lastApiUseAt != null ? ZonedDateTime.ofInstant(user.lastApiUseAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.lastActiveAt = user.lastActiveAt != null ? ZonedDateTime.ofInstant(user.lastActiveAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastProtocolCipher = user.lastProtocolCipher;
-    if (user.lockoutExpires != null) {
-      this.lockoutExpires = ZonedDateTime.ofInstant(user.lockoutExpires.toInstant(), ZoneId.systemDefault());
-    }
+    this.lockoutExpires = user.lockoutExpires != null ? ZonedDateTime.ofInstant(user.lockoutExpires.toInstant(), ZoneId.systemDefault()) : null;
     this.name = user.name;
     this.company = user.company;
     this.notes = user.notes;
     this.notificationDailySendTime = user.notificationDailySendTime;
     this.officeIntegrationEnabled = Boolean.TRUE.equals(user.officeIntegrationEnabled);
-    if (user.passwordSetAt != null) {
-      this.passwordSetAt = ZonedDateTime.ofInstant(user.passwordSetAt.toInstant(), ZoneId.systemDefault());
-    }
+    this.passwordSetAt = user.passwordSetAt != null ? ZonedDateTime.ofInstant(user.passwordSetAt.toInstant(), ZoneId.systemDefault()) : null;
     this.passwordValidityDays = user.passwordValidityDays;
     this.publicKeysCount = user.publicKeysCount;
     this.receiveAdminAlerts = Boolean.TRUE.equals(user.receiveAdminAlerts);
     this.require2fa = user.require2fa;
-    if (user.requireLoginBy != null) {
-      this.requireLoginBy = ZonedDateTime.ofInstant(user.requireLoginBy.toInstant(), ZoneId.systemDefault());
-    }
+    this.requireLoginBy = user.requireLoginBy != null ? ZonedDateTime.ofInstant(user.requireLoginBy.toInstant(), ZoneId.systemDefault()) : null;
     this.active2fa = Boolean.TRUE.equals(user.active2fa);
     this.requirePasswordChange = Boolean.TRUE.equals(user.requirePasswordChange);
     this.passwordExpired = Boolean.TRUE.equals(user.passwordExpired);
@@ -117,12 +84,8 @@ public class UserModel implements Serializable {
     this.userRoot = user.userRoot;
     this.userHome = user.userHome;
     this.daysRemainingUntilPasswordExpire = user.daysRemainingUntilPasswordExpire;
-    if (user.passwordExpireAt != null) {
-      this.passwordExpireAt = ZonedDateTime.ofInstant(user.passwordExpireAt.toInstant(), ZoneId.systemDefault());
-    }
-    if (user.avatarFile != null) {
-      this.avatarFile = new ByteArrayInputStream(user.avatarFile);
-    }
+    this.passwordExpireAt = user.passwordExpireAt != null ? ZonedDateTime.ofInstant(user.passwordExpireAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.avatarFile = user.avatarFile != null ? new ByteArrayInputStream(user.avatarFile) : null;
     this.avatarDelete = Boolean.TRUE.equals(user.avatarDelete);
     this.changePassword = user.changePassword;
     this.changePasswordConfirmation = user.changePasswordConfirmation;

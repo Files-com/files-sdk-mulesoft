@@ -13,7 +13,7 @@
     <groupId>com.files</groupId>
     <artifactId>mule-filescom-connector</artifactId>
     <packaging>mule-extension</packaging>
-    <version>0.1.34</version>
+    <version>0.1.35</version>
 
     <name>Files.com Connector</name>
     <description>The Files.com MuleSoft Connector</description>
@@ -52,6 +52,7 @@
                 <configuration>
                     <activeRecipes>
                         <recipe>org.openrewrite.java.format.AutoFormat</recipe>
+                        <recipe>org.openrewrite.java.RemoveUnusedImports</recipe>
                     </activeRecipes>
                     <activeStyles>
                         <style>com.files.JavaStyle</style>

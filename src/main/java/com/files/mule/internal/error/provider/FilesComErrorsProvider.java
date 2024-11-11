@@ -1,6 +1,5 @@
 package com.files.mule.internal.error.provider;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +11,7 @@ import com.files.mule.internal.error.FilesComErrorType;
 public class FilesComErrorsProvider implements ErrorTypeProvider {
   @Override
   public Set<ErrorTypeDefinition> getErrorTypes() {
-    HashSet<ErrorTypeDefinition> errors = new HashSet<>();
+    HashSet<ErrorTypeDefinition<?>> errors = new HashSet<>();
     errors.add(FilesComErrorType.BAD_REQUEST);
     errors.add(FilesComErrorType.NOT_AUTHENTICATED);
     errors.add(FilesComErrorType.NOT_AUTHORIZED);
@@ -25,6 +24,6 @@ public class FilesComErrorsProvider implements ErrorTypeProvider {
     errors.add(FilesComErrorType.ARGUMENT);
     errors.add(FilesComErrorType.RESPONSE);
     errors.add(FilesComErrorType.CONNECTIVITY);
-    return errors;
+    return new HashSet<>(errors);
   }
 }

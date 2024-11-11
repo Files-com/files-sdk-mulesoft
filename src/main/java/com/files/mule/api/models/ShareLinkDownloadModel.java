@@ -1,13 +1,8 @@
 package com.files.mule.api.models;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 import com.files.models.BundleDownload;
 
@@ -24,9 +19,7 @@ public class ShareLinkDownloadModel implements Serializable {
     }
     this.downloadMethod = bundleDownload.downloadMethod;
     this.path = bundleDownload.path;
-    if (bundleDownload.createdAt != null) {
-      this.createdAt = ZonedDateTime.ofInstant(bundleDownload.createdAt.toInstant(), ZoneId.systemDefault());
-    }
+    this.createdAt = bundleDownload.createdAt != null ? ZonedDateTime.ofInstant(bundleDownload.createdAt.toInstant(), ZoneId.systemDefault()) : null;
   }
 
   private ShareLinkRegistrationModel bundleRegistration;

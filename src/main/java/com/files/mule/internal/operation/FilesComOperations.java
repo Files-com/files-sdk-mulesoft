@@ -13,25 +13,81 @@ import org.mule.runtime.extension.api.annotation.error.Throws;
 import org.mule.runtime.extension.api.annotation.param.Connection;
 import org.mule.runtime.extension.api.annotation.param.Content;
 import org.mule.runtime.extension.api.annotation.param.MediaType;
-import org.mule.runtime.extension.api.annotation.param.Optional;
+import org.mule.runtime.extension.api.annotation.param.ParameterGroup;
 import org.mule.runtime.extension.api.annotation.param.display.DisplayName;
-import org.mule.runtime.extension.api.annotation.param.display.Example;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
-import org.mule.runtime.extension.api.annotation.values.OfValues;
 import org.mule.runtime.extension.api.runtime.streaming.PagingProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.files.ListIterator;
-import com.files.models.*;
-import com.files.mule.api.models.*;
+import com.files.models.Bundle;
+import com.files.models.BundleDownload;
+import com.files.models.BundleNotification;
+import com.files.models.BundleRecipient;
+import com.files.models.BundleRegistration;
+import com.files.models.File;
+import com.files.models.Group;
+import com.files.models.User;
+import com.files.mule.api.models.FileActionModel;
+import com.files.mule.api.models.FileModel;
+import com.files.mule.api.models.FolderModel;
+import com.files.mule.api.models.GroupModel;
+import com.files.mule.api.models.ShareLinkDownloadModel;
+import com.files.mule.api.models.ShareLinkModel;
+import com.files.mule.api.models.ShareLinkNotificationModel;
+import com.files.mule.api.models.ShareLinkRecipientModel;
+import com.files.mule.api.models.ShareLinkRegistrationModel;
+import com.files.mule.api.models.UserModel;
 import com.files.mule.internal.connection.FilesComConnection;
 import com.files.mule.internal.error.provider.FilesComErrorsProvider;
-import com.files.mule.internal.values.*;
+import com.files.mule.internal.operation.parameter.ShareLinkParameterGroup;
+import com.files.mule.internal.operation.parameter.ShareLinkDownloadParameterGroup;
+import com.files.mule.internal.operation.parameter.ShareLinkNotificationParameterGroup;
+import com.files.mule.internal.operation.parameter.ShareLinkRecipientParameterGroup;
+import com.files.mule.internal.operation.parameter.ShareLinkRegistrationParameterGroup;
+import com.files.mule.internal.operation.parameter.FileParameterGroup;
+import com.files.mule.internal.operation.parameter.FolderParameterGroup;
+import com.files.mule.internal.operation.parameter.GroupParameterGroup;
+import com.files.mule.internal.operation.parameter.UserParameterGroup;
 
 public class FilesComOperations {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(FilesComOperations.class);
+  private static final String ADMIN_IDS = "admin_ids";
+  private static final String AUTHENTICATION_METHOD = "authentication_method";
+  private static final String BUNDLE_ID = "bundle_id";
+  private static final String COMPANY = "company";
+  private static final String DAV_PERMISSION = "dav_permission";
+  private static final String DESCRIPTION = "description";
+  private static final String DESTINATION = "destination";
+  private static final String EMAIL = "email";
+  private static final String EXPIRES_AT = "expires_at";
+  private static final String FTP_PERMISSION = "ftp_permission";
+  private static final String GROUP_IDS = "group_ids";
+  private static final String ID = "id";
+  private static final String MAX_USES = "max_uses";
+  private static final String MKDIR_PARENTS = "mkdir_parents";
+  private static final String NAME = "name";
+  private static final String NOTE = "note";
+  private static final String NOTES = "notes";
+  private static final String NOTIFY_ON_REGISTRATION = "notify_on_registration";
+  private static final String NOTIFY_ON_UPLOAD = "notify_on_upload";
+  private static final String PASSWORD = "password";
+  private static final String PATH = "path";
+  private static final String PATHS = "paths";
+  private static final String PERMISSIONS = "permissions";
+  private static final String RECIPIENT = "recipient";
+  private static final String REQUIRE_PASSWORD_CHANGE = "require_password_change";
+  private static final String REQUIRE_REGISTRATION = "require_registration";
+  private static final String RESTAPI_PERMISSION = "restapi_permission";
+  private static final String SFTP_PERMISSION = "sftp_permission";
+  private static final String SHARE_AFTER_CREATE = "share_after_create";
+  private static final String USER_HOME = "user_home";
+  private static final String USER_ID = "user_id";
+  private static final String USER_IDS = "user_ids";
+  private static final String USER_ROOT = "user_root";
+  private static final String USERNAME = "username";
 
   /**
    * List Share Links
@@ -39,8 +95,7 @@ public class FilesComOperations {
   @DisplayName("Share Link - List")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public PagingProvider<FilesComConnection, ShareLinkModel> listShareLinks(
-  ) {
+  public PagingProvider<FilesComConnection, ShareLinkModel> listShareLinks() {
     return new PagingProvider<FilesComConnection, ShareLinkModel>() {
 
       private ListIterator<Bundle> iterator;
@@ -83,12 +138,10 @@ public class FilesComOperations {
   @DisplayName("Share Link - Show")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public ShareLinkModel showShareLink(
-      final @Connection FilesComConnection connection,
-      final @Summary("Bundle ID.") @Example("1") Long id) {
+  public ShareLinkModel showShareLink(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkParameterGroup.Show parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (id != null) {
-      requestParameters.put("id", id);
+    if (parameters.id != null) {
+      requestParameters.put(ID, parameters.id);
     }
 
     return new ShareLinkModel(connection.findBundle(requestParameters));
@@ -100,42 +153,34 @@ public class FilesComOperations {
   @DisplayName("Share Link - Create")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public ShareLinkModel createShareLink(
-      final @Connection FilesComConnection connection,
-      final @Summary("A list of paths to include in this bundle.") @Example("[\"file.txt\"]") List<String> paths,
-      final @Optional @Summary("Password for this bundle.") @Example("Password") String password,
-      final @Optional @Summary("Bundle expiration date/time") @Example("2000-01-01T01:00:00Z") String expiresAt,
-      final @Optional @Summary("Maximum number of times bundle can be accessed") @Example("1") Long maxUses,
-      final @Optional @Summary("Public description") @Example("The public description of the bundle.") String description,
-      final @Optional @Summary("Bundle internal note") @Example("The internal note on the bundle.") String note,
-      final @Optional @Summary("Show a registration page that captures the downloader's name and email address?") @Example("true") boolean requireRegistration) {
+  public ShareLinkModel createShareLink(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkParameterGroup.Create parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (paths != null) {
-      requestParameters.put("paths", paths.toArray(new String[0]));
+    if (parameters.paths != null) {
+      requestParameters.put(PATHS, parameters.paths.toArray(new String[0]));
     }
 
-    if (password != null) {
-      requestParameters.put("password", password);
+    if (parameters.password != null) {
+      requestParameters.put(PASSWORD, parameters.password);
     }
 
-    if (expiresAt != null) {
-      requestParameters.put("expires_at", expiresAt);
+    if (parameters.expiresAt != null) {
+      requestParameters.put(EXPIRES_AT, parameters.expiresAt);
     }
 
-    if (maxUses != null) {
-      requestParameters.put("max_uses", maxUses);
+    if (parameters.maxUses != null) {
+      requestParameters.put(MAX_USES, parameters.maxUses);
     }
 
-    if (description != null) {
-      requestParameters.put("description", description);
+    if (parameters.description != null) {
+      requestParameters.put(DESCRIPTION, parameters.description);
     }
 
-    if (note != null) {
-      requestParameters.put("note", note);
+    if (parameters.note != null) {
+      requestParameters.put(NOTE, parameters.note);
     }
 
-    requestParameters.put("require_registration", requireRegistration);
-    requestParameters.put("permissions", "read");
+    requestParameters.put(REQUIRE_REGISTRATION, parameters.requireRegistration);
+    requestParameters.put(PERMISSIONS, "read");
     return new ShareLinkModel(connection.createBundle(requestParameters));
   }
 
@@ -145,17 +190,14 @@ public class FilesComOperations {
   @DisplayName("Share Link - Update")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public ShareLinkModel updateShareLink(
-      final @Connection FilesComConnection connection,
-      final @Summary("Bundle ID.") @Example("1") Long id,
-      final @Optional @Summary("Bundle expiration date/time") @Example("2000-01-01T01:00:00Z") String expiresAt) {
+  public ShareLinkModel updateShareLink(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkParameterGroup.Update parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (id != null) {
-      requestParameters.put("id", id);
+    if (parameters.id != null) {
+      requestParameters.put(ID, parameters.id);
     }
 
-    if (expiresAt != null) {
-      requestParameters.put("expires_at", expiresAt);
+    if (parameters.expiresAt != null) {
+      requestParameters.put(EXPIRES_AT, parameters.expiresAt);
     }
 
     return new ShareLinkModel(connection.updateBundle(requestParameters));
@@ -166,12 +208,10 @@ public class FilesComOperations {
    */
   @DisplayName("Share Link - Delete")
   @Throws(FilesComErrorsProvider.class)
-  public void deleteShareLink(
-      final @Connection FilesComConnection connection,
-      final @Summary("Bundle ID.") @Example("1") Long id) {
+  public void deleteShareLink(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkParameterGroup.Delete parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (id != null) {
-      requestParameters.put("id", id);
+    if (parameters.id != null) {
+      requestParameters.put(ID, parameters.id);
     }
 
     connection.deleteBundle(requestParameters);
@@ -183,8 +223,7 @@ public class FilesComOperations {
   @DisplayName("Share Link - List Downloads")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public PagingProvider<FilesComConnection, ShareLinkDownloadModel> listShareLinkDownloads(
-      final @Optional @Summary("Bundle ID") @Example("1") Long bundleId) {
+  public PagingProvider<FilesComConnection, ShareLinkDownloadModel> listShareLinkDownloads(final @ParameterGroup(name = "Parameters") ShareLinkDownloadParameterGroup.List parameters) {
     return new PagingProvider<FilesComConnection, ShareLinkDownloadModel>() {
 
       private ListIterator<BundleDownload> iterator;
@@ -193,8 +232,8 @@ public class FilesComOperations {
       public List<ShareLinkDownloadModel> getPage(final FilesComConnection connection) {
         if (iterator == null) {
           final HashMap<String, Object> requestParameters = new HashMap<>();
-          if (bundleId != null) {
-            requestParameters.put("bundle_id", bundleId);
+          if (parameters.bundleId != null) {
+            requestParameters.put(BUNDLE_ID, parameters.bundleId);
           }
 
           LOGGER.debug("Loading first page of ShareLinkDownloads...");
@@ -230,8 +269,7 @@ public class FilesComOperations {
   @DisplayName("Share Link - List Notifications")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public PagingProvider<FilesComConnection, ShareLinkNotificationModel> listShareLinkNotifications(
-  ) {
+  public PagingProvider<FilesComConnection, ShareLinkNotificationModel> listShareLinkNotifications() {
     return new PagingProvider<FilesComConnection, ShareLinkNotificationModel>() {
 
       private ListIterator<BundleNotification> iterator;
@@ -274,12 +312,10 @@ public class FilesComOperations {
   @DisplayName("Share Link - Show Notification")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public ShareLinkNotificationModel showShareLinkNotification(
-      final @Connection FilesComConnection connection,
-      final @Summary("Bundle Notification ID.") @Example("1") Long id) {
+  public ShareLinkNotificationModel showShareLinkNotification(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkNotificationParameterGroup.Show parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (id != null) {
-      requestParameters.put("id", id);
+    if (parameters.id != null) {
+      requestParameters.put(ID, parameters.id);
     }
 
     return new ShareLinkNotificationModel(connection.findBundleNotification(requestParameters));
@@ -291,21 +327,18 @@ public class FilesComOperations {
   @DisplayName("Share Link - Create Notification")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public ShareLinkNotificationModel createShareLinkNotification(
-      final @Connection FilesComConnection connection,
-      final @Summary("Bundle ID to notify on") @Example("1") Long bundleId,
-      final @Optional @Summary("The id of the user to notify.") @Example("1") Long userId) {
+  public ShareLinkNotificationModel createShareLinkNotification(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkNotificationParameterGroup.Create parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (bundleId != null) {
-      requestParameters.put("bundle_id", bundleId);
+    if (parameters.bundleId != null) {
+      requestParameters.put(BUNDLE_ID, parameters.bundleId);
     }
 
-    if (userId != null) {
-      requestParameters.put("user_id", userId);
+    if (parameters.userId != null) {
+      requestParameters.put(USER_ID, parameters.userId);
     }
 
-    requestParameters.put("notify_on_registration", true);
-    requestParameters.put("notify_on_upload", true);
+    requestParameters.put(NOTIFY_ON_REGISTRATION, true);
+    requestParameters.put(NOTIFY_ON_UPLOAD, true);
     return new ShareLinkNotificationModel(connection.createBundleNotification(requestParameters));
   }
 
@@ -315,18 +348,14 @@ public class FilesComOperations {
   @DisplayName("Share Link - Update Notification")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public ShareLinkNotificationModel updateShareLinkNotification(
-      final @Connection FilesComConnection connection,
-      final @Summary("Bundle Notification ID.") @Example("1") Long id,
-      final @Optional @Summary("Triggers bundle notification when a registration action occurs for it.") @Example("true") boolean notifyOnRegistration,
-      final @Optional @Summary("Triggers bundle notification when a upload action occurs for it.") @Example("true") boolean notifyOnUpload) {
+  public ShareLinkNotificationModel updateShareLinkNotification(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkNotificationParameterGroup.Update parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (id != null) {
-      requestParameters.put("id", id);
+    if (parameters.id != null) {
+      requestParameters.put(ID, parameters.id);
     }
 
-    requestParameters.put("notify_on_registration", notifyOnRegistration);
-    requestParameters.put("notify_on_upload", notifyOnUpload);
+    requestParameters.put(NOTIFY_ON_REGISTRATION, parameters.notifyOnRegistration);
+    requestParameters.put(NOTIFY_ON_UPLOAD, parameters.notifyOnUpload);
     return new ShareLinkNotificationModel(connection.updateBundleNotification(requestParameters));
   }
 
@@ -335,12 +364,10 @@ public class FilesComOperations {
    */
   @DisplayName("Share Link - Delete Notification")
   @Throws(FilesComErrorsProvider.class)
-  public void deleteShareLinkNotification(
-      final @Connection FilesComConnection connection,
-      final @Summary("Bundle Notification ID.") @Example("1") Long id) {
+  public void deleteShareLinkNotification(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkNotificationParameterGroup.Delete parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (id != null) {
-      requestParameters.put("id", id);
+    if (parameters.id != null) {
+      requestParameters.put(ID, parameters.id);
     }
 
     connection.deleteBundleNotification(requestParameters);
@@ -352,8 +379,7 @@ public class FilesComOperations {
   @DisplayName("Share Link - List Recipients")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public PagingProvider<FilesComConnection, ShareLinkRecipientModel> listShareLinkRecipients(
-      final @Summary("List recipients for the bundle with this ID.") @Example("1") Long bundleId) {
+  public PagingProvider<FilesComConnection, ShareLinkRecipientModel> listShareLinkRecipients(final @ParameterGroup(name = "Parameters") ShareLinkRecipientParameterGroup.List parameters) {
     return new PagingProvider<FilesComConnection, ShareLinkRecipientModel>() {
 
       private ListIterator<BundleRecipient> iterator;
@@ -362,8 +388,8 @@ public class FilesComOperations {
       public List<ShareLinkRecipientModel> getPage(final FilesComConnection connection) {
         if (iterator == null) {
           final HashMap<String, Object> requestParameters = new HashMap<>();
-          if (bundleId != null) {
-            requestParameters.put("bundle_id", bundleId);
+          if (parameters.bundleId != null) {
+            requestParameters.put(BUNDLE_ID, parameters.bundleId);
           }
 
           LOGGER.debug("Loading first page of ShareLinkRecipients...");
@@ -399,35 +425,29 @@ public class FilesComOperations {
   @DisplayName("Share Link - Create Recipient")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public ShareLinkRecipientModel createShareLinkRecipient(
-      final @Connection FilesComConnection connection,
-      final @Summary("Bundle to share.") @Example("1") Long bundleId,
-      final @Summary("Email addresses to share this bundle with.") @Example("johndoe@gmail.com") String recipient,
-      final @Optional @Summary("Name of recipient.") @Example("John Smith") String name,
-      final @Optional @Summary("Company of recipient.") @Example("Acme Ltd") String company,
-      final @Optional @Summary("Note to include in email.") @Example("Just a note.") String note) {
+  public ShareLinkRecipientModel createShareLinkRecipient(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkRecipientParameterGroup.Create parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (bundleId != null) {
-      requestParameters.put("bundle_id", bundleId);
+    if (parameters.bundleId != null) {
+      requestParameters.put(BUNDLE_ID, parameters.bundleId);
     }
 
-    if (recipient != null) {
-      requestParameters.put("recipient", recipient);
+    if (parameters.recipient != null) {
+      requestParameters.put(RECIPIENT, parameters.recipient);
     }
 
-    if (name != null) {
-      requestParameters.put("name", name);
+    if (parameters.name != null) {
+      requestParameters.put(NAME, parameters.name);
     }
 
-    if (company != null) {
-      requestParameters.put("company", company);
+    if (parameters.company != null) {
+      requestParameters.put(COMPANY, parameters.company);
     }
 
-    if (note != null) {
-      requestParameters.put("note", note);
+    if (parameters.note != null) {
+      requestParameters.put(NOTE, parameters.note);
     }
 
-    requestParameters.put("share_after_create", true);
+    requestParameters.put(SHARE_AFTER_CREATE, true);
     return new ShareLinkRecipientModel(connection.createBundleRecipient(requestParameters));
   }
 
@@ -437,8 +457,7 @@ public class FilesComOperations {
   @DisplayName("Share Link - List Registrations")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public PagingProvider<FilesComConnection, ShareLinkRegistrationModel> listShareLinkRegistrations(
-      final @Optional @Summary("ID of the associated Bundle") @Example("1") Long bundleId) {
+  public PagingProvider<FilesComConnection, ShareLinkRegistrationModel> listShareLinkRegistrations(final @ParameterGroup(name = "Parameters") ShareLinkRegistrationParameterGroup.List parameters) {
     return new PagingProvider<FilesComConnection, ShareLinkRegistrationModel>() {
 
       private ListIterator<BundleRegistration> iterator;
@@ -447,8 +466,8 @@ public class FilesComOperations {
       public List<ShareLinkRegistrationModel> getPage(final FilesComConnection connection) {
         if (iterator == null) {
           final HashMap<String, Object> requestParameters = new HashMap<>();
-          if (bundleId != null) {
-            requestParameters.put("bundle_id", bundleId);
+          if (parameters.bundleId != null) {
+            requestParameters.put(BUNDLE_ID, parameters.bundleId);
           }
 
           LOGGER.debug("Loading first page of ShareLinkRegistrations...");
@@ -484,12 +503,10 @@ public class FilesComOperations {
   @DisplayName("File - Download")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public InputStream downloadFile(
-      final @Connection FilesComConnection connection,
-      final @Summary("Path to operate on.") @Example("path") String path) {
+  public InputStream downloadFile(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Download parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (path != null) {
-      requestParameters.put("path", path);
+    if (parameters.path != null) {
+      requestParameters.put(PATH, parameters.path);
     }
 
     return connection.downloadFile(requestParameters);
@@ -501,16 +518,13 @@ public class FilesComOperations {
   @DisplayName("File - Upload")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public FileModel uploadFile(
-      final @Connection FilesComConnection connection,
-      final @Summary("Path to operate on.") @Example("path") String path,
-      final @Content @Summary("Content to be written into the file.") InputStream content) {
+  public FileModel uploadFile(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Upload parameters, final @Content @Summary("Content to be written into the file.") InputStream content) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (path != null) {
-      requestParameters.put("path", path);
+    if (parameters.path != null) {
+      requestParameters.put(PATH, parameters.path);
     }
 
-    requestParameters.put("mkdir_parents", true);
+    requestParameters.put(MKDIR_PARENTS, true);
     return new FileModel(connection.createFile(requestParameters, content));
   }
 
@@ -519,12 +533,10 @@ public class FilesComOperations {
    */
   @DisplayName("File - Delete")
   @Throws(FilesComErrorsProvider.class)
-  public void deleteFile(
-      final @Connection FilesComConnection connection,
-      final @Summary("Path to operate on.") @Example("path") String path) {
+  public void deleteFile(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Delete parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (path != null) {
-      requestParameters.put("path", path);
+    if (parameters.path != null) {
+      requestParameters.put(PATH, parameters.path);
     }
 
     connection.deleteFile(requestParameters);
@@ -536,12 +548,10 @@ public class FilesComOperations {
   @DisplayName("File - Show")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public FileModel showFile(
-      final @Connection FilesComConnection connection,
-      final @Summary("Path to operate on.") @Example("path") String path) {
+  public FileModel showFile(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Show parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (path != null) {
-      requestParameters.put("path", path);
+    if (parameters.path != null) {
+      requestParameters.put(PATH, parameters.path);
     }
 
     return new FileModel(connection.findFile(requestParameters));
@@ -553,17 +563,14 @@ public class FilesComOperations {
   @DisplayName("File - Copy")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public FileActionModel copyFile(
-      final @Connection FilesComConnection connection,
-      final @Summary("Path to operate on.") @Example("path") String path,
-      final @Summary("Copy destination path.") @Example("destination") String destination) {
+  public FileActionModel copyFile(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Copy parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (path != null) {
-      requestParameters.put("path", path);
+    if (parameters.path != null) {
+      requestParameters.put(PATH, parameters.path);
     }
 
-    if (destination != null) {
-      requestParameters.put("destination", destination);
+    if (parameters.destination != null) {
+      requestParameters.put(DESTINATION, parameters.destination);
     }
 
     return new FileActionModel(connection.copyFile(requestParameters));
@@ -575,17 +582,14 @@ public class FilesComOperations {
   @DisplayName("File - Move")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public FileActionModel moveFile(
-      final @Connection FilesComConnection connection,
-      final @Summary("Path to operate on.") @Example("path") String path,
-      final @Summary("Move destination path.") @Example("destination") String destination) {
+  public FileActionModel moveFile(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Move parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (path != null) {
-      requestParameters.put("path", path);
+    if (parameters.path != null) {
+      requestParameters.put(PATH, parameters.path);
     }
 
-    if (destination != null) {
-      requestParameters.put("destination", destination);
+    if (parameters.destination != null) {
+      requestParameters.put(DESTINATION, parameters.destination);
     }
 
     return new FileActionModel(connection.moveFile(requestParameters));
@@ -597,8 +601,7 @@ public class FilesComOperations {
   @DisplayName("Folder - List")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public PagingProvider<FilesComConnection, FileModel> listFolders(
-      final @Summary("Path to operate on.") @Example("path") String path) {
+  public PagingProvider<FilesComConnection, FileModel> listFolders(final @ParameterGroup(name = "Parameters") FolderParameterGroup.List parameters) {
     return new PagingProvider<FilesComConnection, FileModel>() {
 
       private ListIterator<File> iterator;
@@ -607,8 +610,8 @@ public class FilesComOperations {
       public List<FileModel> getPage(final FilesComConnection connection) {
         if (iterator == null) {
           final HashMap<String, Object> requestParameters = new HashMap<>();
-          if (path != null) {
-            requestParameters.put("path", path);
+          if (parameters.path != null) {
+            requestParameters.put(PATH, parameters.path);
           }
 
           LOGGER.debug("Loading first page of Folders...");
@@ -644,15 +647,13 @@ public class FilesComOperations {
   @DisplayName("Folder - Create")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public FolderModel createFolder(
-      final @Connection FilesComConnection connection,
-      final @Summary("Path to operate on.") @Example("path") String path) {
+  public FolderModel createFolder(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FolderParameterGroup.Create parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (path != null) {
-      requestParameters.put("path", path);
+    if (parameters.path != null) {
+      requestParameters.put(PATH, parameters.path);
     }
 
-    requestParameters.put("mkdir_parents", true);
+    requestParameters.put(MKDIR_PARENTS, true);
     return new FolderModel(connection.createFolder(requestParameters));
   }
 
@@ -661,15 +662,8 @@ public class FilesComOperations {
    */
   @DisplayName("Folder - Delete")
   @Throws(FilesComErrorsProvider.class)
-  public void deleteFolder(
-      final @Connection FilesComConnection connection,
-      final @Summary("Path to operate on.") @Example("path") String path) {
-    final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (path != null) {
-      requestParameters.put("path", path);
-    }
-
-    connection.deleteFile(requestParameters);
+  public void deleteFolder(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Delete parameters) {
+    deleteFile(connection, parameters);
   }
 
   /**
@@ -678,15 +672,8 @@ public class FilesComOperations {
   @DisplayName("Folder - Show")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public FileModel showFolder(
-      final @Connection FilesComConnection connection,
-      final @Summary("Path to operate on.") @Example("path") String path) {
-    final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (path != null) {
-      requestParameters.put("path", path);
-    }
-
-    return new FileModel(connection.findFile(requestParameters));
+  public FileModel showFolder(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Show parameters) {
+    return showFile(connection, parameters);
   }
 
   /**
@@ -695,20 +682,8 @@ public class FilesComOperations {
   @DisplayName("Folder - Copy")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public FileActionModel copyFolder(
-      final @Connection FilesComConnection connection,
-      final @Summary("Path to operate on.") @Example("path") String path,
-      final @Summary("Copy destination path.") @Example("destination") String destination) {
-    final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (path != null) {
-      requestParameters.put("path", path);
-    }
-
-    if (destination != null) {
-      requestParameters.put("destination", destination);
-    }
-
-    return new FileActionModel(connection.copyFile(requestParameters));
+  public FileActionModel copyFolder(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Copy parameters) {
+    return copyFile(connection, parameters);
   }
 
   /**
@@ -717,20 +692,8 @@ public class FilesComOperations {
   @DisplayName("Folder - Move")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public FileActionModel moveFolder(
-      final @Connection FilesComConnection connection,
-      final @Summary("Path to operate on.") @Example("path") String path,
-      final @Summary("Move destination path.") @Example("destination") String destination) {
-    final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (path != null) {
-      requestParameters.put("path", path);
-    }
-
-    if (destination != null) {
-      requestParameters.put("destination", destination);
-    }
-
-    return new FileActionModel(connection.moveFile(requestParameters));
+  public FileActionModel moveFolder(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Move parameters) {
+    return moveFile(connection, parameters);
   }
 
   /**
@@ -739,8 +702,7 @@ public class FilesComOperations {
   @DisplayName("Group - List")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public PagingProvider<FilesComConnection, GroupModel> listGroups(
-  ) {
+  public PagingProvider<FilesComConnection, GroupModel> listGroups() {
     return new PagingProvider<FilesComConnection, GroupModel>() {
 
       private ListIterator<Group> iterator;
@@ -783,12 +745,10 @@ public class FilesComOperations {
   @DisplayName("Group - Show")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public GroupModel showGroup(
-      final @Connection FilesComConnection connection,
-      final @Summary("Group ID.") @Example("1") Long id) {
+  public GroupModel showGroup(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") GroupParameterGroup.Show parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (id != null) {
-      requestParameters.put("id", id);
+    if (parameters.id != null) {
+      requestParameters.put(ID, parameters.id);
     }
 
     return new GroupModel(connection.findGroup(requestParameters));
@@ -800,27 +760,22 @@ public class FilesComOperations {
   @DisplayName("Group - Create")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public GroupModel createGroup(
-      final @Connection FilesComConnection connection,
-      final @Summary("Group name.") @Example("name") String name,
-      final @Optional @Summary("Group notes.") @Example("example") String notes,
-      final @Optional @Summary("A list of user ids. If sent as a string, should be comma-delimited.") @Example("1") String userIds,
-      final @Optional @Summary("A list of group admin user ids. If sent as a string, should be comma-delimited.") @Example("1") String adminIds) {
+  public GroupModel createGroup(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") GroupParameterGroup.Create parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (name != null) {
-      requestParameters.put("name", name);
+    if (parameters.name != null) {
+      requestParameters.put(NAME, parameters.name);
     }
 
-    if (notes != null) {
-      requestParameters.put("notes", notes);
+    if (parameters.notes != null) {
+      requestParameters.put(NOTES, parameters.notes);
     }
 
-    if (userIds != null) {
-      requestParameters.put("user_ids", userIds);
+    if (parameters.userIds != null) {
+      requestParameters.put(USER_IDS, parameters.userIds);
     }
 
-    if (adminIds != null) {
-      requestParameters.put("admin_ids", adminIds);
+    if (parameters.adminIds != null) {
+      requestParameters.put(ADMIN_IDS, parameters.adminIds);
     }
 
     return new GroupModel(connection.createGroup(requestParameters));
@@ -832,32 +787,26 @@ public class FilesComOperations {
   @DisplayName("Group - Update")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public GroupModel updateGroup(
-      final @Connection FilesComConnection connection,
-      final @Summary("Group ID.") @Example("1") Long id,
-      final @Optional @Summary("Group notes.") @Example("example") String notes,
-      final @Optional @Summary("A list of user ids. If sent as a string, should be comma-delimited.") @Example("1") String userIds,
-      final @Optional @Summary("A list of group admin user ids. If sent as a string, should be comma-delimited.") @Example("1") String adminIds,
-      final @Optional @Summary("Group name.") @Example("owners") String name) {
+  public GroupModel updateGroup(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") GroupParameterGroup.Update parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (id != null) {
-      requestParameters.put("id", id);
+    if (parameters.id != null) {
+      requestParameters.put(ID, parameters.id);
     }
 
-    if (notes != null) {
-      requestParameters.put("notes", notes);
+    if (parameters.notes != null) {
+      requestParameters.put(NOTES, parameters.notes);
     }
 
-    if (userIds != null) {
-      requestParameters.put("user_ids", userIds);
+    if (parameters.userIds != null) {
+      requestParameters.put(USER_IDS, parameters.userIds);
     }
 
-    if (adminIds != null) {
-      requestParameters.put("admin_ids", adminIds);
+    if (parameters.adminIds != null) {
+      requestParameters.put(ADMIN_IDS, parameters.adminIds);
     }
 
-    if (name != null) {
-      requestParameters.put("name", name);
+    if (parameters.name != null) {
+      requestParameters.put(NAME, parameters.name);
     }
 
     return new GroupModel(connection.updateGroup(requestParameters));
@@ -868,12 +817,10 @@ public class FilesComOperations {
    */
   @DisplayName("Group - Delete")
   @Throws(FilesComErrorsProvider.class)
-  public void deleteGroup(
-      final @Connection FilesComConnection connection,
-      final @Summary("Group ID.") @Example("1") Long id) {
+  public void deleteGroup(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") GroupParameterGroup.Delete parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (id != null) {
-      requestParameters.put("id", id);
+    if (parameters.id != null) {
+      requestParameters.put(ID, parameters.id);
     }
 
     connection.deleteGroup(requestParameters);
@@ -885,8 +832,7 @@ public class FilesComOperations {
   @DisplayName("User - List")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public PagingProvider<FilesComConnection, UserModel> listUsers(
-  ) {
+  public PagingProvider<FilesComConnection, UserModel> listUsers() {
     return new PagingProvider<FilesComConnection, UserModel>() {
 
       private ListIterator<User> iterator;
@@ -929,12 +875,10 @@ public class FilesComOperations {
   @DisplayName("User - Show")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public UserModel showUser(
-      final @Connection FilesComConnection connection,
-      final @Summary("User ID.") @Example("1") Long id) {
+  public UserModel showUser(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") UserParameterGroup.Show parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (id != null) {
-      requestParameters.put("id", id);
+    if (parameters.id != null) {
+      requestParameters.put(ID, parameters.id);
     }
 
     return new UserModel(connection.findUser(requestParameters));
@@ -946,65 +890,53 @@ public class FilesComOperations {
   @DisplayName("User - Create")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public UserModel createUser(
-      final @Connection FilesComConnection connection,
-      final @Summary("User's username") @Example("user") String username,
-      final @Optional @Summary("User's email.") @Example("example") String email,
-      final @Optional @Summary("A list of group ids to associate this user with.  Comma delimited.") @Example("example") String groupIds,
-      final @Optional @Summary("User password.") String password,
-      final @Optional @Summary("How is this user authenticated?") @OfValues(UserValueProviders.AuthenticationMethod.class) @Example("password") String authenticationMethod,
-      final @Optional @Summary("User's full name") @Example("John Doe") String name,
-      final @Optional @Summary("User's company") @Example("ACME Corp.") String company,
-      final @Optional @Summary("Any internal notes on the user") @Example("Internal notes on this user.") String notes,
-      final @Optional @Summary("Is a password change required upon next user login?") @Example("true") boolean requirePasswordChange,
-      final @Optional @Summary("Root folder for FTP (and optionally SFTP if the appropriate site-wide setting is set).  Note that this is not used for API, Desktop, or Web interface.") @Example("example") String userRoot,
-      final @Optional @Summary("Home folder for FTP/SFTP.  Note that this is not used for API, Desktop, or Web interface.") @Example("example") String userHome) {
+  public UserModel createUser(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") UserParameterGroup.Create parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (username != null) {
-      requestParameters.put("username", username);
+    if (parameters.username != null) {
+      requestParameters.put(USERNAME, parameters.username);
     }
 
-    if (email != null) {
-      requestParameters.put("email", email);
+    if (parameters.email != null) {
+      requestParameters.put(EMAIL, parameters.email);
     }
 
-    if (groupIds != null) {
-      requestParameters.put("group_ids", groupIds);
+    if (parameters.groupIds != null) {
+      requestParameters.put(GROUP_IDS, parameters.groupIds);
     }
 
-    if (password != null) {
-      requestParameters.put("password", password);
+    if (parameters.password != null) {
+      requestParameters.put(PASSWORD, parameters.password);
     }
 
-    if (authenticationMethod != null) {
-      requestParameters.put("authentication_method", authenticationMethod);
+    if (parameters.authenticationMethod != null) {
+      requestParameters.put(AUTHENTICATION_METHOD, parameters.authenticationMethod);
     }
 
-    if (name != null) {
-      requestParameters.put("name", name);
+    if (parameters.name != null) {
+      requestParameters.put(NAME, parameters.name);
     }
 
-    if (company != null) {
-      requestParameters.put("company", company);
+    if (parameters.company != null) {
+      requestParameters.put(COMPANY, parameters.company);
     }
 
-    if (notes != null) {
-      requestParameters.put("notes", notes);
+    if (parameters.notes != null) {
+      requestParameters.put(NOTES, parameters.notes);
     }
 
-    requestParameters.put("require_password_change", requirePasswordChange);
-    if (userRoot != null) {
-      requestParameters.put("user_root", userRoot);
+    requestParameters.put(REQUIRE_PASSWORD_CHANGE, parameters.requirePasswordChange);
+    if (parameters.userRoot != null) {
+      requestParameters.put(USER_ROOT, parameters.userRoot);
     }
 
-    if (userHome != null) {
-      requestParameters.put("user_home", userHome);
+    if (parameters.userHome != null) {
+      requestParameters.put(USER_HOME, parameters.userHome);
     }
 
-    requestParameters.put("dav_permission", true);
-    requestParameters.put("ftp_permission", true);
-    requestParameters.put("restapi_permission", true);
-    requestParameters.put("sftp_permission", true);
+    requestParameters.put(DAV_PERMISSION, true);
+    requestParameters.put(FTP_PERMISSION, true);
+    requestParameters.put(RESTAPI_PERMISSION, true);
+    requestParameters.put(SFTP_PERMISSION, true);
     return new UserModel(connection.createUser(requestParameters));
   }
 
@@ -1014,70 +946,57 @@ public class FilesComOperations {
   @DisplayName("User - Update")
   @MediaType(value = ANY, strict = false)
   @Throws(FilesComErrorsProvider.class)
-  public UserModel updateUser(
-      final @Connection FilesComConnection connection,
-      final @Summary("User ID.") @Example("1") Long id,
-      final @Optional @Summary("User's email.") @Example("example") String email,
-      final @Optional @Summary("A list of group ids to associate this user with.  Comma delimited.") @Example("example") String groupIds,
-      final @Optional @Summary("User password.") String password,
-      final @Optional @Summary("How is this user authenticated?") @OfValues(UserValueProviders.AuthenticationMethod.class) @Example("password") String authenticationMethod,
-      final @Optional @Summary("User's full name") @Example("John Doe") String name,
-      final @Optional @Summary("User's company") @Example("ACME Corp.") String company,
-      final @Optional @Summary("Any internal notes on the user") @Example("Internal notes on this user.") String notes,
-      final @Optional @Summary("Is a password change required upon next user login?") @Example("true") boolean requirePasswordChange,
-      final @Optional @Summary("Root folder for FTP (and optionally SFTP if the appropriate site-wide setting is set).  Note that this is not used for API, Desktop, or Web interface.") @Example("example") String userRoot,
-      final @Optional @Summary("Home folder for FTP/SFTP.  Note that this is not used for API, Desktop, or Web interface.") @Example("example") String userHome,
-      final @Optional @Summary("User's username") @Example("user") String username) {
+  public UserModel updateUser(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") UserParameterGroup.Update parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (id != null) {
-      requestParameters.put("id", id);
+    if (parameters.id != null) {
+      requestParameters.put(ID, parameters.id);
     }
 
-    if (email != null) {
-      requestParameters.put("email", email);
+    if (parameters.email != null) {
+      requestParameters.put(EMAIL, parameters.email);
     }
 
-    if (groupIds != null) {
-      requestParameters.put("group_ids", groupIds);
+    if (parameters.groupIds != null) {
+      requestParameters.put(GROUP_IDS, parameters.groupIds);
     }
 
-    if (password != null) {
-      requestParameters.put("password", password);
+    if (parameters.password != null) {
+      requestParameters.put(PASSWORD, parameters.password);
     }
 
-    if (authenticationMethod != null) {
-      requestParameters.put("authentication_method", authenticationMethod);
+    if (parameters.authenticationMethod != null) {
+      requestParameters.put(AUTHENTICATION_METHOD, parameters.authenticationMethod);
     }
 
-    if (name != null) {
-      requestParameters.put("name", name);
+    if (parameters.name != null) {
+      requestParameters.put(NAME, parameters.name);
     }
 
-    if (company != null) {
-      requestParameters.put("company", company);
+    if (parameters.company != null) {
+      requestParameters.put(COMPANY, parameters.company);
     }
 
-    if (notes != null) {
-      requestParameters.put("notes", notes);
+    if (parameters.notes != null) {
+      requestParameters.put(NOTES, parameters.notes);
     }
 
-    requestParameters.put("require_password_change", requirePasswordChange);
-    if (userRoot != null) {
-      requestParameters.put("user_root", userRoot);
+    requestParameters.put(REQUIRE_PASSWORD_CHANGE, parameters.requirePasswordChange);
+    if (parameters.userRoot != null) {
+      requestParameters.put(USER_ROOT, parameters.userRoot);
     }
 
-    if (userHome != null) {
-      requestParameters.put("user_home", userHome);
+    if (parameters.userHome != null) {
+      requestParameters.put(USER_HOME, parameters.userHome);
     }
 
-    if (username != null) {
-      requestParameters.put("username", username);
+    if (parameters.username != null) {
+      requestParameters.put(USERNAME, parameters.username);
     }
 
-    requestParameters.put("dav_permission", true);
-    requestParameters.put("ftp_permission", true);
-    requestParameters.put("restapi_permission", true);
-    requestParameters.put("sftp_permission", true);
+    requestParameters.put(DAV_PERMISSION, true);
+    requestParameters.put(FTP_PERMISSION, true);
+    requestParameters.put(RESTAPI_PERMISSION, true);
+    requestParameters.put(SFTP_PERMISSION, true);
     return new UserModel(connection.updateUser(requestParameters));
   }
 
@@ -1086,12 +1005,10 @@ public class FilesComOperations {
    */
   @DisplayName("User - Delete")
   @Throws(FilesComErrorsProvider.class)
-  public void deleteUser(
-      final @Connection FilesComConnection connection,
-      final @Summary("User ID.") @Example("1") Long id) {
+  public void deleteUser(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") UserParameterGroup.Delete parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (id != null) {
-      requestParameters.put("id", id);
+    if (parameters.id != null) {
+      requestParameters.put(ID, parameters.id);
     }
 
     connection.deleteUser(requestParameters);

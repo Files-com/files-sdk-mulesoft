@@ -30,9 +30,7 @@ public class ShareLinkModel implements Serializable {
     this.colorTopText = bundle.colorTopText;
     this.url = bundle.url;
     this.description = bundle.description;
-    if (bundle.expiresAt != null) {
-      this.expiresAt = ZonedDateTime.ofInstant(bundle.expiresAt.toInstant(), ZoneId.systemDefault());
-    }
+    this.expiresAt = bundle.expiresAt != null ? ZonedDateTime.ofInstant(bundle.expiresAt.toInstant(), ZoneId.systemDefault()) : null;
     this.passwordProtected = Boolean.TRUE.equals(bundle.passwordProtected);
     this.permissions = bundle.permissions;
     this.previewOnly = Boolean.TRUE.equals(bundle.previewOnly);
@@ -45,14 +43,10 @@ public class ShareLinkModel implements Serializable {
     }
     this.skipName = Boolean.TRUE.equals(bundle.skipName);
     this.skipEmail = Boolean.TRUE.equals(bundle.skipEmail);
-    if (bundle.startAccessOnDate != null) {
-      this.startAccessOnDate = ZonedDateTime.ofInstant(bundle.startAccessOnDate.toInstant(), ZoneId.systemDefault());
-    }
+    this.startAccessOnDate = bundle.startAccessOnDate != null ? ZonedDateTime.ofInstant(bundle.startAccessOnDate.toInstant(), ZoneId.systemDefault()) : null;
     this.skipCompany = Boolean.TRUE.equals(bundle.skipCompany);
     this.id = bundle.id;
-    if (bundle.createdAt != null) {
-      this.createdAt = ZonedDateTime.ofInstant(bundle.createdAt.toInstant(), ZoneId.systemDefault());
-    }
+    this.createdAt = bundle.createdAt != null ? ZonedDateTime.ofInstant(bundle.createdAt.toInstant(), ZoneId.systemDefault()) : null;
     this.dontSeparateSubmissionsByFolder = Boolean.TRUE.equals(bundle.dontSeparateSubmissionsByFolder);
     this.maxUses = bundle.maxUses;
     this.note = bundle.note;
@@ -70,19 +64,13 @@ public class ShareLinkModel implements Serializable {
     this.watermarkValue = bundle.watermarkValue;
     this.hasInbox = Boolean.TRUE.equals(bundle.hasInbox);
     this.dontAllowFoldersInUploads = Boolean.TRUE.equals(bundle.dontAllowFoldersInUploads);
-    if (bundle.paths != null) {
-      this.paths = Arrays.asList(bundle.paths);
-    }
-    if (bundle.bundlepaths != null) {
-      this.bundlepaths = Arrays.asList(bundle.bundlepaths);
-    }
+    this.paths = bundle.paths != null ? Arrays.asList(bundle.paths) : null;
+    this.bundlepaths = bundle.bundlepaths != null ? Arrays.asList(bundle.bundlepaths) : null;
     this.password = bundle.password;
     this.formFieldSetId = bundle.formFieldSetId;
     this.createSnapshot = Boolean.TRUE.equals(bundle.createSnapshot);
     this.finalizeSnapshot = Boolean.TRUE.equals(bundle.finalizeSnapshot);
-    if (bundle.watermarkAttachmentFile != null) {
-      this.watermarkAttachmentFile = new ByteArrayInputStream(bundle.watermarkAttachmentFile);
-    }
+    this.watermarkAttachmentFile = bundle.watermarkAttachmentFile != null ? new ByteArrayInputStream(bundle.watermarkAttachmentFile) : null;
     this.watermarkAttachmentDelete = Boolean.TRUE.equals(bundle.watermarkAttachmentDelete);
   }
 

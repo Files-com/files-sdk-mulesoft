@@ -1,12 +1,8 @@
 package com.files.mule.api.models;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import com.files.models.File;
@@ -29,21 +25,15 @@ public class FileModel implements Serializable {
     this.displayName = file.displayName;
     this.type = file.type;
     this.size = file.size;
-    if (file.createdAt != null) {
-      this.createdAt = ZonedDateTime.ofInstant(file.createdAt.toInstant(), ZoneId.systemDefault());
-    }
+    this.createdAt = file.createdAt != null ? ZonedDateTime.ofInstant(file.createdAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastModifiedById = file.lastModifiedById;
     this.lastModifiedByApiKeyId = file.lastModifiedByApiKeyId;
     this.lastModifiedByAutomationId = file.lastModifiedByAutomationId;
     this.lastModifiedByBundleRegistrationId = file.lastModifiedByBundleRegistrationId;
     this.lastModifiedByRemoteServerId = file.lastModifiedByRemoteServerId;
     this.lastModifiedByRemoteServerSyncId = file.lastModifiedByRemoteServerSyncId;
-    if (file.mtime != null) {
-      this.mtime = ZonedDateTime.ofInstant(file.mtime.toInstant(), ZoneId.systemDefault());
-    }
-    if (file.providedMtime != null) {
-      this.providedMtime = ZonedDateTime.ofInstant(file.providedMtime.toInstant(), ZoneId.systemDefault());
-    }
+    this.mtime = file.mtime != null ? ZonedDateTime.ofInstant(file.mtime.toInstant(), ZoneId.systemDefault()) : null;
+    this.providedMtime = file.providedMtime != null ? ZonedDateTime.ofInstant(file.providedMtime.toInstant(), ZoneId.systemDefault()) : null;
     this.crc32 = file.crc32;
     this.md5 = file.md5;
     this.sha1 = file.sha1;

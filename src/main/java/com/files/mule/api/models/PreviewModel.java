@@ -1,13 +1,6 @@
 package com.files.mule.api.models;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.io.Serializable;
-import java.time.ZonedDateTime;
-import java.time.ZoneId;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 import com.files.models.Preview;
 

@@ -1,13 +1,8 @@
 package com.files.mule.api.models;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.io.Serializable;
-import java.time.ZonedDateTime;
-import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import com.files.models.FormFieldSet;
 
@@ -25,12 +20,8 @@ public class FormFieldSetModel implements Serializable {
   public FormFieldSetModel(final FormFieldSet formFieldSet) {
     this.id = formFieldSet.id;
     this.title = formFieldSet.title;
-    if (formFieldSet.formLayout != null) {
-      this.formLayouts = Arrays.asList(formFieldSet.formLayout);
-    }
-    if (formFieldSet.formFields != null) {
-      this.formFields = Arrays.asList(formFieldSet.formFields);
-    }
+    this.formLayouts = formFieldSet.formLayout != null ? Arrays.asList(formFieldSet.formLayout) : null;
+    this.formFields = formFieldSet.formFields != null ? Arrays.asList(formFieldSet.formFields) : null;
     this.skipName = Boolean.TRUE.equals(formFieldSet.skipName);
     this.skipEmail = Boolean.TRUE.equals(formFieldSet.skipEmail);
     this.skipCompany = Boolean.TRUE.equals(formFieldSet.skipCompany);
