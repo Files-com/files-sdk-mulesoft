@@ -3,6 +3,7 @@ package com.files.mule.internal.operation.parameter;
 import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.Parameter;
 import org.mule.runtime.extension.api.annotation.param.display.Example;
+import org.mule.runtime.extension.api.annotation.param.display.Placement;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 
 public class ShareLinkDownloadParameterGroup {
@@ -11,6 +12,7 @@ public class ShareLinkDownloadParameterGroup {
 
   public static class List {
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Bundle ID")
     @Example("1")

@@ -1,8 +1,6 @@
 package com.files.mule.api.models;
 
-import java.io.Serializable;
 import java.time.ZonedDateTime;
-import java.time.ZoneId;
 import java.util.Map;
 
 import com.files.models.BundleRegistration;
@@ -10,7 +8,7 @@ import com.files.models.BundleRegistration;
 /**
  * A BundleRegistration is a registration record when a user fills out the form to access the bundle.
  */
-public class ShareLinkRegistrationModel implements Serializable {
+public class ShareLinkRegistrationModel extends AbstractModel {
   public ShareLinkRegistrationModel() {
   }
 
@@ -27,7 +25,7 @@ public class ShareLinkRegistrationModel implements Serializable {
     this.bundleCode = bundleRegistration.bundleCode;
     this.bundleId = bundleRegistration.bundleId;
     this.bundleRecipientId = bundleRegistration.bundleRecipientId;
-    this.createdAt = bundleRegistration.createdAt != null ? ZonedDateTime.ofInstant(bundleRegistration.createdAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.createdAt = toZonedDateTime(bundleRegistration.createdAt);
   }
 
   private String code;

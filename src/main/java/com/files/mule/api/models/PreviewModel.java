@@ -1,13 +1,11 @@
 package com.files.mule.api.models;
 
-import java.io.Serializable;
-
 import com.files.models.Preview;
 
 /**
  * A Preview is an image or PDF preview that is meant to be viewed within the web interface.
  */
-public class PreviewModel implements Serializable {
+public class PreviewModel extends AbstractModel {
   public PreviewModel() {
   }
 

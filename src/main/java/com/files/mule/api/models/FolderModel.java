@@ -1,13 +1,11 @@
 package com.files.mule.api.models;
 
-import java.io.Serializable;
 import java.time.ZonedDateTime;
-import java.time.ZoneId;
 import java.util.Map;
 
 import com.files.models.Folder;
 
-public class FolderModel implements Serializable {
+public class FolderModel extends AbstractModel {
   public FolderModel() {
   }
 
@@ -25,15 +23,15 @@ public class FolderModel implements Serializable {
     this.displayName = folder.displayName;
     this.type = folder.type;
     this.size = folder.size;
-    this.createdAt = folder.createdAt != null ? ZonedDateTime.ofInstant(folder.createdAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.createdAt = toZonedDateTime(folder.createdAt);
     this.lastModifiedById = folder.lastModifiedById;
     this.lastModifiedByApiKeyId = folder.lastModifiedByApiKeyId;
     this.lastModifiedByAutomationId = folder.lastModifiedByAutomationId;
     this.lastModifiedByBundleRegistrationId = folder.lastModifiedByBundleRegistrationId;
     this.lastModifiedByRemoteServerId = folder.lastModifiedByRemoteServerId;
     this.lastModifiedByRemoteServerSyncId = folder.lastModifiedByRemoteServerSyncId;
-    this.mtime = folder.mtime != null ? ZonedDateTime.ofInstant(folder.mtime.toInstant(), ZoneId.systemDefault()) : null;
-    this.providedMtime = folder.providedMtime != null ? ZonedDateTime.ofInstant(folder.providedMtime.toInstant(), ZoneId.systemDefault()) : null;
+    this.mtime = toZonedDateTime(folder.mtime);
+    this.providedMtime = toZonedDateTime(folder.providedMtime);
     this.crc32 = folder.crc32;
     this.md5 = folder.md5;
     this.sha1 = folder.sha1;

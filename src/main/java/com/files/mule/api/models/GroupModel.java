@@ -1,7 +1,5 @@
 package com.files.mule.api.models;
 
-import java.io.Serializable;
-
 import com.files.models.Group;
 
 /**
@@ -11,7 +9,7 @@ import com.files.models.Group;
  *
  * Files.com's Group Admin feature allows you to define Group Admins, who then have access to add and remove users within their groups.
  */
-public class GroupModel implements Serializable {
+public class GroupModel extends AbstractModel {
   public GroupModel() {
   }
 

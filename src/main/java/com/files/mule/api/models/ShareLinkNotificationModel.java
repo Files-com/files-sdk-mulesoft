@@ -1,13 +1,11 @@
 package com.files.mule.api.models;
 
-import java.io.Serializable;
-
 import com.files.models.BundleNotification;
 
 /**
  * A BundleNotification is an E-Mail sent out to users when certain actions are performed on or within a shared set of files and folders.
  */
-public class ShareLinkNotificationModel implements Serializable {
+public class ShareLinkNotificationModel extends AbstractModel {
   public ShareLinkNotificationModel() {
   }
 

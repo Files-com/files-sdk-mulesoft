@@ -3,6 +3,7 @@ package com.files.mule.internal.operation.parameter;
 import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.Parameter;
 import org.mule.runtime.extension.api.annotation.param.display.Example;
+import org.mule.runtime.extension.api.annotation.param.display.Placement;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 
 public class ShareLinkNotificationParameterGroup {
@@ -11,6 +12,7 @@ public class ShareLinkNotificationParameterGroup {
 
   public static class Show {
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Summary("Bundle Notification ID.")
     @Example("1")
     public Long id;
@@ -27,6 +29,7 @@ public class ShareLinkNotificationParameterGroup {
 
   public static class Create {
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Summary("Bundle ID to notify on")
     @Example("1")
     public Long bundleId;
@@ -40,6 +43,7 @@ public class ShareLinkNotificationParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("The id of the user to notify.")
     @Example("1")
@@ -57,6 +61,7 @@ public class ShareLinkNotificationParameterGroup {
 
   public static class Update {
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Summary("Bundle Notification ID.")
     @Example("1")
     public Long id;
@@ -70,6 +75,7 @@ public class ShareLinkNotificationParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Triggers bundle notification when a registration action occurs for it.")
     @Example("true")
@@ -84,6 +90,7 @@ public class ShareLinkNotificationParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Triggers bundle notification when a upload action occurs for it.")
     @Example("true")
@@ -101,6 +108,7 @@ public class ShareLinkNotificationParameterGroup {
 
   public static class Delete {
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Summary("Bundle Notification ID.")
     @Example("1")
     public Long id;

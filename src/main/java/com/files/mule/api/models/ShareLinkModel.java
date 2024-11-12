@@ -1,11 +1,7 @@
 package com.files.mule.api.models;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.time.ZonedDateTime;
-import java.time.ZoneId;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +13,7 @@ import com.files.models.Bundle;
  *
  * Please note that we very closely monitor the E-Mailing feature and any abuse will result in disabling of your site.
  */
-public class ShareLinkModel implements Serializable {
+public class ShareLinkModel extends AbstractModel {
   public ShareLinkModel() {
   }
 
@@ -30,7 +26,7 @@ public class ShareLinkModel implements Serializable {
     this.colorTopText = bundle.colorTopText;
     this.url = bundle.url;
     this.description = bundle.description;
-    this.expiresAt = bundle.expiresAt != null ? ZonedDateTime.ofInstant(bundle.expiresAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.expiresAt = toZonedDateTime(bundle.expiresAt);
     this.passwordProtected = Boolean.TRUE.equals(bundle.passwordProtected);
     this.permissions = bundle.permissions;
     this.previewOnly = Boolean.TRUE.equals(bundle.previewOnly);
@@ -43,10 +39,10 @@ public class ShareLinkModel implements Serializable {
     }
     this.skipName = Boolean.TRUE.equals(bundle.skipName);
     this.skipEmail = Boolean.TRUE.equals(bundle.skipEmail);
-    this.startAccessOnDate = bundle.startAccessOnDate != null ? ZonedDateTime.ofInstant(bundle.startAccessOnDate.toInstant(), ZoneId.systemDefault()) : null;
+    this.startAccessOnDate = toZonedDateTime(bundle.startAccessOnDate);
     this.skipCompany = Boolean.TRUE.equals(bundle.skipCompany);
     this.id = bundle.id;
-    this.createdAt = bundle.createdAt != null ? ZonedDateTime.ofInstant(bundle.createdAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.createdAt = toZonedDateTime(bundle.createdAt);
     this.dontSeparateSubmissionsByFolder = Boolean.TRUE.equals(bundle.dontSeparateSubmissionsByFolder);
     this.maxUses = bundle.maxUses;
     this.note = bundle.note;
@@ -64,13 +60,13 @@ public class ShareLinkModel implements Serializable {
     this.watermarkValue = bundle.watermarkValue;
     this.hasInbox = Boolean.TRUE.equals(bundle.hasInbox);
     this.dontAllowFoldersInUploads = Boolean.TRUE.equals(bundle.dontAllowFoldersInUploads);
-    this.paths = bundle.paths != null ? Arrays.asList(bundle.paths) : null;
-    this.bundlepaths = bundle.bundlepaths != null ? Arrays.asList(bundle.bundlepaths) : null;
+    this.paths = toList(bundle.paths);
+    this.bundlepaths = toList(bundle.bundlepaths);
     this.password = bundle.password;
     this.formFieldSetId = bundle.formFieldSetId;
     this.createSnapshot = Boolean.TRUE.equals(bundle.createSnapshot);
     this.finalizeSnapshot = Boolean.TRUE.equals(bundle.finalizeSnapshot);
-    this.watermarkAttachmentFile = bundle.watermarkAttachmentFile != null ? new ByteArrayInputStream(bundle.watermarkAttachmentFile) : null;
+    this.watermarkAttachmentFile = toInputStream(bundle.watermarkAttachmentFile);
     this.watermarkAttachmentDelete = Boolean.TRUE.equals(bundle.watermarkAttachmentDelete);
   }
 

@@ -3,6 +3,7 @@ package com.files.mule.internal.operation.parameter;
 import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.Parameter;
 import org.mule.runtime.extension.api.annotation.param.display.Example;
+import org.mule.runtime.extension.api.annotation.param.display.Placement;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 import org.mule.runtime.extension.api.annotation.values.OfValues;
 
@@ -15,6 +16,7 @@ public class UserParameterGroup {
 
   public static class Show {
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Summary("User ID.")
     @Example("1")
     public Long id;
@@ -31,6 +33,7 @@ public class UserParameterGroup {
 
   public static class Create {
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Summary("User's username")
     @Example("user")
     public String username;
@@ -44,6 +47,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("User's email.")
     @Example("example")
@@ -58,6 +62,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("A list of group ids to associate this user with.  Comma delimited.")
     @Example("example")
@@ -72,6 +77,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("User password.")
     public String password;
@@ -85,6 +91,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("How is this user authenticated?")
     @OfValues(UserValueProviders.AuthenticationMethod.class)
@@ -100,6 +107,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("User's full name")
     @Example("John Doe")
@@ -114,6 +122,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("User's company")
     @Example("ACME Corp.")
@@ -128,6 +137,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Any internal notes on the user")
     @Example("Internal notes on this user.")
@@ -142,6 +152,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Is a password change required upon next user login?")
     @Example("true")
@@ -156,6 +167,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Root folder for FTP (and optionally SFTP if the appropriate site-wide setting is set).  Note that this is not used for API, Desktop, or Web interface.")
     @Example("example")
@@ -170,6 +182,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Home folder for FTP/SFTP.  Note that this is not used for API, Desktop, or Web interface.")
     @Example("example")
@@ -187,6 +200,7 @@ public class UserParameterGroup {
 
   public static class Update {
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Summary("User ID.")
     @Example("1")
     public Long id;
@@ -200,6 +214,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("User's email.")
     @Example("example")
@@ -214,6 +229,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("A list of group ids to associate this user with.  Comma delimited.")
     @Example("example")
@@ -228,6 +244,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("User password.")
     public String password;
@@ -241,6 +258,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("How is this user authenticated?")
     @OfValues(UserValueProviders.AuthenticationMethod.class)
@@ -256,6 +274,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("User's full name")
     @Example("John Doe")
@@ -270,6 +289,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("User's company")
     @Example("ACME Corp.")
@@ -284,6 +304,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Any internal notes on the user")
     @Example("Internal notes on this user.")
@@ -298,6 +319,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Is a password change required upon next user login?")
     @Example("true")
@@ -312,6 +334,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Root folder for FTP (and optionally SFTP if the appropriate site-wide setting is set).  Note that this is not used for API, Desktop, or Web interface.")
     @Example("example")
@@ -326,6 +349,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Home folder for FTP/SFTP.  Note that this is not used for API, Desktop, or Web interface.")
     @Example("example")
@@ -340,6 +364,7 @@ public class UserParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("User's username")
     @Example("user")
@@ -357,6 +382,7 @@ public class UserParameterGroup {
 
   public static class Delete {
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Summary("User ID.")
     @Example("1")
     public Long id;

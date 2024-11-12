@@ -1,13 +1,11 @@
 package com.files.mule.api.models;
 
-import java.io.Serializable;
 import java.time.ZonedDateTime;
-import java.time.ZoneId;
 import java.util.Map;
 
 import com.files.models.File;
 
-public class FileModel implements Serializable {
+public class FileModel extends AbstractModel {
   public FileModel() {
   }
 
@@ -25,15 +23,15 @@ public class FileModel implements Serializable {
     this.displayName = file.displayName;
     this.type = file.type;
     this.size = file.size;
-    this.createdAt = file.createdAt != null ? ZonedDateTime.ofInstant(file.createdAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.createdAt = toZonedDateTime(file.createdAt);
     this.lastModifiedById = file.lastModifiedById;
     this.lastModifiedByApiKeyId = file.lastModifiedByApiKeyId;
     this.lastModifiedByAutomationId = file.lastModifiedByAutomationId;
     this.lastModifiedByBundleRegistrationId = file.lastModifiedByBundleRegistrationId;
     this.lastModifiedByRemoteServerId = file.lastModifiedByRemoteServerId;
     this.lastModifiedByRemoteServerSyncId = file.lastModifiedByRemoteServerSyncId;
-    this.mtime = file.mtime != null ? ZonedDateTime.ofInstant(file.mtime.toInstant(), ZoneId.systemDefault()) : null;
-    this.providedMtime = file.providedMtime != null ? ZonedDateTime.ofInstant(file.providedMtime.toInstant(), ZoneId.systemDefault()) : null;
+    this.mtime = toZonedDateTime(file.mtime);
+    this.providedMtime = toZonedDateTime(file.providedMtime);
     this.crc32 = file.crc32;
     this.md5 = file.md5;
     this.sha1 = file.sha1;

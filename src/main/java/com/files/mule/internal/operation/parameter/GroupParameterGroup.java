@@ -3,6 +3,7 @@ package com.files.mule.internal.operation.parameter;
 import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.Parameter;
 import org.mule.runtime.extension.api.annotation.param.display.Example;
+import org.mule.runtime.extension.api.annotation.param.display.Placement;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 
 public class GroupParameterGroup {
@@ -11,6 +12,7 @@ public class GroupParameterGroup {
 
   public static class Show {
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Summary("Group ID.")
     @Example("1")
     public Long id;
@@ -27,6 +29,7 @@ public class GroupParameterGroup {
 
   public static class Create {
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Summary("Group name.")
     @Example("name")
     public String name;
@@ -40,6 +43,7 @@ public class GroupParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Group notes.")
     @Example("example")
@@ -54,6 +58,7 @@ public class GroupParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("A list of user ids. If sent as a string, should be comma-delimited.")
     @Example("1")
@@ -68,6 +73,7 @@ public class GroupParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("A list of group admin user ids. If sent as a string, should be comma-delimited.")
     @Example("1")
@@ -85,6 +91,7 @@ public class GroupParameterGroup {
 
   public static class Update {
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Summary("Group ID.")
     @Example("1")
     public Long id;
@@ -98,6 +105,7 @@ public class GroupParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Group notes.")
     @Example("example")
@@ -112,6 +120,7 @@ public class GroupParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("A list of user ids. If sent as a string, should be comma-delimited.")
     @Example("1")
@@ -126,6 +135,7 @@ public class GroupParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("A list of group admin user ids. If sent as a string, should be comma-delimited.")
     @Example("1")
@@ -140,6 +150,7 @@ public class GroupParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Group name.")
     @Example("owners")
@@ -157,6 +168,7 @@ public class GroupParameterGroup {
 
   public static class Delete {
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Summary("Group ID.")
     @Example("1")
     public Long id;

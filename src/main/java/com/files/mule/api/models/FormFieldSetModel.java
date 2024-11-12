@@ -1,7 +1,5 @@
 package com.files.mule.api.models;
 
-import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 
 import com.files.models.FormFieldSet;
@@ -13,15 +11,15 @@ import com.files.models.FormFieldSet;
  *
  * Once created, a form field set can then be associated with one or more bundle(s) and/or inbox(s). Once associated, you will be required to submit well-formatted form-data when creating a bundle-registration or inbox registration.
  */
-public class FormFieldSetModel implements Serializable {
+public class FormFieldSetModel extends AbstractModel {
   public FormFieldSetModel() {
   }
 
   public FormFieldSetModel(final FormFieldSet formFieldSet) {
     this.id = formFieldSet.id;
     this.title = formFieldSet.title;
-    this.formLayouts = formFieldSet.formLayout != null ? Arrays.asList(formFieldSet.formLayout) : null;
-    this.formFields = formFieldSet.formFields != null ? Arrays.asList(formFieldSet.formFields) : null;
+    this.formLayouts = toList(formFieldSet.formLayout);
+    this.formFields = toList(formFieldSet.formFields);
     this.skipName = Boolean.TRUE.equals(formFieldSet.skipName);
     this.skipEmail = Boolean.TRUE.equals(formFieldSet.skipEmail);
     this.skipCompany = Boolean.TRUE.equals(formFieldSet.skipCompany);

@@ -1,15 +1,13 @@
 package com.files.mule.api.models;
 
-import java.io.Serializable;
 import java.time.ZonedDateTime;
-import java.time.ZoneId;
 
 import com.files.models.BundleDownload;
 
 /**
  * A BundleDownload is a record of the download action that happened in the bundle.
  */
-public class ShareLinkDownloadModel implements Serializable {
+public class ShareLinkDownloadModel extends AbstractModel {
   public ShareLinkDownloadModel() {
   }
 
@@ -19,7 +17,7 @@ public class ShareLinkDownloadModel implements Serializable {
     }
     this.downloadMethod = bundleDownload.downloadMethod;
     this.path = bundleDownload.path;
-    this.createdAt = bundleDownload.createdAt != null ? ZonedDateTime.ofInstant(bundleDownload.createdAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.createdAt = toZonedDateTime(bundleDownload.createdAt);
   }
 
   private ShareLinkRegistrationModel bundleRegistration;

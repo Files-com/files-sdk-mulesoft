@@ -1,8 +1,6 @@
 package com.files.mule.api.models;
 
-import java.io.Serializable;
 import java.time.ZonedDateTime;
-import java.time.ZoneId;
 
 import com.files.models.BundleRecipient;
 
@@ -11,7 +9,7 @@ import com.files.models.BundleRecipient;
  * with a Bundle Recipient by sending a create request with the inbox_id, recipient email address,
  * and share_after_create =  true.
  */
-public class ShareLinkRecipientModel implements Serializable {
+public class ShareLinkRecipientModel extends AbstractModel {
   public ShareLinkRecipientModel() {
   }
 
@@ -20,7 +18,7 @@ public class ShareLinkRecipientModel implements Serializable {
     this.name = bundleRecipient.name;
     this.note = bundleRecipient.note;
     this.recipient = bundleRecipient.recipient;
-    this.sentAt = bundleRecipient.sentAt != null ? ZonedDateTime.ofInstant(bundleRecipient.sentAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.sentAt = toZonedDateTime(bundleRecipient.sentAt);
     this.bundleId = bundleRecipient.bundleId;
     this.shareAfterCreate = Boolean.TRUE.equals(bundleRecipient.shareAfterCreate);
   }

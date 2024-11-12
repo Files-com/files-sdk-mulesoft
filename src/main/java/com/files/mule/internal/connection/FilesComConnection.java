@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import org.mule.runtime.extension.api.exception.ModuleException;
@@ -151,7 +152,7 @@ public class FilesComConnection {
 
   public void deleteBundle(final HashMap<String, Object> parameters) {
     try {
-      executeWithRegionRetry(() -> Bundle.delete(parameters, getRequestOptions()));
+      executeWithRegionRetry(_null -> Bundle.delete(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -295,7 +296,7 @@ public class FilesComConnection {
 
   public void deleteBundleNotification(final HashMap<String, Object> parameters) {
     try {
-      executeWithRegionRetry(() -> BundleNotification.delete(parameters, getRequestOptions()));
+      executeWithRegionRetry(_null -> BundleNotification.delete(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -442,7 +443,7 @@ public class FilesComConnection {
 
   public void deleteFile(final HashMap<String, Object> parameters) {
     try {
-      executeWithRegionRetry(() -> File.delete(parameters, getRequestOptions()));
+      executeWithRegionRetry(_null -> File.delete(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -658,7 +659,7 @@ public class FilesComConnection {
 
   public void deleteGroup(final HashMap<String, Object> parameters) {
     try {
-      executeWithRegionRetry(() -> Group.delete(parameters, getRequestOptions()));
+      executeWithRegionRetry(_null -> Group.delete(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -766,7 +767,7 @@ public class FilesComConnection {
 
   public void deleteUser(final HashMap<String, Object> parameters) {
     try {
-      executeWithRegionRetry(() -> User.delete(parameters, getRequestOptions()));
+      executeWithRegionRetry(_null -> User.delete(parameters, getRequestOptions()));
     } catch (final ApiErrorException e) {
       throw new ModuleException(getErrorType(e), e);
     } catch (final AuthenticationException e) {
@@ -783,9 +784,9 @@ public class FilesComConnection {
   }
 
 
-  private void executeWithRegionRetry(final Runnable task) {
+  private void executeWithRegionRetry(final Consumer<Void> task) {
     executeWithRegionRetry(() -> {
-      task.run();
+      task.accept(null);
       return null;
     });
   }

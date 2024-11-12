@@ -3,6 +3,7 @@ package com.files.mule.internal.operation.parameter;
 import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.Parameter;
 import org.mule.runtime.extension.api.annotation.param.display.Example;
+import org.mule.runtime.extension.api.annotation.param.display.Placement;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 
 public class ShareLinkRecipientParameterGroup {
@@ -11,6 +12,7 @@ public class ShareLinkRecipientParameterGroup {
 
   public static class List {
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Summary("List recipients for the bundle with this ID.")
     @Example("1")
     public Long bundleId;
@@ -27,6 +29,7 @@ public class ShareLinkRecipientParameterGroup {
 
   public static class Create {
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Summary("Bundle to share.")
     @Example("1")
     public Long bundleId;
@@ -40,6 +43,7 @@ public class ShareLinkRecipientParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Summary("Email addresses to share this bundle with.")
     @Example("johndoe@gmail.com")
     public String recipient;
@@ -53,6 +57,7 @@ public class ShareLinkRecipientParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Name of recipient.")
     @Example("John Smith")
@@ -67,6 +72,7 @@ public class ShareLinkRecipientParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Company of recipient.")
     @Example("Acme Ltd")
@@ -81,6 +87,7 @@ public class ShareLinkRecipientParameterGroup {
     }
 
     @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Note to include in email.")
     @Example("Just a note.")

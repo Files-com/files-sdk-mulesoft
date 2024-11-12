@@ -1,11 +1,7 @@
 package com.files.mule.api.models;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.time.ZonedDateTime;
-import java.time.ZoneId;
-import java.util.Arrays;
 import java.util.List;
 
 import com.files.models.User;
@@ -15,56 +11,56 @@ import com.files.models.User;
  *
  * Users functionality provides the tools and features needed to manage user accounts within your site.
  */
-public class UserModel implements Serializable {
+public class UserModel extends AbstractModel {
   public UserModel() {
   }
 
   public UserModel(final User user) {
     this.id = user.id;
     this.username = user.username;
-    this.adminGroupIds = user.adminGroupIds != null ? Arrays.asList(user.adminGroupIds) : null;
+    this.adminGroupIds = toList(user.adminGroupIds);
     this.allowedIps = user.allowedIps;
     this.attachmentsPermission = Boolean.TRUE.equals(user.attachmentsPermission);
     this.apiKeysCount = user.apiKeysCount;
-    this.authenticateUntil = user.authenticateUntil != null ? ZonedDateTime.ofInstant(user.authenticateUntil.toInstant(), ZoneId.systemDefault()) : null;
+    this.authenticateUntil = toZonedDateTime(user.authenticateUntil);
     this.authenticationMethod = user.authenticationMethod;
     this.avatarUrl = user.avatarUrl;
     this.billable = Boolean.TRUE.equals(user.billable);
     this.billingPermission = Boolean.TRUE.equals(user.billingPermission);
     this.bypassSiteAllowedIps = Boolean.TRUE.equals(user.bypassSiteAllowedIps);
     this.bypassInactiveDisable = Boolean.TRUE.equals(user.bypassInactiveDisable);
-    this.createdAt = user.createdAt != null ? ZonedDateTime.ofInstant(user.createdAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.createdAt = toZonedDateTime(user.createdAt);
     this.davPermission = Boolean.TRUE.equals(user.davPermission);
     this.disabled = Boolean.TRUE.equals(user.disabled);
     this.disabledExpiredOrInactive = Boolean.TRUE.equals(user.disabledExpiredOrInactive);
     this.email = user.email;
-    this.firstLoginAt = user.firstLoginAt != null ? ZonedDateTime.ofInstant(user.firstLoginAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.firstLoginAt = toZonedDateTime(user.firstLoginAt);
     this.ftpPermission = Boolean.TRUE.equals(user.ftpPermission);
     this.groupIds = user.groupIds;
     this.headerText = user.headerText;
     this.language = user.language;
-    this.lastLoginAt = user.lastLoginAt != null ? ZonedDateTime.ofInstant(user.lastLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastWebLoginAt = user.lastWebLoginAt != null ? ZonedDateTime.ofInstant(user.lastWebLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastFtpLoginAt = user.lastFtpLoginAt != null ? ZonedDateTime.ofInstant(user.lastFtpLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastSftpLoginAt = user.lastSftpLoginAt != null ? ZonedDateTime.ofInstant(user.lastSftpLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastDavLoginAt = user.lastDavLoginAt != null ? ZonedDateTime.ofInstant(user.lastDavLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastDesktopLoginAt = user.lastDesktopLoginAt != null ? ZonedDateTime.ofInstant(user.lastDesktopLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastRestapiLoginAt = user.lastRestapiLoginAt != null ? ZonedDateTime.ofInstant(user.lastRestapiLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastApiUseAt = user.lastApiUseAt != null ? ZonedDateTime.ofInstant(user.lastApiUseAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastActiveAt = user.lastActiveAt != null ? ZonedDateTime.ofInstant(user.lastActiveAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.lastLoginAt = toZonedDateTime(user.lastLoginAt);
+    this.lastWebLoginAt = toZonedDateTime(user.lastWebLoginAt);
+    this.lastFtpLoginAt = toZonedDateTime(user.lastFtpLoginAt);
+    this.lastSftpLoginAt = toZonedDateTime(user.lastSftpLoginAt);
+    this.lastDavLoginAt = toZonedDateTime(user.lastDavLoginAt);
+    this.lastDesktopLoginAt = toZonedDateTime(user.lastDesktopLoginAt);
+    this.lastRestapiLoginAt = toZonedDateTime(user.lastRestapiLoginAt);
+    this.lastApiUseAt = toZonedDateTime(user.lastApiUseAt);
+    this.lastActiveAt = toZonedDateTime(user.lastActiveAt);
     this.lastProtocolCipher = user.lastProtocolCipher;
-    this.lockoutExpires = user.lockoutExpires != null ? ZonedDateTime.ofInstant(user.lockoutExpires.toInstant(), ZoneId.systemDefault()) : null;
+    this.lockoutExpires = toZonedDateTime(user.lockoutExpires);
     this.name = user.name;
     this.company = user.company;
     this.notes = user.notes;
     this.notificationDailySendTime = user.notificationDailySendTime;
     this.officeIntegrationEnabled = Boolean.TRUE.equals(user.officeIntegrationEnabled);
-    this.passwordSetAt = user.passwordSetAt != null ? ZonedDateTime.ofInstant(user.passwordSetAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.passwordSetAt = toZonedDateTime(user.passwordSetAt);
     this.passwordValidityDays = user.passwordValidityDays;
     this.publicKeysCount = user.publicKeysCount;
     this.receiveAdminAlerts = Boolean.TRUE.equals(user.receiveAdminAlerts);
     this.require2fa = user.require2fa;
-    this.requireLoginBy = user.requireLoginBy != null ? ZonedDateTime.ofInstant(user.requireLoginBy.toInstant(), ZoneId.systemDefault()) : null;
+    this.requireLoginBy = toZonedDateTime(user.requireLoginBy);
     this.active2fa = Boolean.TRUE.equals(user.active2fa);
     this.requirePasswordChange = Boolean.TRUE.equals(user.requirePasswordChange);
     this.passwordExpired = Boolean.TRUE.equals(user.passwordExpired);
@@ -74,7 +70,7 @@ public class UserModel implements Serializable {
     this.sftpPermission = Boolean.TRUE.equals(user.sftpPermission);
     this.siteAdmin = Boolean.TRUE.equals(user.siteAdmin);
     this.skipWelcomeScreen = Boolean.TRUE.equals(user.skipWelcomeScreen);
-    this.sslRequired = user.sslRequired;
+    this.encryptionRequired = user.sslRequired;
     this.ssoStrategyId = user.ssoStrategyId;
     this.subscribeToNewsletter = Boolean.TRUE.equals(user.subscribeToNewsletter);
     this.externallyManaged = Boolean.TRUE.equals(user.externallyManaged);
@@ -84,8 +80,8 @@ public class UserModel implements Serializable {
     this.userRoot = user.userRoot;
     this.userHome = user.userHome;
     this.daysRemainingUntilPasswordExpire = user.daysRemainingUntilPasswordExpire;
-    this.passwordExpireAt = user.passwordExpireAt != null ? ZonedDateTime.ofInstant(user.passwordExpireAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.avatarFile = user.avatarFile != null ? new ByteArrayInputStream(user.avatarFile) : null;
+    this.passwordExpireAt = toZonedDateTime(user.passwordExpireAt);
+    this.avatarFile = toInputStream(user.avatarFile);
     this.avatarDelete = Boolean.TRUE.equals(user.avatarDelete);
     this.changePassword = user.changePassword;
     this.changePasswordConfirmation = user.changePasswordConfirmation;
@@ -421,10 +417,10 @@ public class UserModel implements Serializable {
     return skipWelcomeScreen;
   }
 
-  private String sslRequired;
+  private String encryptionRequired;
 
-  public String getSslRequired() {
-    return sslRequired;
+  public String getEncryptionRequired() {
+    return encryptionRequired;
   }
 
   private Long ssoStrategyId;
