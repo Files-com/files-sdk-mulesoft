@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:filescom="http://www.mulesoft.org/schema/mule/filescom"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+						http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+						http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+						http://www.mulesoft.org/schema/mule/filescom http://www.mulesoft.org/schema/mule/filescom/current/mule-filescom.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config"
+		doc:id="b0d0d8ed-d906-49ef-b598-6b4e80ad0780">
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<filescom:config name="Files_com_Config" doc:name="Files.com Config"
+		doc:id="3ccaf63c-42c8-46da-b25a-e10572669bc3">
+		<filescom:connection apiKey="" />
+	</filescom:config>
+	<flow name="mule-filescom-connector-general-downloadFlow"
+		doc:id="e4a7e8b0-64f1-4d71-93cb-8c1c2c5b5386">
+		<http:listener doc:name="Listener" doc:id="ff8be7f0-4d6e-4797-aad3-1b859fb9b1f5"
+			config-ref="HTTP_Listener_config" path="download" />
+		<filescom:download-file doc:name="File - Download"
+			doc:id="c4da5873-9953-4042-97d4-37b54c3bbc4d" path="#[attributes.queryParams.path]"
+			config-ref="Files_com_Config" />
+	</flow>
+	<flow name="mule-filescom-connector-general-uploadFlow"
+		doc:id="45919f88-2224-47b4-a977-86068f6a33b9">
+		<http:listener doc:name="Listener" doc:id="73ba8b82-aaf5-4c9c-8c11-51cf03cee5f5"
+			config-ref="HTTP_Listener_config" path="upload" />
+		<filescom:upload-file doc:name="File - Upload" doc:id="5a036a48-ea2a-4608-bc7e-e6733cdbf5a2"
+			config-ref="Files_com_Config" path="#[attributes.queryParams.path]" />
+		<filescom:create-share-link doc:name="Share Link - Create"
+			doc:id="e2a78c0a-a137-4375-abde-884f55b103ed" config-ref="Files_com_Config"
+			paths="#[[payload.path]]" />
+		<ee:transform doc:name="Transform Message" doc:id="2e621fba-2de4-4336-94f0-1aba47542906">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  url: payload.url
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
