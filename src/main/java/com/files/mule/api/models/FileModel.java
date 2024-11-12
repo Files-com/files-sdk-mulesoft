@@ -1,15 +1,25 @@
 package com.files.mule.api.models;
 
+import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.time.ZoneId;
 import java.util.Map;
 
 import com.files.models.File;
 
-public class FileModel extends AbstractModel {
+public class FileModel implements Serializable {
   public FileModel() {
   }
 
   public FileModel(final File file) {
+    initGroup1(file);
+    initGroup2(file);
+    initGroup3(file);
+    initGroup4(file);
+    initGroup5(file);
+  }
+
+  private void initGroup1(final File file) {
     this.path = file.path;
     this.createdById = file.createdById;
     this.createdByApiKeyId = file.createdByApiKeyId;
@@ -20,18 +30,24 @@ public class FileModel extends AbstractModel {
     this.createdByRemoteServerId = file.createdByRemoteServerId;
     this.createdByRemoteServerSyncId = file.createdByRemoteServerSyncId;
     this.customMetadata = file.customMetadata;
+  }
+
+  private void initGroup2(final File file) {
     this.displayName = file.displayName;
     this.type = file.type;
     this.size = file.size;
-    this.createdAt = toZonedDateTime(file.createdAt);
+    this.createdAt = file.createdAt != null ? ZonedDateTime.ofInstant(file.createdAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastModifiedById = file.lastModifiedById;
     this.lastModifiedByApiKeyId = file.lastModifiedByApiKeyId;
     this.lastModifiedByAutomationId = file.lastModifiedByAutomationId;
     this.lastModifiedByBundleRegistrationId = file.lastModifiedByBundleRegistrationId;
     this.lastModifiedByRemoteServerId = file.lastModifiedByRemoteServerId;
     this.lastModifiedByRemoteServerSyncId = file.lastModifiedByRemoteServerSyncId;
-    this.mtime = toZonedDateTime(file.mtime);
-    this.providedMtime = toZonedDateTime(file.providedMtime);
+  }
+
+  private void initGroup3(final File file) {
+    this.mtime = file.mtime != null ? ZonedDateTime.ofInstant(file.mtime.toInstant(), ZoneId.systemDefault()) : null;
+    this.providedMtime = file.providedMtime != null ? ZonedDateTime.ofInstant(file.providedMtime.toInstant(), ZoneId.systemDefault()) : null;
     this.crc32 = file.crc32;
     this.md5 = file.md5;
     this.sha1 = file.sha1;
@@ -40,6 +56,9 @@ public class FileModel extends AbstractModel {
     this.region = file.region;
     this.permissions = file.permissions;
     this.subfoldersLocked = Boolean.TRUE.equals(file.subfoldersLocked);
+  }
+
+  private void initGroup4(final File file) {
     this.isLocked = Boolean.TRUE.equals(file.isLocked);
     this.downloadUri = file.downloadUri;
     this.priorityColor = file.priorityColor;
@@ -52,6 +71,9 @@ public class FileModel extends AbstractModel {
     this.mkdirParents = Boolean.TRUE.equals(file.mkdirParents);
     this.part = file.part;
     this.parts = file.parts;
+  }
+
+  private void initGroup5(final File file) {
     this.ref = file.ref;
     this.restart = file.restart;
     this.structure = file.structure;

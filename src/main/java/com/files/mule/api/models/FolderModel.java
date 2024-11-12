@@ -1,15 +1,24 @@
 package com.files.mule.api.models;
 
+import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.time.ZoneId;
 import java.util.Map;
 
 import com.files.models.Folder;
 
-public class FolderModel extends AbstractModel {
+public class FolderModel implements Serializable {
   public FolderModel() {
   }
 
   public FolderModel(final Folder folder) {
+    initGroup1(folder);
+    initGroup2(folder);
+    initGroup3(folder);
+    initGroup4(folder);
+  }
+
+  private void initGroup1(final Folder folder) {
     this.path = folder.path;
     this.createdById = folder.createdById;
     this.createdByApiKeyId = folder.createdByApiKeyId;
@@ -20,18 +29,24 @@ public class FolderModel extends AbstractModel {
     this.createdByRemoteServerId = folder.createdByRemoteServerId;
     this.createdByRemoteServerSyncId = folder.createdByRemoteServerSyncId;
     this.customMetadata = folder.customMetadata;
+  }
+
+  private void initGroup2(final Folder folder) {
     this.displayName = folder.displayName;
     this.type = folder.type;
     this.size = folder.size;
-    this.createdAt = toZonedDateTime(folder.createdAt);
+    this.createdAt = folder.createdAt != null ? ZonedDateTime.ofInstant(folder.createdAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastModifiedById = folder.lastModifiedById;
     this.lastModifiedByApiKeyId = folder.lastModifiedByApiKeyId;
     this.lastModifiedByAutomationId = folder.lastModifiedByAutomationId;
     this.lastModifiedByBundleRegistrationId = folder.lastModifiedByBundleRegistrationId;
     this.lastModifiedByRemoteServerId = folder.lastModifiedByRemoteServerId;
     this.lastModifiedByRemoteServerSyncId = folder.lastModifiedByRemoteServerSyncId;
-    this.mtime = toZonedDateTime(folder.mtime);
-    this.providedMtime = toZonedDateTime(folder.providedMtime);
+  }
+
+  private void initGroup3(final Folder folder) {
+    this.mtime = folder.mtime != null ? ZonedDateTime.ofInstant(folder.mtime.toInstant(), ZoneId.systemDefault()) : null;
+    this.providedMtime = folder.providedMtime != null ? ZonedDateTime.ofInstant(folder.providedMtime.toInstant(), ZoneId.systemDefault()) : null;
     this.crc32 = folder.crc32;
     this.md5 = folder.md5;
     this.sha1 = folder.sha1;
@@ -40,6 +55,9 @@ public class FolderModel extends AbstractModel {
     this.region = folder.region;
     this.permissions = folder.permissions;
     this.subfoldersLocked = Boolean.TRUE.equals(folder.subfoldersLocked);
+  }
+
+  private void initGroup4(final Folder folder) {
     this.isLocked = Boolean.TRUE.equals(folder.isLocked);
     this.downloadUri = folder.downloadUri;
     this.priorityColor = folder.priorityColor;

@@ -1,12 +1,18 @@
 package com.files.mule.api.models;
 
+import java.io.Serializable;
+
 import com.files.models.Image;
 
-public class ImageModel extends AbstractModel {
+public class ImageModel implements Serializable {
   public ImageModel() {
   }
 
   public ImageModel(final Image image) {
+    initGroup1(image);
+  }
+
+  private void initGroup1(final Image image) {
     this.name = image.name;
     this.uri = image.uri;
   }
