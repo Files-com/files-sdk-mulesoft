@@ -1,7 +1,5 @@
 package com.files.mule.api.models;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
@@ -82,15 +80,13 @@ public class ShareLinkModel implements Serializable {
     this.hasInbox = Boolean.TRUE.equals(bundle.hasInbox);
     this.dontAllowFoldersInUploads = Boolean.TRUE.equals(bundle.dontAllowFoldersInUploads);
     this.paths = bundle.paths != null ? Arrays.asList(bundle.paths) : null;
-    this.bundlepaths = bundle.bundlepaths != null ? Arrays.asList(bundle.bundlepaths) : null;
+    this.password = bundle.password;
   }
 
   private void initGroup5(final Bundle bundle) {
-    this.password = bundle.password;
     this.formFieldSetId = bundle.formFieldSetId;
     this.createSnapshot = Boolean.TRUE.equals(bundle.createSnapshot);
     this.finalizeSnapshot = Boolean.TRUE.equals(bundle.finalizeSnapshot);
-    this.watermarkAttachmentFile = bundle.watermarkAttachmentFile != null ? new ByteArrayInputStream(bundle.watermarkAttachmentFile) : null;
     this.watermarkAttachmentDelete = Boolean.TRUE.equals(bundle.watermarkAttachmentDelete);
   }
 
@@ -328,12 +324,6 @@ public class ShareLinkModel implements Serializable {
     return paths;
   }
 
-  private List<Object> bundlepaths;
-
-  public List<Object> getBundlepaths() {
-    return bundlepaths;
-  }
-
   private String password;
 
   public String getPassword() {
@@ -356,12 +346,6 @@ public class ShareLinkModel implements Serializable {
 
   public boolean getFinalizeSnapshot() {
     return finalizeSnapshot;
-  }
-
-  private InputStream watermarkAttachmentFile;
-
-  public InputStream getWatermarkAttachmentFile() {
-    return watermarkAttachmentFile;
   }
 
   private boolean watermarkAttachmentDelete;

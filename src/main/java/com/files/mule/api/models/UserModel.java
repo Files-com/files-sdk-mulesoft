@@ -1,7 +1,5 @@
 package com.files.mule.api.models;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
@@ -114,15 +112,14 @@ public class UserModel implements Serializable {
     this.userHome = user.userHome;
     this.daysRemainingUntilPasswordExpire = user.daysRemainingUntilPasswordExpire;
     this.passwordExpireAt = user.passwordExpireAt != null ? ZonedDateTime.ofInstant(user.passwordExpireAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.avatarFile = user.avatarFile != null ? new ByteArrayInputStream(user.avatarFile) : null;
     this.avatarDelete = Boolean.TRUE.equals(user.avatarDelete);
     this.changePassword = user.changePassword;
     this.changePasswordConfirmation = user.changePasswordConfirmation;
     this.grantPermission = user.grantPermission;
+    this.groupId = user.groupId;
   }
 
   private void initGroup8(final User user) {
-    this.groupId = user.groupId;
     this.importedPasswordHash = user.importedPasswordHash;
     this.password = user.password;
     this.passwordConfirmation = user.passwordConfirmation;
@@ -517,12 +514,6 @@ public class UserModel implements Serializable {
 
   public ZonedDateTime getPasswordExpireAt() {
     return passwordExpireAt;
-  }
-
-  private InputStream avatarFile;
-
-  public InputStream getAvatarFile() {
-    return avatarFile;
   }
 
   private boolean avatarDelete;

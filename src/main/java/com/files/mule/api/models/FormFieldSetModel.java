@@ -25,7 +25,6 @@ public class FormFieldSetModel implements Serializable {
     this.id = formFieldSet.id;
     this.title = formFieldSet.title;
     this.formLayouts = formFieldSet.formLayout != null ? Arrays.asList(formFieldSet.formLayout) : null;
-    this.formFields = formFieldSet.formFields != null ? Arrays.asList(formFieldSet.formFields) : null;
     this.skipName = Boolean.TRUE.equals(formFieldSet.skipName);
     this.skipEmail = Boolean.TRUE.equals(formFieldSet.skipEmail);
     this.skipCompany = Boolean.TRUE.equals(formFieldSet.skipCompany);
@@ -48,12 +47,6 @@ public class FormFieldSetModel implements Serializable {
 
   public List<Long> getFormLayouts() {
     return formLayouts;
-  }
-
-  private List<Object> formFields;
-
-  public List<Object> getFormFields() {
-    return formFields;
   }
 
   private boolean skipName;
