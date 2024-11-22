@@ -97,16 +97,17 @@ public class UserModel implements Serializable {
     this.selfManaged = Boolean.TRUE.equals(user.selfManaged);
     this.sftpPermission = Boolean.TRUE.equals(user.sftpPermission);
     this.siteAdmin = Boolean.TRUE.equals(user.siteAdmin);
+    this.siteId = user.siteId;
     this.skipWelcomeScreen = Boolean.TRUE.equals(user.skipWelcomeScreen);
     this.encryptionRequired = user.sslRequired;
     this.ssoStrategyId = user.ssoStrategyId;
     this.subscribeToNewsletter = Boolean.TRUE.equals(user.subscribeToNewsletter);
     this.externallyManaged = Boolean.TRUE.equals(user.externallyManaged);
     this.timeZone = user.timeZone;
-    this.typeOf2fa = user.typeOf2fa;
   }
 
   private void initGroup7(final User user) {
+    this.typeOf2fa = user.typeOf2fa;
     this.typeOf2faForDisplay = user.typeOf2faForDisplay;
     this.userRoot = user.userRoot;
     this.userHome = user.userHome;
@@ -116,10 +117,10 @@ public class UserModel implements Serializable {
     this.changePassword = user.changePassword;
     this.changePasswordConfirmation = user.changePasswordConfirmation;
     this.grantPermission = user.grantPermission;
-    this.groupId = user.groupId;
   }
 
   private void initGroup8(final User user) {
+    this.groupId = user.groupId;
     this.importedPasswordHash = user.importedPasswordHash;
     this.password = user.password;
     this.passwordConfirmation = user.passwordConfirmation;
@@ -442,6 +443,12 @@ public class UserModel implements Serializable {
 
   public boolean getSiteAdmin() {
     return siteAdmin;
+  }
+
+  private Long siteId;
+
+  public Long getSiteId() {
+    return siteId;
   }
 
   private boolean skipWelcomeScreen;
