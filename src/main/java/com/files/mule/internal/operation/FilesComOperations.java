@@ -498,7 +498,7 @@ public class FilesComOperations {
   }
 
   /**
-   * Download file
+   * Download File
    */
   @DisplayName("File - Download")
   @MediaType(value = ANY, strict = false)
@@ -513,7 +513,7 @@ public class FilesComOperations {
   }
 
   /**
-   * Upload file
+   * Upload File
    */
   @DisplayName("File - Upload")
   @MediaType(value = ANY, strict = false)
@@ -529,7 +529,7 @@ public class FilesComOperations {
   }
 
   /**
-   * Delete file/folder
+   * Delete File/Folder
    */
   @DisplayName("File - Delete")
   @Throws(FilesComErrorsProvider.class)
@@ -543,7 +543,7 @@ public class FilesComOperations {
   }
 
   /**
-   * Find file/folder by path
+   * Find File/Folder by Path
    */
   @DisplayName("File - Show")
   @MediaType(value = ANY, strict = false)
@@ -558,7 +558,7 @@ public class FilesComOperations {
   }
 
   /**
-   * Copy file/folder
+   * Copy File/Folder
    */
   @DisplayName("File - Copy")
   @MediaType(value = ANY, strict = false)
@@ -577,7 +577,7 @@ public class FilesComOperations {
   }
 
   /**
-   * Move file/folder
+   * Move File/Folder
    */
   @DisplayName("File - Move")
   @MediaType(value = ANY, strict = false)
@@ -642,7 +642,7 @@ public class FilesComOperations {
   }
 
   /**
-   * Create folder
+   * Create Folder
    */
   @DisplayName("Folder - Create")
   @MediaType(value = ANY, strict = false)
@@ -658,7 +658,7 @@ public class FilesComOperations {
   }
 
   /**
-   * Delete file/folder
+   * Delete File/Folder
    */
   @DisplayName("Folder - Delete")
   @Throws(FilesComErrorsProvider.class)
@@ -667,7 +667,7 @@ public class FilesComOperations {
   }
 
   /**
-   * Find file/folder by path
+   * Find File/Folder by Path
    */
   @DisplayName("Folder - Show")
   @MediaType(value = ANY, strict = false)
@@ -677,7 +677,7 @@ public class FilesComOperations {
   }
 
   /**
-   * Copy file/folder
+   * Copy File/Folder
    */
   @DisplayName("Folder - Copy")
   @MediaType(value = ANY, strict = false)
@@ -687,7 +687,7 @@ public class FilesComOperations {
   }
 
   /**
-   * Move file/folder
+   * Move File/Folder
    */
   @DisplayName("Folder - Move")
   @MediaType(value = ANY, strict = false)
