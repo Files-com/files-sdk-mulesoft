@@ -596,7 +596,7 @@ public class FilesComOperations {
   }
 
   /**
-   * List Folders by path
+   * List Folders by Path
    */
   @DisplayName("Folder - List")
   @MediaType(value = ANY, strict = false)
