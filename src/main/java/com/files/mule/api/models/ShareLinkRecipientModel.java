@@ -7,7 +7,7 @@ import java.time.ZoneId;
 import com.files.models.BundleRecipient;
 
 /**
- * A BundleRecipient is a person who have had a bundle shared with them via email invite. A Bundle can be re-shared
+ * A BundleRecipient is a person who has had a bundle shared with them via email invite. A Bundle can be re-shared
  * with a Bundle Recipient by sending a create request with the inbox_id, recipient email address,
  * and share_after_create =  true.
  */
