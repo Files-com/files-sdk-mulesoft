@@ -14,7 +14,7 @@ more.
 
 ### Requirements
 
-Mule Runtime 4.1.1 or later is required to use the Files.com MuleSoft Connector.
+Mule Runtime 4.3.0 or later is required to use the Files.com MuleSoft Connector.
 
 ### Installation
 

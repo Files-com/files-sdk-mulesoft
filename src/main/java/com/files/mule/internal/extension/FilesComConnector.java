@@ -7,11 +7,17 @@ import org.mule.runtime.extension.api.annotation.Operations;
 import org.mule.runtime.extension.api.annotation.connectivity.ConnectionProviders;
 import org.mule.runtime.extension.api.annotation.dsl.xml.Xml;
 import org.mule.runtime.extension.api.annotation.error.ErrorTypes;
+import org.mule.runtime.extension.api.annotation.license.RequiresEnterpriseLicense;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
+import org.mule.sdk.api.annotation.JavaVersionSupport;
 
 import com.files.mule.internal.connection.provider.FilesComConnectionProvider;
 import com.files.mule.internal.error.FilesComErrorType;
 import com.files.mule.internal.operation.FilesComOperations;
+
+import static org.mule.sdk.api.meta.JavaVersion.JAVA_11;
+import static org.mule.sdk.api.meta.JavaVersion.JAVA_17;
+import static org.mule.sdk.api.meta.JavaVersion.JAVA_8;
 
 /**
  * EVERY FILE IN YOUR BUSINESS THROUGH ONE API AND APP Files.com is one single
@@ -19,6 +25,8 @@ import com.files.mule.internal.operation.FilesComOperations;
  */
 @Xml(prefix = "filescom")
 @Extension(name = "Files.com", category = CERTIFIED, vendor = "Files.com")
+@JavaVersionSupport({JAVA_8, JAVA_11, JAVA_17})
+@RequiresEnterpriseLicense(allowEvaluationLicense = true)
 @Operations(FilesComOperations.class)
 @ConnectionProviders(FilesComConnectionProvider.class)
 @ErrorTypes(FilesComErrorType.class)
