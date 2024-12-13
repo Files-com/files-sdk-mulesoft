@@ -141,7 +141,7 @@ public class FilesComOperations {
   public ShareLinkModel showShareLink(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkParameterGroup.Show parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.id != null) {
-      requestParameters.put(ID, parameters.id);
+      requestParameters.put(ID, parameters.getId());
     }
 
     return new ShareLinkModel(connection.findBundle(requestParameters));
@@ -156,30 +156,30 @@ public class FilesComOperations {
   public ShareLinkModel createShareLink(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkParameterGroup.Create parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.paths != null) {
-      requestParameters.put(PATHS, parameters.paths.toArray(new String[0]));
+      requestParameters.put(PATHS, parameters.getPaths().toArray(new String[0]));
     }
 
     if (parameters.password != null) {
-      requestParameters.put(PASSWORD, parameters.password);
+      requestParameters.put(PASSWORD, parameters.getPassword());
     }
 
     if (parameters.expiresAt != null) {
-      requestParameters.put(EXPIRES_AT, parameters.expiresAt);
+      requestParameters.put(EXPIRES_AT, parameters.getExpiresAt());
     }
 
     if (parameters.maxUses != null) {
-      requestParameters.put(MAX_USES, parameters.maxUses);
+      requestParameters.put(MAX_USES, parameters.getMaxUses());
     }
 
     if (parameters.description != null) {
-      requestParameters.put(DESCRIPTION, parameters.description);
+      requestParameters.put(DESCRIPTION, parameters.getDescription());
     }
 
     if (parameters.note != null) {
-      requestParameters.put(NOTE, parameters.note);
+      requestParameters.put(NOTE, parameters.getNote());
     }
 
-    requestParameters.put(REQUIRE_REGISTRATION, parameters.requireRegistration);
+    requestParameters.put(REQUIRE_REGISTRATION, parameters.getRequireRegistration());
     requestParameters.put(PERMISSIONS, "read");
     return new ShareLinkModel(connection.createBundle(requestParameters));
   }
@@ -193,11 +193,11 @@ public class FilesComOperations {
   public ShareLinkModel updateShareLink(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkParameterGroup.Update parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.id != null) {
-      requestParameters.put(ID, parameters.id);
+      requestParameters.put(ID, parameters.getId());
     }
 
     if (parameters.expiresAt != null) {
-      requestParameters.put(EXPIRES_AT, parameters.expiresAt);
+      requestParameters.put(EXPIRES_AT, parameters.getExpiresAt());
     }
 
     return new ShareLinkModel(connection.updateBundle(requestParameters));
@@ -211,7 +211,7 @@ public class FilesComOperations {
   public void deleteShareLink(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkParameterGroup.Delete parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.id != null) {
-      requestParameters.put(ID, parameters.id);
+      requestParameters.put(ID, parameters.getId());
     }
 
     connection.deleteBundle(requestParameters);
@@ -233,7 +233,7 @@ public class FilesComOperations {
         if (iterator == null) {
           final HashMap<String, Object> requestParameters = new HashMap<>();
           if (parameters.bundleId != null) {
-            requestParameters.put(BUNDLE_ID, parameters.bundleId);
+            requestParameters.put(BUNDLE_ID, parameters.getBundleId());
           }
 
           LOGGER.debug("Loading first page of ShareLinkDownloads...");
@@ -315,7 +315,7 @@ public class FilesComOperations {
   public ShareLinkNotificationModel showShareLinkNotification(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkNotificationParameterGroup.Show parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.id != null) {
-      requestParameters.put(ID, parameters.id);
+      requestParameters.put(ID, parameters.getId());
     }
 
     return new ShareLinkNotificationModel(connection.findBundleNotification(requestParameters));
@@ -330,11 +330,11 @@ public class FilesComOperations {
   public ShareLinkNotificationModel createShareLinkNotification(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkNotificationParameterGroup.Create parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.bundleId != null) {
-      requestParameters.put(BUNDLE_ID, parameters.bundleId);
+      requestParameters.put(BUNDLE_ID, parameters.getBundleId());
     }
 
     if (parameters.userId != null) {
-      requestParameters.put(USER_ID, parameters.userId);
+      requestParameters.put(USER_ID, parameters.getUserId());
     }
 
     requestParameters.put(NOTIFY_ON_REGISTRATION, true);
@@ -351,11 +351,11 @@ public class FilesComOperations {
   public ShareLinkNotificationModel updateShareLinkNotification(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkNotificationParameterGroup.Update parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.id != null) {
-      requestParameters.put(ID, parameters.id);
+      requestParameters.put(ID, parameters.getId());
     }
 
-    requestParameters.put(NOTIFY_ON_REGISTRATION, parameters.notifyOnRegistration);
-    requestParameters.put(NOTIFY_ON_UPLOAD, parameters.notifyOnUpload);
+    requestParameters.put(NOTIFY_ON_REGISTRATION, parameters.getNotifyOnRegistration());
+    requestParameters.put(NOTIFY_ON_UPLOAD, parameters.getNotifyOnUpload());
     return new ShareLinkNotificationModel(connection.updateBundleNotification(requestParameters));
   }
 
@@ -367,7 +367,7 @@ public class FilesComOperations {
   public void deleteShareLinkNotification(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkNotificationParameterGroup.Delete parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.id != null) {
-      requestParameters.put(ID, parameters.id);
+      requestParameters.put(ID, parameters.getId());
     }
 
     connection.deleteBundleNotification(requestParameters);
@@ -389,7 +389,7 @@ public class FilesComOperations {
         if (iterator == null) {
           final HashMap<String, Object> requestParameters = new HashMap<>();
           if (parameters.bundleId != null) {
-            requestParameters.put(BUNDLE_ID, parameters.bundleId);
+            requestParameters.put(BUNDLE_ID, parameters.getBundleId());
           }
 
           LOGGER.debug("Loading first page of ShareLinkRecipients...");
@@ -428,23 +428,23 @@ public class FilesComOperations {
   public ShareLinkRecipientModel createShareLinkRecipient(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") ShareLinkRecipientParameterGroup.Create parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.bundleId != null) {
-      requestParameters.put(BUNDLE_ID, parameters.bundleId);
+      requestParameters.put(BUNDLE_ID, parameters.getBundleId());
     }
 
     if (parameters.recipient != null) {
-      requestParameters.put(RECIPIENT, parameters.recipient);
+      requestParameters.put(RECIPIENT, parameters.getRecipient());
     }
 
     if (parameters.name != null) {
-      requestParameters.put(NAME, parameters.name);
+      requestParameters.put(NAME, parameters.getName());
     }
 
     if (parameters.company != null) {
-      requestParameters.put(COMPANY, parameters.company);
+      requestParameters.put(COMPANY, parameters.getCompany());
     }
 
     if (parameters.note != null) {
-      requestParameters.put(NOTE, parameters.note);
+      requestParameters.put(NOTE, parameters.getNote());
     }
 
     requestParameters.put(SHARE_AFTER_CREATE, true);
@@ -467,7 +467,7 @@ public class FilesComOperations {
         if (iterator == null) {
           final HashMap<String, Object> requestParameters = new HashMap<>();
           if (parameters.bundleId != null) {
-            requestParameters.put(BUNDLE_ID, parameters.bundleId);
+            requestParameters.put(BUNDLE_ID, parameters.getBundleId());
           }
 
           LOGGER.debug("Loading first page of ShareLinkRegistrations...");
@@ -506,7 +506,7 @@ public class FilesComOperations {
   public InputStream downloadFile(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Download parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.path != null) {
-      requestParameters.put(PATH, parameters.path);
+      requestParameters.put(PATH, parameters.getPath());
     }
 
     return connection.downloadFile(requestParameters);
@@ -521,7 +521,7 @@ public class FilesComOperations {
   public FileModel uploadFile(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Upload parameters, final @Content @Summary("Content to be written into the file.") InputStream content) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.path != null) {
-      requestParameters.put(PATH, parameters.path);
+      requestParameters.put(PATH, parameters.getPath());
     }
 
     requestParameters.put(MKDIR_PARENTS, true);
@@ -536,7 +536,7 @@ public class FilesComOperations {
   public void deleteFile(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Delete parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.path != null) {
-      requestParameters.put(PATH, parameters.path);
+      requestParameters.put(PATH, parameters.getPath());
     }
 
     connection.deleteFile(requestParameters);
@@ -551,7 +551,7 @@ public class FilesComOperations {
   public FileModel showFile(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Show parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.path != null) {
-      requestParameters.put(PATH, parameters.path);
+      requestParameters.put(PATH, parameters.getPath());
     }
 
     return new FileModel(connection.findFile(requestParameters));
@@ -566,11 +566,11 @@ public class FilesComOperations {
   public FileActionModel copyFile(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Copy parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.path != null) {
-      requestParameters.put(PATH, parameters.path);
+      requestParameters.put(PATH, parameters.getPath());
     }
 
     if (parameters.destination != null) {
-      requestParameters.put(DESTINATION, parameters.destination);
+      requestParameters.put(DESTINATION, parameters.getDestination());
     }
 
     return new FileActionModel(connection.copyFile(requestParameters));
@@ -585,11 +585,11 @@ public class FilesComOperations {
   public FileActionModel moveFile(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Move parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.path != null) {
-      requestParameters.put(PATH, parameters.path);
+      requestParameters.put(PATH, parameters.getPath());
     }
 
     if (parameters.destination != null) {
-      requestParameters.put(DESTINATION, parameters.destination);
+      requestParameters.put(DESTINATION, parameters.getDestination());
     }
 
     return new FileActionModel(connection.moveFile(requestParameters));
@@ -611,7 +611,7 @@ public class FilesComOperations {
         if (iterator == null) {
           final HashMap<String, Object> requestParameters = new HashMap<>();
           if (parameters.path != null) {
-            requestParameters.put(PATH, parameters.path);
+            requestParameters.put(PATH, parameters.getPath());
           }
 
           LOGGER.debug("Loading first page of Folders...");
@@ -650,7 +650,7 @@ public class FilesComOperations {
   public FolderModel createFolder(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FolderParameterGroup.Create parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.path != null) {
-      requestParameters.put(PATH, parameters.path);
+      requestParameters.put(PATH, parameters.getPath());
     }
 
     requestParameters.put(MKDIR_PARENTS, true);
@@ -748,7 +748,7 @@ public class FilesComOperations {
   public GroupModel showGroup(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") GroupParameterGroup.Show parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.id != null) {
-      requestParameters.put(ID, parameters.id);
+      requestParameters.put(ID, parameters.getId());
     }
 
     return new GroupModel(connection.findGroup(requestParameters));
@@ -763,19 +763,19 @@ public class FilesComOperations {
   public GroupModel createGroup(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") GroupParameterGroup.Create parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.name != null) {
-      requestParameters.put(NAME, parameters.name);
+      requestParameters.put(NAME, parameters.getName());
     }
 
     if (parameters.notes != null) {
-      requestParameters.put(NOTES, parameters.notes);
+      requestParameters.put(NOTES, parameters.getNotes());
     }
 
     if (parameters.userIds != null) {
-      requestParameters.put(USER_IDS, parameters.userIds);
+      requestParameters.put(USER_IDS, parameters.getUserIds());
     }
 
     if (parameters.adminIds != null) {
-      requestParameters.put(ADMIN_IDS, parameters.adminIds);
+      requestParameters.put(ADMIN_IDS, parameters.getAdminIds());
     }
 
     return new GroupModel(connection.createGroup(requestParameters));
@@ -790,23 +790,23 @@ public class FilesComOperations {
   public GroupModel updateGroup(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") GroupParameterGroup.Update parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.id != null) {
-      requestParameters.put(ID, parameters.id);
+      requestParameters.put(ID, parameters.getId());
     }
 
     if (parameters.notes != null) {
-      requestParameters.put(NOTES, parameters.notes);
+      requestParameters.put(NOTES, parameters.getNotes());
     }
 
     if (parameters.userIds != null) {
-      requestParameters.put(USER_IDS, parameters.userIds);
+      requestParameters.put(USER_IDS, parameters.getUserIds());
     }
 
     if (parameters.adminIds != null) {
-      requestParameters.put(ADMIN_IDS, parameters.adminIds);
+      requestParameters.put(ADMIN_IDS, parameters.getAdminIds());
     }
 
     if (parameters.name != null) {
-      requestParameters.put(NAME, parameters.name);
+      requestParameters.put(NAME, parameters.getName());
     }
 
     return new GroupModel(connection.updateGroup(requestParameters));
@@ -820,7 +820,7 @@ public class FilesComOperations {
   public void deleteGroup(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") GroupParameterGroup.Delete parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.id != null) {
-      requestParameters.put(ID, parameters.id);
+      requestParameters.put(ID, parameters.getId());
     }
 
     connection.deleteGroup(requestParameters);
@@ -878,7 +878,7 @@ public class FilesComOperations {
   public UserModel showUser(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") UserParameterGroup.Show parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.id != null) {
-      requestParameters.put(ID, parameters.id);
+      requestParameters.put(ID, parameters.getId());
     }
 
     return new UserModel(connection.findUser(requestParameters));
@@ -893,44 +893,44 @@ public class FilesComOperations {
   public UserModel createUser(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") UserParameterGroup.Create parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.username != null) {
-      requestParameters.put(USERNAME, parameters.username);
+      requestParameters.put(USERNAME, parameters.getUsername());
     }
 
     if (parameters.email != null) {
-      requestParameters.put(EMAIL, parameters.email);
+      requestParameters.put(EMAIL, parameters.getEmail());
     }
 
     if (parameters.groupIds != null) {
-      requestParameters.put(GROUP_IDS, parameters.groupIds);
+      requestParameters.put(GROUP_IDS, parameters.getGroupIds());
     }
 
     if (parameters.password != null) {
-      requestParameters.put(PASSWORD, parameters.password);
+      requestParameters.put(PASSWORD, parameters.getPassword());
     }
 
     if (parameters.authenticationMethod != null) {
-      requestParameters.put(AUTHENTICATION_METHOD, parameters.authenticationMethod);
+      requestParameters.put(AUTHENTICATION_METHOD, parameters.getAuthenticationMethod());
     }
 
     if (parameters.name != null) {
-      requestParameters.put(NAME, parameters.name);
+      requestParameters.put(NAME, parameters.getName());
     }
 
     if (parameters.company != null) {
-      requestParameters.put(COMPANY, parameters.company);
+      requestParameters.put(COMPANY, parameters.getCompany());
     }
 
     if (parameters.notes != null) {
-      requestParameters.put(NOTES, parameters.notes);
+      requestParameters.put(NOTES, parameters.getNotes());
     }
 
-    requestParameters.put(REQUIRE_PASSWORD_CHANGE, parameters.requirePasswordChange);
+    requestParameters.put(REQUIRE_PASSWORD_CHANGE, parameters.getRequirePasswordChange());
     if (parameters.userRoot != null) {
-      requestParameters.put(USER_ROOT, parameters.userRoot);
+      requestParameters.put(USER_ROOT, parameters.getUserRoot());
     }
 
     if (parameters.userHome != null) {
-      requestParameters.put(USER_HOME, parameters.userHome);
+      requestParameters.put(USER_HOME, parameters.getUserHome());
     }
 
     requestParameters.put(DAV_PERMISSION, true);
@@ -949,48 +949,48 @@ public class FilesComOperations {
   public UserModel updateUser(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") UserParameterGroup.Update parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.id != null) {
-      requestParameters.put(ID, parameters.id);
+      requestParameters.put(ID, parameters.getId());
     }
 
     if (parameters.email != null) {
-      requestParameters.put(EMAIL, parameters.email);
+      requestParameters.put(EMAIL, parameters.getEmail());
     }
 
     if (parameters.groupIds != null) {
-      requestParameters.put(GROUP_IDS, parameters.groupIds);
+      requestParameters.put(GROUP_IDS, parameters.getGroupIds());
     }
 
     if (parameters.password != null) {
-      requestParameters.put(PASSWORD, parameters.password);
+      requestParameters.put(PASSWORD, parameters.getPassword());
     }
 
     if (parameters.authenticationMethod != null) {
-      requestParameters.put(AUTHENTICATION_METHOD, parameters.authenticationMethod);
+      requestParameters.put(AUTHENTICATION_METHOD, parameters.getAuthenticationMethod());
     }
 
     if (parameters.name != null) {
-      requestParameters.put(NAME, parameters.name);
+      requestParameters.put(NAME, parameters.getName());
     }
 
     if (parameters.company != null) {
-      requestParameters.put(COMPANY, parameters.company);
+      requestParameters.put(COMPANY, parameters.getCompany());
     }
 
     if (parameters.notes != null) {
-      requestParameters.put(NOTES, parameters.notes);
+      requestParameters.put(NOTES, parameters.getNotes());
     }
 
-    requestParameters.put(REQUIRE_PASSWORD_CHANGE, parameters.requirePasswordChange);
+    requestParameters.put(REQUIRE_PASSWORD_CHANGE, parameters.getRequirePasswordChange());
     if (parameters.userRoot != null) {
-      requestParameters.put(USER_ROOT, parameters.userRoot);
+      requestParameters.put(USER_ROOT, parameters.getUserRoot());
     }
 
     if (parameters.userHome != null) {
-      requestParameters.put(USER_HOME, parameters.userHome);
+      requestParameters.put(USER_HOME, parameters.getUserHome());
     }
 
     if (parameters.username != null) {
-      requestParameters.put(USERNAME, parameters.username);
+      requestParameters.put(USERNAME, parameters.getUsername());
     }
 
     requestParameters.put(DAV_PERMISSION, true);
@@ -1008,7 +1008,7 @@ public class FilesComOperations {
   public void deleteUser(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") UserParameterGroup.Delete parameters) {
     final HashMap<String, Object> requestParameters = new HashMap<>();
     if (parameters.id != null) {
-      requestParameters.put(ID, parameters.id);
+      requestParameters.put(ID, parameters.getId());
     }
 
     connection.deleteUser(requestParameters);

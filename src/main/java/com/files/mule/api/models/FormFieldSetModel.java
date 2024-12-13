@@ -37,10 +37,18 @@ public class FormFieldSetModel implements Serializable {
     return id;
   }
 
+  public void setId(final Long id) {
+    this.id = id;
+  }
+
   private String title;
 
   public String getTitle() {
     return title;
+  }
+
+  public void setTitle(final String title) {
+    this.title = title;
   }
 
   private List<Long> formLayouts;
@@ -49,10 +57,18 @@ public class FormFieldSetModel implements Serializable {
     return formLayouts;
   }
 
+  public void setFormLayouts(final List<Long> formLayouts) {
+    this.formLayouts = formLayouts;
+  }
+
   private boolean skipName;
 
   public boolean getSkipName() {
     return skipName;
+  }
+
+  public void setSkipName(final boolean skipName) {
+    this.skipName = skipName;
   }
 
   private boolean skipEmail;
@@ -61,16 +77,28 @@ public class FormFieldSetModel implements Serializable {
     return skipEmail;
   }
 
+  public void setSkipEmail(final boolean skipEmail) {
+    this.skipEmail = skipEmail;
+  }
+
   private boolean skipCompany;
 
   public boolean getSkipCompany() {
     return skipCompany;
   }
 
+  public void setSkipCompany(final boolean skipCompany) {
+    this.skipCompany = skipCompany;
+  }
+
   private Long userId;
 
   public Long getUserId() {
     return userId;
+  }
+
+  public void setUserId(final Long userId) {
+    this.userId = userId;
   }
 
 }

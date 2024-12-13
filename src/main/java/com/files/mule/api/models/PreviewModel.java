@@ -19,7 +19,7 @@ public class PreviewModel implements Serializable {
     this.id = preview.id;
     this.status = preview.status;
     this.downloadUri = preview.downloadUri;
-    this.type = preview.type;
+    this.previewType = preview.type;
     this.size = preview.size;
   }
 
@@ -29,10 +29,18 @@ public class PreviewModel implements Serializable {
     return id;
   }
 
+  public void setId(final Long id) {
+    this.id = id;
+  }
+
   private String status;
 
   public String getStatus() {
     return status;
+  }
+
+  public void setStatus(final String status) {
+    this.status = status;
   }
 
   private String downloadUri;
@@ -41,16 +49,28 @@ public class PreviewModel implements Serializable {
     return downloadUri;
   }
 
-  private String type;
+  public void setDownloadUri(final String downloadUri) {
+    this.downloadUri = downloadUri;
+  }
 
-  public String getType() {
-    return type;
+  private String previewType;
+
+  public String getPreviewType() {
+    return previewType;
+  }
+
+  public void setPreviewType(final String previewType) {
+    this.previewType = previewType;
   }
 
   private String size;
 
   public String getSize() {
     return size;
+  }
+
+  public void setSize(final String size) {
+    this.size = size;
   }
 
 }

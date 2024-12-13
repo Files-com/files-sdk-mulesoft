@@ -18,7 +18,7 @@ public class FilesComOperationsTestCase extends MuleArtifactFunctionalTestCase {
 
   @Test
   public void testFlows() throws Exception {
-    final String[] flowNames = new String[]{"ShareLinkFlow", "FileFlow", "FolderFlow", "GroupFlow", "UserFlow", "listShareLinksFlow", "showShareLinkFlow", "createShareLinkFlow", "updateShareLinkFlow", "deleteShareLinkFlow", "listShareLinkDownloadsFlow", "listShareLinkNotificationsFlow", "showShareLinkNotificationFlow", "createShareLinkNotificationFlow", "updateShareLinkNotificationFlow", "deleteShareLinkNotificationFlow", "listShareLinkRecipientsFlow", "createShareLinkRecipientFlow", "listShareLinkRegistrationsFlow", "downloadFileFlow", "deleteFileFlow", "showFileFlow", "copyFileFlow", "moveFileFlow", "listFoldersFlow", "createFolderFlow", "deleteFolderFlow", "showFolderFlow", "copyFolderFlow", "moveFolderFlow", "listGroupsFlow", "showGroupFlow", "createGroupFlow", "updateGroupFlow", "deleteGroupFlow", "listUsersFlow", "showUserFlow", "createUserFlow", "updateUserFlow", "deleteUserFlow"};
+    final String[] flowNames = new String[]{"ShareLinkFlow", "FileFlow", "FolderFlow", "GroupFlow", "UserFlow"};
     for (final String flowName : flowNames) {
       try {
         final Optional<Error> error = flowRunner(flowName).run().getError();

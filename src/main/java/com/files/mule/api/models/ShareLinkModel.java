@@ -96,10 +96,18 @@ public class ShareLinkModel implements Serializable {
     return code;
   }
 
+  public void setCode(final String code) {
+    this.code = code;
+  }
+
   private String colorLeft;
 
   public String getColorLeft() {
     return colorLeft;
+  }
+
+  public void setColorLeft(final String colorLeft) {
+    this.colorLeft = colorLeft;
   }
 
   private String colorLink;
@@ -108,10 +116,18 @@ public class ShareLinkModel implements Serializable {
     return colorLink;
   }
 
+  public void setColorLink(final String colorLink) {
+    this.colorLink = colorLink;
+  }
+
   private String colorText;
 
   public String getColorText() {
     return colorText;
+  }
+
+  public void setColorText(final String colorText) {
+    this.colorText = colorText;
   }
 
   private String colorTop;
@@ -120,10 +136,18 @@ public class ShareLinkModel implements Serializable {
     return colorTop;
   }
 
+  public void setColorTop(final String colorTop) {
+    this.colorTop = colorTop;
+  }
+
   private String colorTopText;
 
   public String getColorTopText() {
     return colorTopText;
+  }
+
+  public void setColorTopText(final String colorTopText) {
+    this.colorTopText = colorTopText;
   }
 
   private String url;
@@ -132,10 +156,18 @@ public class ShareLinkModel implements Serializable {
     return url;
   }
 
+  public void setUrl(final String url) {
+    this.url = url;
+  }
+
   private String description;
 
   public String getDescription() {
     return description;
+  }
+
+  public void setDescription(final String description) {
+    this.description = description;
   }
 
   private ZonedDateTime expiresAt;
@@ -144,10 +176,18 @@ public class ShareLinkModel implements Serializable {
     return expiresAt;
   }
 
+  public void setExpiresAt(final ZonedDateTime expiresAt) {
+    this.expiresAt = expiresAt;
+  }
+
   private boolean passwordProtected;
 
   public boolean getPasswordProtected() {
     return passwordProtected;
+  }
+
+  public void setPasswordProtected(final boolean passwordProtected) {
+    this.passwordProtected = passwordProtected;
   }
 
   private String permissions;
@@ -156,10 +196,18 @@ public class ShareLinkModel implements Serializable {
     return permissions;
   }
 
+  public void setPermissions(final String permissions) {
+    this.permissions = permissions;
+  }
+
   private boolean previewOnly;
 
   public boolean getPreviewOnly() {
     return previewOnly;
+  }
+
+  public void setPreviewOnly(final boolean previewOnly) {
+    this.previewOnly = previewOnly;
   }
 
   private boolean requireRegistration;
@@ -168,10 +216,18 @@ public class ShareLinkModel implements Serializable {
     return requireRegistration;
   }
 
+  public void setRequireRegistration(final boolean requireRegistration) {
+    this.requireRegistration = requireRegistration;
+  }
+
   private boolean requireShareRecipient;
 
   public boolean getRequireShareRecipient() {
     return requireShareRecipient;
+  }
+
+  public void setRequireShareRecipient(final boolean requireShareRecipient) {
+    this.requireShareRecipient = requireShareRecipient;
   }
 
   private boolean requireLogout;
@@ -180,10 +236,18 @@ public class ShareLinkModel implements Serializable {
     return requireLogout;
   }
 
+  public void setRequireLogout(final boolean requireLogout) {
+    this.requireLogout = requireLogout;
+  }
+
   private String clickwrapBody;
 
   public String getClickwrapBody() {
     return clickwrapBody;
+  }
+
+  public void setClickwrapBody(final String clickwrapBody) {
+    this.clickwrapBody = clickwrapBody;
   }
 
   private FormFieldSetModel formFieldSet;
@@ -192,10 +256,18 @@ public class ShareLinkModel implements Serializable {
     return formFieldSet;
   }
 
+  public void setFormFieldSet(final FormFieldSetModel formFieldSet) {
+    this.formFieldSet = formFieldSet;
+  }
+
   private boolean skipName;
 
   public boolean getSkipName() {
     return skipName;
+  }
+
+  public void setSkipName(final boolean skipName) {
+    this.skipName = skipName;
   }
 
   private boolean skipEmail;
@@ -204,10 +276,18 @@ public class ShareLinkModel implements Serializable {
     return skipEmail;
   }
 
+  public void setSkipEmail(final boolean skipEmail) {
+    this.skipEmail = skipEmail;
+  }
+
   private ZonedDateTime startAccessOnDate;
 
   public ZonedDateTime getStartAccessOnDate() {
     return startAccessOnDate;
+  }
+
+  public void setStartAccessOnDate(final ZonedDateTime startAccessOnDate) {
+    this.startAccessOnDate = startAccessOnDate;
   }
 
   private boolean skipCompany;
@@ -216,10 +296,18 @@ public class ShareLinkModel implements Serializable {
     return skipCompany;
   }
 
+  public void setSkipCompany(final boolean skipCompany) {
+    this.skipCompany = skipCompany;
+  }
+
   private Long id;
 
   public Long getId() {
     return id;
+  }
+
+  public void setId(final Long id) {
+    this.id = id;
   }
 
   private ZonedDateTime createdAt;
@@ -228,10 +316,18 @@ public class ShareLinkModel implements Serializable {
     return createdAt;
   }
 
+  public void setCreatedAt(final ZonedDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
   private boolean dontSeparateSubmissionsByFolder;
 
   public boolean getDontSeparateSubmissionsByFolder() {
     return dontSeparateSubmissionsByFolder;
+  }
+
+  public void setDontSeparateSubmissionsByFolder(final boolean dontSeparateSubmissionsByFolder) {
+    this.dontSeparateSubmissionsByFolder = dontSeparateSubmissionsByFolder;
   }
 
   private Long maxUses;
@@ -240,10 +336,18 @@ public class ShareLinkModel implements Serializable {
     return maxUses;
   }
 
+  public void setMaxUses(final Long maxUses) {
+    this.maxUses = maxUses;
+  }
+
   private String note;
 
   public String getNote() {
     return note;
+  }
+
+  public void setNote(final String note) {
+    this.note = note;
   }
 
   private String pathTemplate;
@@ -252,10 +356,18 @@ public class ShareLinkModel implements Serializable {
     return pathTemplate;
   }
 
+  public void setPathTemplate(final String pathTemplate) {
+    this.pathTemplate = pathTemplate;
+  }
+
   private String pathTemplateTimeZone;
 
   public String getPathTemplateTimeZone() {
     return pathTemplateTimeZone;
+  }
+
+  public void setPathTemplateTimeZone(final String pathTemplateTimeZone) {
+    this.pathTemplateTimeZone = pathTemplateTimeZone;
   }
 
   private boolean sendEmailReceiptToUploader;
@@ -264,10 +376,18 @@ public class ShareLinkModel implements Serializable {
     return sendEmailReceiptToUploader;
   }
 
+  public void setSendEmailReceiptToUploader(final boolean sendEmailReceiptToUploader) {
+    this.sendEmailReceiptToUploader = sendEmailReceiptToUploader;
+  }
+
   private Long snapshotId;
 
   public Long getSnapshotId() {
     return snapshotId;
+  }
+
+  public void setSnapshotId(final Long snapshotId) {
+    this.snapshotId = snapshotId;
   }
 
   private Long userId;
@@ -276,10 +396,18 @@ public class ShareLinkModel implements Serializable {
     return userId;
   }
 
+  public void setUserId(final Long userId) {
+    this.userId = userId;
+  }
+
   private String username;
 
   public String getUsername() {
     return username;
+  }
+
+  public void setUsername(final String username) {
+    this.username = username;
   }
 
   private Long clickwrapId;
@@ -288,10 +416,18 @@ public class ShareLinkModel implements Serializable {
     return clickwrapId;
   }
 
+  public void setClickwrapId(final Long clickwrapId) {
+    this.clickwrapId = clickwrapId;
+  }
+
   private Long inboxId;
 
   public Long getInboxId() {
     return inboxId;
+  }
+
+  public void setInboxId(final Long inboxId) {
+    this.inboxId = inboxId;
   }
 
   private ImageModel watermarkAttachment;
@@ -300,10 +436,18 @@ public class ShareLinkModel implements Serializable {
     return watermarkAttachment;
   }
 
+  public void setWatermarkAttachment(final ImageModel watermarkAttachment) {
+    this.watermarkAttachment = watermarkAttachment;
+  }
+
   private Map<String, String> watermarkValue;
 
   public Map<String, String> getWatermarkValue() {
     return watermarkValue;
+  }
+
+  public void setWatermarkValue(final Map<String, String> watermarkValue) {
+    this.watermarkValue = watermarkValue;
   }
 
   private boolean hasInbox;
@@ -312,10 +456,18 @@ public class ShareLinkModel implements Serializable {
     return hasInbox;
   }
 
+  public void setHasInbox(final boolean hasInbox) {
+    this.hasInbox = hasInbox;
+  }
+
   private boolean dontAllowFoldersInUploads;
 
   public boolean getDontAllowFoldersInUploads() {
     return dontAllowFoldersInUploads;
+  }
+
+  public void setDontAllowFoldersInUploads(final boolean dontAllowFoldersInUploads) {
+    this.dontAllowFoldersInUploads = dontAllowFoldersInUploads;
   }
 
   private List<String> paths;
@@ -324,10 +476,18 @@ public class ShareLinkModel implements Serializable {
     return paths;
   }
 
+  public void setPaths(final List<String> paths) {
+    this.paths = paths;
+  }
+
   private String password;
 
   public String getPassword() {
     return password;
+  }
+
+  public void setPassword(final String password) {
+    this.password = password;
   }
 
   private Long formFieldSetId;
@@ -336,10 +496,18 @@ public class ShareLinkModel implements Serializable {
     return formFieldSetId;
   }
 
+  public void setFormFieldSetId(final Long formFieldSetId) {
+    this.formFieldSetId = formFieldSetId;
+  }
+
   private boolean createSnapshot;
 
   public boolean getCreateSnapshot() {
     return createSnapshot;
+  }
+
+  public void setCreateSnapshot(final boolean createSnapshot) {
+    this.createSnapshot = createSnapshot;
   }
 
   private boolean finalizeSnapshot;
@@ -348,10 +516,18 @@ public class ShareLinkModel implements Serializable {
     return finalizeSnapshot;
   }
 
+  public void setFinalizeSnapshot(final boolean finalizeSnapshot) {
+    this.finalizeSnapshot = finalizeSnapshot;
+  }
+
   private boolean watermarkAttachmentDelete;
 
   public boolean getWatermarkAttachmentDelete() {
     return watermarkAttachmentDelete;
+  }
+
+  public void setWatermarkAttachmentDelete(final boolean watermarkAttachmentDelete) {
+    this.watermarkAttachmentDelete = watermarkAttachmentDelete;
   }
 
 }

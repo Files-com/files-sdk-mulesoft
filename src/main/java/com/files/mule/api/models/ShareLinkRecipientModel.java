@@ -35,10 +35,18 @@ public class ShareLinkRecipientModel implements Serializable {
     return company;
   }
 
+  public void setCompany(final String company) {
+    this.company = company;
+  }
+
   private String name;
 
   public String getName() {
     return name;
+  }
+
+  public void setName(final String name) {
+    this.name = name;
   }
 
   private String note;
@@ -47,10 +55,18 @@ public class ShareLinkRecipientModel implements Serializable {
     return note;
   }
 
+  public void setNote(final String note) {
+    this.note = note;
+  }
+
   private String recipient;
 
   public String getRecipient() {
     return recipient;
+  }
+
+  public void setRecipient(final String recipient) {
+    this.recipient = recipient;
   }
 
   private ZonedDateTime sentAt;
@@ -59,16 +75,28 @@ public class ShareLinkRecipientModel implements Serializable {
     return sentAt;
   }
 
+  public void setSentAt(final ZonedDateTime sentAt) {
+    this.sentAt = sentAt;
+  }
+
   private Long bundleId;
 
   public Long getBundleId() {
     return bundleId;
   }
 
+  public void setBundleId(final Long bundleId) {
+    this.bundleId = bundleId;
+  }
+
   private boolean shareAfterCreate;
 
   public boolean getShareAfterCreate() {
     return shareAfterCreate;
+  }
+
+  public void setShareAfterCreate(final boolean shareAfterCreate) {
+    this.shareAfterCreate = shareAfterCreate;
   }
 
 }

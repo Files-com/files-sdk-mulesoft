@@ -133,10 +133,18 @@ public class UserModel implements Serializable {
     return id;
   }
 
+  public void setId(final Long id) {
+    this.id = id;
+  }
+
   private String username;
 
   public String getUsername() {
     return username;
+  }
+
+  public void setUsername(final String username) {
+    this.username = username;
   }
 
   private List<Long> adminGroupIds;
@@ -145,10 +153,18 @@ public class UserModel implements Serializable {
     return adminGroupIds;
   }
 
+  public void setAdminGroupIds(final List<Long> adminGroupIds) {
+    this.adminGroupIds = adminGroupIds;
+  }
+
   private String allowedIps;
 
   public String getAllowedIps() {
     return allowedIps;
+  }
+
+  public void setAllowedIps(final String allowedIps) {
+    this.allowedIps = allowedIps;
   }
 
   private boolean attachmentsPermission;
@@ -157,10 +173,18 @@ public class UserModel implements Serializable {
     return attachmentsPermission;
   }
 
+  public void setAttachmentsPermission(final boolean attachmentsPermission) {
+    this.attachmentsPermission = attachmentsPermission;
+  }
+
   private Long apiKeysCount;
 
   public Long getApiKeysCount() {
     return apiKeysCount;
+  }
+
+  public void setApiKeysCount(final Long apiKeysCount) {
+    this.apiKeysCount = apiKeysCount;
   }
 
   private ZonedDateTime authenticateUntil;
@@ -169,10 +193,18 @@ public class UserModel implements Serializable {
     return authenticateUntil;
   }
 
+  public void setAuthenticateUntil(final ZonedDateTime authenticateUntil) {
+    this.authenticateUntil = authenticateUntil;
+  }
+
   private String authenticationMethod;
 
   public String getAuthenticationMethod() {
     return authenticationMethod;
+  }
+
+  public void setAuthenticationMethod(final String authenticationMethod) {
+    this.authenticationMethod = authenticationMethod;
   }
 
   private String avatarUrl;
@@ -181,10 +213,18 @@ public class UserModel implements Serializable {
     return avatarUrl;
   }
 
+  public void setAvatarUrl(final String avatarUrl) {
+    this.avatarUrl = avatarUrl;
+  }
+
   private boolean billable;
 
   public boolean getBillable() {
     return billable;
+  }
+
+  public void setBillable(final boolean billable) {
+    this.billable = billable;
   }
 
   private boolean billingPermission;
@@ -193,10 +233,18 @@ public class UserModel implements Serializable {
     return billingPermission;
   }
 
+  public void setBillingPermission(final boolean billingPermission) {
+    this.billingPermission = billingPermission;
+  }
+
   private boolean bypassSiteAllowedIps;
 
   public boolean getBypassSiteAllowedIps() {
     return bypassSiteAllowedIps;
+  }
+
+  public void setBypassSiteAllowedIps(final boolean bypassSiteAllowedIps) {
+    this.bypassSiteAllowedIps = bypassSiteAllowedIps;
   }
 
   private boolean bypassInactiveDisable;
@@ -205,10 +253,18 @@ public class UserModel implements Serializable {
     return bypassInactiveDisable;
   }
 
+  public void setBypassInactiveDisable(final boolean bypassInactiveDisable) {
+    this.bypassInactiveDisable = bypassInactiveDisable;
+  }
+
   private ZonedDateTime createdAt;
 
   public ZonedDateTime getCreatedAt() {
     return createdAt;
+  }
+
+  public void setCreatedAt(final ZonedDateTime createdAt) {
+    this.createdAt = createdAt;
   }
 
   private boolean davPermission;
@@ -217,10 +273,18 @@ public class UserModel implements Serializable {
     return davPermission;
   }
 
+  public void setDavPermission(final boolean davPermission) {
+    this.davPermission = davPermission;
+  }
+
   private boolean disabled;
 
   public boolean getDisabled() {
     return disabled;
+  }
+
+  public void setDisabled(final boolean disabled) {
+    this.disabled = disabled;
   }
 
   private boolean disabledExpiredOrInactive;
@@ -229,10 +293,18 @@ public class UserModel implements Serializable {
     return disabledExpiredOrInactive;
   }
 
+  public void setDisabledExpiredOrInactive(final boolean disabledExpiredOrInactive) {
+    this.disabledExpiredOrInactive = disabledExpiredOrInactive;
+  }
+
   private String email;
 
   public String getEmail() {
     return email;
+  }
+
+  public void setEmail(final String email) {
+    this.email = email;
   }
 
   private ZonedDateTime firstLoginAt;
@@ -241,10 +313,18 @@ public class UserModel implements Serializable {
     return firstLoginAt;
   }
 
+  public void setFirstLoginAt(final ZonedDateTime firstLoginAt) {
+    this.firstLoginAt = firstLoginAt;
+  }
+
   private boolean ftpPermission;
 
   public boolean getFtpPermission() {
     return ftpPermission;
+  }
+
+  public void setFtpPermission(final boolean ftpPermission) {
+    this.ftpPermission = ftpPermission;
   }
 
   private String groupIds;
@@ -253,10 +333,18 @@ public class UserModel implements Serializable {
     return groupIds;
   }
 
+  public void setGroupIds(final String groupIds) {
+    this.groupIds = groupIds;
+  }
+
   private String headerText;
 
   public String getHeaderText() {
     return headerText;
+  }
+
+  public void setHeaderText(final String headerText) {
+    this.headerText = headerText;
   }
 
   private String language;
@@ -265,10 +353,18 @@ public class UserModel implements Serializable {
     return language;
   }
 
+  public void setLanguage(final String language) {
+    this.language = language;
+  }
+
   private ZonedDateTime lastLoginAt;
 
   public ZonedDateTime getLastLoginAt() {
     return lastLoginAt;
+  }
+
+  public void setLastLoginAt(final ZonedDateTime lastLoginAt) {
+    this.lastLoginAt = lastLoginAt;
   }
 
   private ZonedDateTime lastWebLoginAt;
@@ -277,10 +373,18 @@ public class UserModel implements Serializable {
     return lastWebLoginAt;
   }
 
+  public void setLastWebLoginAt(final ZonedDateTime lastWebLoginAt) {
+    this.lastWebLoginAt = lastWebLoginAt;
+  }
+
   private ZonedDateTime lastFtpLoginAt;
 
   public ZonedDateTime getLastFtpLoginAt() {
     return lastFtpLoginAt;
+  }
+
+  public void setLastFtpLoginAt(final ZonedDateTime lastFtpLoginAt) {
+    this.lastFtpLoginAt = lastFtpLoginAt;
   }
 
   private ZonedDateTime lastSftpLoginAt;
@@ -289,10 +393,18 @@ public class UserModel implements Serializable {
     return lastSftpLoginAt;
   }
 
+  public void setLastSftpLoginAt(final ZonedDateTime lastSftpLoginAt) {
+    this.lastSftpLoginAt = lastSftpLoginAt;
+  }
+
   private ZonedDateTime lastDavLoginAt;
 
   public ZonedDateTime getLastDavLoginAt() {
     return lastDavLoginAt;
+  }
+
+  public void setLastDavLoginAt(final ZonedDateTime lastDavLoginAt) {
+    this.lastDavLoginAt = lastDavLoginAt;
   }
 
   private ZonedDateTime lastDesktopLoginAt;
@@ -301,10 +413,18 @@ public class UserModel implements Serializable {
     return lastDesktopLoginAt;
   }
 
+  public void setLastDesktopLoginAt(final ZonedDateTime lastDesktopLoginAt) {
+    this.lastDesktopLoginAt = lastDesktopLoginAt;
+  }
+
   private ZonedDateTime lastRestapiLoginAt;
 
   public ZonedDateTime getLastRestapiLoginAt() {
     return lastRestapiLoginAt;
+  }
+
+  public void setLastRestapiLoginAt(final ZonedDateTime lastRestapiLoginAt) {
+    this.lastRestapiLoginAt = lastRestapiLoginAt;
   }
 
   private ZonedDateTime lastApiUseAt;
@@ -313,10 +433,18 @@ public class UserModel implements Serializable {
     return lastApiUseAt;
   }
 
+  public void setLastApiUseAt(final ZonedDateTime lastApiUseAt) {
+    this.lastApiUseAt = lastApiUseAt;
+  }
+
   private ZonedDateTime lastActiveAt;
 
   public ZonedDateTime getLastActiveAt() {
     return lastActiveAt;
+  }
+
+  public void setLastActiveAt(final ZonedDateTime lastActiveAt) {
+    this.lastActiveAt = lastActiveAt;
   }
 
   private String lastProtocolCipher;
@@ -325,10 +453,18 @@ public class UserModel implements Serializable {
     return lastProtocolCipher;
   }
 
+  public void setLastProtocolCipher(final String lastProtocolCipher) {
+    this.lastProtocolCipher = lastProtocolCipher;
+  }
+
   private ZonedDateTime lockoutExpires;
 
   public ZonedDateTime getLockoutExpires() {
     return lockoutExpires;
+  }
+
+  public void setLockoutExpires(final ZonedDateTime lockoutExpires) {
+    this.lockoutExpires = lockoutExpires;
   }
 
   private String name;
@@ -337,10 +473,18 @@ public class UserModel implements Serializable {
     return name;
   }
 
+  public void setName(final String name) {
+    this.name = name;
+  }
+
   private String company;
 
   public String getCompany() {
     return company;
+  }
+
+  public void setCompany(final String company) {
+    this.company = company;
   }
 
   private String notes;
@@ -349,10 +493,18 @@ public class UserModel implements Serializable {
     return notes;
   }
 
+  public void setNotes(final String notes) {
+    this.notes = notes;
+  }
+
   private Long notificationDailySendTime;
 
   public Long getNotificationDailySendTime() {
     return notificationDailySendTime;
+  }
+
+  public void setNotificationDailySendTime(final Long notificationDailySendTime) {
+    this.notificationDailySendTime = notificationDailySendTime;
   }
 
   private boolean officeIntegrationEnabled;
@@ -361,10 +513,18 @@ public class UserModel implements Serializable {
     return officeIntegrationEnabled;
   }
 
+  public void setOfficeIntegrationEnabled(final boolean officeIntegrationEnabled) {
+    this.officeIntegrationEnabled = officeIntegrationEnabled;
+  }
+
   private ZonedDateTime passwordSetAt;
 
   public ZonedDateTime getPasswordSetAt() {
     return passwordSetAt;
+  }
+
+  public void setPasswordSetAt(final ZonedDateTime passwordSetAt) {
+    this.passwordSetAt = passwordSetAt;
   }
 
   private Long passwordValidityDays;
@@ -373,10 +533,18 @@ public class UserModel implements Serializable {
     return passwordValidityDays;
   }
 
+  public void setPasswordValidityDays(final Long passwordValidityDays) {
+    this.passwordValidityDays = passwordValidityDays;
+  }
+
   private Long publicKeysCount;
 
   public Long getPublicKeysCount() {
     return publicKeysCount;
+  }
+
+  public void setPublicKeysCount(final Long publicKeysCount) {
+    this.publicKeysCount = publicKeysCount;
   }
 
   private boolean receiveAdminAlerts;
@@ -385,10 +553,18 @@ public class UserModel implements Serializable {
     return receiveAdminAlerts;
   }
 
+  public void setReceiveAdminAlerts(final boolean receiveAdminAlerts) {
+    this.receiveAdminAlerts = receiveAdminAlerts;
+  }
+
   private String require2fa;
 
   public String getRequire2fa() {
     return require2fa;
+  }
+
+  public void setRequire2fa(final String require2fa) {
+    this.require2fa = require2fa;
   }
 
   private ZonedDateTime requireLoginBy;
@@ -397,10 +573,18 @@ public class UserModel implements Serializable {
     return requireLoginBy;
   }
 
+  public void setRequireLoginBy(final ZonedDateTime requireLoginBy) {
+    this.requireLoginBy = requireLoginBy;
+  }
+
   private boolean active2fa;
 
   public boolean getActive2fa() {
     return active2fa;
+  }
+
+  public void setActive2fa(final boolean active2fa) {
+    this.active2fa = active2fa;
   }
 
   private boolean requirePasswordChange;
@@ -409,10 +593,18 @@ public class UserModel implements Serializable {
     return requirePasswordChange;
   }
 
+  public void setRequirePasswordChange(final boolean requirePasswordChange) {
+    this.requirePasswordChange = requirePasswordChange;
+  }
+
   private boolean passwordExpired;
 
   public boolean getPasswordExpired() {
     return passwordExpired;
+  }
+
+  public void setPasswordExpired(final boolean passwordExpired) {
+    this.passwordExpired = passwordExpired;
   }
 
   private boolean readonlySiteAdmin;
@@ -421,10 +613,18 @@ public class UserModel implements Serializable {
     return readonlySiteAdmin;
   }
 
+  public void setReadonlySiteAdmin(final boolean readonlySiteAdmin) {
+    this.readonlySiteAdmin = readonlySiteAdmin;
+  }
+
   private boolean restapiPermission;
 
   public boolean getRestapiPermission() {
     return restapiPermission;
+  }
+
+  public void setRestapiPermission(final boolean restapiPermission) {
+    this.restapiPermission = restapiPermission;
   }
 
   private boolean selfManaged;
@@ -433,10 +633,18 @@ public class UserModel implements Serializable {
     return selfManaged;
   }
 
+  public void setSelfManaged(final boolean selfManaged) {
+    this.selfManaged = selfManaged;
+  }
+
   private boolean sftpPermission;
 
   public boolean getSftpPermission() {
     return sftpPermission;
+  }
+
+  public void setSftpPermission(final boolean sftpPermission) {
+    this.sftpPermission = sftpPermission;
   }
 
   private boolean siteAdmin;
@@ -445,10 +653,18 @@ public class UserModel implements Serializable {
     return siteAdmin;
   }
 
+  public void setSiteAdmin(final boolean siteAdmin) {
+    this.siteAdmin = siteAdmin;
+  }
+
   private Long siteId;
 
   public Long getSiteId() {
     return siteId;
+  }
+
+  public void setSiteId(final Long siteId) {
+    this.siteId = siteId;
   }
 
   private boolean skipWelcomeScreen;
@@ -457,10 +673,18 @@ public class UserModel implements Serializable {
     return skipWelcomeScreen;
   }
 
+  public void setSkipWelcomeScreen(final boolean skipWelcomeScreen) {
+    this.skipWelcomeScreen = skipWelcomeScreen;
+  }
+
   private String encryptionRequired;
 
   public String getEncryptionRequired() {
     return encryptionRequired;
+  }
+
+  public void setEncryptionRequired(final String encryptionRequired) {
+    this.encryptionRequired = encryptionRequired;
   }
 
   private Long ssoStrategyId;
@@ -469,10 +693,18 @@ public class UserModel implements Serializable {
     return ssoStrategyId;
   }
 
+  public void setSsoStrategyId(final Long ssoStrategyId) {
+    this.ssoStrategyId = ssoStrategyId;
+  }
+
   private boolean subscribeToNewsletter;
 
   public boolean getSubscribeToNewsletter() {
     return subscribeToNewsletter;
+  }
+
+  public void setSubscribeToNewsletter(final boolean subscribeToNewsletter) {
+    this.subscribeToNewsletter = subscribeToNewsletter;
   }
 
   private boolean externallyManaged;
@@ -481,10 +713,18 @@ public class UserModel implements Serializable {
     return externallyManaged;
   }
 
+  public void setExternallyManaged(final boolean externallyManaged) {
+    this.externallyManaged = externallyManaged;
+  }
+
   private String timeZone;
 
   public String getTimeZone() {
     return timeZone;
+  }
+
+  public void setTimeZone(final String timeZone) {
+    this.timeZone = timeZone;
   }
 
   private String typeOf2fa;
@@ -493,10 +733,18 @@ public class UserModel implements Serializable {
     return typeOf2fa;
   }
 
+  public void setTypeOf2fa(final String typeOf2fa) {
+    this.typeOf2fa = typeOf2fa;
+  }
+
   private String typeOf2faForDisplay;
 
   public String getTypeOf2faForDisplay() {
     return typeOf2faForDisplay;
+  }
+
+  public void setTypeOf2faForDisplay(final String typeOf2faForDisplay) {
+    this.typeOf2faForDisplay = typeOf2faForDisplay;
   }
 
   private String userRoot;
@@ -505,10 +753,18 @@ public class UserModel implements Serializable {
     return userRoot;
   }
 
+  public void setUserRoot(final String userRoot) {
+    this.userRoot = userRoot;
+  }
+
   private String userHome;
 
   public String getUserHome() {
     return userHome;
+  }
+
+  public void setUserHome(final String userHome) {
+    this.userHome = userHome;
   }
 
   private Long daysRemainingUntilPasswordExpire;
@@ -517,10 +773,18 @@ public class UserModel implements Serializable {
     return daysRemainingUntilPasswordExpire;
   }
 
+  public void setDaysRemainingUntilPasswordExpire(final Long daysRemainingUntilPasswordExpire) {
+    this.daysRemainingUntilPasswordExpire = daysRemainingUntilPasswordExpire;
+  }
+
   private ZonedDateTime passwordExpireAt;
 
   public ZonedDateTime getPasswordExpireAt() {
     return passwordExpireAt;
+  }
+
+  public void setPasswordExpireAt(final ZonedDateTime passwordExpireAt) {
+    this.passwordExpireAt = passwordExpireAt;
   }
 
   private boolean avatarDelete;
@@ -529,10 +793,18 @@ public class UserModel implements Serializable {
     return avatarDelete;
   }
 
+  public void setAvatarDelete(final boolean avatarDelete) {
+    this.avatarDelete = avatarDelete;
+  }
+
   private String changePassword;
 
   public String getChangePassword() {
     return changePassword;
+  }
+
+  public void setChangePassword(final String changePassword) {
+    this.changePassword = changePassword;
   }
 
   private String changePasswordConfirmation;
@@ -541,10 +813,18 @@ public class UserModel implements Serializable {
     return changePasswordConfirmation;
   }
 
+  public void setChangePasswordConfirmation(final String changePasswordConfirmation) {
+    this.changePasswordConfirmation = changePasswordConfirmation;
+  }
+
   private String grantPermission;
 
   public String getGrantPermission() {
     return grantPermission;
+  }
+
+  public void setGrantPermission(final String grantPermission) {
+    this.grantPermission = grantPermission;
   }
 
   private Long groupId;
@@ -553,10 +833,18 @@ public class UserModel implements Serializable {
     return groupId;
   }
 
+  public void setGroupId(final Long groupId) {
+    this.groupId = groupId;
+  }
+
   private String importedPasswordHash;
 
   public String getImportedPasswordHash() {
     return importedPasswordHash;
+  }
+
+  public void setImportedPasswordHash(final String importedPasswordHash) {
+    this.importedPasswordHash = importedPasswordHash;
   }
 
   private String password;
@@ -565,16 +853,28 @@ public class UserModel implements Serializable {
     return password;
   }
 
+  public void setPassword(final String password) {
+    this.password = password;
+  }
+
   private String passwordConfirmation;
 
   public String getPasswordConfirmation() {
     return passwordConfirmation;
   }
 
+  public void setPasswordConfirmation(final String passwordConfirmation) {
+    this.passwordConfirmation = passwordConfirmation;
+  }
+
   private boolean announcementsRead;
 
   public boolean getAnnouncementsRead() {
     return announcementsRead;
+  }
+
+  public void setAnnouncementsRead(final boolean announcementsRead) {
+    this.announcementsRead = announcementsRead;
   }
 
 }

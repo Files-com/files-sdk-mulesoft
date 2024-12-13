@@ -61,361 +61,85 @@ public class FilesComConnection {
   }
 
   public ListIterator<Bundle> listBundle(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> Bundle.list(parameters, getRequestOptions()).loadNextPage());
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> Bundle.list(parameters, getRequestOptions()).loadNextPage());
   }
 
   public ListIterator<Bundle> listBundle(final ListIterator<Bundle> iterator) {
-    try {
-      return executeWithRegionRetry(() -> iterator.loadNextPage());
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> iterator.loadNextPage());
   }
 
   public Bundle findBundle(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> Bundle.find(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> Bundle.find(parameters, getRequestOptions()));
   }
 
   public Bundle createBundle(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> Bundle.create(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> Bundle.create(parameters, getRequestOptions()));
   }
 
   public Bundle updateBundle(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> Bundle.update(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> Bundle.update(parameters, getRequestOptions()));
   }
 
   public void deleteBundle(final HashMap<String, Object> parameters) {
-    try {
-      executeWithRegionRetry(_null -> Bundle.delete(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    executeWithRegionRetry(_null -> Bundle.delete(parameters, getRequestOptions()));
   }
 
   public ListIterator<BundleDownload> listBundleDownload(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> BundleDownload.list(parameters, getRequestOptions()).loadNextPage());
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> BundleDownload.list(parameters, getRequestOptions()).loadNextPage());
   }
 
   public ListIterator<BundleDownload> listBundleDownload(final ListIterator<BundleDownload> iterator) {
-    try {
-      return executeWithRegionRetry(() -> iterator.loadNextPage());
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> iterator.loadNextPage());
   }
 
   public ListIterator<BundleNotification> listBundleNotification(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> BundleNotification.list(parameters, getRequestOptions()).loadNextPage());
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> BundleNotification.list(parameters, getRequestOptions()).loadNextPage());
   }
 
   public ListIterator<BundleNotification> listBundleNotification(final ListIterator<BundleNotification> iterator) {
-    try {
-      return executeWithRegionRetry(() -> iterator.loadNextPage());
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> iterator.loadNextPage());
   }
 
   public BundleNotification findBundleNotification(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> BundleNotification.find(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> BundleNotification.find(parameters, getRequestOptions()));
   }
 
   public BundleNotification createBundleNotification(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> BundleNotification.create(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> BundleNotification.create(parameters, getRequestOptions()));
   }
 
   public BundleNotification updateBundleNotification(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> BundleNotification.update(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> BundleNotification.update(parameters, getRequestOptions()));
   }
 
   public void deleteBundleNotification(final HashMap<String, Object> parameters) {
-    try {
-      executeWithRegionRetry(_null -> BundleNotification.delete(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    executeWithRegionRetry(_null -> BundleNotification.delete(parameters, getRequestOptions()));
   }
 
   public ListIterator<BundleRecipient> listBundleRecipient(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> BundleRecipient.list(parameters, getRequestOptions()).loadNextPage());
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> BundleRecipient.list(parameters, getRequestOptions()).loadNextPage());
   }
 
   public ListIterator<BundleRecipient> listBundleRecipient(final ListIterator<BundleRecipient> iterator) {
-    try {
-      return executeWithRegionRetry(() -> iterator.loadNextPage());
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> iterator.loadNextPage());
   }
 
   public BundleRecipient createBundleRecipient(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> BundleRecipient.create(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> BundleRecipient.create(parameters, getRequestOptions()));
   }
 
   public ListIterator<BundleRegistration> listBundleRegistration(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> BundleRegistration.list(parameters, getRequestOptions()).loadNextPage());
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> BundleRegistration.list(parameters, getRequestOptions()).loadNextPage());
   }
 
   public ListIterator<BundleRegistration> listBundleRegistration(final ListIterator<BundleRegistration> iterator) {
-    try {
-      return executeWithRegionRetry(() -> iterator.loadNextPage());
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> iterator.loadNextPage());
   }
 
   public InputStream downloadFile(final HashMap<String, Object> parameters) {
     try {
       return executeWithRegionRetry(() -> File.download(parameters, getRequestOptions())).getInputStream();
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException | IOException e) {
+    } catch (final IOException e) {
       throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
@@ -423,364 +147,89 @@ public class FilesComConnection {
   public File createFile(final HashMap<String, Object> parameters, final InputStream content) {
     try {
       return executeWithRegionRetry(() -> File.create(parameters, getRequestOptions())).putInputStream(content, null, 1);
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException | IOException e) {
+    } catch (final IOException e) {
       throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     } catch (final InterruptedException e) { // Handle interruption, but it should never get thrown in this context
       Thread.currentThread().interrupt();
       throw new ModuleException("Upload was interrupted", FilesComErrorType.ARGUMENT, e);
     }
+
   }
 
   public void deleteFile(final HashMap<String, Object> parameters) {
-    try {
-      executeWithRegionRetry(_null -> File.delete(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    executeWithRegionRetry(_null -> File.delete(parameters, getRequestOptions()));
   }
 
   public File findFile(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> File.find(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> File.find(parameters, getRequestOptions()));
   }
 
   public FileAction copyFile(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> File.copy(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> File.copy(parameters, getRequestOptions()));
   }
 
   public FileAction moveFile(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> File.move(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> File.move(parameters, getRequestOptions()));
   }
 
   public ListIterator<File> listForFolder(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> Folder.listFor(parameters, getRequestOptions()).loadNextPage());
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> Folder.listFor(parameters, getRequestOptions()).loadNextPage());
   }
 
   public ListIterator<File> listForFolder(final ListIterator<File> iterator) {
-    try {
-      return executeWithRegionRetry(() -> iterator.loadNextPage());
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> iterator.loadNextPage());
   }
 
   public Folder createFolder(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> Folder.create(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> Folder.create(parameters, getRequestOptions()));
   }
 
   public ListIterator<Group> listGroup(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> Group.list(parameters, getRequestOptions()).loadNextPage());
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> Group.list(parameters, getRequestOptions()).loadNextPage());
   }
 
   public ListIterator<Group> listGroup(final ListIterator<Group> iterator) {
-    try {
-      return executeWithRegionRetry(() -> iterator.loadNextPage());
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> iterator.loadNextPage());
   }
 
   public Group findGroup(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> Group.find(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> Group.find(parameters, getRequestOptions()));
   }
 
   public Group createGroup(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> Group.create(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> Group.create(parameters, getRequestOptions()));
   }
 
   public Group updateGroup(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> Group.update(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> Group.update(parameters, getRequestOptions()));
   }
 
   public void deleteGroup(final HashMap<String, Object> parameters) {
-    try {
-      executeWithRegionRetry(_null -> Group.delete(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    executeWithRegionRetry(_null -> Group.delete(parameters, getRequestOptions()));
   }
 
   public ListIterator<User> listUser(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> User.list(parameters, getRequestOptions()).loadNextPage());
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> User.list(parameters, getRequestOptions()).loadNextPage());
   }
 
   public ListIterator<User> listUser(final ListIterator<User> iterator) {
-    try {
-      return executeWithRegionRetry(() -> iterator.loadNextPage());
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> iterator.loadNextPage());
   }
 
   public User findUser(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> User.find(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> User.find(parameters, getRequestOptions()));
   }
 
   public User createUser(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> User.create(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> User.create(parameters, getRequestOptions()));
   }
 
   public User updateUser(final HashMap<String, Object> parameters) {
-    try {
-      return executeWithRegionRetry(() -> User.update(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    return executeWithRegionRetry(() -> User.update(parameters, getRequestOptions()));
   }
 
   public void deleteUser(final HashMap<String, Object> parameters) {
-    try {
-      executeWithRegionRetry(_null -> User.delete(parameters, getRequestOptions()));
-    } catch (final ApiErrorException e) {
-      throw new ModuleException(getErrorType(e), e);
-    } catch (final AuthenticationException e) {
-      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
-    } catch (final ApiConnectionException e) {
-      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
-    } catch (final InvalidResponseException e) {
-      throw new ModuleException(FilesComErrorType.RESPONSE, e);
-    } catch (final ServerErrorException e) {
-      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
-    } catch (final IllegalArgumentException | NullPointerException e) {
-      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
-    }
+    executeWithRegionRetry(_null -> User.delete(parameters, getRequestOptions()));
   }
 
 
@@ -797,6 +246,18 @@ public class FilesComConnection {
     } catch (final LockoutRegionMismatchException e) {
       setApiRoot(e.getData().get("host").toString());
       return task.get();
+    } catch (final ApiErrorException e) {
+      throw new ModuleException(getErrorType(e), e);
+    } catch (final AuthenticationException e) {
+      throw new ModuleException(FilesComErrorType.NOT_AUTHENTICATED, e);
+    } catch (final ApiConnectionException e) {
+      throw new ModuleException(FilesComErrorType.CONNECTIVITY, e);
+    } catch (final InvalidResponseException e) {
+      throw new ModuleException(FilesComErrorType.RESPONSE, e);
+    } catch (final ServerErrorException e) {
+      throw new ModuleException(FilesComErrorType.SERVICE_UNAVAILABLE, e);
+    } catch (final IllegalArgumentException | NullPointerException e) {
+      throw new ModuleException(FilesComErrorType.ARGUMENT, e);
     }
   }
 

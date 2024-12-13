@@ -1,449 +1,82 @@
 <mule xmlns="http://www.mulesoft.org/schema/mule/core"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:filescom="http://www.mulesoft.org/schema/mule/filescom"
-    xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-                        http://www.mulesoft.org/schema/mule/filescom http://www.mulesoft.org/schema/mule/filescom/current/mule-filescom.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:filescom="http://www.mulesoft.org/schema/mule/filescom"
+  xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+                      http://www.mulesoft.org/schema/mule/filescom http://www.mulesoft.org/schema/mule/filescom/current/mule-filescom.xsd">
 
-    <global-property name="FILES_MOCK_SERVER_HOST" value="localhost"/>
-    <global-property name="FILES_MOCK_SERVER_PORT" value="4041"/>
-    <global-property name="baseUrl" value="http://${FILES_MOCK_SERVER_HOST}:${FILES_MOCK_SERVER_PORT}"/>
-    <global-property name="mockServer" value="true"/>
-    <configuration-properties file="automation-credentials.properties" />
+  <global-property name="FILES_MOCK_SERVER_HOST" value="localhost" />
+  <global-property name="FILES_MOCK_SERVER_PORT" value="4041" />
+  <global-property name="baseUrl" value="http://${FILES_MOCK_SERVER_HOST}:${FILES_MOCK_SERVER_PORT}" />
+  <global-property name="mockServer" value="true" />
+  <configuration-properties file="automation-credentials.properties" />
 
-    <filescom:config name="FilesCom">
-        <filescom:connection apiKey="${apiKey}" baseUrl="${baseUrl}" />
-    </filescom:config>
+  <filescom:config name="FilesCom">
+    <filescom:connection apiKey="${apiKey}" baseUrl="${baseUrl}" />
+  </filescom:config>
 
-    <flow name="ShareLinkFlow">
-        <filescom:list-share-links config-ref="FilesCom" />
-        <filescom:create-share-link config-ref="FilesCom"
-         paths='#[[""]]'
-         maxUses="1"
-         description="The public description of the bundle."
-         note="The internal note on the bundle."
-         requireRegistration="true"
-        />
-        <filescom:show-share-link config-ref="FilesCom" id="#[payload.id]" />
-        <filescom:update-share-link config-ref="FilesCom" id="#[payload.id]" />
-        <filescom:delete-share-link config-ref="FilesCom" id="#[payload.id]" />
-    </flow>
+  <flow name="ShareLinkFlow">
+    <filescom:create-share-link config-ref="FilesCom" paths='#[[""]]' />
+    <set-variable variableName="bundleId" value="#[payload.id]" />
 
-    <flow name="FileFlow">
-        <choice>
-            <when expression="#['${mockServer}' == 'false']">
-                <filescom:upload-file config-ref="FilesCom" path="file-path">
-                    <filescom:content ><![CDATA[yo]]></filescom:content>
-                </filescom:upload-file>
-            </when>
-        </choice>
-        <filescom:show-file config-ref="FilesCom" path="file-path" />
-        <filescom:download-file config-ref="FilesCom" path="file-path" />
-        <filescom:delete-file config-ref="FilesCom" path="file-path" />
-    </flow>
+    <filescom:show-share-link config-ref="FilesCom" id="#[vars.bundleId]" />
+    <filescom:update-share-link config-ref="FilesCom" id="#[vars.bundleId]" />
+    <filescom:list-share-links config-ref="FilesCom" />
 
-    <flow name="FolderFlow">
-        <filescom:create-folder config-ref="FilesCom" path="folder-path" />
-        <filescom:show-folder config-ref="FilesCom" path="folder-path" />
-        <filescom:list-folders config-ref="FilesCom" path="folder-path" />
-        <filescom:delete-folder config-ref="FilesCom" path="folder-path" />
-    </flow>
+    <filescom:list-share-link-notifications config-ref="FilesCom" />
+    <filescom:list-share-link-downloads config-ref="FilesCom" bundleId="#[vars.bundleId]" />
+    <filescom:list-share-link-recipients config-ref="FilesCom" bundleId="#[vars.bundleId]" />
+    <filescom:list-share-link-registrations config-ref="FilesCom" bundleId="#[vars.bundleId]" />
 
-    <flow name="GroupFlow">
-        <filescom:list-groups config-ref="FilesCom" />
-        <filescom:create-group config-ref="FilesCom"
-         name="name"
-         notes="example"
-        />
-        <filescom:show-group config-ref="FilesCom" id="#[payload.id]" />
-        <filescom:update-group config-ref="FilesCom" id="#[payload.id]"
-         notes="example"
-         name="owners"
-        />
-        <filescom:delete-group config-ref="FilesCom" id="#[payload.id]" />
-    </flow>
+    <filescom:delete-share-link config-ref="FilesCom" id="#[vars.bundleId]" />
+  </flow>
 
-    <flow name="UserFlow">
-        <filescom:list-users config-ref="FilesCom" />
-        <filescom:create-user config-ref="FilesCom"
-         username="john.doe"
-         authenticationMethod="password"
-         name="John Doe"
-         company="ACME Corp."
-         notes="Internal notes on this user."
-         requirePasswordChange="true"
-         userRoot="example"
-         userHome="example"
-        />
-        <filescom:show-user config-ref="FilesCom" id="#[payload.id]" />
-        <filescom:update-user config-ref="FilesCom" id="#[payload.id]"
-         username="john.doe"
-         authenticationMethod="password"
-         name="John Doe"
-         company="ACME Corp."
-         notes="Internal notes on this user."
-         requirePasswordChange="true"
-         userRoot="example"
-         userHome="example"
-        />
-        <filescom:delete-user config-ref="FilesCom" id="#[payload.id]" />
-    </flow>
+  <flow name="FileFlow">
+    <choice>
+      <when expression="#['${mockServer}' == 'false']">
+        <filescom:upload-file config-ref="FilesCom" path="file-path">
+          <filescom:content><![CDATA[yo]]></filescom:content>
+        </filescom:upload-file>
+      </when>
+    </choice>
+    <filescom:show-file config-ref="FilesCom" path="file-path" />
+    <filescom:download-file config-ref="FilesCom" path="file-path" />
+    <filescom:delete-file config-ref="FilesCom" path="file-path" />
+  </flow>
 
-    <flow name="listShareLinksFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:list-share-links config-ref="FilesCom" />
-        </when>
-      </choice>
-    </flow>
+  <flow name="FolderFlow">
+    <filescom:create-folder config-ref="FilesCom" path="folder-path" />
+    <filescom:show-folder config-ref="FilesCom" path="folder-path" />
+    <filescom:list-folders config-ref="FilesCom" path="folder-path" />
+    <filescom:delete-folder config-ref="FilesCom" path="folder-path" />
+  </flow>
 
-    <flow name="showShareLinkFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:show-share-link config-ref="FilesCom" id="1" />
-        </when>
-      </choice>
-    </flow>
+  <flow name="GroupFlow">
+    <filescom:create-group config-ref="FilesCom" name="name" />
+    <set-variable variableName="groupId" value="#[payload.id]" />
 
-    <flow name="createShareLinkFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:create-share-link config-ref="FilesCom"
-           paths='#[["file.txt"]]'
-           password="Password"
-           expiresAt="2000-01-01T01:00:00Z"
-           maxUses="1"
-           description="The public description of the bundle."
-           note="The internal note on the bundle."
-           requireRegistration="true"
-          />
-        </when>
-      </choice>
-    </flow>
+    <filescom:show-group config-ref="FilesCom" id="#[vars.groupId]" />
+    <filescom:update-group config-ref="FilesCom" id="#[vars.groupId]" notes="example" />
 
-    <flow name="updateShareLinkFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:update-share-link config-ref="FilesCom"
-           id="1"
-           expiresAt="2000-01-01T01:00:00Z"
-          />
-        </when>
-      </choice>
-    </flow>
+    <filescom:list-groups config-ref="FilesCom" />
+    <filescom:delete-group config-ref="FilesCom" id="#[vars.groupId]" />
+  </flow>
 
-    <flow name="deleteShareLinkFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:delete-share-link config-ref="FilesCom" id="1" />
-        </when>
-      </choice>
-    </flow>
+  <flow name="UserFlow">
+    <filescom:create-user config-ref="FilesCom"
+      username="john.doe"
+      authenticationMethod="password"
+      name="John Doe"
+      company="ACME Corp."
+      notes="Internal notes on this user."
+    />
+    <set-variable variableName="userId" value="#[payload.id]" />
 
-    <flow name="listShareLinkDownloadsFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:list-share-link-downloads config-ref="FilesCom" bundleId="1" />
-        </when>
-      </choice>
-    </flow>
+    <filescom:show-user config-ref="FilesCom" id="#[vars.userId]" />
+    <filescom:update-user config-ref="FilesCom" id="#[vars.userId]"
+      notes="Updated internal notes on this user."
+    />
 
-    <flow name="listShareLinkNotificationsFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:list-share-link-notifications config-ref="FilesCom" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="showShareLinkNotificationFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:show-share-link-notification config-ref="FilesCom" id="1" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="createShareLinkNotificationFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:create-share-link-notification config-ref="FilesCom"
-           bundleId="1"
-           userId="1"
-          />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="updateShareLinkNotificationFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:update-share-link-notification config-ref="FilesCom"
-           id="1"
-           notifyOnRegistration="true"
-           notifyOnUpload="true"
-          />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="deleteShareLinkNotificationFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:delete-share-link-notification config-ref="FilesCom" id="1" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="listShareLinkRecipientsFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:list-share-link-recipients config-ref="FilesCom" bundleId="1" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="createShareLinkRecipientFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:create-share-link-recipient config-ref="FilesCom"
-           bundleId="1"
-           recipient="johndoe@gmail.com"
-           name="John Smith"
-           company="Acme Ltd"
-           note="Just a note."
-          />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="listShareLinkRegistrationsFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:list-share-link-registrations config-ref="FilesCom" bundleId="1" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="downloadFileFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:download-file config-ref="FilesCom" path="path" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="uploadFileFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:upload-file config-ref="FilesCom" path="path" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="deleteFileFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:delete-file config-ref="FilesCom" path="path" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="showFileFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:show-file config-ref="FilesCom" path="path" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="copyFileFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:copy-file config-ref="FilesCom"
-           path="path"
-           destination="destination"
-          />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="moveFileFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:move-file config-ref="FilesCom"
-           path="path"
-           destination="destination"
-          />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="listFoldersFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:list-folders config-ref="FilesCom" path="path" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="createFolderFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:create-folder config-ref="FilesCom" path="path" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="deleteFolderFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:delete-folder config-ref="FilesCom" path="path" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="showFolderFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:show-folder config-ref="FilesCom" path="path" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="copyFolderFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:copy-folder config-ref="FilesCom"
-           path="path"
-           destination="destination"
-          />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="moveFolderFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:move-folder config-ref="FilesCom"
-           path="path"
-           destination="destination"
-          />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="listGroupsFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:list-groups config-ref="FilesCom" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="showGroupFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:show-group config-ref="FilesCom" id="1" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="createGroupFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:create-group config-ref="FilesCom"
-           name="name"
-           notes="example"
-           userIds="1"
-           adminIds="1"
-          />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="updateGroupFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:update-group config-ref="FilesCom"
-           id="1"
-           notes="example"
-           userIds="1"
-           adminIds="1"
-           name="owners"
-          />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="deleteGroupFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:delete-group config-ref="FilesCom" id="1" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="listUsersFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:list-users config-ref="FilesCom" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="showUserFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:show-user config-ref="FilesCom" id="1" />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="createUserFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:create-user config-ref="FilesCom"
-           username="user"
-           email="example"
-           groupIds="example"
-           authenticationMethod="password"
-           name="John Doe"
-           company="ACME Corp."
-           notes="Internal notes on this user."
-           requirePasswordChange="true"
-           userRoot="example"
-           userHome="example"
-          />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="updateUserFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:update-user config-ref="FilesCom"
-           id="1"
-           email="example"
-           groupIds="example"
-           authenticationMethod="password"
-           name="John Doe"
-           company="ACME Corp."
-           notes="Internal notes on this user."
-           requirePasswordChange="true"
-           userRoot="example"
-           userHome="example"
-           username="user"
-          />
-        </when>
-      </choice>
-    </flow>
-
-    <flow name="deleteUserFlow">
-      <choice>
-        <when expression="#['${mockServer}' != 'false']">
-          <filescom:delete-user config-ref="FilesCom" id="1" />
-        </when>
-      </choice>
-    </flow>
-
+    <filescom:list-users config-ref="FilesCom" />
+    <filescom:delete-user config-ref="FilesCom" id="#[vars.userId]" />
+  </flow>
 </mule>

@@ -34,7 +34,7 @@ public class FileModel implements Serializable {
 
   private void initGroup2(final File file) {
     this.displayName = file.displayName;
-    this.type = file.type;
+    this.fileType = file.type;
     this.size = file.size;
     this.createdAt = file.createdAt != null ? ZonedDateTime.ofInstant(file.createdAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastModifiedById = file.lastModifiedById;
@@ -86,10 +86,18 @@ public class FileModel implements Serializable {
     return path;
   }
 
+  public void setPath(final String path) {
+    this.path = path;
+  }
+
   private Long createdById;
 
   public Long getCreatedById() {
     return createdById;
+  }
+
+  public void setCreatedById(final Long createdById) {
+    this.createdById = createdById;
   }
 
   private Long createdByApiKeyId;
@@ -98,10 +106,18 @@ public class FileModel implements Serializable {
     return createdByApiKeyId;
   }
 
+  public void setCreatedByApiKeyId(final Long createdByApiKeyId) {
+    this.createdByApiKeyId = createdByApiKeyId;
+  }
+
   private Long createdByAs2IncomingMessageId;
 
   public Long getCreatedByAs2IncomingMessageId() {
     return createdByAs2IncomingMessageId;
+  }
+
+  public void setCreatedByAs2IncomingMessageId(final Long createdByAs2IncomingMessageId) {
+    this.createdByAs2IncomingMessageId = createdByAs2IncomingMessageId;
   }
 
   private Long createdByAutomationId;
@@ -110,10 +126,18 @@ public class FileModel implements Serializable {
     return createdByAutomationId;
   }
 
+  public void setCreatedByAutomationId(final Long createdByAutomationId) {
+    this.createdByAutomationId = createdByAutomationId;
+  }
+
   private Long createdByBundleRegistrationId;
 
   public Long getCreatedByBundleRegistrationId() {
     return createdByBundleRegistrationId;
+  }
+
+  public void setCreatedByBundleRegistrationId(final Long createdByBundleRegistrationId) {
+    this.createdByBundleRegistrationId = createdByBundleRegistrationId;
   }
 
   private Long createdByInboxId;
@@ -122,10 +146,18 @@ public class FileModel implements Serializable {
     return createdByInboxId;
   }
 
+  public void setCreatedByInboxId(final Long createdByInboxId) {
+    this.createdByInboxId = createdByInboxId;
+  }
+
   private Long createdByRemoteServerId;
 
   public Long getCreatedByRemoteServerId() {
     return createdByRemoteServerId;
+  }
+
+  public void setCreatedByRemoteServerId(final Long createdByRemoteServerId) {
+    this.createdByRemoteServerId = createdByRemoteServerId;
   }
 
   private Long createdByRemoteServerSyncId;
@@ -134,10 +166,18 @@ public class FileModel implements Serializable {
     return createdByRemoteServerSyncId;
   }
 
+  public void setCreatedByRemoteServerSyncId(final Long createdByRemoteServerSyncId) {
+    this.createdByRemoteServerSyncId = createdByRemoteServerSyncId;
+  }
+
   private Map<String, String> customMetadata;
 
   public Map<String, String> getCustomMetadata() {
     return customMetadata;
+  }
+
+  public void setCustomMetadata(final Map<String, String> customMetadata) {
+    this.customMetadata = customMetadata;
   }
 
   private String displayName;
@@ -146,10 +186,18 @@ public class FileModel implements Serializable {
     return displayName;
   }
 
-  private String type;
+  public void setDisplayName(final String displayName) {
+    this.displayName = displayName;
+  }
 
-  public String getType() {
-    return type;
+  private String fileType;
+
+  public String getFileType() {
+    return fileType;
+  }
+
+  public void setFileType(final String fileType) {
+    this.fileType = fileType;
   }
 
   private Long size;
@@ -158,10 +206,18 @@ public class FileModel implements Serializable {
     return size;
   }
 
+  public void setSize(final Long size) {
+    this.size = size;
+  }
+
   private ZonedDateTime createdAt;
 
   public ZonedDateTime getCreatedAt() {
     return createdAt;
+  }
+
+  public void setCreatedAt(final ZonedDateTime createdAt) {
+    this.createdAt = createdAt;
   }
 
   private Long lastModifiedById;
@@ -170,10 +226,18 @@ public class FileModel implements Serializable {
     return lastModifiedById;
   }
 
+  public void setLastModifiedById(final Long lastModifiedById) {
+    this.lastModifiedById = lastModifiedById;
+  }
+
   private Long lastModifiedByApiKeyId;
 
   public Long getLastModifiedByApiKeyId() {
     return lastModifiedByApiKeyId;
+  }
+
+  public void setLastModifiedByApiKeyId(final Long lastModifiedByApiKeyId) {
+    this.lastModifiedByApiKeyId = lastModifiedByApiKeyId;
   }
 
   private Long lastModifiedByAutomationId;
@@ -182,10 +246,18 @@ public class FileModel implements Serializable {
     return lastModifiedByAutomationId;
   }
 
+  public void setLastModifiedByAutomationId(final Long lastModifiedByAutomationId) {
+    this.lastModifiedByAutomationId = lastModifiedByAutomationId;
+  }
+
   private Long lastModifiedByBundleRegistrationId;
 
   public Long getLastModifiedByBundleRegistrationId() {
     return lastModifiedByBundleRegistrationId;
+  }
+
+  public void setLastModifiedByBundleRegistrationId(final Long lastModifiedByBundleRegistrationId) {
+    this.lastModifiedByBundleRegistrationId = lastModifiedByBundleRegistrationId;
   }
 
   private Long lastModifiedByRemoteServerId;
@@ -194,10 +266,18 @@ public class FileModel implements Serializable {
     return lastModifiedByRemoteServerId;
   }
 
+  public void setLastModifiedByRemoteServerId(final Long lastModifiedByRemoteServerId) {
+    this.lastModifiedByRemoteServerId = lastModifiedByRemoteServerId;
+  }
+
   private Long lastModifiedByRemoteServerSyncId;
 
   public Long getLastModifiedByRemoteServerSyncId() {
     return lastModifiedByRemoteServerSyncId;
+  }
+
+  public void setLastModifiedByRemoteServerSyncId(final Long lastModifiedByRemoteServerSyncId) {
+    this.lastModifiedByRemoteServerSyncId = lastModifiedByRemoteServerSyncId;
   }
 
   private ZonedDateTime mtime;
@@ -206,10 +286,18 @@ public class FileModel implements Serializable {
     return mtime;
   }
 
+  public void setMtime(final ZonedDateTime mtime) {
+    this.mtime = mtime;
+  }
+
   private ZonedDateTime providedMtime;
 
   public ZonedDateTime getProvidedMtime() {
     return providedMtime;
+  }
+
+  public void setProvidedMtime(final ZonedDateTime providedMtime) {
+    this.providedMtime = providedMtime;
   }
 
   private String crc32;
@@ -218,10 +306,18 @@ public class FileModel implements Serializable {
     return crc32;
   }
 
+  public void setCrc32(final String crc32) {
+    this.crc32 = crc32;
+  }
+
   private String md5;
 
   public String getMd5() {
     return md5;
+  }
+
+  public void setMd5(final String md5) {
+    this.md5 = md5;
   }
 
   private String sha1;
@@ -230,10 +326,18 @@ public class FileModel implements Serializable {
     return sha1;
   }
 
+  public void setSha1(final String sha1) {
+    this.sha1 = sha1;
+  }
+
   private String sha256;
 
   public String getSha256() {
     return sha256;
+  }
+
+  public void setSha256(final String sha256) {
+    this.sha256 = sha256;
   }
 
   private String mimeType;
@@ -242,10 +346,18 @@ public class FileModel implements Serializable {
     return mimeType;
   }
 
+  public void setMimeType(final String mimeType) {
+    this.mimeType = mimeType;
+  }
+
   private String region;
 
   public String getRegion() {
     return region;
+  }
+
+  public void setRegion(final String region) {
+    this.region = region;
   }
 
   private String permissions;
@@ -254,10 +366,18 @@ public class FileModel implements Serializable {
     return permissions;
   }
 
+  public void setPermissions(final String permissions) {
+    this.permissions = permissions;
+  }
+
   private boolean subfoldersLocked;
 
   public boolean getSubfoldersLocked() {
     return subfoldersLocked;
+  }
+
+  public void setSubfoldersLocked(final boolean subfoldersLocked) {
+    this.subfoldersLocked = subfoldersLocked;
   }
 
   private boolean isLocked;
@@ -266,10 +386,18 @@ public class FileModel implements Serializable {
     return isLocked;
   }
 
+  public void setIsLocked(final boolean isLocked) {
+    this.isLocked = isLocked;
+  }
+
   private String downloadUri;
 
   public String getDownloadUri() {
     return downloadUri;
+  }
+
+  public void setDownloadUri(final String downloadUri) {
+    this.downloadUri = downloadUri;
   }
 
   private String priorityColor;
@@ -278,10 +406,18 @@ public class FileModel implements Serializable {
     return priorityColor;
   }
 
+  public void setPriorityColor(final String priorityColor) {
+    this.priorityColor = priorityColor;
+  }
+
   private Long previewId;
 
   public Long getPreviewId() {
     return previewId;
+  }
+
+  public void setPreviewId(final Long previewId) {
+    this.previewId = previewId;
   }
 
   private PreviewModel preview;
@@ -290,10 +426,18 @@ public class FileModel implements Serializable {
     return preview;
   }
 
+  public void setPreview(final PreviewModel preview) {
+    this.preview = preview;
+  }
+
   private String action;
 
   public String getAction() {
     return action;
+  }
+
+  public void setAction(final String action) {
+    this.action = action;
   }
 
   private Long length;
@@ -302,10 +446,18 @@ public class FileModel implements Serializable {
     return length;
   }
 
+  public void setLength(final Long length) {
+    this.length = length;
+  }
+
   private boolean mkdirParents;
 
   public boolean getMkdirParents() {
     return mkdirParents;
+  }
+
+  public void setMkdirParents(final boolean mkdirParents) {
+    this.mkdirParents = mkdirParents;
   }
 
   private Long part;
@@ -314,10 +466,18 @@ public class FileModel implements Serializable {
     return part;
   }
 
+  public void setPart(final Long part) {
+    this.part = part;
+  }
+
   private Long parts;
 
   public Long getParts() {
     return parts;
+  }
+
+  public void setParts(final Long parts) {
+    this.parts = parts;
   }
 
   private String ref;
@@ -326,10 +486,18 @@ public class FileModel implements Serializable {
     return ref;
   }
 
+  public void setRef(final String ref) {
+    this.ref = ref;
+  }
+
   private Long restart;
 
   public Long getRestart() {
     return restart;
+  }
+
+  public void setRestart(final Long restart) {
+    this.restart = restart;
   }
 
   private String structure;
@@ -338,10 +506,18 @@ public class FileModel implements Serializable {
     return structure;
   }
 
+  public void setStructure(final String structure) {
+    this.structure = structure;
+  }
+
   private boolean withRename;
 
   public boolean getWithRename() {
     return withRename;
+  }
+
+  public void setWithRename(final boolean withRename) {
+    this.withRename = withRename;
   }
 
 }

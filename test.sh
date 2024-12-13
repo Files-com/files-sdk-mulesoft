@@ -15,4 +15,4 @@ if command -v jenv &> /dev/null; then
 fi
 mvn rewrite:run || exit 1
 mvn checkstyle:checkstyle || exit 1
-mvn test || exit 1
+mvn verify || exit 1

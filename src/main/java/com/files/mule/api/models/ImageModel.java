@@ -23,10 +23,18 @@ public class ImageModel implements Serializable {
     return name;
   }
 
+  public void setName(final String name) {
+    this.name = name;
+  }
+
   private String uri;
 
   public String getUri() {
     return uri;
+  }
+
+  public void setUri(final String uri) {
+    this.uri = uri;
   }
 
 }

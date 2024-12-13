@@ -44,10 +44,18 @@ public class ShareLinkRegistrationModel implements Serializable {
     return code;
   }
 
+  public void setCode(final String code) {
+    this.code = code;
+  }
+
   private String name;
 
   public String getName() {
     return name;
+  }
+
+  public void setName(final String name) {
+    this.name = name;
   }
 
   private String company;
@@ -56,10 +64,18 @@ public class ShareLinkRegistrationModel implements Serializable {
     return company;
   }
 
+  public void setCompany(final String company) {
+    this.company = company;
+  }
+
   private String email;
 
   public String getEmail() {
     return email;
+  }
+
+  public void setEmail(final String email) {
+    this.email = email;
   }
 
   private String ip;
@@ -68,10 +84,18 @@ public class ShareLinkRegistrationModel implements Serializable {
     return ip;
   }
 
+  public void setIp(final String ip) {
+    this.ip = ip;
+  }
+
   private String inboxCode;
 
   public String getInboxCode() {
     return inboxCode;
+  }
+
+  public void setInboxCode(final String inboxCode) {
+    this.inboxCode = inboxCode;
   }
 
   private String clickwrapBody;
@@ -80,10 +104,18 @@ public class ShareLinkRegistrationModel implements Serializable {
     return clickwrapBody;
   }
 
+  public void setClickwrapBody(final String clickwrapBody) {
+    this.clickwrapBody = clickwrapBody;
+  }
+
   private Long formFieldSetId;
 
   public Long getFormFieldSetId() {
     return formFieldSetId;
+  }
+
+  public void setFormFieldSetId(final Long formFieldSetId) {
+    this.formFieldSetId = formFieldSetId;
   }
 
   private Map<String, String> formFieldData;
@@ -92,10 +124,18 @@ public class ShareLinkRegistrationModel implements Serializable {
     return formFieldData;
   }
 
+  public void setFormFieldData(final Map<String, String> formFieldData) {
+    this.formFieldData = formFieldData;
+  }
+
   private String bundleCode;
 
   public String getBundleCode() {
     return bundleCode;
+  }
+
+  public void setBundleCode(final String bundleCode) {
+    this.bundleCode = bundleCode;
   }
 
   private Long bundleId;
@@ -104,16 +144,28 @@ public class ShareLinkRegistrationModel implements Serializable {
     return bundleId;
   }
 
+  public void setBundleId(final Long bundleId) {
+    this.bundleId = bundleId;
+  }
+
   private Long bundleRecipientId;
 
   public Long getBundleRecipientId() {
     return bundleRecipientId;
   }
 
+  public void setBundleRecipientId(final Long bundleRecipientId) {
+    this.bundleRecipientId = bundleRecipientId;
+  }
+
   private ZonedDateTime createdAt;
 
   public ZonedDateTime getCreatedAt() {
     return createdAt;
+  }
+
+  public void setCreatedAt(final ZonedDateTime createdAt) {
+    this.createdAt = createdAt;
   }
 
 }

@@ -32,10 +32,18 @@ public class ShareLinkDownloadModel implements Serializable {
     return bundleRegistration;
   }
 
+  public void setBundleRegistration(final ShareLinkRegistrationModel bundleRegistration) {
+    this.bundleRegistration = bundleRegistration;
+  }
+
   private String downloadMethod;
 
   public String getDownloadMethod() {
     return downloadMethod;
+  }
+
+  public void setDownloadMethod(final String downloadMethod) {
+    this.downloadMethod = downloadMethod;
   }
 
   private String path;
@@ -44,10 +52,18 @@ public class ShareLinkDownloadModel implements Serializable {
     return path;
   }
 
+  public void setPath(final String path) {
+    this.path = path;
+  }
+
   private ZonedDateTime createdAt;
 
   public ZonedDateTime getCreatedAt() {
     return createdAt;
+  }
+
+  public void setCreatedAt(final ZonedDateTime createdAt) {
+    this.createdAt = createdAt;
   }
 
 }

@@ -26,10 +26,18 @@ public class FileActionModel implements Serializable {
     return status;
   }
 
+  public void setStatus(final String status) {
+    this.status = status;
+  }
+
   private Long fileMigrationId;
 
   public Long getFileMigrationId() {
     return fileMigrationId;
+  }
+
+  public void setFileMigrationId(final Long fileMigrationId) {
+    this.fileMigrationId = fileMigrationId;
   }
 
 }

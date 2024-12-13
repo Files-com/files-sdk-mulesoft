@@ -44,10 +44,18 @@ public class GroupModel implements Serializable {
     return id;
   }
 
+  public void setId(final Long id) {
+    this.id = id;
+  }
+
   private String name;
 
   public String getName() {
     return name;
+  }
+
+  public void setName(final String name) {
+    this.name = name;
   }
 
   private String allowedIps;
@@ -56,10 +64,18 @@ public class GroupModel implements Serializable {
     return allowedIps;
   }
 
+  public void setAllowedIps(final String allowedIps) {
+    this.allowedIps = allowedIps;
+  }
+
   private String adminIds;
 
   public String getAdminIds() {
     return adminIds;
+  }
+
+  public void setAdminIds(final String adminIds) {
+    this.adminIds = adminIds;
   }
 
   private String notes;
@@ -68,10 +84,18 @@ public class GroupModel implements Serializable {
     return notes;
   }
 
+  public void setNotes(final String notes) {
+    this.notes = notes;
+  }
+
   private String userIds;
 
   public String getUserIds() {
     return userIds;
+  }
+
+  public void setUserIds(final String userIds) {
+    this.userIds = userIds;
   }
 
   private String usernames;
@@ -80,10 +104,18 @@ public class GroupModel implements Serializable {
     return usernames;
   }
 
+  public void setUsernames(final String usernames) {
+    this.usernames = usernames;
+  }
+
   private boolean ftpPermission;
 
   public boolean getFtpPermission() {
     return ftpPermission;
+  }
+
+  public void setFtpPermission(final boolean ftpPermission) {
+    this.ftpPermission = ftpPermission;
   }
 
   private boolean sftpPermission;
@@ -92,10 +124,18 @@ public class GroupModel implements Serializable {
     return sftpPermission;
   }
 
+  public void setSftpPermission(final boolean sftpPermission) {
+    this.sftpPermission = sftpPermission;
+  }
+
   private boolean davPermission;
 
   public boolean getDavPermission() {
     return davPermission;
+  }
+
+  public void setDavPermission(final boolean davPermission) {
+    this.davPermission = davPermission;
   }
 
   private boolean restapiPermission;
@@ -104,10 +144,18 @@ public class GroupModel implements Serializable {
     return restapiPermission;
   }
 
+  public void setRestapiPermission(final boolean restapiPermission) {
+    this.restapiPermission = restapiPermission;
+  }
+
   private Long siteId;
 
   public Long getSiteId() {
     return siteId;
+  }
+
+  public void setSiteId(final Long siteId) {
+    this.siteId = siteId;
   }
 
 }
