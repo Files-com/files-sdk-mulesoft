@@ -5,7 +5,7 @@ Anypoint Studio demo for Files.com Connector.
 ## Prerequisites
 
 * Anypoint Studio 7
-* Files.com Connector v0.1.0
+* Files.com Connector v1.0.0
 
 ## How to Run
 
