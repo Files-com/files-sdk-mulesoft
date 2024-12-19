@@ -83,7 +83,7 @@ public class FolderModelTest {
     assertThat(model.getPreviewId(), equalTo(1L));
     model.setPreview(null);
     assertThat(model.getPreview(), equalTo(null));
-    model.setMkdirParents(true);
-    assertThat(model.getMkdirParents(), equalTo(true));
+    model.setMkdirParents(false);
+    assertThat(model.getMkdirParents(), equalTo(false));
   }
 }

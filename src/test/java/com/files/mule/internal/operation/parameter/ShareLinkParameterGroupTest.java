@@ -30,8 +30,8 @@ public class ShareLinkParameterGroupTest {
     assertThat(group.getDescription(), equalTo("The public description of the bundle."));
     group.setNote("The internal note on the bundle.");
     assertThat(group.getNote(), equalTo("The internal note on the bundle."));
-    group.setRequireRegistration(true);
-    assertThat(group.getRequireRegistration(), equalTo(true));
+    group.setRequireRegistration(false);
+    assertThat(group.getRequireRegistration(), equalTo(false));
   }
 
   @Test

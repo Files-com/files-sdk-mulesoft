@@ -146,8 +146,8 @@ public class UserModelTest {
     assertThat(model.getDaysRemainingUntilPasswordExpire(), equalTo(1L));
     model.setPasswordExpireAt(ZonedDateTime.parse("2000-01-01T01:00:00Z"));
     assertThat(model.getPasswordExpireAt(), equalTo(ZonedDateTime.parse("2000-01-01T01:00:00Z")));
-    model.setAvatarDelete(true);
-    assertThat(model.getAvatarDelete(), equalTo(true));
+    model.setAvatarDelete(false);
+    assertThat(model.getAvatarDelete(), equalTo(false));
     model.setChangePassword("");
     assertThat(model.getChangePassword(), equalTo(""));
     model.setChangePasswordConfirmation("");
@@ -162,7 +162,7 @@ public class UserModelTest {
     assertThat(model.getPassword(), equalTo(""));
     model.setPasswordConfirmation("");
     assertThat(model.getPasswordConfirmation(), equalTo(""));
-    model.setAnnouncementsRead(true);
-    assertThat(model.getAnnouncementsRead(), equalTo(true));
+    model.setAnnouncementsRead(false);
+    assertThat(model.getAnnouncementsRead(), equalTo(false));
   }
 }

@@ -87,8 +87,8 @@ public class FileModelTest {
     assertThat(model.getAction(), equalTo(""));
     model.setLength(1L);
     assertThat(model.getLength(), equalTo(1L));
-    model.setMkdirParents(true);
-    assertThat(model.getMkdirParents(), equalTo(true));
+    model.setMkdirParents(false);
+    assertThat(model.getMkdirParents(), equalTo(false));
     model.setPart(1L);
     assertThat(model.getPart(), equalTo(1L));
     model.setParts(1L);
@@ -99,7 +99,7 @@ public class FileModelTest {
     assertThat(model.getRestart(), equalTo(1L));
     model.setStructure("");
     assertThat(model.getStructure(), equalTo(""));
-    model.setWithRename(true);
-    assertThat(model.getWithRename(), equalTo(true));
+    model.setWithRename(false);
+    assertThat(model.getWithRename(), equalTo(false));
   }
 }

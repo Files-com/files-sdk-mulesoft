@@ -96,11 +96,11 @@ public class ShareLinkModelTest {
     assertThat(model.getPassword(), equalTo("Password"));
     model.setFormFieldSetId(1L);
     assertThat(model.getFormFieldSetId(), equalTo(1L));
-    model.setCreateSnapshot(true);
-    assertThat(model.getCreateSnapshot(), equalTo(true));
-    model.setFinalizeSnapshot(true);
-    assertThat(model.getFinalizeSnapshot(), equalTo(true));
-    model.setWatermarkAttachmentDelete(true);
-    assertThat(model.getWatermarkAttachmentDelete(), equalTo(true));
+    model.setCreateSnapshot(false);
+    assertThat(model.getCreateSnapshot(), equalTo(false));
+    model.setFinalizeSnapshot(false);
+    assertThat(model.getFinalizeSnapshot(), equalTo(false));
+    model.setWatermarkAttachmentDelete(false);
+    assertThat(model.getWatermarkAttachmentDelete(), equalTo(false));
   }
 }

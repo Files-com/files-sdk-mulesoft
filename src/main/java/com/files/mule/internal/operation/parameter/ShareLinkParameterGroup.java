@@ -123,7 +123,7 @@ public class ShareLinkParameterGroup {
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Show a registration page that captures the downloader's name and email address?")
-    @Example("true")
+    @Example("false")
     public boolean requireRegistration;
 
     public boolean getRequireRegistration() {
