@@ -14,7 +14,7 @@ import com.files.models.User;
  * Users are associated with API Keys, SSH (SFTP) Keys, Notifications, Permissions, and Group memberships.
  *
  *
- * # Authentication
+ * ## Authentication
  *
  * The `authentication_method` property on a User determines exactly how that user can login and authenticate to their Files.com account. Files.com offers a variety of authentication methods to ensure flexibility, security, migration, and compliance.
  *
