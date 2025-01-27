@@ -1,8 +1,14 @@
-# Files.com MuleSoft Connector Release Notes
+# Files.com Connector Release Notes
 
-## Version 1.0.0
+The Files.com Connector allows you to interact with the Files.com API using MuleSoft, providing access to a wide range resources, including users, groups, folders, files, and more.
 
-This initial release of the Files.com MuleSoft Connector includes the following operations:
+## 1.0.0
+
+The Files.com Connector is available on Mule 4.3 or later.
+
+### Key Features
+
+The Files.com Connector supports the following operations:
 
 * File - Copy
 * File - Delete
@@ -40,3 +46,5 @@ This initial release of the Files.com MuleSoft Connector includes the following 
 * User - List
 * User - Show
 * User - Update
+
+For more information, please see the [Developer Documentation](https://developers.files.com/mulesoft/).
