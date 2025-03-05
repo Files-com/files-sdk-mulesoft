@@ -113,6 +113,38 @@ If you're manually configuring your MuleSoft application, you can set the base U
 </filescom:config>
 ```
 
+## Sort and Filter
+
+Several of the Files.com API resources have list operations that return multiple instances of the
+resource. The List operations can be sorted and filtered.
+
+### Sorting
+
+To sort the returned data, pass in the ```sort_by``` method argument.
+
+Each resource supports a unique set of valid sort fields and can only be sorted by one field at a
+time.
+
+### Filtering
+
+Filters apply selection criteria to the underlying query that returns the results. They can be
+applied individually or combined with other filters, and the resulting data can be sorted by a
+single field.
+
+Each resource supports a unique set of valid filter fields, filter combinations, and combinations of
+filters and sort fields.
+
+#### Filter Types
+
+| Filter | Type | Description |
+| --------- | --------- | --------- |
+| `filter` | Exact | Find resources that have an exact field value match to a passed in value. (i.e., FIELD_VALUE = PASS_IN_VALUE). |
+| `filter_prefix` | Pattern | Find resources where the specified field is prefixed by the supplied value. This is applicable to values that are strings. |
+| `filter_gt` | Range | Find resources that have a field value that is greater than the passed in value.  (i.e., FIELD_VALUE > PASS_IN_VALUE). |
+| `filter_gteq` | Range | Find resources that have a field value that is greater than or equal to the passed in value.  (i.e., FIELD_VALUE >=  PASS_IN_VALUE). |
+| `filter_lt` | Range | Find resources that have a field value that is less than the passed in value.  (i.e., FIELD_VALUE < PASS_IN_VALUE). |
+| `filter_lteq` | Range | Find resources that have a field value that is less than or equal to the passed in value.  (i.e., FIELD_VALUE \<= PASS_IN_VALUE). |
+
 ## Errors
 
 The Files.com MuleSoft Connector will return errors that fall into two categories:
@@ -149,6 +181,10 @@ Connector groups all API errors into the following types:
 | `FILESCOM:SERVICE_UNAVAILABLE` | Service Unavailable |
 | `FILESCOM:SITE_CONFIGURATION` | Site Configuration |
 | `FILESCOM:OTHER` | Unknown API Error |
+
+## Case Sensitivity
+
+The Files.com API compares files and paths in a case-insensitive manner. For related documentation see [Case Sensitivity Documentation](https://www.files.com/docs/files-and-folders/file-system-semantics/case-sensitivity).
 
 ## Mock Server
 
