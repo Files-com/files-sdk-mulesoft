@@ -53,7 +53,7 @@ public class UserParameterGroup {
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("User's email.")
-    @Example("example")
+    @Example("john.doe@files.com")
     public String email;
 
     public String getEmail() {
@@ -220,7 +220,7 @@ public class UserParameterGroup {
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("User's email.")
-    @Example("example")
+    @Example("john.doe@files.com")
     public String email;
 
     public String getEmail() {

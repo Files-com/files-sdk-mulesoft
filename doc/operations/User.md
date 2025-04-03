@@ -58,7 +58,7 @@ These authentication methods can be configured during user creation and can be m
     "davPermission": true,
     "disabled": true,
     "disabledExpiredOrInactive": true,
-    "email": "example",
+    "email": "john.doe@files.com",
     "firstLoginAt": "2000-01-01T01:00:00Z",
     "ftpPermission": true,
     "groupIds": "example",
@@ -156,7 +156,7 @@ These authentication methods can be configured during user creation and can be m
   "davPermission": true,
   "disabled": true,
   "disabledExpiredOrInactive": true,
-  "email": "example",
+  "email": "john.doe@files.com",
   "firstLoginAt": "2000-01-01T01:00:00Z",
   "ftpPermission": true,
   "groupIds": "example",
@@ -238,7 +238,7 @@ These authentication methods can be configured during user creation and can be m
 ```xml
 <filescom:create-user config-ref="FilesCom"
  username="user"
- email="example"
+ email="john.doe@files.com"
  groupIds="example"
  authenticationMethod="password"
  name="John Doe"
@@ -274,7 +274,7 @@ These authentication methods can be configured during user creation and can be m
   "davPermission": true,
   "disabled": true,
   "disabledExpiredOrInactive": true,
-  "email": "example",
+  "email": "john.doe@files.com",
   "firstLoginAt": "2000-01-01T01:00:00Z",
   "ftpPermission": true,
   "groupIds": "example",
@@ -357,7 +357,7 @@ These authentication methods can be configured during user creation and can be m
 ```xml
 <filescom:update-user config-ref="FilesCom"
  id="1"
- email="example"
+ email="john.doe@files.com"
  groupIds="example"
  authenticationMethod="password"
  name="John Doe"
@@ -394,7 +394,7 @@ These authentication methods can be configured during user creation and can be m
   "davPermission": true,
   "disabled": true,
   "disabledExpiredOrInactive": true,
-  "email": "example",
+  "email": "john.doe@files.com",
   "firstLoginAt": "2000-01-01T01:00:00Z",
   "ftpPermission": true,
   "groupIds": "example",

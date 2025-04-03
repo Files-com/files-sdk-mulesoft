@@ -51,8 +51,8 @@ public class UserModelTest {
     assertThat(model.getDisabled(), equalTo(true));
     model.setDisabledExpiredOrInactive(true);
     assertThat(model.getDisabledExpiredOrInactive(), equalTo(true));
-    model.setEmail("example");
-    assertThat(model.getEmail(), equalTo("example"));
+    model.setEmail("john.doe@files.com");
+    assertThat(model.getEmail(), equalTo("john.doe@files.com"));
     model.setFirstLoginAt(ZonedDateTime.parse("2000-01-01T01:00:00Z"));
     assertThat(model.getFirstLoginAt(), equalTo(ZonedDateTime.parse("2000-01-01T01:00:00Z")));
     model.setFtpPermission(true);

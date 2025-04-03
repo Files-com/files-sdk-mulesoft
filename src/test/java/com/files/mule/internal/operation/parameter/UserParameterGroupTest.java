@@ -21,8 +21,8 @@ public class UserParameterGroupTest {
     final UserParameterGroup.Create group = new UserParameterGroup.Create();
     group.setUsername("user");
     assertThat(group.getUsername(), equalTo("user"));
-    group.setEmail("example");
-    assertThat(group.getEmail(), equalTo("example"));
+    group.setEmail("john.doe@files.com");
+    assertThat(group.getEmail(), equalTo("john.doe@files.com"));
     group.setGroupIds("example");
     assertThat(group.getGroupIds(), equalTo("example"));
     group.setPassword("");
@@ -48,8 +48,8 @@ public class UserParameterGroupTest {
     final UserParameterGroup.Update group = new UserParameterGroup.Update();
     group.setId(1L);
     assertThat(group.getId(), equalTo(1L));
-    group.setEmail("example");
-    assertThat(group.getEmail(), equalTo("example"));
+    group.setEmail("john.doe@files.com");
+    assertThat(group.getEmail(), equalTo("john.doe@files.com"));
     group.setGroupIds("example");
     assertThat(group.getGroupIds(), equalTo("example"));
     group.setPassword("");

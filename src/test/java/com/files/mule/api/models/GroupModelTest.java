@@ -26,8 +26,8 @@ public class GroupModelTest {
     assertThat(model.getNotes(), equalTo("example"));
     model.setUserIds("1");
     assertThat(model.getUserIds(), equalTo("1"));
-    model.setUsernames("example");
-    assertThat(model.getUsernames(), equalTo("example"));
+    model.setUsernames("user");
+    assertThat(model.getUsernames(), equalTo("user"));
     model.setFtpPermission(true);
     assertThat(model.getFtpPermission(), equalTo(true));
     model.setSftpPermission(true);
