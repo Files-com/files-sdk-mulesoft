@@ -21,8 +21,8 @@ public class ShareLinkNotificationParameterGroupTest {
     final ShareLinkNotificationParameterGroup.Create group = new ShareLinkNotificationParameterGroup.Create();
     group.setBundleId(1L);
     assertThat(group.getBundleId(), equalTo(1L));
-    group.setUserId(1L);
-    assertThat(group.getUserId(), equalTo(1L));
+    group.setNotifyUserId(1L);
+    assertThat(group.getNotifyUserId(), equalTo(1L));
   }
 
   @Test

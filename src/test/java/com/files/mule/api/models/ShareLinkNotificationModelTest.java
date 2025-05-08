@@ -22,7 +22,7 @@ public class ShareLinkNotificationModelTest {
     assertThat(model.getNotifyOnRegistration(), equalTo(true));
     model.setNotifyOnUpload(true);
     assertThat(model.getNotifyOnUpload(), equalTo(true));
-    model.setUserId(1L);
-    assertThat(model.getUserId(), equalTo(1L));
+    model.setNotifyUserId(1L);
+    assertThat(model.getNotifyUserId(), equalTo(1L));
   }
 }

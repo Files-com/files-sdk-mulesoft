@@ -50,14 +50,14 @@ public class ShareLinkNotificationParameterGroup {
     @Optional
     @Summary("The id of the user to notify.")
     @Example("1")
-    public Long userId;
+    public Long notifyUserId;
 
-    public Long getUserId() {
-      return userId;
+    public Long getNotifyUserId() {
+      return notifyUserId;
     }
 
-    public void setUserId(final Long userId) {
-      this.userId = userId;
+    public void setNotifyUserId(final Long notifyUserId) {
+      this.notifyUserId = notifyUserId;
     }
 
   }

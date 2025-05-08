@@ -76,6 +76,7 @@ public class FilesComOperations {
   private static final String NOTES = "notes";
   private static final String NOTIFY_ON_REGISTRATION = "notify_on_registration";
   private static final String NOTIFY_ON_UPLOAD = "notify_on_upload";
+  private static final String NOTIFY_USER_ID = "notify_user_id";
   private static final String PASSWORD = "password";
   private static final String PATH = "path";
   private static final String PATHS = "paths";
@@ -87,7 +88,6 @@ public class FilesComOperations {
   private static final String SFTP_PERMISSION = "sftp_permission";
   private static final String SHARE_AFTER_CREATE = "share_after_create";
   private static final String USER_HOME = "user_home";
-  private static final String USER_ID = "user_id";
   private static final String USER_IDS = "user_ids";
   private static final String USER_ROOT = "user_root";
   private static final String USERNAME = "username";
@@ -336,8 +336,8 @@ public class FilesComOperations {
       requestParameters.put(BUNDLE_ID, parameters.getBundleId());
     }
 
-    if (parameters.userId != null) {
-      requestParameters.put(USER_ID, parameters.getUserId());
+    if (parameters.notifyUserId != null) {
+      requestParameters.put(NOTIFY_USER_ID, parameters.getNotifyUserId());
     }
 
     requestParameters.put(NOTIFY_ON_REGISTRATION, true);

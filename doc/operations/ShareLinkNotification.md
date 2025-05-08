@@ -27,7 +27,7 @@ A BundleNotification is an E-Mail sent out to users when certain actions are per
     "id": 1,
     "notifyOnRegistration": true,
     "notifyOnUpload": true,
-    "userId": 1
+    "notifyUserId": 1
   }
 ]
 ```
@@ -62,7 +62,7 @@ A BundleNotification is an E-Mail sent out to users when certain actions are per
   "id": 1,
   "notifyOnRegistration": true,
   "notifyOnUpload": true,
-  "userId": 1
+  "notifyUserId": 1
 }
 ```
 
@@ -79,7 +79,7 @@ A BundleNotification is an E-Mail sent out to users when certain actions are per
 | Parameter | Description |
 | --------- | ----------- |
 | bundleId<br/>*Long*<br/>**Required** | Bundle ID to notify on |
-| userId<br/>*Long* | The id of the user to notify. |
+| notifyUserId<br/>*Long* | The id of the user to notify. |
 
 
 ### Example Operation
@@ -87,7 +87,7 @@ A BundleNotification is an E-Mail sent out to users when certain actions are per
 ```xml
 <filescom:create-share-link-notification config-ref="FilesCom"
  bundleId="1"
- userId="1"
+ notifyUserId="1"
 />
 ```
 
@@ -100,7 +100,7 @@ A BundleNotification is an E-Mail sent out to users when certain actions are per
   "id": 1,
   "notifyOnRegistration": true,
   "notifyOnUpload": true,
-  "userId": 1
+  "notifyUserId": 1
 }
 ```
 
@@ -140,7 +140,7 @@ A BundleNotification is an E-Mail sent out to users when certain actions are per
   "id": 1,
   "notifyOnRegistration": true,
   "notifyOnUpload": true,
-  "userId": 1
+  "notifyUserId": 1
 }
 ```
 
