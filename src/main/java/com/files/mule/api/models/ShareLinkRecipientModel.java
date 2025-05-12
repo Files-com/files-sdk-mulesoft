@@ -28,6 +28,7 @@ public class ShareLinkRecipientModel implements Serializable {
     this.note = bundleRecipient.note;
     this.recipient = bundleRecipient.recipient;
     this.sentAt = bundleRecipient.sentAt != null ? ZonedDateTime.ofInstant(bundleRecipient.sentAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.userId = bundleRecipient.userId;
     this.bundleId = bundleRecipient.bundleId;
     this.shareAfterCreate = Boolean.TRUE.equals(bundleRecipient.shareAfterCreate);
   }
@@ -80,6 +81,16 @@ public class ShareLinkRecipientModel implements Serializable {
 
   public void setSentAt(final ZonedDateTime sentAt) {
     this.sentAt = sentAt;
+  }
+
+  private Long userId;
+
+  public Long getUserId() {
+    return userId;
+  }
+
+  public void setUserId(final Long userId) {
+    this.userId = userId;
   }
 
   private Long bundleId;

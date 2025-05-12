@@ -26,6 +26,8 @@ public class ShareLinkRecipientModelTest {
     assertThat(model.getRecipient(), equalTo("john.doe@example.com"));
     model.setSentAt(ZonedDateTime.parse("2000-01-01T01:00:00Z"));
     assertThat(model.getSentAt(), equalTo(ZonedDateTime.parse("2000-01-01T01:00:00Z")));
+    model.setUserId(1L);
+    assertThat(model.getUserId(), equalTo(1L));
     model.setBundleId(1L);
     assertThat(model.getBundleId(), equalTo(1L));
     model.setShareAfterCreate(false);

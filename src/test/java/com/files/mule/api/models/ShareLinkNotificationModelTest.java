@@ -24,5 +24,7 @@ public class ShareLinkNotificationModelTest {
     assertThat(model.getNotifyOnUpload(), equalTo(true));
     model.setNotifyUserId(1L);
     assertThat(model.getNotifyUserId(), equalTo(1L));
+    model.setUserId(1L);
+    assertThat(model.getUserId(), equalTo(1L));
   }
 }
