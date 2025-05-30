@@ -31,6 +31,7 @@ public class FormFieldSetModel implements Serializable {
     this.skipName = Boolean.TRUE.equals(formFieldSet.skipName);
     this.skipEmail = Boolean.TRUE.equals(formFieldSet.skipEmail);
     this.skipCompany = Boolean.TRUE.equals(formFieldSet.skipCompany);
+    this.inUse = Boolean.TRUE.equals(formFieldSet.inUse);
     this.userId = formFieldSet.userId;
   }
 
@@ -92,6 +93,16 @@ public class FormFieldSetModel implements Serializable {
 
   public void setSkipCompany(final boolean skipCompany) {
     this.skipCompany = skipCompany;
+  }
+
+  private boolean inUse;
+
+  public boolean getInUse() {
+    return inUse;
+  }
+
+  public void setInUse(final boolean inUse) {
+    this.inUse = inUse;
   }
 
   private Long userId;

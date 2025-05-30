@@ -69,7 +69,8 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
       ],
       "skipName": true,
       "skipEmail": true,
-      "skipCompany": true
+      "skipCompany": true,
+      "inUse": true
     },
     "skipName": true,
     "skipEmail": true,
@@ -179,7 +180,8 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
     ],
     "skipName": true,
     "skipEmail": true,
-    "skipCompany": true
+    "skipCompany": true,
+    "inUse": true
   },
   "skipName": true,
   "skipEmail": true,
@@ -302,7 +304,8 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
     ],
     "skipName": true,
     "skipEmail": true,
-    "skipCompany": true
+    "skipCompany": true,
+    "inUse": true
   },
   "skipName": true,
   "skipEmail": true,
@@ -415,7 +418,8 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
     ],
     "skipName": true,
     "skipEmail": true,
-    "skipCompany": true
+    "skipCompany": true,
+    "inUse": true
   },
   "skipName": true,
   "skipEmail": true,

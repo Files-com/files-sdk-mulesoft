@@ -28,6 +28,8 @@ public class FormFieldSetModelTest {
     assertThat(model.getSkipEmail(), equalTo(true));
     model.setSkipCompany(true);
     assertThat(model.getSkipCompany(), equalTo(true));
+    model.setInUse(true);
+    assertThat(model.getInUse(), equalTo(true));
     model.setUserId(1L);
     assertThat(model.getUserId(), equalTo(1L));
   }
