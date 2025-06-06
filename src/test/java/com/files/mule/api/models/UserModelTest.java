@@ -41,8 +41,8 @@ public class UserModelTest {
     assertThat(model.getBillingPermission(), equalTo(true));
     model.setBypassSiteAllowedIps(true);
     assertThat(model.getBypassSiteAllowedIps(), equalTo(true));
-    model.setBypassInactiveDisable(true);
-    assertThat(model.getBypassInactiveDisable(), equalTo(true));
+    model.setBypassUserLifecycleRules(true);
+    assertThat(model.getBypassUserLifecycleRules(), equalTo(true));
     model.setCreatedAt(ZonedDateTime.parse("2000-01-01T01:00:00Z"));
     assertThat(model.getCreatedAt(), equalTo(ZonedDateTime.parse("2000-01-01T01:00:00Z")));
     model.setDavPermission(true);

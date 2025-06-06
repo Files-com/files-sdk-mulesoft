@@ -61,7 +61,7 @@ public class UserModel implements Serializable {
   private void initGroup2(final User user) {
     this.billingPermission = Boolean.TRUE.equals(user.billingPermission);
     this.bypassSiteAllowedIps = Boolean.TRUE.equals(user.bypassSiteAllowedIps);
-    this.bypassInactiveDisable = Boolean.TRUE.equals(user.bypassInactiveDisable);
+    this.bypassUserLifecycleRules = Boolean.TRUE.equals(user.bypassUserLifecycleRules);
     this.createdAt = user.createdAt != null ? ZonedDateTime.ofInstant(user.createdAt.toInstant(), ZoneId.systemDefault()) : null;
     this.davPermission = Boolean.TRUE.equals(user.davPermission);
     this.disabled = Boolean.TRUE.equals(user.disabled);
@@ -264,14 +264,14 @@ public class UserModel implements Serializable {
     this.bypassSiteAllowedIps = bypassSiteAllowedIps;
   }
 
-  private boolean bypassInactiveDisable;
+  private boolean bypassUserLifecycleRules;
 
-  public boolean getBypassInactiveDisable() {
-    return bypassInactiveDisable;
+  public boolean getBypassUserLifecycleRules() {
+    return bypassUserLifecycleRules;
   }
 
-  public void setBypassInactiveDisable(final boolean bypassInactiveDisable) {
-    this.bypassInactiveDisable = bypassInactiveDisable;
+  public void setBypassUserLifecycleRules(final boolean bypassUserLifecycleRules) {
+    this.bypassUserLifecycleRules = bypassUserLifecycleRules;
   }
 
   private ZonedDateTime createdAt;
