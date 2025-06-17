@@ -130,13 +130,14 @@ public class UserModel implements Serializable {
     this.userHome = user.userHome;
     this.daysRemainingUntilPasswordExpire = user.daysRemainingUntilPasswordExpire;
     this.passwordExpireAt = user.passwordExpireAt != null ? ZonedDateTime.ofInstant(user.passwordExpireAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.hasReassignableAssociations = Boolean.TRUE.equals(user.hasReassignableAssociations);
     this.avatarDelete = Boolean.TRUE.equals(user.avatarDelete);
     this.changePassword = user.changePassword;
     this.changePasswordConfirmation = user.changePasswordConfirmation;
-    this.grantPermission = user.grantPermission;
   }
 
   private void initGroup8(final User user) {
+    this.grantPermission = user.grantPermission;
     this.groupId = user.groupId;
     this.importedPasswordHash = user.importedPasswordHash;
     this.password = user.password;
@@ -802,6 +803,16 @@ public class UserModel implements Serializable {
 
   public void setPasswordExpireAt(final ZonedDateTime passwordExpireAt) {
     this.passwordExpireAt = passwordExpireAt;
+  }
+
+  private boolean hasReassignableAssociations;
+
+  public boolean getHasReassignableAssociations() {
+    return hasReassignableAssociations;
+  }
+
+  public void setHasReassignableAssociations(final boolean hasReassignableAssociations) {
+    this.hasReassignableAssociations = hasReassignableAssociations;
   }
 
   private boolean avatarDelete;
