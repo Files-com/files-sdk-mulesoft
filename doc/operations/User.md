@@ -106,8 +106,7 @@ These authentication methods can be configured during user creation and can be m
     "userRoot": "example",
     "userHome": "example",
     "daysRemainingUntilPasswordExpire": 1,
-    "passwordExpireAt": "2000-01-01T01:00:00Z",
-    "hasReassignableAssociations": true
+    "passwordExpireAt": "2000-01-01T01:00:00Z"
   }
 ]
 ```
@@ -205,8 +204,7 @@ These authentication methods can be configured during user creation and can be m
   "userRoot": "example",
   "userHome": "example",
   "daysRemainingUntilPasswordExpire": 1,
-  "passwordExpireAt": "2000-01-01T01:00:00Z",
-  "hasReassignableAssociations": true
+  "passwordExpireAt": "2000-01-01T01:00:00Z"
 }
 ```
 
@@ -324,8 +322,7 @@ These authentication methods can be configured during user creation and can be m
   "userRoot": "example",
   "userHome": "example",
   "daysRemainingUntilPasswordExpire": 1,
-  "passwordExpireAt": "2000-01-01T01:00:00Z",
-  "hasReassignableAssociations": true
+  "passwordExpireAt": "2000-01-01T01:00:00Z"
 }
 ```
 
@@ -445,8 +442,7 @@ These authentication methods can be configured during user creation and can be m
   "userRoot": "example",
   "userHome": "example",
   "daysRemainingUntilPasswordExpire": 1,
-  "passwordExpireAt": "2000-01-01T01:00:00Z",
-  "hasReassignableAssociations": true
+  "passwordExpireAt": "2000-01-01T01:00:00Z"
 }
 ```
 

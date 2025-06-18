@@ -149,8 +149,6 @@ public class UserModelTest {
     assertThat(model.getDaysRemainingUntilPasswordExpire(), equalTo(1L));
     model.setPasswordExpireAt(ZonedDateTime.parse("2000-01-01T01:00:00Z"));
     assertThat(model.getPasswordExpireAt(), equalTo(ZonedDateTime.parse("2000-01-01T01:00:00Z")));
-    model.setHasReassignableAssociations(true);
-    assertThat(model.getHasReassignableAssociations(), equalTo(true));
     model.setAvatarDelete(false);
     assertThat(model.getAvatarDelete(), equalTo(false));
     model.setChangePassword("");
