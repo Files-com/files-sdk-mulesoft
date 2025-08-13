@@ -167,5 +167,7 @@ public class UserModelTest {
     assertThat(model.getPasswordConfirmation(), equalTo(""));
     model.setAnnouncementsRead(false);
     assertThat(model.getAnnouncementsRead(), equalTo(false));
+    model.setClear2fa(false);
+    assertThat(model.getClear2fa(), equalTo(false));
   }
 }

@@ -142,6 +142,7 @@ public class UserModel implements Serializable {
     this.password = user.password;
     this.passwordConfirmation = user.passwordConfirmation;
     this.announcementsRead = Boolean.TRUE.equals(user.announcementsRead);
+    this.clear2fa = Boolean.TRUE.equals(user.clear2fa);
   }
 
   private Long id;
@@ -892,6 +893,16 @@ public class UserModel implements Serializable {
 
   public void setAnnouncementsRead(final boolean announcementsRead) {
     this.announcementsRead = announcementsRead;
+  }
+
+  private boolean clear2fa;
+
+  public boolean getClear2fa() {
+    return clear2fa;
+  }
+
+  public void setClear2fa(final boolean clear2fa) {
+    this.clear2fa = clear2fa;
   }
 
 }
