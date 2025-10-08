@@ -81,6 +81,7 @@ public class FileModel implements Serializable {
     this.restart = file.restart;
     this.structure = file.structure;
     this.withRename = Boolean.TRUE.equals(file.withRename);
+    this.bufferedUpload = Boolean.TRUE.equals(file.bufferedUpload);
   }
 
   private String path;
@@ -521,6 +522,16 @@ public class FileModel implements Serializable {
 
   public void setWithRename(final boolean withRename) {
     this.withRename = withRename;
+  }
+
+  private boolean bufferedUpload;
+
+  public boolean getBufferedUpload() {
+    return bufferedUpload;
+  }
+
+  public void setBufferedUpload(final boolean bufferedUpload) {
+    this.bufferedUpload = bufferedUpload;
   }
 
 }

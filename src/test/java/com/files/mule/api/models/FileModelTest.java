@@ -104,5 +104,7 @@ public class FileModelTest {
     assertThat(model.getStructure(), equalTo(""));
     model.setWithRename(false);
     assertThat(model.getWithRename(), equalTo(false));
+    model.setBufferedUpload(false);
+    assertThat(model.getBufferedUpload(), equalTo(false));
   }
 }
