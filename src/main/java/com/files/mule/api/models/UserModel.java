@@ -67,11 +67,12 @@ public class UserModel implements Serializable {
     this.disabled = Boolean.TRUE.equals(user.disabled);
     this.disabledExpiredOrInactive = Boolean.TRUE.equals(user.disabledExpiredOrInactive);
     this.email = user.email;
+    this.filesystemLayout = user.filesystemLayout;
     this.firstLoginAt = user.firstLoginAt != null ? ZonedDateTime.ofInstant(user.firstLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.ftpPermission = Boolean.TRUE.equals(user.ftpPermission);
   }
 
   private void initGroup3(final User user) {
+    this.ftpPermission = Boolean.TRUE.equals(user.ftpPermission);
     this.groupIds = user.groupIds;
     this.headerText = user.headerText;
     this.language = user.language;
@@ -81,10 +82,10 @@ public class UserModel implements Serializable {
     this.lastSftpLoginAt = user.lastSftpLoginAt != null ? ZonedDateTime.ofInstant(user.lastSftpLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastDavLoginAt = user.lastDavLoginAt != null ? ZonedDateTime.ofInstant(user.lastDavLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastDesktopLoginAt = user.lastDesktopLoginAt != null ? ZonedDateTime.ofInstant(user.lastDesktopLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastRestapiLoginAt = user.lastRestapiLoginAt != null ? ZonedDateTime.ofInstant(user.lastRestapiLoginAt.toInstant(), ZoneId.systemDefault()) : null;
   }
 
   private void initGroup4(final User user) {
+    this.lastRestapiLoginAt = user.lastRestapiLoginAt != null ? ZonedDateTime.ofInstant(user.lastRestapiLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastApiUseAt = user.lastApiUseAt != null ? ZonedDateTime.ofInstant(user.lastApiUseAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastActiveAt = user.lastActiveAt != null ? ZonedDateTime.ofInstant(user.lastActiveAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastProtocolCipher = user.lastProtocolCipher;
@@ -94,10 +95,11 @@ public class UserModel implements Serializable {
     this.notes = user.notes;
     this.notificationDailySendTime = user.notificationDailySendTime;
     this.officeIntegrationEnabled = Boolean.TRUE.equals(user.officeIntegrationEnabled);
-    this.passwordSetAt = user.passwordSetAt != null ? ZonedDateTime.ofInstant(user.passwordSetAt.toInstant(), ZoneId.systemDefault()) : null;
   }
 
   private void initGroup5(final User user) {
+    this.partnerId = user.partnerId;
+    this.passwordSetAt = user.passwordSetAt != null ? ZonedDateTime.ofInstant(user.passwordSetAt.toInstant(), ZoneId.systemDefault()) : null;
     this.passwordValidityDays = user.passwordValidityDays;
     this.publicKeysCount = user.publicKeysCount;
     this.receiveAdminAlerts = Boolean.TRUE.equals(user.receiveAdminAlerts);
@@ -106,11 +108,11 @@ public class UserModel implements Serializable {
     this.active2fa = Boolean.TRUE.equals(user.active2fa);
     this.requirePasswordChange = Boolean.TRUE.equals(user.requirePasswordChange);
     this.passwordExpired = Boolean.TRUE.equals(user.passwordExpired);
-    this.readonlySiteAdmin = Boolean.TRUE.equals(user.readonlySiteAdmin);
-    this.restapiPermission = Boolean.TRUE.equals(user.restapiPermission);
   }
 
   private void initGroup6(final User user) {
+    this.readonlySiteAdmin = Boolean.TRUE.equals(user.readonlySiteAdmin);
+    this.restapiPermission = Boolean.TRUE.equals(user.restapiPermission);
     this.selfManaged = Boolean.TRUE.equals(user.selfManaged);
     this.sftpPermission = Boolean.TRUE.equals(user.sftpPermission);
     this.siteAdmin = Boolean.TRUE.equals(user.siteAdmin);
@@ -119,11 +121,11 @@ public class UserModel implements Serializable {
     this.encryptionRequired = user.sslRequired;
     this.ssoStrategyId = user.ssoStrategyId;
     this.subscribeToNewsletter = Boolean.TRUE.equals(user.subscribeToNewsletter);
-    this.externallyManaged = Boolean.TRUE.equals(user.externallyManaged);
-    this.timeZone = user.timeZone;
   }
 
   private void initGroup7(final User user) {
+    this.externallyManaged = Boolean.TRUE.equals(user.externallyManaged);
+    this.timeZone = user.timeZone;
     this.typeOf2fa = user.typeOf2fa;
     this.typeOf2faForDisplay = user.typeOf2faForDisplay;
     this.userRoot = user.userRoot;
@@ -132,11 +134,11 @@ public class UserModel implements Serializable {
     this.passwordExpireAt = user.passwordExpireAt != null ? ZonedDateTime.ofInstant(user.passwordExpireAt.toInstant(), ZoneId.systemDefault()) : null;
     this.avatarDelete = Boolean.TRUE.equals(user.avatarDelete);
     this.changePassword = user.changePassword;
-    this.changePasswordConfirmation = user.changePasswordConfirmation;
-    this.grantPermission = user.grantPermission;
   }
 
   private void initGroup8(final User user) {
+    this.changePasswordConfirmation = user.changePasswordConfirmation;
+    this.grantPermission = user.grantPermission;
     this.groupId = user.groupId;
     this.importedPasswordHash = user.importedPasswordHash;
     this.password = user.password;
@@ -323,6 +325,16 @@ public class UserModel implements Serializable {
 
   public void setEmail(final String email) {
     this.email = email;
+  }
+
+  private String filesystemLayout;
+
+  public String getFilesystemLayout() {
+    return filesystemLayout;
+  }
+
+  public void setFilesystemLayout(final String filesystemLayout) {
+    this.filesystemLayout = filesystemLayout;
   }
 
   private ZonedDateTime firstLoginAt;
@@ -533,6 +545,16 @@ public class UserModel implements Serializable {
 
   public void setOfficeIntegrationEnabled(final boolean officeIntegrationEnabled) {
     this.officeIntegrationEnabled = officeIntegrationEnabled;
+  }
+
+  private Long partnerId;
+
+  public Long getPartnerId() {
+    return partnerId;
+  }
+
+  public void setPartnerId(final Long partnerId) {
+    this.partnerId = partnerId;
   }
 
   private ZonedDateTime passwordSetAt;

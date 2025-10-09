@@ -53,6 +53,8 @@ public class UserModelTest {
     assertThat(model.getDisabledExpiredOrInactive(), equalTo(true));
     model.setEmail("john.doe@files.com");
     assertThat(model.getEmail(), equalTo("john.doe@files.com"));
+    model.setFilesystemLayout("site_root");
+    assertThat(model.getFilesystemLayout(), equalTo("site_root"));
     model.setFirstLoginAt(ZonedDateTime.parse("2000-01-01T01:00:00Z"));
     assertThat(model.getFirstLoginAt(), equalTo(ZonedDateTime.parse("2000-01-01T01:00:00Z")));
     model.setFtpPermission(true);
@@ -95,6 +97,8 @@ public class UserModelTest {
     assertThat(model.getNotificationDailySendTime(), equalTo(18L));
     model.setOfficeIntegrationEnabled(true);
     assertThat(model.getOfficeIntegrationEnabled(), equalTo(true));
+    model.setPartnerId(1L);
+    assertThat(model.getPartnerId(), equalTo(1L));
     model.setPasswordSetAt(ZonedDateTime.parse("2000-01-01T01:00:00Z"));
     assertThat(model.getPasswordSetAt(), equalTo(ZonedDateTime.parse("2000-01-01T01:00:00Z")));
     model.setPasswordValidityDays(1L);
