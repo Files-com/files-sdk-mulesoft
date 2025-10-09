@@ -97,6 +97,8 @@ public class UserModelTest {
     assertThat(model.getNotificationDailySendTime(), equalTo(18L));
     model.setOfficeIntegrationEnabled(true);
     assertThat(model.getOfficeIntegrationEnabled(), equalTo(true));
+    model.setPartnerAdmin(true);
+    assertThat(model.getPartnerAdmin(), equalTo(true));
     model.setPartnerId(1L);
     assertThat(model.getPartnerId(), equalTo(1L));
     model.setPasswordSetAt(ZonedDateTime.parse("2000-01-01T01:00:00Z"));
