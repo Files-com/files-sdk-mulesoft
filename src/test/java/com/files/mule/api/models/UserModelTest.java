@@ -141,6 +141,8 @@ public class UserModelTest {
     assertThat(model.getSubscribeToNewsletter(), equalTo(true));
     model.setExternallyManaged(true);
     assertThat(model.getExternallyManaged(), equalTo(true));
+    model.setTags("example");
+    assertThat(model.getTags(), equalTo("example"));
     model.setTimeZone("Pacific Time (US & Canada)");
     assertThat(model.getTimeZone(), equalTo("Pacific Time (US & Canada)"));
     model.setTypeOf2fa("yubi");
@@ -175,5 +177,7 @@ public class UserModelTest {
     assertThat(model.getAnnouncementsRead(), equalTo(false));
     model.setClear2fa(false);
     assertThat(model.getClear2fa(), equalTo(false));
+    model.setConvertToPartnerUser(false);
+    assertThat(model.getConvertToPartnerUser(), equalTo(false));
   }
 }

@@ -43,6 +43,7 @@ public class UserModel implements Serializable {
     initGroup6(user);
     initGroup7(user);
     initGroup8(user);
+    initGroup9(user);
   }
 
   private void initGroup1(final User user) {
@@ -126,6 +127,7 @@ public class UserModel implements Serializable {
   private void initGroup7(final User user) {
     this.subscribeToNewsletter = Boolean.TRUE.equals(user.subscribeToNewsletter);
     this.externallyManaged = Boolean.TRUE.equals(user.externallyManaged);
+    this.tags = user.tags;
     this.timeZone = user.timeZone;
     this.typeOf2fa = user.typeOf2fa;
     this.typeOf2faForDisplay = user.typeOf2faForDisplay;
@@ -133,10 +135,10 @@ public class UserModel implements Serializable {
     this.userHome = user.userHome;
     this.daysRemainingUntilPasswordExpire = user.daysRemainingUntilPasswordExpire;
     this.passwordExpireAt = user.passwordExpireAt != null ? ZonedDateTime.ofInstant(user.passwordExpireAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.avatarDelete = Boolean.TRUE.equals(user.avatarDelete);
   }
 
   private void initGroup8(final User user) {
+    this.avatarDelete = Boolean.TRUE.equals(user.avatarDelete);
     this.changePassword = user.changePassword;
     this.changePasswordConfirmation = user.changePasswordConfirmation;
     this.grantPermission = user.grantPermission;
@@ -146,6 +148,10 @@ public class UserModel implements Serializable {
     this.passwordConfirmation = user.passwordConfirmation;
     this.announcementsRead = Boolean.TRUE.equals(user.announcementsRead);
     this.clear2fa = Boolean.TRUE.equals(user.clear2fa);
+  }
+
+  private void initGroup9(final User user) {
+    this.convertToPartnerUser = Boolean.TRUE.equals(user.convertToPartnerUser);
   }
 
   private Long id;
@@ -768,6 +774,16 @@ public class UserModel implements Serializable {
     this.externallyManaged = externallyManaged;
   }
 
+  private String tags;
+
+  public String getTags() {
+    return tags;
+  }
+
+  public void setTags(final String tags) {
+    this.tags = tags;
+  }
+
   private String timeZone;
 
   public String getTimeZone() {
@@ -936,6 +952,16 @@ public class UserModel implements Serializable {
 
   public void setClear2fa(final boolean clear2fa) {
     this.clear2fa = clear2fa;
+  }
+
+  private boolean convertToPartnerUser;
+
+  public boolean getConvertToPartnerUser() {
+    return convertToPartnerUser;
+  }
+
+  public void setConvertToPartnerUser(final boolean convertToPartnerUser) {
+    this.convertToPartnerUser = convertToPartnerUser;
   }
 
 }
