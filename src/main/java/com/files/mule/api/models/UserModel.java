@@ -101,6 +101,7 @@ public class UserModel implements Serializable {
   private void initGroup5(final User user) {
     this.partnerAdmin = Boolean.TRUE.equals(user.partnerAdmin);
     this.partnerId = user.partnerId;
+    this.partnerName = user.partnerName;
     this.passwordSetAt = user.passwordSetAt != null ? ZonedDateTime.ofInstant(user.passwordSetAt.toInstant(), ZoneId.systemDefault()) : null;
     this.passwordValidityDays = user.passwordValidityDays;
     this.publicKeysCount = user.publicKeysCount;
@@ -108,10 +109,10 @@ public class UserModel implements Serializable {
     this.require2fa = user.require2fa;
     this.requireLoginBy = user.requireLoginBy != null ? ZonedDateTime.ofInstant(user.requireLoginBy.toInstant(), ZoneId.systemDefault()) : null;
     this.active2fa = Boolean.TRUE.equals(user.active2fa);
-    this.requirePasswordChange = Boolean.TRUE.equals(user.requirePasswordChange);
   }
 
   private void initGroup6(final User user) {
+    this.requirePasswordChange = Boolean.TRUE.equals(user.requirePasswordChange);
     this.passwordExpired = Boolean.TRUE.equals(user.passwordExpired);
     this.readonlySiteAdmin = Boolean.TRUE.equals(user.readonlySiteAdmin);
     this.restapiPermission = Boolean.TRUE.equals(user.restapiPermission);
@@ -121,10 +122,10 @@ public class UserModel implements Serializable {
     this.siteId = user.siteId;
     this.skipWelcomeScreen = Boolean.TRUE.equals(user.skipWelcomeScreen);
     this.encryptionRequired = user.sslRequired;
-    this.ssoStrategyId = user.ssoStrategyId;
   }
 
   private void initGroup7(final User user) {
+    this.ssoStrategyId = user.ssoStrategyId;
     this.subscribeToNewsletter = Boolean.TRUE.equals(user.subscribeToNewsletter);
     this.externallyManaged = Boolean.TRUE.equals(user.externallyManaged);
     this.tags = user.tags;
@@ -134,10 +135,10 @@ public class UserModel implements Serializable {
     this.userRoot = user.userRoot;
     this.userHome = user.userHome;
     this.daysRemainingUntilPasswordExpire = user.daysRemainingUntilPasswordExpire;
-    this.passwordExpireAt = user.passwordExpireAt != null ? ZonedDateTime.ofInstant(user.passwordExpireAt.toInstant(), ZoneId.systemDefault()) : null;
   }
 
   private void initGroup8(final User user) {
+    this.passwordExpireAt = user.passwordExpireAt != null ? ZonedDateTime.ofInstant(user.passwordExpireAt.toInstant(), ZoneId.systemDefault()) : null;
     this.avatarDelete = Boolean.TRUE.equals(user.avatarDelete);
     this.changePassword = user.changePassword;
     this.changePasswordConfirmation = user.changePasswordConfirmation;
@@ -147,10 +148,10 @@ public class UserModel implements Serializable {
     this.password = user.password;
     this.passwordConfirmation = user.passwordConfirmation;
     this.announcementsRead = Boolean.TRUE.equals(user.announcementsRead);
-    this.clear2fa = Boolean.TRUE.equals(user.clear2fa);
   }
 
   private void initGroup9(final User user) {
+    this.clear2fa = Boolean.TRUE.equals(user.clear2fa);
     this.convertToPartnerUser = Boolean.TRUE.equals(user.convertToPartnerUser);
   }
 
@@ -572,6 +573,16 @@ public class UserModel implements Serializable {
 
   public void setPartnerId(final Long partnerId) {
     this.partnerId = partnerId;
+  }
+
+  private String partnerName;
+
+  public String getPartnerName() {
+    return partnerName;
+  }
+
+  public void setPartnerName(final String partnerName) {
+    this.partnerName = partnerName;
   }
 
   private ZonedDateTime passwordSetAt;

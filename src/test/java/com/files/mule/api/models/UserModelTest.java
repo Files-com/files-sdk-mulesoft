@@ -101,6 +101,8 @@ public class UserModelTest {
     assertThat(model.getPartnerAdmin(), equalTo(true));
     model.setPartnerId(1L);
     assertThat(model.getPartnerId(), equalTo(1L));
+    model.setPartnerName("example");
+    assertThat(model.getPartnerName(), equalTo("example"));
     model.setPasswordSetAt(ZonedDateTime.parse("2000-01-01T01:00:00Z"));
     assertThat(model.getPasswordSetAt(), equalTo(ZonedDateTime.parse("2000-01-01T01:00:00Z")));
     model.setPasswordValidityDays(1L);
