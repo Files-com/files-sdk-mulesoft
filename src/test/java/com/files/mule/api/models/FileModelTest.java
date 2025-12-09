@@ -32,8 +32,8 @@ public class FileModelTest {
     assertThat(model.getCreatedByInboxId(), equalTo(1L));
     model.setCreatedByRemoteServerId(1L);
     assertThat(model.getCreatedByRemoteServerId(), equalTo(1L));
-    model.setCreatedByRemoteServerSyncId(1L);
-    assertThat(model.getCreatedByRemoteServerSyncId(), equalTo(1L));
+    model.setCreatedBySyncId(1L);
+    assertThat(model.getCreatedBySyncId(), equalTo(1L));
     model.setCustomMetadata(null);
     assertThat(model.getCustomMetadata(), equalTo(null));
     model.setDisplayName("file.txt");
@@ -54,8 +54,8 @@ public class FileModelTest {
     assertThat(model.getLastModifiedByBundleRegistrationId(), equalTo(1L));
     model.setLastModifiedByRemoteServerId(1L);
     assertThat(model.getLastModifiedByRemoteServerId(), equalTo(1L));
-    model.setLastModifiedByRemoteServerSyncId(1L);
-    assertThat(model.getLastModifiedByRemoteServerSyncId(), equalTo(1L));
+    model.setLastModifiedBySyncId(1L);
+    assertThat(model.getLastModifiedBySyncId(), equalTo(1L));
     model.setMtime(ZonedDateTime.parse("2000-01-01T01:00:00Z"));
     assertThat(model.getMtime(), equalTo(ZonedDateTime.parse("2000-01-01T01:00:00Z")));
     model.setProvidedMtime(ZonedDateTime.parse("2000-01-01T01:00:00Z"));

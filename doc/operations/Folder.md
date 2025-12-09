@@ -37,7 +37,7 @@
     "createdByBundleRegistrationId": 1,
     "createdByInboxId": 1,
     "createdByRemoteServerId": 1,
-    "createdByRemoteServerSyncId": 1,
+    "createdBySyncId": 1,
     "customMetadata": {
       "key": "value"
     },
@@ -50,7 +50,7 @@
     "lastModifiedByAutomationId": 1,
     "lastModifiedByBundleRegistrationId": 1,
     "lastModifiedByRemoteServerId": 1,
-    "lastModifiedByRemoteServerSyncId": 1,
+    "lastModifiedBySyncId": 1,
     "mtime": "2000-01-01T01:00:00Z",
     "providedMtime": "2000-01-01T01:00:00Z",
     "crc32": "70976923",
@@ -110,7 +110,7 @@
   "createdByBundleRegistrationId": 1,
   "createdByInboxId": 1,
   "createdByRemoteServerId": 1,
-  "createdByRemoteServerSyncId": 1,
+  "createdBySyncId": 1,
   "customMetadata": {
     "key": "value"
   },
@@ -123,7 +123,7 @@
   "lastModifiedByAutomationId": 1,
   "lastModifiedByBundleRegistrationId": 1,
   "lastModifiedByRemoteServerId": 1,
-  "lastModifiedByRemoteServerSyncId": 1,
+  "lastModifiedBySyncId": 1,
   "mtime": "2000-01-01T01:00:00Z",
   "providedMtime": "2000-01-01T01:00:00Z",
   "crc32": "70976923",

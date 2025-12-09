@@ -70,7 +70,7 @@ The above example uses the payload as the content. You can also specify the cont
   "createdByBundleRegistrationId": 1,
   "createdByInboxId": 1,
   "createdByRemoteServerId": 1,
-  "createdByRemoteServerSyncId": 1,
+  "createdBySyncId": 1,
   "customMetadata": {
     "key": "value"
   },
@@ -83,7 +83,7 @@ The above example uses the payload as the content. You can also specify the cont
   "lastModifiedByAutomationId": 1,
   "lastModifiedByBundleRegistrationId": 1,
   "lastModifiedByRemoteServerId": 1,
-  "lastModifiedByRemoteServerSyncId": 1,
+  "lastModifiedBySyncId": 1,
   "mtime": "2000-01-01T01:00:00Z",
   "providedMtime": "2000-01-01T01:00:00Z",
   "crc32": "70976923",
@@ -164,7 +164,7 @@ The above example uses the payload as the content. You can also specify the cont
   "createdByBundleRegistrationId": 1,
   "createdByInboxId": 1,
   "createdByRemoteServerId": 1,
-  "createdByRemoteServerSyncId": 1,
+  "createdBySyncId": 1,
   "customMetadata": {
     "key": "value"
   },
@@ -177,7 +177,7 @@ The above example uses the payload as the content. You can also specify the cont
   "lastModifiedByAutomationId": 1,
   "lastModifiedByBundleRegistrationId": 1,
   "lastModifiedByRemoteServerId": 1,
-  "lastModifiedByRemoteServerSyncId": 1,
+  "lastModifiedBySyncId": 1,
   "mtime": "2000-01-01T01:00:00Z",
   "providedMtime": "2000-01-01T01:00:00Z",
   "crc32": "70976923",

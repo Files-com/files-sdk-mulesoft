@@ -31,7 +31,7 @@ public class FileModel implements Serializable {
     this.createdByBundleRegistrationId = file.createdByBundleRegistrationId;
     this.createdByInboxId = file.createdByInboxId;
     this.createdByRemoteServerId = file.createdByRemoteServerId;
-    this.createdByRemoteServerSyncId = file.createdByRemoteServerSyncId;
+    this.createdBySyncId = file.createdBySyncId;
     this.customMetadata = file.customMetadata;
   }
 
@@ -45,7 +45,7 @@ public class FileModel implements Serializable {
     this.lastModifiedByAutomationId = file.lastModifiedByAutomationId;
     this.lastModifiedByBundleRegistrationId = file.lastModifiedByBundleRegistrationId;
     this.lastModifiedByRemoteServerId = file.lastModifiedByRemoteServerId;
-    this.lastModifiedByRemoteServerSyncId = file.lastModifiedByRemoteServerSyncId;
+    this.lastModifiedBySyncId = file.lastModifiedBySyncId;
   }
 
   private void initGroup3(final File file) {
@@ -164,14 +164,14 @@ public class FileModel implements Serializable {
     this.createdByRemoteServerId = createdByRemoteServerId;
   }
 
-  private Long createdByRemoteServerSyncId;
+  private Long createdBySyncId;
 
-  public Long getCreatedByRemoteServerSyncId() {
-    return createdByRemoteServerSyncId;
+  public Long getCreatedBySyncId() {
+    return createdBySyncId;
   }
 
-  public void setCreatedByRemoteServerSyncId(final Long createdByRemoteServerSyncId) {
-    this.createdByRemoteServerSyncId = createdByRemoteServerSyncId;
+  public void setCreatedBySyncId(final Long createdBySyncId) {
+    this.createdBySyncId = createdBySyncId;
   }
 
   private Map<String, String> customMetadata;
@@ -274,14 +274,14 @@ public class FileModel implements Serializable {
     this.lastModifiedByRemoteServerId = lastModifiedByRemoteServerId;
   }
 
-  private Long lastModifiedByRemoteServerSyncId;
+  private Long lastModifiedBySyncId;
 
-  public Long getLastModifiedByRemoteServerSyncId() {
-    return lastModifiedByRemoteServerSyncId;
+  public Long getLastModifiedBySyncId() {
+    return lastModifiedBySyncId;
   }
 
-  public void setLastModifiedByRemoteServerSyncId(final Long lastModifiedByRemoteServerSyncId) {
-    this.lastModifiedByRemoteServerSyncId = lastModifiedByRemoteServerSyncId;
+  public void setLastModifiedBySyncId(final Long lastModifiedBySyncId) {
+    this.lastModifiedBySyncId = lastModifiedBySyncId;
   }
 
   private ZonedDateTime mtime;
