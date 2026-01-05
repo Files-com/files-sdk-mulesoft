@@ -6,7 +6,6 @@ package com.files.mule.api.models;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
-import java.util.Map;
 
 import com.files.models.File;
 
