@@ -443,13 +443,13 @@ public class ShareLinkModel implements Serializable {
     this.watermarkAttachment = watermarkAttachment;
   }
 
-  private Map<String, String> watermarkValue;
+  private Object watermarkValue;
 
-  public Map<String, String> getWatermarkValue() {
+  public Object getWatermarkValue() {
     return watermarkValue;
   }
 
-  public void setWatermarkValue(final Map<String, String> watermarkValue) {
+  public void setWatermarkValue(final Object watermarkValue) {
     this.watermarkValue = watermarkValue;
   }
 

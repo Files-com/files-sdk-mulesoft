@@ -38,5 +38,7 @@ public class GroupModelTest {
     assertThat(model.getRestapiPermission(), equalTo(true));
     model.setSiteId(1L);
     assertThat(model.getSiteId(), equalTo(1L));
+    model.setWorkspaceId(1L);
+    assertThat(model.getWorkspaceId(), equalTo(1L));
   }
 }

@@ -121,13 +121,13 @@ public class ShareLinkRegistrationModel implements Serializable {
     this.formFieldSetId = formFieldSetId;
   }
 
-  private Map<String, String> formFieldData;
+  private Object formFieldData;
 
-  public Map<String, String> getFormFieldData() {
+  public Object getFormFieldData() {
     return formFieldData;
   }
 
-  public void setFormFieldData(final Map<String, String> formFieldData) {
+  public void setFormFieldData(final Object formFieldData) {
     this.formFieldData = formFieldData;
   }
 

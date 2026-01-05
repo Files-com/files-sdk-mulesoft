@@ -161,13 +161,13 @@ public class FolderModel implements Serializable {
     this.createdBySyncId = createdBySyncId;
   }
 
-  private Map<String, String> customMetadata;
+  private Object customMetadata;
 
-  public Map<String, String> getCustomMetadata() {
+  public Object getCustomMetadata() {
     return customMetadata;
   }
 
-  public void setCustomMetadata(final Map<String, String> customMetadata) {
+  public void setCustomMetadata(final Object customMetadata) {
     this.customMetadata = customMetadata;
   }
 

@@ -39,6 +39,7 @@ public class GroupModel implements Serializable {
   private void initGroup2(final Group group) {
     this.restapiPermission = Boolean.TRUE.equals(group.restapiPermission);
     this.siteId = group.siteId;
+    this.workspaceId = group.workspaceId;
   }
 
   private Long id;
@@ -159,6 +160,16 @@ public class GroupModel implements Serializable {
 
   public void setSiteId(final Long siteId) {
     this.siteId = siteId;
+  }
+
+  private Long workspaceId;
+
+  public Long getWorkspaceId() {
+    return workspaceId;
+  }
+
+  public void setWorkspaceId(final Long workspaceId) {
+    this.workspaceId = workspaceId;
   }
 
 }
