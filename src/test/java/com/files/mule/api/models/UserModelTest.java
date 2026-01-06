@@ -131,6 +131,8 @@ public class UserModelTest {
     assertThat(model.getSftpPermission(), equalTo(true));
     model.setSiteAdmin(true);
     assertThat(model.getSiteAdmin(), equalTo(true));
+    model.setWorkspaceAdmin(true);
+    assertThat(model.getWorkspaceAdmin(), equalTo(true));
     model.setSiteId(1L);
     assertThat(model.getSiteId(), equalTo(1L));
     model.setWorkspaceId(1L);

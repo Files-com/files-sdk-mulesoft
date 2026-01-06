@@ -119,12 +119,13 @@ public class UserModel implements Serializable {
     this.selfManaged = Boolean.TRUE.equals(user.selfManaged);
     this.sftpPermission = Boolean.TRUE.equals(user.sftpPermission);
     this.siteAdmin = Boolean.TRUE.equals(user.siteAdmin);
+    this.workspaceAdmin = Boolean.TRUE.equals(user.workspaceAdmin);
     this.siteId = user.siteId;
     this.workspaceId = user.workspaceId;
-    this.skipWelcomeScreen = Boolean.TRUE.equals(user.skipWelcomeScreen);
   }
 
   private void initGroup7(final User user) {
+    this.skipWelcomeScreen = Boolean.TRUE.equals(user.skipWelcomeScreen);
     this.encryptionRequired = user.sslRequired;
     this.ssoStrategyId = user.ssoStrategyId;
     this.subscribeToNewsletter = Boolean.TRUE.equals(user.subscribeToNewsletter);
@@ -134,10 +135,10 @@ public class UserModel implements Serializable {
     this.typeOf2fa = user.typeOf2fa;
     this.typeOf2faForDisplay = user.typeOf2faForDisplay;
     this.userRoot = user.userRoot;
-    this.userHome = user.userHome;
   }
 
   private void initGroup8(final User user) {
+    this.userHome = user.userHome;
     this.daysRemainingUntilPasswordExpire = user.daysRemainingUntilPasswordExpire;
     this.passwordExpireAt = user.passwordExpireAt != null ? ZonedDateTime.ofInstant(user.passwordExpireAt.toInstant(), ZoneId.systemDefault()) : null;
     this.avatarDelete = Boolean.TRUE.equals(user.avatarDelete);
@@ -147,10 +148,10 @@ public class UserModel implements Serializable {
     this.groupId = user.groupId;
     this.importedPasswordHash = user.importedPasswordHash;
     this.password = user.password;
-    this.passwordConfirmation = user.passwordConfirmation;
   }
 
   private void initGroup9(final User user) {
+    this.passwordConfirmation = user.passwordConfirmation;
     this.announcementsRead = Boolean.TRUE.equals(user.announcementsRead);
     this.clear2fa = Boolean.TRUE.equals(user.clear2fa);
     this.convertToPartnerUser = Boolean.TRUE.equals(user.convertToPartnerUser);
@@ -724,6 +725,16 @@ public class UserModel implements Serializable {
 
   public void setSiteAdmin(final boolean siteAdmin) {
     this.siteAdmin = siteAdmin;
+  }
+
+  private boolean workspaceAdmin;
+
+  public boolean getWorkspaceAdmin() {
+    return workspaceAdmin;
+  }
+
+  public void setWorkspaceAdmin(final boolean workspaceAdmin) {
+    this.workspaceAdmin = workspaceAdmin;
   }
 
   private Long siteId;
