@@ -49,7 +49,7 @@
 		<dependency>
 			<groupId>com.files</groupId>
 			<artifactId>mule-filescom-connector</artifactId>
-			<version>1.0.212</version>
+			<version>1.0.213</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
 	</dependencies>
