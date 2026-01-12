@@ -79,13 +79,14 @@ public class ShareLinkModel implements Serializable {
       this.watermarkAttachment = new ImageModel(bundle.watermarkAttachment);
     }
     this.watermarkValue = bundle.watermarkValue;
+    this.sendOneTimePasswordToRecipientAtRegistration = Boolean.TRUE.equals(bundle.sendOneTimePasswordToRecipientAtRegistration);
     this.hasInbox = Boolean.TRUE.equals(bundle.hasInbox);
     this.dontAllowFoldersInUploads = Boolean.TRUE.equals(bundle.dontAllowFoldersInUploads);
     this.paths = bundle.paths != null ? Arrays.asList(bundle.paths) : null;
-    this.password = bundle.password;
   }
 
   private void initGroup5(final Bundle bundle) {
+    this.password = bundle.password;
     this.formFieldSetId = bundle.formFieldSetId;
     this.createSnapshot = Boolean.TRUE.equals(bundle.createSnapshot);
     this.finalizeSnapshot = Boolean.TRUE.equals(bundle.finalizeSnapshot);
@@ -450,6 +451,16 @@ public class ShareLinkModel implements Serializable {
 
   public void setWatermarkValue(final Object watermarkValue) {
     this.watermarkValue = watermarkValue;
+  }
+
+  private boolean sendOneTimePasswordToRecipientAtRegistration;
+
+  public boolean getSendOneTimePasswordToRecipientAtRegistration() {
+    return sendOneTimePasswordToRecipientAtRegistration;
+  }
+
+  public void setSendOneTimePasswordToRecipientAtRegistration(final boolean sendOneTimePasswordToRecipientAtRegistration) {
+    this.sendOneTimePasswordToRecipientAtRegistration = sendOneTimePasswordToRecipientAtRegistration;
   }
 
   private boolean hasInbox;

@@ -89,6 +89,8 @@ public class ShareLinkModelTest {
     assertThat(model.getWatermarkAttachment(), equalTo(null));
     model.setWatermarkValue(null);
     assertThat(model.getWatermarkValue(), equalTo(null));
+    model.setSendOneTimePasswordToRecipientAtRegistration(true);
+    assertThat(model.getSendOneTimePasswordToRecipientAtRegistration(), equalTo(true));
     model.setHasInbox(true);
     assertThat(model.getHasInbox(), equalTo(true));
     model.setDontAllowFoldersInUploads(true);

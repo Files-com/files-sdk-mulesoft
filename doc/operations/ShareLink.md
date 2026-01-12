@@ -96,6 +96,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
     "watermarkValue": {
       "key": "example value"
     },
+    "sendOneTimePasswordToRecipientAtRegistration": true,
     "hasInbox": true,
     "dontAllowFoldersInUploads": true,
     "paths": [
@@ -207,6 +208,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
   "watermarkValue": {
     "key": "example value"
   },
+  "sendOneTimePasswordToRecipientAtRegistration": true,
   "hasInbox": true,
   "dontAllowFoldersInUploads": true,
   "paths": [
@@ -331,6 +333,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
   "watermarkValue": {
     "key": "example value"
   },
+  "sendOneTimePasswordToRecipientAtRegistration": true,
   "hasInbox": true,
   "dontAllowFoldersInUploads": true,
   "paths": [
@@ -445,6 +448,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
   "watermarkValue": {
     "key": "example value"
   },
+  "sendOneTimePasswordToRecipientAtRegistration": true,
   "hasInbox": true,
   "dontAllowFoldersInUploads": true,
   "paths": [
