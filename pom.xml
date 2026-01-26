@@ -13,7 +13,7 @@
     <groupId>com.files</groupId>
     <artifactId>mule-filescom-connector</artifactId>
     <packaging>mule-extension</packaging>
-    <version>1.0.263</version>
+    <version>1.0.264</version>
 
     <name>Files.com Connector</name>
     <description>The Files.com MuleSoft Connector</description>
@@ -115,7 +115,7 @@
         <dependency>
             <groupId>com.files</groupId>
             <artifactId>files-sdk</artifactId>
-            <version>1.7.88</version>
+            <version>1.7.89</version>
         </dependency>
         <dependency>
             <groupId>org.mule.sdk</groupId>
