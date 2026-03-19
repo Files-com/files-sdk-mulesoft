@@ -67,12 +67,13 @@ public class UserModel implements Serializable {
     this.davPermission = Boolean.TRUE.equals(user.davPermission);
     this.disabled = Boolean.TRUE.equals(user.disabled);
     this.disabledExpiredOrInactive = Boolean.TRUE.equals(user.disabledExpiredOrInactive);
+    this.desktopConfigurationProfileId = user.desktopConfigurationProfileId;
     this.email = user.email;
     this.filesystemLayout = user.filesystemLayout;
-    this.firstLoginAt = user.firstLoginAt != null ? ZonedDateTime.ofInstant(user.firstLoginAt.toInstant(), ZoneId.systemDefault()) : null;
   }
 
   private void initGroup3(final User user) {
+    this.firstLoginAt = user.firstLoginAt != null ? ZonedDateTime.ofInstant(user.firstLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.ftpPermission = Boolean.TRUE.equals(user.ftpPermission);
     this.groupIds = user.groupIds;
     this.headerText = user.headerText;
@@ -82,10 +83,10 @@ public class UserModel implements Serializable {
     this.lastFtpLoginAt = user.lastFtpLoginAt != null ? ZonedDateTime.ofInstant(user.lastFtpLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastSftpLoginAt = user.lastSftpLoginAt != null ? ZonedDateTime.ofInstant(user.lastSftpLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastDavLoginAt = user.lastDavLoginAt != null ? ZonedDateTime.ofInstant(user.lastDavLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastDesktopLoginAt = user.lastDesktopLoginAt != null ? ZonedDateTime.ofInstant(user.lastDesktopLoginAt.toInstant(), ZoneId.systemDefault()) : null;
   }
 
   private void initGroup4(final User user) {
+    this.lastDesktopLoginAt = user.lastDesktopLoginAt != null ? ZonedDateTime.ofInstant(user.lastDesktopLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastRestapiLoginAt = user.lastRestapiLoginAt != null ? ZonedDateTime.ofInstant(user.lastRestapiLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastApiUseAt = user.lastApiUseAt != null ? ZonedDateTime.ofInstant(user.lastApiUseAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastActiveAt = user.lastActiveAt != null ? ZonedDateTime.ofInstant(user.lastActiveAt.toInstant(), ZoneId.systemDefault()) : null;
@@ -95,10 +96,10 @@ public class UserModel implements Serializable {
     this.company = user.company;
     this.notes = user.notes;
     this.notificationDailySendTime = user.notificationDailySendTime;
-    this.officeIntegrationEnabled = Boolean.TRUE.equals(user.officeIntegrationEnabled);
   }
 
   private void initGroup5(final User user) {
+    this.officeIntegrationEnabled = Boolean.TRUE.equals(user.officeIntegrationEnabled);
     this.partnerAdmin = Boolean.TRUE.equals(user.partnerAdmin);
     this.partnerId = user.partnerId;
     this.partnerName = user.partnerName;
@@ -108,10 +109,10 @@ public class UserModel implements Serializable {
     this.receiveAdminAlerts = Boolean.TRUE.equals(user.receiveAdminAlerts);
     this.require2fa = user.require2fa;
     this.requireLoginBy = user.requireLoginBy != null ? ZonedDateTime.ofInstant(user.requireLoginBy.toInstant(), ZoneId.systemDefault()) : null;
-    this.active2fa = Boolean.TRUE.equals(user.active2fa);
   }
 
   private void initGroup6(final User user) {
+    this.active2fa = Boolean.TRUE.equals(user.active2fa);
     this.requirePasswordChange = Boolean.TRUE.equals(user.requirePasswordChange);
     this.passwordExpired = Boolean.TRUE.equals(user.passwordExpired);
     this.readonlySiteAdmin = Boolean.TRUE.equals(user.readonlySiteAdmin);
@@ -121,10 +122,10 @@ public class UserModel implements Serializable {
     this.siteAdmin = Boolean.TRUE.equals(user.siteAdmin);
     this.workspaceAdmin = Boolean.TRUE.equals(user.workspaceAdmin);
     this.siteId = user.siteId;
-    this.workspaceId = user.workspaceId;
   }
 
   private void initGroup7(final User user) {
+    this.workspaceId = user.workspaceId;
     this.skipWelcomeScreen = Boolean.TRUE.equals(user.skipWelcomeScreen);
     this.encryptionRequired = user.sslRequired;
     this.ssoStrategyId = user.ssoStrategyId;
@@ -134,10 +135,10 @@ public class UserModel implements Serializable {
     this.timeZone = user.timeZone;
     this.typeOf2fa = user.typeOf2fa;
     this.typeOf2faForDisplay = user.typeOf2faForDisplay;
-    this.userRoot = user.userRoot;
   }
 
   private void initGroup8(final User user) {
+    this.userRoot = user.userRoot;
     this.userHome = user.userHome;
     this.daysRemainingUntilPasswordExpire = user.daysRemainingUntilPasswordExpire;
     this.passwordExpireAt = user.passwordExpireAt != null ? ZonedDateTime.ofInstant(user.passwordExpireAt.toInstant(), ZoneId.systemDefault()) : null;
@@ -147,10 +148,10 @@ public class UserModel implements Serializable {
     this.grantPermission = user.grantPermission;
     this.groupId = user.groupId;
     this.importedPasswordHash = user.importedPasswordHash;
-    this.password = user.password;
   }
 
   private void initGroup9(final User user) {
+    this.password = user.password;
     this.passwordConfirmation = user.passwordConfirmation;
     this.announcementsRead = Boolean.TRUE.equals(user.announcementsRead);
     this.clear2fa = Boolean.TRUE.equals(user.clear2fa);
@@ -325,6 +326,16 @@ public class UserModel implements Serializable {
 
   public void setDisabledExpiredOrInactive(final boolean disabledExpiredOrInactive) {
     this.disabledExpiredOrInactive = disabledExpiredOrInactive;
+  }
+
+  private Long desktopConfigurationProfileId;
+
+  public Long getDesktopConfigurationProfileId() {
+    return desktopConfigurationProfileId;
+  }
+
+  public void setDesktopConfigurationProfileId(final Long desktopConfigurationProfileId) {
+    this.desktopConfigurationProfileId = desktopConfigurationProfileId;
   }
 
   private String email;

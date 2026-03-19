@@ -51,6 +51,8 @@ public class UserModelTest {
     assertThat(model.getDisabled(), equalTo(true));
     model.setDisabledExpiredOrInactive(true);
     assertThat(model.getDisabledExpiredOrInactive(), equalTo(true));
+    model.setDesktopConfigurationProfileId(1L);
+    assertThat(model.getDesktopConfigurationProfileId(), equalTo(1L));
     model.setEmail("john.doe@files.com");
     assertThat(model.getEmail(), equalTo("john.doe@files.com"));
     model.setFilesystemLayout("site_root");
