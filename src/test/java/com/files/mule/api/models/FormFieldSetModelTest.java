@@ -32,5 +32,7 @@ public class FormFieldSetModelTest {
     assertThat(model.getInUse(), equalTo(true));
     model.setUserId(1L);
     assertThat(model.getUserId(), equalTo(1L));
+    model.setWorkspaceId(1L);
+    assertThat(model.getWorkspaceId(), equalTo(1L));
   }
 }

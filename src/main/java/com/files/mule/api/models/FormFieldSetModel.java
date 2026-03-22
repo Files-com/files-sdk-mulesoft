@@ -33,6 +33,7 @@ public class FormFieldSetModel implements Serializable {
     this.skipCompany = Boolean.TRUE.equals(formFieldSet.skipCompany);
     this.inUse = Boolean.TRUE.equals(formFieldSet.inUse);
     this.userId = formFieldSet.userId;
+    this.workspaceId = formFieldSet.workspaceId;
   }
 
   private Long id;
@@ -113,6 +114,16 @@ public class FormFieldSetModel implements Serializable {
 
   public void setUserId(final Long userId) {
     this.userId = userId;
+  }
+
+  private Long workspaceId;
+
+  public Long getWorkspaceId() {
+    return workspaceId;
+  }
+
+  public void setWorkspaceId(final Long workspaceId) {
+    this.workspaceId = workspaceId;
   }
 
 }
