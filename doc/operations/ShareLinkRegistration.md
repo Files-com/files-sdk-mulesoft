@@ -43,6 +43,7 @@ A BundleRegistration is a registration record when a user fills out the form to 
     "bundleCode": "example",
     "bundleId": 1,
     "bundleRecipientId": 1,
+    "workspaceId": 1,
     "createdAt": "2000-01-01T01:00:00Z"
   }
 ]

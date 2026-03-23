@@ -27,7 +27,8 @@ A BundleNotification is an E-Mail sent out to users when certain actions are per
     "id": 1,
     "notifyOnRegistration": true,
     "notifyOnUpload": true,
-    "notifyUserId": 1
+    "notifyUserId": 1,
+    "workspaceId": 1
   }
 ]
 ```
@@ -62,7 +63,8 @@ A BundleNotification is an E-Mail sent out to users when certain actions are per
   "id": 1,
   "notifyOnRegistration": true,
   "notifyOnUpload": true,
-  "notifyUserId": 1
+  "notifyUserId": 1,
+  "workspaceId": 1
 }
 ```
 
@@ -100,7 +102,8 @@ A BundleNotification is an E-Mail sent out to users when certain actions are per
   "id": 1,
   "notifyOnRegistration": true,
   "notifyOnUpload": true,
-  "notifyUserId": 1
+  "notifyUserId": 1,
+  "workspaceId": 1
 }
 ```
 
@@ -140,7 +143,8 @@ A BundleNotification is an E-Mail sent out to users when certain actions are per
   "id": 1,
   "notifyOnRegistration": true,
   "notifyOnUpload": true,
-  "notifyUserId": 1
+  "notifyUserId": 1,
+  "workspaceId": 1
 }
 ```
 

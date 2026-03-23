@@ -97,6 +97,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
       "key": "example value"
     },
     "sendOneTimePasswordToRecipientAtRegistration": true,
+    "workspaceId": 1,
     "hasInbox": true,
     "dontAllowFoldersInUploads": true,
     "paths": [
@@ -209,6 +210,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
     "key": "example value"
   },
   "sendOneTimePasswordToRecipientAtRegistration": true,
+  "workspaceId": 1,
   "hasInbox": true,
   "dontAllowFoldersInUploads": true,
   "paths": [
@@ -334,6 +336,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
     "key": "example value"
   },
   "sendOneTimePasswordToRecipientAtRegistration": true,
+  "workspaceId": 1,
   "hasInbox": true,
   "dontAllowFoldersInUploads": true,
   "paths": [
@@ -449,6 +452,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
     "key": "example value"
   },
   "sendOneTimePasswordToRecipientAtRegistration": true,
+  "workspaceId": 1,
   "hasInbox": true,
   "dontAllowFoldersInUploads": true,
   "paths": [

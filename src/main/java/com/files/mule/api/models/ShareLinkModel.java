@@ -80,12 +80,13 @@ public class ShareLinkModel implements Serializable {
     }
     this.watermarkValue = bundle.watermarkValue;
     this.sendOneTimePasswordToRecipientAtRegistration = Boolean.TRUE.equals(bundle.sendOneTimePasswordToRecipientAtRegistration);
+    this.workspaceId = bundle.workspaceId;
     this.hasInbox = Boolean.TRUE.equals(bundle.hasInbox);
     this.dontAllowFoldersInUploads = Boolean.TRUE.equals(bundle.dontAllowFoldersInUploads);
-    this.paths = bundle.paths != null ? Arrays.asList(bundle.paths) : null;
   }
 
   private void initGroup5(final Bundle bundle) {
+    this.paths = bundle.paths != null ? Arrays.asList(bundle.paths) : null;
     this.password = bundle.password;
     this.formFieldSetId = bundle.formFieldSetId;
     this.createSnapshot = Boolean.TRUE.equals(bundle.createSnapshot);
@@ -461,6 +462,16 @@ public class ShareLinkModel implements Serializable {
 
   public void setSendOneTimePasswordToRecipientAtRegistration(final boolean sendOneTimePasswordToRecipientAtRegistration) {
     this.sendOneTimePasswordToRecipientAtRegistration = sendOneTimePasswordToRecipientAtRegistration;
+  }
+
+  private Long workspaceId;
+
+  public Long getWorkspaceId() {
+    return workspaceId;
+  }
+
+  public void setWorkspaceId(final Long workspaceId) {
+    this.workspaceId = workspaceId;
   }
 
   private boolean hasInbox;

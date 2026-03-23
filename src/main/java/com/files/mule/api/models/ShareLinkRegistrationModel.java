@@ -37,6 +37,7 @@ public class ShareLinkRegistrationModel implements Serializable {
   private void initGroup2(final BundleRegistration bundleRegistration) {
     this.bundleId = bundleRegistration.bundleId;
     this.bundleRecipientId = bundleRegistration.bundleRecipientId;
+    this.workspaceId = bundleRegistration.workspaceId;
     this.createdAt = bundleRegistration.createdAt != null ? ZonedDateTime.ofInstant(bundleRegistration.createdAt.toInstant(), ZoneId.systemDefault()) : null;
   }
 
@@ -158,6 +159,16 @@ public class ShareLinkRegistrationModel implements Serializable {
 
   public void setBundleRecipientId(final Long bundleRecipientId) {
     this.bundleRecipientId = bundleRecipientId;
+  }
+
+  private Long workspaceId;
+
+  public Long getWorkspaceId() {
+    return workspaceId;
+  }
+
+  public void setWorkspaceId(final Long workspaceId) {
+    this.workspaceId = workspaceId;
   }
 
   private ZonedDateTime createdAt;

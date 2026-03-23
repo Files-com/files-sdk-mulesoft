@@ -40,6 +40,8 @@ public class ShareLinkRegistrationModelTest {
     assertThat(model.getBundleId(), equalTo(1L));
     model.setBundleRecipientId(1L);
     assertThat(model.getBundleRecipientId(), equalTo(1L));
+    model.setWorkspaceId(1L);
+    assertThat(model.getWorkspaceId(), equalTo(1L));
     model.setCreatedAt(ZonedDateTime.parse("2000-01-01T01:00:00Z"));
     assertThat(model.getCreatedAt(), equalTo(ZonedDateTime.parse("2000-01-01T01:00:00Z")));
   }

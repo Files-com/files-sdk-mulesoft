@@ -44,10 +44,12 @@ A BundleDownload is a record of the download action that happened in the bundle.
       "bundleCode": "example",
       "bundleId": 1,
       "bundleRecipientId": 1,
+      "workspaceId": 1,
       "createdAt": "2000-01-01T01:00:00Z"
     },
     "downloadMethod": "file",
     "path": "a/b/test.txt",
+    "workspaceId": 1,
     "createdAt": "2000-01-01T01:00:00Z"
   }
 ]

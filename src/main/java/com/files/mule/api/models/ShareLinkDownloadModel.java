@@ -26,6 +26,7 @@ public class ShareLinkDownloadModel implements Serializable {
     }
     this.downloadMethod = bundleDownload.downloadMethod;
     this.path = bundleDownload.path;
+    this.workspaceId = bundleDownload.workspaceId;
     this.createdAt = bundleDownload.createdAt != null ? ZonedDateTime.ofInstant(bundleDownload.createdAt.toInstant(), ZoneId.systemDefault()) : null;
   }
 
@@ -57,6 +58,16 @@ public class ShareLinkDownloadModel implements Serializable {
 
   public void setPath(final String path) {
     this.path = path;
+  }
+
+  private Long workspaceId;
+
+  public Long getWorkspaceId() {
+    return workspaceId;
+  }
+
+  public void setWorkspaceId(final Long workspaceId) {
+    this.workspaceId = workspaceId;
   }
 
   private ZonedDateTime createdAt;

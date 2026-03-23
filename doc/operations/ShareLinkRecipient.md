@@ -35,7 +35,8 @@ and share_after_create => true.
     "name": "John Doe",
     "note": "Some note.",
     "recipient": "john.doe@example.com",
-    "sentAt": "2000-01-01T01:00:00Z"
+    "sentAt": "2000-01-01T01:00:00Z",
+    "workspaceId": 1
   }
 ]
 ```
@@ -80,7 +81,8 @@ and share_after_create => true.
   "name": "John Doe",
   "note": "Some note.",
   "recipient": "john.doe@example.com",
-  "sentAt": "2000-01-01T01:00:00Z"
+  "sentAt": "2000-01-01T01:00:00Z",
+  "workspaceId": 1
 }
 ```
 

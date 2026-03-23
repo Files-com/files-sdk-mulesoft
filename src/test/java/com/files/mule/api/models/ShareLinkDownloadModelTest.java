@@ -22,6 +22,8 @@ public class ShareLinkDownloadModelTest {
     assertThat(model.getDownloadMethod(), equalTo("file"));
     model.setPath("a/b/test.txt");
     assertThat(model.getPath(), equalTo("a/b/test.txt"));
+    model.setWorkspaceId(1L);
+    assertThat(model.getWorkspaceId(), equalTo(1L));
     model.setCreatedAt(ZonedDateTime.parse("2000-01-01T01:00:00Z"));
     assertThat(model.getCreatedAt(), equalTo(ZonedDateTime.parse("2000-01-01T01:00:00Z")));
   }

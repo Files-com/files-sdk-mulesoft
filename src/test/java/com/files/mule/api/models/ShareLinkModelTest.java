@@ -91,6 +91,8 @@ public class ShareLinkModelTest {
     assertThat(model.getWatermarkValue(), equalTo(null));
     model.setSendOneTimePasswordToRecipientAtRegistration(true);
     assertThat(model.getSendOneTimePasswordToRecipientAtRegistration(), equalTo(true));
+    model.setWorkspaceId(1L);
+    assertThat(model.getWorkspaceId(), equalTo(1L));
     model.setHasInbox(true);
     assertThat(model.getHasInbox(), equalTo(true));
     model.setDontAllowFoldersInUploads(true);

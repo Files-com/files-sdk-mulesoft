@@ -24,6 +24,7 @@ public class ShareLinkNotificationModel implements Serializable {
     this.notifyOnRegistration = Boolean.TRUE.equals(bundleNotification.notifyOnRegistration);
     this.notifyOnUpload = Boolean.TRUE.equals(bundleNotification.notifyOnUpload);
     this.notifyUserId = bundleNotification.notifyUserId;
+    this.workspaceId = bundleNotification.workspaceId;
     this.userId = bundleNotification.userId;
   }
 
@@ -75,6 +76,16 @@ public class ShareLinkNotificationModel implements Serializable {
 
   public void setNotifyUserId(final Long notifyUserId) {
     this.notifyUserId = notifyUserId;
+  }
+
+  private Long workspaceId;
+
+  public Long getWorkspaceId() {
+    return workspaceId;
+  }
+
+  public void setWorkspaceId(final Long workspaceId) {
+    this.workspaceId = workspaceId;
   }
 
   private Long userId;
