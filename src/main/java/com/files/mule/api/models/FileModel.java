@@ -78,6 +78,7 @@ public class FileModel implements Serializable {
   private void initGroup5(final File file) {
     this.ref = file.ref;
     this.restart = file.restart;
+    this.copyBehaviors = Boolean.TRUE.equals(file.copyBehaviors);
     this.structure = file.structure;
     this.withRename = Boolean.TRUE.equals(file.withRename);
     this.bufferedUpload = Boolean.TRUE.equals(file.bufferedUpload);
@@ -501,6 +502,16 @@ public class FileModel implements Serializable {
 
   public void setRestart(final Long restart) {
     this.restart = restart;
+  }
+
+  private boolean copyBehaviors;
+
+  public boolean getCopyBehaviors() {
+    return copyBehaviors;
+  }
+
+  public void setCopyBehaviors(final boolean copyBehaviors) {
+    this.copyBehaviors = copyBehaviors;
   }
 
   private String structure;

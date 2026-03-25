@@ -100,6 +100,8 @@ public class FileModelTest {
     assertThat(model.getRef(), equalTo(""));
     model.setRestart(1L);
     assertThat(model.getRestart(), equalTo(1L));
+    model.setCopyBehaviors(false);
+    assertThat(model.getCopyBehaviors(), equalTo(false));
     model.setStructure("");
     assertThat(model.getStructure(), equalTo(""));
     model.setWithRename(false);
