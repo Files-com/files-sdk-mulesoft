@@ -105,13 +105,14 @@ public class UserModel implements Serializable {
     this.partnerName = user.partnerName;
     this.passwordSetAt = user.passwordSetAt != null ? ZonedDateTime.ofInstant(user.passwordSetAt.toInstant(), ZoneId.systemDefault()) : null;
     this.passwordValidityDays = user.passwordValidityDays;
+    this.primaryGroupId = user.primaryGroupId;
     this.publicKeysCount = user.publicKeysCount;
     this.receiveAdminAlerts = Boolean.TRUE.equals(user.receiveAdminAlerts);
     this.require2fa = user.require2fa;
-    this.requireLoginBy = user.requireLoginBy != null ? ZonedDateTime.ofInstant(user.requireLoginBy.toInstant(), ZoneId.systemDefault()) : null;
   }
 
   private void initGroup6(final User user) {
+    this.requireLoginBy = user.requireLoginBy != null ? ZonedDateTime.ofInstant(user.requireLoginBy.toInstant(), ZoneId.systemDefault()) : null;
     this.active2fa = Boolean.TRUE.equals(user.active2fa);
     this.requirePasswordChange = Boolean.TRUE.equals(user.requirePasswordChange);
     this.passwordExpired = Boolean.TRUE.equals(user.passwordExpired);
@@ -121,10 +122,10 @@ public class UserModel implements Serializable {
     this.sftpPermission = Boolean.TRUE.equals(user.sftpPermission);
     this.siteAdmin = Boolean.TRUE.equals(user.siteAdmin);
     this.workspaceAdmin = Boolean.TRUE.equals(user.workspaceAdmin);
-    this.siteId = user.siteId;
   }
 
   private void initGroup7(final User user) {
+    this.siteId = user.siteId;
     this.workspaceId = user.workspaceId;
     this.skipWelcomeScreen = Boolean.TRUE.equals(user.skipWelcomeScreen);
     this.encryptionRequired = user.sslRequired;
@@ -134,10 +135,10 @@ public class UserModel implements Serializable {
     this.tags = user.tags;
     this.timeZone = user.timeZone;
     this.typeOf2fa = user.typeOf2fa;
-    this.typeOf2faForDisplay = user.typeOf2faForDisplay;
   }
 
   private void initGroup8(final User user) {
+    this.typeOf2faForDisplay = user.typeOf2faForDisplay;
     this.userRoot = user.userRoot;
     this.userHome = user.userHome;
     this.daysRemainingUntilPasswordExpire = user.daysRemainingUntilPasswordExpire;
@@ -147,10 +148,10 @@ public class UserModel implements Serializable {
     this.changePasswordConfirmation = user.changePasswordConfirmation;
     this.grantPermission = user.grantPermission;
     this.groupId = user.groupId;
-    this.importedPasswordHash = user.importedPasswordHash;
   }
 
   private void initGroup9(final User user) {
+    this.importedPasswordHash = user.importedPasswordHash;
     this.password = user.password;
     this.passwordConfirmation = user.passwordConfirmation;
     this.announcementsRead = Boolean.TRUE.equals(user.announcementsRead);
@@ -616,6 +617,16 @@ public class UserModel implements Serializable {
 
   public void setPasswordValidityDays(final Long passwordValidityDays) {
     this.passwordValidityDays = passwordValidityDays;
+  }
+
+  private Long primaryGroupId;
+
+  public Long getPrimaryGroupId() {
+    return primaryGroupId;
+  }
+
+  public void setPrimaryGroupId(final Long primaryGroupId) {
+    this.primaryGroupId = primaryGroupId;
   }
 
   private Long publicKeysCount;

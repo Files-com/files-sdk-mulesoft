@@ -109,6 +109,8 @@ public class UserModelTest {
     assertThat(model.getPasswordSetAt(), equalTo(ZonedDateTime.parse("2000-01-01T01:00:00Z")));
     model.setPasswordValidityDays(1L);
     assertThat(model.getPasswordValidityDays(), equalTo(1L));
+    model.setPrimaryGroupId(1L);
+    assertThat(model.getPrimaryGroupId(), equalTo(1L));
     model.setPublicKeysCount(1L);
     assertThat(model.getPublicKeysCount(), equalTo(1L));
     model.setReceiveAdminAlerts(true);
