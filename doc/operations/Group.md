@@ -38,6 +38,7 @@ Files.com's Group Admin feature allows you to define Group Admins, who then have
     "sftpPermission": true,
     "davPermission": true,
     "restapiPermission": true,
+    "desktopConfigurationProfileId": 1,
     "siteId": 1,
     "workspaceId": 1
   }
@@ -81,6 +82,7 @@ Files.com's Group Admin feature allows you to define Group Admins, who then have
   "sftpPermission": true,
   "davPermission": true,
   "restapiPermission": true,
+  "desktopConfigurationProfileId": 1,
   "siteId": 1,
   "workspaceId": 1
 }
@@ -131,6 +133,7 @@ Files.com's Group Admin feature allows you to define Group Admins, who then have
   "sftpPermission": true,
   "davPermission": true,
   "restapiPermission": true,
+  "desktopConfigurationProfileId": 1,
   "siteId": 1,
   "workspaceId": 1
 }
@@ -183,6 +186,7 @@ Files.com's Group Admin feature allows you to define Group Admins, who then have
   "sftpPermission": true,
   "davPermission": true,
   "restapiPermission": true,
+  "desktopConfigurationProfileId": 1,
   "siteId": 1,
   "workspaceId": 1
 }

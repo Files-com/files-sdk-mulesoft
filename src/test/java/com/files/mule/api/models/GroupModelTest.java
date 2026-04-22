@@ -36,6 +36,8 @@ public class GroupModelTest {
     assertThat(model.getDavPermission(), equalTo(true));
     model.setRestapiPermission(true);
     assertThat(model.getRestapiPermission(), equalTo(true));
+    model.setDesktopConfigurationProfileId(1L);
+    assertThat(model.getDesktopConfigurationProfileId(), equalTo(1L));
     model.setSiteId(1L);
     assertThat(model.getSiteId(), equalTo(1L));
     model.setWorkspaceId(1L);
