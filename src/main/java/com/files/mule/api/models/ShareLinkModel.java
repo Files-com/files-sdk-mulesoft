@@ -60,6 +60,7 @@ public class ShareLinkModel implements Serializable {
   private void initGroup3(final Bundle bundle) {
     this.skipCompany = Boolean.TRUE.equals(bundle.skipCompany);
     this.id = bundle.id;
+    this.bypassesSiteExpirationRules = Boolean.TRUE.equals(bundle.bypassesSiteExpirationRules);
     this.createdAt = bundle.createdAt != null ? ZonedDateTime.ofInstant(bundle.createdAt.toInstant(), ZoneId.systemDefault()) : null;
     this.dontSeparateSubmissionsByFolder = Boolean.TRUE.equals(bundle.dontSeparateSubmissionsByFolder);
     this.maxUses = bundle.maxUses;
@@ -67,10 +68,10 @@ public class ShareLinkModel implements Serializable {
     this.pathTemplate = bundle.pathTemplate;
     this.pathTemplateTimeZone = bundle.pathTemplateTimeZone;
     this.sendEmailReceiptToUploader = Boolean.TRUE.equals(bundle.sendEmailReceiptToUploader);
-    this.snapshotId = bundle.snapshotId;
   }
 
   private void initGroup4(final Bundle bundle) {
+    this.snapshotId = bundle.snapshotId;
     this.userId = bundle.userId;
     this.username = bundle.username;
     this.clickwrapId = bundle.clickwrapId;
@@ -82,10 +83,10 @@ public class ShareLinkModel implements Serializable {
     this.sendOneTimePasswordToRecipientAtRegistration = Boolean.TRUE.equals(bundle.sendOneTimePasswordToRecipientAtRegistration);
     this.workspaceId = bundle.workspaceId;
     this.hasInbox = Boolean.TRUE.equals(bundle.hasInbox);
-    this.dontAllowFoldersInUploads = Boolean.TRUE.equals(bundle.dontAllowFoldersInUploads);
   }
 
   private void initGroup5(final Bundle bundle) {
+    this.dontAllowFoldersInUploads = Boolean.TRUE.equals(bundle.dontAllowFoldersInUploads);
     this.paths = bundle.paths != null ? Arrays.asList(bundle.paths) : null;
     this.password = bundle.password;
     this.formFieldSetId = bundle.formFieldSetId;
@@ -312,6 +313,16 @@ public class ShareLinkModel implements Serializable {
 
   public void setId(final Long id) {
     this.id = id;
+  }
+
+  private boolean bypassesSiteExpirationRules;
+
+  public boolean getBypassesSiteExpirationRules() {
+    return bypassesSiteExpirationRules;
+  }
+
+  public void setBypassesSiteExpirationRules(final boolean bypassesSiteExpirationRules) {
+    this.bypassesSiteExpirationRules = bypassesSiteExpirationRules;
   }
 
   private ZonedDateTime createdAt;
