@@ -44,6 +44,7 @@ public class UserModel implements Serializable {
     initGroup7(user);
     initGroup8(user);
     initGroup9(user);
+    initGroup10(user);
   }
 
   private void initGroup1(final User user) {
@@ -108,12 +109,23 @@ public class UserModel implements Serializable {
     this.primaryGroupId = user.primaryGroupId;
     this.publicKeysCount = user.publicKeysCount;
     this.receiveAdminAlerts = Boolean.TRUE.equals(user.receiveAdminAlerts);
-    this.require2fa = user.require2fa;
+    this.notifyOnAllSiteWarnings = Boolean.TRUE.equals(user.notifyOnAllSiteWarnings);
   }
 
   private void initGroup6(final User user) {
+    this.notifyOnAllSsoFailures = Boolean.TRUE.equals(user.notifyOnAllSsoFailures);
+    this.notifyOnAllUserSecurityEvents = Boolean.TRUE.equals(user.notifyOnAllUserSecurityEvents);
+    this.notifyOnAllPendingWorkFailures = Boolean.TRUE.equals(user.notifyOnAllPendingWorkFailures);
+    this.notifyOnAllSiemHttpDestinationFailures = Boolean.TRUE.equals(user.notifyOnAllSiemHttpDestinationFailures);
+    this.notifyOnAllSyncFailures = Boolean.TRUE.equals(user.notifyOnAllSyncFailures);
+    this.notifyOnAllAutomationFailures = Boolean.TRUE.equals(user.notifyOnAllAutomationFailures);
+    this.notifyOnAllExpectationFailures = Boolean.TRUE.equals(user.notifyOnAllExpectationFailures);
+    this.require2fa = user.require2fa;
     this.requireLoginBy = user.requireLoginBy != null ? ZonedDateTime.ofInstant(user.requireLoginBy.toInstant(), ZoneId.systemDefault()) : null;
     this.active2fa = Boolean.TRUE.equals(user.active2fa);
+  }
+
+  private void initGroup7(final User user) {
     this.requirePasswordChange = Boolean.TRUE.equals(user.requirePasswordChange);
     this.passwordExpired = Boolean.TRUE.equals(user.passwordExpired);
     this.readonlySiteAdmin = Boolean.TRUE.equals(user.readonlySiteAdmin);
@@ -122,11 +134,11 @@ public class UserModel implements Serializable {
     this.sftpPermission = Boolean.TRUE.equals(user.sftpPermission);
     this.siteAdmin = Boolean.TRUE.equals(user.siteAdmin);
     this.workspaceAdmin = Boolean.TRUE.equals(user.workspaceAdmin);
-  }
-
-  private void initGroup7(final User user) {
     this.siteId = user.siteId;
     this.workspaceId = user.workspaceId;
+  }
+
+  private void initGroup8(final User user) {
     this.skipWelcomeScreen = Boolean.TRUE.equals(user.skipWelcomeScreen);
     this.encryptionRequired = user.sslRequired;
     this.ssoStrategyId = user.ssoStrategyId;
@@ -135,11 +147,11 @@ public class UserModel implements Serializable {
     this.tags = user.tags;
     this.timeZone = user.timeZone;
     this.typeOf2fa = user.typeOf2fa;
-  }
-
-  private void initGroup8(final User user) {
     this.typeOf2faForDisplay = user.typeOf2faForDisplay;
     this.userRoot = user.userRoot;
+  }
+
+  private void initGroup9(final User user) {
     this.userHome = user.userHome;
     this.daysRemainingUntilPasswordExpire = user.daysRemainingUntilPasswordExpire;
     this.passwordExpireAt = user.passwordExpireAt != null ? ZonedDateTime.ofInstant(user.passwordExpireAt.toInstant(), ZoneId.systemDefault()) : null;
@@ -148,11 +160,11 @@ public class UserModel implements Serializable {
     this.changePasswordConfirmation = user.changePasswordConfirmation;
     this.grantPermission = user.grantPermission;
     this.groupId = user.groupId;
-  }
-
-  private void initGroup9(final User user) {
     this.importedPasswordHash = user.importedPasswordHash;
     this.password = user.password;
+  }
+
+  private void initGroup10(final User user) {
     this.passwordConfirmation = user.passwordConfirmation;
     this.announcementsRead = Boolean.TRUE.equals(user.announcementsRead);
     this.clear2fa = Boolean.TRUE.equals(user.clear2fa);
@@ -647,6 +659,86 @@ public class UserModel implements Serializable {
 
   public void setReceiveAdminAlerts(final boolean receiveAdminAlerts) {
     this.receiveAdminAlerts = receiveAdminAlerts;
+  }
+
+  private boolean notifyOnAllSiteWarnings;
+
+  public boolean getNotifyOnAllSiteWarnings() {
+    return notifyOnAllSiteWarnings;
+  }
+
+  public void setNotifyOnAllSiteWarnings(final boolean notifyOnAllSiteWarnings) {
+    this.notifyOnAllSiteWarnings = notifyOnAllSiteWarnings;
+  }
+
+  private boolean notifyOnAllSsoFailures;
+
+  public boolean getNotifyOnAllSsoFailures() {
+    return notifyOnAllSsoFailures;
+  }
+
+  public void setNotifyOnAllSsoFailures(final boolean notifyOnAllSsoFailures) {
+    this.notifyOnAllSsoFailures = notifyOnAllSsoFailures;
+  }
+
+  private boolean notifyOnAllUserSecurityEvents;
+
+  public boolean getNotifyOnAllUserSecurityEvents() {
+    return notifyOnAllUserSecurityEvents;
+  }
+
+  public void setNotifyOnAllUserSecurityEvents(final boolean notifyOnAllUserSecurityEvents) {
+    this.notifyOnAllUserSecurityEvents = notifyOnAllUserSecurityEvents;
+  }
+
+  private boolean notifyOnAllPendingWorkFailures;
+
+  public boolean getNotifyOnAllPendingWorkFailures() {
+    return notifyOnAllPendingWorkFailures;
+  }
+
+  public void setNotifyOnAllPendingWorkFailures(final boolean notifyOnAllPendingWorkFailures) {
+    this.notifyOnAllPendingWorkFailures = notifyOnAllPendingWorkFailures;
+  }
+
+  private boolean notifyOnAllSiemHttpDestinationFailures;
+
+  public boolean getNotifyOnAllSiemHttpDestinationFailures() {
+    return notifyOnAllSiemHttpDestinationFailures;
+  }
+
+  public void setNotifyOnAllSiemHttpDestinationFailures(final boolean notifyOnAllSiemHttpDestinationFailures) {
+    this.notifyOnAllSiemHttpDestinationFailures = notifyOnAllSiemHttpDestinationFailures;
+  }
+
+  private boolean notifyOnAllSyncFailures;
+
+  public boolean getNotifyOnAllSyncFailures() {
+    return notifyOnAllSyncFailures;
+  }
+
+  public void setNotifyOnAllSyncFailures(final boolean notifyOnAllSyncFailures) {
+    this.notifyOnAllSyncFailures = notifyOnAllSyncFailures;
+  }
+
+  private boolean notifyOnAllAutomationFailures;
+
+  public boolean getNotifyOnAllAutomationFailures() {
+    return notifyOnAllAutomationFailures;
+  }
+
+  public void setNotifyOnAllAutomationFailures(final boolean notifyOnAllAutomationFailures) {
+    this.notifyOnAllAutomationFailures = notifyOnAllAutomationFailures;
+  }
+
+  private boolean notifyOnAllExpectationFailures;
+
+  public boolean getNotifyOnAllExpectationFailures() {
+    return notifyOnAllExpectationFailures;
+  }
+
+  public void setNotifyOnAllExpectationFailures(final boolean notifyOnAllExpectationFailures) {
+    this.notifyOnAllExpectationFailures = notifyOnAllExpectationFailures;
   }
 
   private String require2fa;
