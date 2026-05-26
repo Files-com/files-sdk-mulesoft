@@ -182,8 +182,11 @@ public class FilesComOperations {
       requestParameters.put(NOTE, parameters.getNote());
     }
 
+    if (parameters.permissions != null) {
+      requestParameters.put(PERMISSIONS, parameters.getPermissions());
+    }
+
     requestParameters.put(REQUIRE_REGISTRATION, parameters.getRequireRegistration());
-    requestParameters.put(PERMISSIONS, "read");
     return new ShareLinkModel(connection.createBundle(requestParameters));
   }
 
@@ -201,6 +204,10 @@ public class FilesComOperations {
 
     if (parameters.expiresAt != null) {
       requestParameters.put(EXPIRES_AT, parameters.getExpiresAt());
+    }
+
+    if (parameters.permissions != null) {
+      requestParameters.put(PERMISSIONS, parameters.getPermissions());
     }
 
     return new ShareLinkModel(connection.updateBundle(requestParameters));

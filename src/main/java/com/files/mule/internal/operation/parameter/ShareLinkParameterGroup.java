@@ -10,6 +10,10 @@ import org.mule.runtime.extension.api.annotation.param.Parameter;
 import org.mule.runtime.extension.api.annotation.param.display.Example;
 import org.mule.runtime.extension.api.annotation.param.display.Placement;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
+import org.mule.runtime.extension.api.annotation.values.OfValues;
+
+import com.files.mule.internal.values.ShareLinkValueProviders;
+import com.files.mule.internal.values.ShareLinkValueProviders.Permissions;
 
 public class ShareLinkParameterGroup {
   private ShareLinkParameterGroup() {
@@ -125,6 +129,22 @@ public class ShareLinkParameterGroup {
     @Parameter
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
+    @Summary("Permissions that apply to Folders in this Share Link.")
+    @OfValues(ShareLinkValueProviders.Permissions.class)
+    @Example("read")
+    public String permissions;
+
+    public String getPermissions() {
+      return permissions;
+    }
+
+    public void setPermissions(final String permissions) {
+      this.permissions = permissions;
+    }
+
+    @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
+    @Optional
     @Summary("Show a registration page that captures the downloader's name and email address?")
     @Example("false")
     public boolean requireRegistration;
@@ -167,6 +187,22 @@ public class ShareLinkParameterGroup {
 
     public void setExpiresAt(final String expiresAt) {
       this.expiresAt = expiresAt;
+    }
+
+    @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
+    @Optional
+    @Summary("Permissions that apply to Folders in this Share Link.")
+    @OfValues(ShareLinkValueProviders.Permissions.class)
+    @Example("read")
+    public String permissions;
+
+    public String getPermissions() {
+      return permissions;
+    }
+
+    public void setPermissions(final String permissions) {
+      this.permissions = permissions;
     }
 
   }

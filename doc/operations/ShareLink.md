@@ -245,6 +245,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
 | maxUses<br/>*Long* | Maximum number of times bundle can be accessed |
 | description<br/>*String* | Public description |
 | note<br/>*String* | Bundle internal note |
+| permissions<br/>*String* | Permissions that apply to Folders in this Share Link.<br/>Possible values: `read`, `write`, `read_write`, `full`, `none`, `preview_only` |
 | requireRegistration<br/>*boolean* | Show a registration page that captures the downloader's name and email address? |
 
 
@@ -258,6 +259,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
  maxUses="1"
  description="The public description of the bundle."
  note="The internal note on the bundle."
+ permissions="read"
  requireRegistration="false"
 />
 ```
@@ -368,6 +370,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
 | --------- | ----------- |
 | id<br/>*Long*<br/>**Required** | Bundle ID. |
 | expiresAt<br/>*String* | Bundle expiration date/time |
+| permissions<br/>*String* | Permissions that apply to Folders in this Share Link.<br/>Possible values: `read`, `write`, `read_write`, `full`, `none`, `preview_only` |
 
 
 ### Example Operation
@@ -376,6 +379,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
 <filescom:update-share-link config-ref="FilesCom"
  id="1"
  expiresAt="2000-01-01T01:00:00Z"
+ permissions="read"
 />
 ```
 

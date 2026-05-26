@@ -33,6 +33,8 @@ public class ShareLinkParameterGroupTest {
     assertThat(group.getDescription(), equalTo("The public description of the bundle."));
     group.setNote("The internal note on the bundle.");
     assertThat(group.getNote(), equalTo("The internal note on the bundle."));
+    group.setPermissions("read");
+    assertThat(group.getPermissions(), equalTo("read"));
     group.setRequireRegistration(false);
     assertThat(group.getRequireRegistration(), equalTo(false));
   }
@@ -44,6 +46,8 @@ public class ShareLinkParameterGroupTest {
     assertThat(group.getId(), equalTo(1L));
     group.setExpiresAt("2000-01-01T01:00:00Z");
     assertThat(group.getExpiresAt(), equalTo("2000-01-01T01:00:00Z"));
+    group.setPermissions("read");
+    assertThat(group.getPermissions(), equalTo("read"));
   }
 
   @Test
