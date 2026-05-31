@@ -157,6 +157,8 @@ public class UserModelTest {
     assertThat(model.getSiteId(), equalTo(1L));
     model.setWorkspaceId(1L);
     assertThat(model.getWorkspaceId(), equalTo(1L));
+    model.setDefaultWorkspaceId(1L);
+    assertThat(model.getDefaultWorkspaceId(), equalTo(1L));
     model.setSkipWelcomeScreen(true);
     assertThat(model.getSkipWelcomeScreen(), equalTo(true));
     model.setEncryptionRequired("always_require");

@@ -139,6 +139,7 @@ public class UserModel implements Serializable {
   }
 
   private void initGroup8(final User user) {
+    this.defaultWorkspaceId = user.defaultWorkspaceId;
     this.skipWelcomeScreen = Boolean.TRUE.equals(user.skipWelcomeScreen);
     this.encryptionRequired = user.sslRequired;
     this.ssoStrategyId = user.ssoStrategyId;
@@ -148,10 +149,10 @@ public class UserModel implements Serializable {
     this.timeZone = user.timeZone;
     this.typeOf2fa = user.typeOf2fa;
     this.typeOf2faForDisplay = user.typeOf2faForDisplay;
-    this.userRoot = user.userRoot;
   }
 
   private void initGroup9(final User user) {
+    this.userRoot = user.userRoot;
     this.userHome = user.userHome;
     this.daysRemainingUntilPasswordExpire = user.daysRemainingUntilPasswordExpire;
     this.passwordExpireAt = user.passwordExpireAt != null ? ZonedDateTime.ofInstant(user.passwordExpireAt.toInstant(), ZoneId.systemDefault()) : null;
@@ -161,10 +162,10 @@ public class UserModel implements Serializable {
     this.grantPermission = user.grantPermission;
     this.groupId = user.groupId;
     this.importedPasswordHash = user.importedPasswordHash;
-    this.password = user.password;
   }
 
   private void initGroup10(final User user) {
+    this.password = user.password;
     this.passwordConfirmation = user.passwordConfirmation;
     this.announcementsRead = Boolean.TRUE.equals(user.announcementsRead);
     this.clear2fa = Boolean.TRUE.equals(user.clear2fa);
@@ -869,6 +870,16 @@ public class UserModel implements Serializable {
 
   public void setWorkspaceId(final Long workspaceId) {
     this.workspaceId = workspaceId;
+  }
+
+  private Long defaultWorkspaceId;
+
+  public Long getDefaultWorkspaceId() {
+    return defaultWorkspaceId;
+  }
+
+  public void setDefaultWorkspaceId(final Long defaultWorkspaceId) {
+    this.defaultWorkspaceId = defaultWorkspaceId;
   }
 
   private boolean skipWelcomeScreen;
