@@ -74,6 +74,7 @@ public class ShareLinkModel implements Serializable {
     this.snapshotId = bundle.snapshotId;
     this.userId = bundle.userId;
     this.username = bundle.username;
+    this.groupId = bundle.groupId;
     this.clickwrapId = bundle.clickwrapId;
     this.inboxId = bundle.inboxId;
     if (bundle.watermarkAttachment != null) {
@@ -82,10 +83,10 @@ public class ShareLinkModel implements Serializable {
     this.watermarkValue = bundle.watermarkValue;
     this.sendOneTimePasswordToRecipientAtRegistration = Boolean.TRUE.equals(bundle.sendOneTimePasswordToRecipientAtRegistration);
     this.workspaceId = bundle.workspaceId;
-    this.hasInbox = Boolean.TRUE.equals(bundle.hasInbox);
   }
 
   private void initGroup5(final Bundle bundle) {
+    this.hasInbox = Boolean.TRUE.equals(bundle.hasInbox);
     this.dontAllowFoldersInUploads = Boolean.TRUE.equals(bundle.dontAllowFoldersInUploads);
     this.paths = bundle.paths != null ? Arrays.asList(bundle.paths) : null;
     this.password = bundle.password;
@@ -423,6 +424,16 @@ public class ShareLinkModel implements Serializable {
 
   public void setUsername(final String username) {
     this.username = username;
+  }
+
+  private Long groupId;
+
+  public Long getGroupId() {
+    return groupId;
+  }
+
+  public void setGroupId(final Long groupId) {
+    this.groupId = groupId;
   }
 
   private Long clickwrapId;

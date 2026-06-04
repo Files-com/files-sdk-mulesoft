@@ -83,6 +83,8 @@ public class ShareLinkModelTest {
     assertThat(model.getUserId(), equalTo(1L));
     model.setUsername("user");
     assertThat(model.getUsername(), equalTo("user"));
+    model.setGroupId(1L);
+    assertThat(model.getGroupId(), equalTo(1L));
     model.setClickwrapId(1L);
     assertThat(model.getClickwrapId(), equalTo(1L));
     model.setInboxId(1L);

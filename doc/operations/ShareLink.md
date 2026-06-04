@@ -88,6 +88,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
     "snapshotId": 1,
     "userId": 1,
     "username": "user",
+    "groupId": 1,
     "clickwrapId": 1,
     "inboxId": 1,
     "watermarkAttachment": {
@@ -202,6 +203,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
   "snapshotId": 1,
   "userId": 1,
   "username": "user",
+  "groupId": 1,
   "clickwrapId": 1,
   "inboxId": 1,
   "watermarkAttachment": {
@@ -331,6 +333,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
   "snapshotId": 1,
   "userId": 1,
   "username": "user",
+  "groupId": 1,
   "clickwrapId": 1,
   "inboxId": 1,
   "watermarkAttachment": {
@@ -450,6 +453,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
   "snapshotId": 1,
   "userId": 1,
   "username": "user",
+  "groupId": 1,
   "clickwrapId": 1,
   "inboxId": 1,
   "watermarkAttachment": {
