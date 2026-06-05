@@ -65,6 +65,10 @@ public class ShareLinkModelTest {
     assertThat(model.getBypassesSiteExpirationRules(), equalTo(true));
     model.setCreatedAt(ZonedDateTime.parse("2000-01-01T01:00:00Z"));
     assertThat(model.getCreatedAt(), equalTo(ZonedDateTime.parse("2000-01-01T01:00:00Z")));
+    model.setDeleted(true);
+    assertThat(model.getDeleted(), equalTo(true));
+    model.setDeletedAt(ZonedDateTime.parse("2000-01-01T01:00:00Z"));
+    assertThat(model.getDeletedAt(), equalTo(ZonedDateTime.parse("2000-01-01T01:00:00Z")));
     model.setDontSeparateSubmissionsByFolder(true);
     assertThat(model.getDontSeparateSubmissionsByFolder(), equalTo(true));
     model.setMaxUses(1L);

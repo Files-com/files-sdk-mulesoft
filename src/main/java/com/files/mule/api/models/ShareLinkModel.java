@@ -62,15 +62,17 @@ public class ShareLinkModel implements Serializable {
     this.id = bundle.id;
     this.bypassesSiteExpirationRules = Boolean.TRUE.equals(bundle.bypassesSiteExpirationRules);
     this.createdAt = bundle.createdAt != null ? ZonedDateTime.ofInstant(bundle.createdAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.deleted = Boolean.TRUE.equals(bundle.deleted);
+    this.deletedAt = bundle.deletedAt != null ? ZonedDateTime.ofInstant(bundle.deletedAt.toInstant(), ZoneId.systemDefault()) : null;
     this.dontSeparateSubmissionsByFolder = Boolean.TRUE.equals(bundle.dontSeparateSubmissionsByFolder);
     this.maxUses = bundle.maxUses;
     this.note = bundle.note;
     this.pathTemplate = bundle.pathTemplate;
-    this.pathTemplateTimeZone = bundle.pathTemplateTimeZone;
-    this.sendEmailReceiptToUploader = Boolean.TRUE.equals(bundle.sendEmailReceiptToUploader);
   }
 
   private void initGroup4(final Bundle bundle) {
+    this.pathTemplateTimeZone = bundle.pathTemplateTimeZone;
+    this.sendEmailReceiptToUploader = Boolean.TRUE.equals(bundle.sendEmailReceiptToUploader);
     this.snapshotId = bundle.snapshotId;
     this.userId = bundle.userId;
     this.username = bundle.username;
@@ -81,11 +83,11 @@ public class ShareLinkModel implements Serializable {
       this.watermarkAttachment = new ImageModel(bundle.watermarkAttachment);
     }
     this.watermarkValue = bundle.watermarkValue;
-    this.sendOneTimePasswordToRecipientAtRegistration = Boolean.TRUE.equals(bundle.sendOneTimePasswordToRecipientAtRegistration);
-    this.workspaceId = bundle.workspaceId;
   }
 
   private void initGroup5(final Bundle bundle) {
+    this.sendOneTimePasswordToRecipientAtRegistration = Boolean.TRUE.equals(bundle.sendOneTimePasswordToRecipientAtRegistration);
+    this.workspaceId = bundle.workspaceId;
     this.hasInbox = Boolean.TRUE.equals(bundle.hasInbox);
     this.dontAllowFoldersInUploads = Boolean.TRUE.equals(bundle.dontAllowFoldersInUploads);
     this.paths = bundle.paths != null ? Arrays.asList(bundle.paths) : null;
@@ -334,6 +336,26 @@ public class ShareLinkModel implements Serializable {
 
   public void setCreatedAt(final ZonedDateTime createdAt) {
     this.createdAt = createdAt;
+  }
+
+  private boolean deleted;
+
+  public boolean getDeleted() {
+    return deleted;
+  }
+
+  public void setDeleted(final boolean deleted) {
+    this.deleted = deleted;
+  }
+
+  private ZonedDateTime deletedAt;
+
+  public ZonedDateTime getDeletedAt() {
+    return deletedAt;
+  }
+
+  public void setDeletedAt(final ZonedDateTime deletedAt) {
+    this.deletedAt = deletedAt;
   }
 
   private boolean dontSeparateSubmissionsByFolder;
