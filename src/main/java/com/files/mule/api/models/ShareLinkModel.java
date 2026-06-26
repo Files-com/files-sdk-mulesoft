@@ -27,6 +27,7 @@ public class ShareLinkModel implements Serializable {
     initGroup3(bundle);
     initGroup4(bundle);
     initGroup5(bundle);
+    initGroup6(bundle);
   }
 
   private void initGroup1(final Bundle bundle) {
@@ -66,11 +67,12 @@ public class ShareLinkModel implements Serializable {
     this.deletedAt = bundle.deletedAt != null ? ZonedDateTime.ofInstant(bundle.deletedAt.toInstant(), ZoneId.systemDefault()) : null;
     this.dontSeparateSubmissionsByFolder = Boolean.TRUE.equals(bundle.dontSeparateSubmissionsByFolder);
     this.maxUses = bundle.maxUses;
+    this.internalName = bundle.internalName;
     this.note = bundle.note;
-    this.pathTemplate = bundle.pathTemplate;
   }
 
   private void initGroup4(final Bundle bundle) {
+    this.pathTemplate = bundle.pathTemplate;
     this.pathTemplateTimeZone = bundle.pathTemplateTimeZone;
     this.sendEmailReceiptToUploader = Boolean.TRUE.equals(bundle.sendEmailReceiptToUploader);
     this.snapshotId = bundle.snapshotId;
@@ -82,10 +84,10 @@ public class ShareLinkModel implements Serializable {
     if (bundle.watermarkAttachment != null) {
       this.watermarkAttachment = new ImageModel(bundle.watermarkAttachment);
     }
-    this.watermarkValue = bundle.watermarkValue;
   }
 
   private void initGroup5(final Bundle bundle) {
+    this.watermarkValue = bundle.watermarkValue;
     this.sendOneTimePasswordToRecipientAtRegistration = Boolean.TRUE.equals(bundle.sendOneTimePasswordToRecipientAtRegistration);
     this.workspaceId = bundle.workspaceId;
     this.hasInbox = Boolean.TRUE.equals(bundle.hasInbox);
@@ -95,6 +97,9 @@ public class ShareLinkModel implements Serializable {
     this.formFieldSetId = bundle.formFieldSetId;
     this.createSnapshot = Boolean.TRUE.equals(bundle.createSnapshot);
     this.finalizeSnapshot = Boolean.TRUE.equals(bundle.finalizeSnapshot);
+  }
+
+  private void initGroup6(final Bundle bundle) {
     this.watermarkAttachmentDelete = Boolean.TRUE.equals(bundle.watermarkAttachmentDelete);
   }
 
@@ -376,6 +381,16 @@ public class ShareLinkModel implements Serializable {
 
   public void setMaxUses(final Long maxUses) {
     this.maxUses = maxUses;
+  }
+
+  private String internalName;
+
+  public String getInternalName() {
+    return internalName;
+  }
+
+  public void setInternalName(final String internalName) {
+    this.internalName = internalName;
   }
 
   private String note;

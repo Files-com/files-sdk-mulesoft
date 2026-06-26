@@ -73,6 +73,8 @@ public class ShareLinkModelTest {
     assertThat(model.getDontSeparateSubmissionsByFolder(), equalTo(true));
     model.setMaxUses(1L);
     assertThat(model.getMaxUses(), equalTo(1L));
+    model.setInternalName("Quarterly reports");
+    assertThat(model.getInternalName(), equalTo("Quarterly reports"));
     model.setNote("The internal note on the bundle.");
     assertThat(model.getNote(), equalTo("The internal note on the bundle."));
     model.setPathTemplate("{{name}}_{{ip}}");
