@@ -31,12 +31,13 @@ public class GroupModel implements Serializable {
     this.notes = group.notes;
     this.userIds = group.userIds;
     this.usernames = group.usernames;
+    this.aiAssistantPersonalityId = group.aiAssistantPersonalityId;
     this.ftpPermission = Boolean.TRUE.equals(group.ftpPermission);
     this.sftpPermission = Boolean.TRUE.equals(group.sftpPermission);
-    this.davPermission = Boolean.TRUE.equals(group.davPermission);
   }
 
   private void initGroup2(final Group group) {
+    this.davPermission = Boolean.TRUE.equals(group.davPermission);
     this.restapiPermission = Boolean.TRUE.equals(group.restapiPermission);
     this.desktopConfigurationProfileId = group.desktopConfigurationProfileId;
     this.siteId = group.siteId;
@@ -111,6 +112,16 @@ public class GroupModel implements Serializable {
 
   public void setUsernames(final String usernames) {
     this.usernames = usernames;
+  }
+
+  private Long aiAssistantPersonalityId;
+
+  public Long getAiAssistantPersonalityId() {
+    return aiAssistantPersonalityId;
+  }
+
+  public void setAiAssistantPersonalityId(final Long aiAssistantPersonalityId) {
+    this.aiAssistantPersonalityId = aiAssistantPersonalityId;
   }
 
   private boolean ftpPermission;

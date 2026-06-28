@@ -28,6 +28,8 @@ public class GroupModelTest {
     assertThat(model.getUserIds(), equalTo("1"));
     model.setUsernames("user");
     assertThat(model.getUsernames(), equalTo("user"));
+    model.setAiAssistantPersonalityId(1L);
+    assertThat(model.getAiAssistantPersonalityId(), equalTo(1L));
     model.setFtpPermission(true);
     assertThat(model.getFtpPermission(), equalTo(true));
     model.setSftpPermission(true);

@@ -68,12 +68,13 @@ public class UserModel implements Serializable {
     this.davPermission = Boolean.TRUE.equals(user.davPermission);
     this.disabled = Boolean.TRUE.equals(user.disabled);
     this.disabledExpiredOrInactive = Boolean.TRUE.equals(user.disabledExpiredOrInactive);
+    this.aiAssistantPersonalityId = user.aiAssistantPersonalityId;
     this.desktopConfigurationProfileId = user.desktopConfigurationProfileId;
     this.email = user.email;
-    this.filesystemLayout = user.filesystemLayout;
   }
 
   private void initGroup3(final User user) {
+    this.filesystemLayout = user.filesystemLayout;
     this.firstLoginAt = user.firstLoginAt != null ? ZonedDateTime.ofInstant(user.firstLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.ftpPermission = Boolean.TRUE.equals(user.ftpPermission);
     this.groupIds = user.groupIds;
@@ -83,10 +84,10 @@ public class UserModel implements Serializable {
     this.lastWebLoginAt = user.lastWebLoginAt != null ? ZonedDateTime.ofInstant(user.lastWebLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastFtpLoginAt = user.lastFtpLoginAt != null ? ZonedDateTime.ofInstant(user.lastFtpLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastSftpLoginAt = user.lastSftpLoginAt != null ? ZonedDateTime.ofInstant(user.lastSftpLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastDavLoginAt = user.lastDavLoginAt != null ? ZonedDateTime.ofInstant(user.lastDavLoginAt.toInstant(), ZoneId.systemDefault()) : null;
   }
 
   private void initGroup4(final User user) {
+    this.lastDavLoginAt = user.lastDavLoginAt != null ? ZonedDateTime.ofInstant(user.lastDavLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastDesktopLoginAt = user.lastDesktopLoginAt != null ? ZonedDateTime.ofInstant(user.lastDesktopLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastRestapiLoginAt = user.lastRestapiLoginAt != null ? ZonedDateTime.ofInstant(user.lastRestapiLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastApiUseAt = user.lastApiUseAt != null ? ZonedDateTime.ofInstant(user.lastApiUseAt.toInstant(), ZoneId.systemDefault()) : null;
@@ -96,10 +97,10 @@ public class UserModel implements Serializable {
     this.name = user.name;
     this.company = user.company;
     this.notes = user.notes;
-    this.notificationDailySendTime = user.notificationDailySendTime;
   }
 
   private void initGroup5(final User user) {
+    this.notificationDailySendTime = user.notificationDailySendTime;
     this.officeIntegrationEnabled = Boolean.TRUE.equals(user.officeIntegrationEnabled);
     this.partnerAdmin = Boolean.TRUE.equals(user.partnerAdmin);
     this.partnerId = user.partnerId;
@@ -109,10 +110,10 @@ public class UserModel implements Serializable {
     this.primaryGroupId = user.primaryGroupId;
     this.publicKeysCount = user.publicKeysCount;
     this.receiveAdminAlerts = Boolean.TRUE.equals(user.receiveAdminAlerts);
-    this.notifyOnAllSiteWarnings = Boolean.TRUE.equals(user.notifyOnAllSiteWarnings);
   }
 
   private void initGroup6(final User user) {
+    this.notifyOnAllSiteWarnings = Boolean.TRUE.equals(user.notifyOnAllSiteWarnings);
     this.notifyOnAllSsoFailures = Boolean.TRUE.equals(user.notifyOnAllSsoFailures);
     this.notifyOnAllUserSecurityEvents = Boolean.TRUE.equals(user.notifyOnAllUserSecurityEvents);
     this.notifyOnAllPendingWorkFailures = Boolean.TRUE.equals(user.notifyOnAllPendingWorkFailures);
@@ -122,10 +123,10 @@ public class UserModel implements Serializable {
     this.notifyOnAllExpectationFailures = Boolean.TRUE.equals(user.notifyOnAllExpectationFailures);
     this.require2fa = user.require2fa;
     this.requireLoginBy = user.requireLoginBy != null ? ZonedDateTime.ofInstant(user.requireLoginBy.toInstant(), ZoneId.systemDefault()) : null;
-    this.active2fa = Boolean.TRUE.equals(user.active2fa);
   }
 
   private void initGroup7(final User user) {
+    this.active2fa = Boolean.TRUE.equals(user.active2fa);
     this.requirePasswordChange = Boolean.TRUE.equals(user.requirePasswordChange);
     this.passwordExpired = Boolean.TRUE.equals(user.passwordExpired);
     this.readonlySiteAdmin = Boolean.TRUE.equals(user.readonlySiteAdmin);
@@ -135,10 +136,10 @@ public class UserModel implements Serializable {
     this.siteAdmin = Boolean.TRUE.equals(user.siteAdmin);
     this.workspaceAdmin = Boolean.TRUE.equals(user.workspaceAdmin);
     this.siteId = user.siteId;
-    this.workspaceId = user.workspaceId;
   }
 
   private void initGroup8(final User user) {
+    this.workspaceId = user.workspaceId;
     this.defaultWorkspaceId = user.defaultWorkspaceId;
     this.skipWelcomeScreen = Boolean.TRUE.equals(user.skipWelcomeScreen);
     this.encryptionRequired = user.sslRequired;
@@ -148,10 +149,10 @@ public class UserModel implements Serializable {
     this.tags = user.tags;
     this.timeZone = user.timeZone;
     this.typeOf2fa = user.typeOf2fa;
-    this.typeOf2faForDisplay = user.typeOf2faForDisplay;
   }
 
   private void initGroup9(final User user) {
+    this.typeOf2faForDisplay = user.typeOf2faForDisplay;
     this.userRoot = user.userRoot;
     this.userHome = user.userHome;
     this.daysRemainingUntilPasswordExpire = user.daysRemainingUntilPasswordExpire;
@@ -161,10 +162,10 @@ public class UserModel implements Serializable {
     this.changePasswordConfirmation = user.changePasswordConfirmation;
     this.grantPermission = user.grantPermission;
     this.groupId = user.groupId;
-    this.importedPasswordHash = user.importedPasswordHash;
   }
 
   private void initGroup10(final User user) {
+    this.importedPasswordHash = user.importedPasswordHash;
     this.password = user.password;
     this.passwordConfirmation = user.passwordConfirmation;
     this.announcementsRead = Boolean.TRUE.equals(user.announcementsRead);
@@ -340,6 +341,16 @@ public class UserModel implements Serializable {
 
   public void setDisabledExpiredOrInactive(final boolean disabledExpiredOrInactive) {
     this.disabledExpiredOrInactive = disabledExpiredOrInactive;
+  }
+
+  private Long aiAssistantPersonalityId;
+
+  public Long getAiAssistantPersonalityId() {
+    return aiAssistantPersonalityId;
+  }
+
+  public void setAiAssistantPersonalityId(final Long aiAssistantPersonalityId) {
+    this.aiAssistantPersonalityId = aiAssistantPersonalityId;
   }
 
   private Long desktopConfigurationProfileId;
