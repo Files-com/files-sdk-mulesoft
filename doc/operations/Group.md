@@ -40,6 +40,7 @@ Files.com's Group Admin feature allows you to define Group Admins, who then have
     "davPermission": true,
     "restapiPermission": true,
     "desktopConfigurationProfileId": 1,
+    "integrationCentricProfileId": 1,
     "siteId": 1,
     "workspaceId": 1
   }
@@ -85,6 +86,7 @@ Files.com's Group Admin feature allows you to define Group Admins, who then have
   "davPermission": true,
   "restapiPermission": true,
   "desktopConfigurationProfileId": 1,
+  "integrationCentricProfileId": 1,
   "siteId": 1,
   "workspaceId": 1
 }
@@ -137,6 +139,7 @@ Files.com's Group Admin feature allows you to define Group Admins, who then have
   "davPermission": true,
   "restapiPermission": true,
   "desktopConfigurationProfileId": 1,
+  "integrationCentricProfileId": 1,
   "siteId": 1,
   "workspaceId": 1
 }
@@ -191,6 +194,7 @@ Files.com's Group Admin feature allows you to define Group Admins, who then have
   "davPermission": true,
   "restapiPermission": true,
   "desktopConfigurationProfileId": 1,
+  "integrationCentricProfileId": 1,
   "siteId": 1,
   "workspaceId": 1
 }

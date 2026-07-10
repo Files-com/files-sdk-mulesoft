@@ -70,10 +70,11 @@ public class UserModel implements Serializable {
     this.disabledExpiredOrInactive = Boolean.TRUE.equals(user.disabledExpiredOrInactive);
     this.aiAssistantPersonalityId = user.aiAssistantPersonalityId;
     this.desktopConfigurationProfileId = user.desktopConfigurationProfileId;
-    this.email = user.email;
+    this.integrationCentricProfileId = user.integrationCentricProfileId;
   }
 
   private void initGroup3(final User user) {
+    this.email = user.email;
     this.filesystemLayout = user.filesystemLayout;
     this.firstLoginAt = user.firstLoginAt != null ? ZonedDateTime.ofInstant(user.firstLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.ftpPermission = Boolean.TRUE.equals(user.ftpPermission);
@@ -83,10 +84,10 @@ public class UserModel implements Serializable {
     this.lastLoginAt = user.lastLoginAt != null ? ZonedDateTime.ofInstant(user.lastLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastWebLoginAt = user.lastWebLoginAt != null ? ZonedDateTime.ofInstant(user.lastWebLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastFtpLoginAt = user.lastFtpLoginAt != null ? ZonedDateTime.ofInstant(user.lastFtpLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastSftpLoginAt = user.lastSftpLoginAt != null ? ZonedDateTime.ofInstant(user.lastSftpLoginAt.toInstant(), ZoneId.systemDefault()) : null;
   }
 
   private void initGroup4(final User user) {
+    this.lastSftpLoginAt = user.lastSftpLoginAt != null ? ZonedDateTime.ofInstant(user.lastSftpLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastDavLoginAt = user.lastDavLoginAt != null ? ZonedDateTime.ofInstant(user.lastDavLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastDesktopLoginAt = user.lastDesktopLoginAt != null ? ZonedDateTime.ofInstant(user.lastDesktopLoginAt.toInstant(), ZoneId.systemDefault()) : null;
     this.lastRestapiLoginAt = user.lastRestapiLoginAt != null ? ZonedDateTime.ofInstant(user.lastRestapiLoginAt.toInstant(), ZoneId.systemDefault()) : null;
@@ -96,10 +97,10 @@ public class UserModel implements Serializable {
     this.lockoutExpires = user.lockoutExpires != null ? ZonedDateTime.ofInstant(user.lockoutExpires.toInstant(), ZoneId.systemDefault()) : null;
     this.name = user.name;
     this.company = user.company;
-    this.notes = user.notes;
   }
 
   private void initGroup5(final User user) {
+    this.notes = user.notes;
     this.notificationDailySendTime = user.notificationDailySendTime;
     this.officeIntegrationEnabled = Boolean.TRUE.equals(user.officeIntegrationEnabled);
     this.partnerAdmin = Boolean.TRUE.equals(user.partnerAdmin);
@@ -109,10 +110,10 @@ public class UserModel implements Serializable {
     this.passwordValidityDays = user.passwordValidityDays;
     this.primaryGroupId = user.primaryGroupId;
     this.publicKeysCount = user.publicKeysCount;
-    this.receiveAdminAlerts = Boolean.TRUE.equals(user.receiveAdminAlerts);
   }
 
   private void initGroup6(final User user) {
+    this.receiveAdminAlerts = Boolean.TRUE.equals(user.receiveAdminAlerts);
     this.notifyOnAllSiteWarnings = Boolean.TRUE.equals(user.notifyOnAllSiteWarnings);
     this.notifyOnAllSsoFailures = Boolean.TRUE.equals(user.notifyOnAllSsoFailures);
     this.notifyOnAllUserSecurityEvents = Boolean.TRUE.equals(user.notifyOnAllUserSecurityEvents);
@@ -122,10 +123,10 @@ public class UserModel implements Serializable {
     this.notifyOnAllAutomationFailures = Boolean.TRUE.equals(user.notifyOnAllAutomationFailures);
     this.notifyOnAllExpectationFailures = Boolean.TRUE.equals(user.notifyOnAllExpectationFailures);
     this.require2fa = user.require2fa;
-    this.requireLoginBy = user.requireLoginBy != null ? ZonedDateTime.ofInstant(user.requireLoginBy.toInstant(), ZoneId.systemDefault()) : null;
   }
 
   private void initGroup7(final User user) {
+    this.requireLoginBy = user.requireLoginBy != null ? ZonedDateTime.ofInstant(user.requireLoginBy.toInstant(), ZoneId.systemDefault()) : null;
     this.active2fa = Boolean.TRUE.equals(user.active2fa);
     this.requirePasswordChange = Boolean.TRUE.equals(user.requirePasswordChange);
     this.passwordExpired = Boolean.TRUE.equals(user.passwordExpired);
@@ -135,10 +136,10 @@ public class UserModel implements Serializable {
     this.sftpPermission = Boolean.TRUE.equals(user.sftpPermission);
     this.siteAdmin = Boolean.TRUE.equals(user.siteAdmin);
     this.workspaceAdmin = Boolean.TRUE.equals(user.workspaceAdmin);
-    this.siteId = user.siteId;
   }
 
   private void initGroup8(final User user) {
+    this.siteId = user.siteId;
     this.workspaceId = user.workspaceId;
     this.defaultWorkspaceId = user.defaultWorkspaceId;
     this.skipWelcomeScreen = Boolean.TRUE.equals(user.skipWelcomeScreen);
@@ -148,10 +149,10 @@ public class UserModel implements Serializable {
     this.externallyManaged = Boolean.TRUE.equals(user.externallyManaged);
     this.tags = user.tags;
     this.timeZone = user.timeZone;
-    this.typeOf2fa = user.typeOf2fa;
   }
 
   private void initGroup9(final User user) {
+    this.typeOf2fa = user.typeOf2fa;
     this.typeOf2faForDisplay = user.typeOf2faForDisplay;
     this.userRoot = user.userRoot;
     this.userHome = user.userHome;
@@ -161,10 +162,10 @@ public class UserModel implements Serializable {
     this.changePassword = user.changePassword;
     this.changePasswordConfirmation = user.changePasswordConfirmation;
     this.grantPermission = user.grantPermission;
-    this.groupId = user.groupId;
   }
 
   private void initGroup10(final User user) {
+    this.groupId = user.groupId;
     this.importedPasswordHash = user.importedPasswordHash;
     this.password = user.password;
     this.passwordConfirmation = user.passwordConfirmation;
@@ -361,6 +362,16 @@ public class UserModel implements Serializable {
 
   public void setDesktopConfigurationProfileId(final Long desktopConfigurationProfileId) {
     this.desktopConfigurationProfileId = desktopConfigurationProfileId;
+  }
+
+  private Long integrationCentricProfileId;
+
+  public Long getIntegrationCentricProfileId() {
+    return integrationCentricProfileId;
+  }
+
+  public void setIntegrationCentricProfileId(final Long integrationCentricProfileId) {
+    this.integrationCentricProfileId = integrationCentricProfileId;
   }
 
   private String email;

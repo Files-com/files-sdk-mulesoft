@@ -40,6 +40,7 @@ public class GroupModel implements Serializable {
     this.davPermission = Boolean.TRUE.equals(group.davPermission);
     this.restapiPermission = Boolean.TRUE.equals(group.restapiPermission);
     this.desktopConfigurationProfileId = group.desktopConfigurationProfileId;
+    this.integrationCentricProfileId = group.integrationCentricProfileId;
     this.siteId = group.siteId;
     this.workspaceId = group.workspaceId;
   }
@@ -172,6 +173,16 @@ public class GroupModel implements Serializable {
 
   public void setDesktopConfigurationProfileId(final Long desktopConfigurationProfileId) {
     this.desktopConfigurationProfileId = desktopConfigurationProfileId;
+  }
+
+  private Long integrationCentricProfileId;
+
+  public Long getIntegrationCentricProfileId() {
+    return integrationCentricProfileId;
+  }
+
+  public void setIntegrationCentricProfileId(final Long integrationCentricProfileId) {
+    this.integrationCentricProfileId = integrationCentricProfileId;
   }
 
   private Long siteId;

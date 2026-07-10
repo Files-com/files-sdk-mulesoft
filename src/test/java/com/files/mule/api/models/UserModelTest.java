@@ -55,6 +55,8 @@ public class UserModelTest {
     assertThat(model.getAiAssistantPersonalityId(), equalTo(1L));
     model.setDesktopConfigurationProfileId(1L);
     assertThat(model.getDesktopConfigurationProfileId(), equalTo(1L));
+    model.setIntegrationCentricProfileId(1L);
+    assertThat(model.getIntegrationCentricProfileId(), equalTo(1L));
     model.setEmail("john.doe@files.com");
     assertThat(model.getEmail(), equalTo("john.doe@files.com"));
     model.setFilesystemLayout("site_root");
