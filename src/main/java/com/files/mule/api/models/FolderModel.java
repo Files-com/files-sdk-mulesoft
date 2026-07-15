@@ -62,6 +62,9 @@ public class FolderModel implements Serializable {
   private void initGroup4(final Folder folder) {
     this.isLocked = Boolean.TRUE.equals(folder.isLocked);
     this.downloadUri = folder.downloadUri;
+    if (folder.directConnectionInfo != null) {
+      this.directConnectionInfo = new DirectConnectionInfoModel(folder.directConnectionInfo);
+    }
     this.priorityColor = folder.priorityColor;
     this.previewId = folder.previewId;
     if (folder.preview != null) {
@@ -388,6 +391,16 @@ public class FolderModel implements Serializable {
 
   public void setDownloadUri(final String downloadUri) {
     this.downloadUri = downloadUri;
+  }
+
+  private DirectConnectionInfoModel directConnectionInfo;
+
+  public DirectConnectionInfoModel getDirectConnectionInfo() {
+    return directConnectionInfo;
+  }
+
+  public void setDirectConnectionInfo(final DirectConnectionInfoModel directConnectionInfo) {
+    this.directConnectionInfo = directConnectionInfo;
   }
 
   private String priorityColor;

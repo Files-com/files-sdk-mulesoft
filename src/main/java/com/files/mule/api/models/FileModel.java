@@ -63,6 +63,9 @@ public class FileModel implements Serializable {
   private void initGroup4(final File file) {
     this.isLocked = Boolean.TRUE.equals(file.isLocked);
     this.downloadUri = file.downloadUri;
+    if (file.directConnectionInfo != null) {
+      this.directConnectionInfo = new DirectConnectionInfoModel(file.directConnectionInfo);
+    }
     this.priorityColor = file.priorityColor;
     this.previewId = file.previewId;
     if (file.preview != null) {
@@ -72,16 +75,17 @@ public class FileModel implements Serializable {
     this.length = file.length;
     this.mkdirParents = Boolean.TRUE.equals(file.mkdirParents);
     this.part = file.part;
-    this.parts = file.parts;
   }
 
   private void initGroup5(final File file) {
+    this.parts = file.parts;
     this.ref = file.ref;
     this.restart = file.restart;
     this.copyBehaviors = Boolean.TRUE.equals(file.copyBehaviors);
     this.structure = file.structure;
     this.withRename = Boolean.TRUE.equals(file.withRename);
     this.bufferedUpload = Boolean.TRUE.equals(file.bufferedUpload);
+    this.withDirectConnectionInfo = Boolean.TRUE.equals(file.withDirectConnectionInfo);
   }
 
   private String path;
@@ -404,6 +408,16 @@ public class FileModel implements Serializable {
     this.downloadUri = downloadUri;
   }
 
+  private DirectConnectionInfoModel directConnectionInfo;
+
+  public DirectConnectionInfoModel getDirectConnectionInfo() {
+    return directConnectionInfo;
+  }
+
+  public void setDirectConnectionInfo(final DirectConnectionInfoModel directConnectionInfo) {
+    this.directConnectionInfo = directConnectionInfo;
+  }
+
   private String priorityColor;
 
   public String getPriorityColor() {
@@ -542,6 +556,16 @@ public class FileModel implements Serializable {
 
   public void setBufferedUpload(final boolean bufferedUpload) {
     this.bufferedUpload = bufferedUpload;
+  }
+
+  private boolean withDirectConnectionInfo;
+
+  public boolean getWithDirectConnectionInfo() {
+    return withDirectConnectionInfo;
+  }
+
+  public void setWithDirectConnectionInfo(final boolean withDirectConnectionInfo) {
+    this.withDirectConnectionInfo = withDirectConnectionInfo;
   }
 
 }

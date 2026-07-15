@@ -96,6 +96,15 @@ The above example uses the payload as the content. You can also specify the cont
   "subfoldersLocked?": true,
   "isLocked": true,
   "downloadUri": "https://mysite.files.com/...",
+  "directConnectionInfo": {
+    "version": 1,
+    "serverName": "example",
+    "addresses": [
+      "example"
+    ],
+    "directUri": "example",
+    "caPem": "example"
+  },
   "priorityColor": "red",
   "previewId": 1,
   "preview": {
@@ -190,6 +199,15 @@ The above example uses the payload as the content. You can also specify the cont
   "subfoldersLocked?": true,
   "isLocked": true,
   "downloadUri": "https://mysite.files.com/...",
+  "directConnectionInfo": {
+    "version": 1,
+    "serverName": "example",
+    "addresses": [
+      "example"
+    ],
+    "directUri": "example",
+    "caPem": "example"
+  },
   "priorityColor": "red",
   "previewId": 1,
   "preview": {

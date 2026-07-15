@@ -80,6 +80,8 @@ public class FolderModelTest {
     assertThat(model.getIsLocked(), equalTo(true));
     model.setDownloadUri("https://mysite.files.com/...");
     assertThat(model.getDownloadUri(), equalTo("https://mysite.files.com/..."));
+    model.setDirectConnectionInfo(null);
+    assertThat(model.getDirectConnectionInfo(), equalTo(null));
     model.setPriorityColor("red");
     assertThat(model.getPriorityColor(), equalTo("red"));
     model.setPreviewId(1L);

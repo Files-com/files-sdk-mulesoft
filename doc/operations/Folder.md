@@ -63,6 +63,15 @@
     "subfoldersLocked?": true,
     "isLocked": true,
     "downloadUri": "https://mysite.files.com/...",
+    "directConnectionInfo": {
+      "version": 1,
+      "serverName": "example",
+      "addresses": [
+        "example"
+      ],
+      "directUri": "example",
+      "caPem": "example"
+    },
     "priorityColor": "red",
     "previewId": 1,
     "preview": {
@@ -136,6 +145,15 @@
   "subfoldersLocked?": true,
   "isLocked": true,
   "downloadUri": "https://mysite.files.com/...",
+  "directConnectionInfo": {
+    "version": 1,
+    "serverName": "example",
+    "addresses": [
+      "example"
+    ],
+    "directUri": "example",
+    "caPem": "example"
+  },
   "priorityColor": "red",
   "previewId": 1,
   "preview": {
