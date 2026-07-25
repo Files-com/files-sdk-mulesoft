@@ -105,6 +105,8 @@ These authentication methods can be configured during user creation and can be m
     "active2fa": true,
     "requirePasswordChange": true,
     "passwordExpired": true,
+    "responsibleGroupId": 1,
+    "responsibleUserId": 1,
     "readonlySiteAdmin": true,
     "restapiPermission": true,
     "selfManaged": true,
@@ -223,6 +225,8 @@ These authentication methods can be configured during user creation and can be m
   "active2fa": true,
   "requirePasswordChange": true,
   "passwordExpired": true,
+  "responsibleGroupId": 1,
+  "responsibleUserId": 1,
   "readonlySiteAdmin": true,
   "restapiPermission": true,
   "selfManaged": true,
@@ -269,8 +273,8 @@ These authentication methods can be configured during user creation and can be m
 | company<br/>*String* | User's company |
 | notes<br/>*String* | Any internal notes on the user |
 | requirePasswordChange<br/>*boolean* | Is a password change required upon next user login? |
-| userRoot<br/>*String* | Root folder for FTP (and optionally SFTP if the appropriate site-wide setting is set).  Note that this is not used for API, Desktop, or Web interface. |
-| userHome<br/>*String* | Home folder for FTP/SFTP.  Note that this is not used for API, Desktop, or Web interface. |
+| userRoot<br/>*String* | If filesystem layout is user_root, this path is the root path the user is fixed to for all interfaces. If the filesystem layout is site_root or partner_root, this acts as a root folder only for FTP and SFTP (SFTP applicability also requires a site-wide setting to be set). For partner_root layout, this path is relative to the Partner root folder for all callers and blank opts out of an additional protocol root. In this situation, this path is not applied to the API, Desktop, or Web interface. |
+| userHome<br/>*String* | Home folder for FTP/SFTP. For users with the partner_root filesystem layout, this path is relative to the Partner root folder. In all other cases, it is an absolute path. Only applies to FTP and SFTP, and not any other interface. |
 
 
 ### Example Operation
@@ -361,6 +365,8 @@ These authentication methods can be configured during user creation and can be m
   "active2fa": true,
   "requirePasswordChange": true,
   "passwordExpired": true,
+  "responsibleGroupId": 1,
+  "responsibleUserId": 1,
   "readonlySiteAdmin": true,
   "restapiPermission": true,
   "selfManaged": true,
@@ -407,8 +413,8 @@ These authentication methods can be configured during user creation and can be m
 | company<br/>*String* | User's company |
 | notes<br/>*String* | Any internal notes on the user |
 | requirePasswordChange<br/>*boolean* | Is a password change required upon next user login? |
-| userRoot<br/>*String* | Root folder for FTP (and optionally SFTP if the appropriate site-wide setting is set).  Note that this is not used for API, Desktop, or Web interface. |
-| userHome<br/>*String* | Home folder for FTP/SFTP.  Note that this is not used for API, Desktop, or Web interface. |
+| userRoot<br/>*String* | If filesystem layout is user_root, this path is the root path the user is fixed to for all interfaces. If the filesystem layout is site_root or partner_root, this acts as a root folder only for FTP and SFTP (SFTP applicability also requires a site-wide setting to be set). For partner_root layout, this path is relative to the Partner root folder for all callers and blank opts out of an additional protocol root. In this situation, this path is not applied to the API, Desktop, or Web interface. |
+| userHome<br/>*String* | Home folder for FTP/SFTP. For users with the partner_root filesystem layout, this path is relative to the Partner root folder. In all other cases, it is an absolute path. Only applies to FTP and SFTP, and not any other interface. |
 | username<br/>*String* | User's username |
 
 
@@ -501,6 +507,8 @@ These authentication methods can be configured during user creation and can be m
   "active2fa": true,
   "requirePasswordChange": true,
   "passwordExpired": true,
+  "responsibleGroupId": 1,
+  "responsibleUserId": 1,
   "readonlySiteAdmin": true,
   "restapiPermission": true,
   "selfManaged": true,

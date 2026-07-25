@@ -130,15 +130,17 @@ public class UserModel implements Serializable {
     this.active2fa = Boolean.TRUE.equals(user.active2fa);
     this.requirePasswordChange = Boolean.TRUE.equals(user.requirePasswordChange);
     this.passwordExpired = Boolean.TRUE.equals(user.passwordExpired);
+    this.responsibleGroupId = user.responsibleGroupId;
+    this.responsibleUserId = user.responsibleUserId;
     this.readonlySiteAdmin = Boolean.TRUE.equals(user.readonlySiteAdmin);
     this.restapiPermission = Boolean.TRUE.equals(user.restapiPermission);
     this.selfManaged = Boolean.TRUE.equals(user.selfManaged);
     this.sftpPermission = Boolean.TRUE.equals(user.sftpPermission);
-    this.siteAdmin = Boolean.TRUE.equals(user.siteAdmin);
-    this.workspaceAdmin = Boolean.TRUE.equals(user.workspaceAdmin);
   }
 
   private void initGroup8(final User user) {
+    this.siteAdmin = Boolean.TRUE.equals(user.siteAdmin);
+    this.workspaceAdmin = Boolean.TRUE.equals(user.workspaceAdmin);
     this.siteId = user.siteId;
     this.workspaceId = user.workspaceId;
     this.defaultWorkspaceId = user.defaultWorkspaceId;
@@ -147,11 +149,11 @@ public class UserModel implements Serializable {
     this.ssoStrategyId = user.ssoStrategyId;
     this.subscribeToNewsletter = Boolean.TRUE.equals(user.subscribeToNewsletter);
     this.externallyManaged = Boolean.TRUE.equals(user.externallyManaged);
-    this.tags = user.tags;
-    this.timeZone = user.timeZone;
   }
 
   private void initGroup9(final User user) {
+    this.tags = user.tags;
+    this.timeZone = user.timeZone;
     this.typeOf2fa = user.typeOf2fa;
     this.typeOf2faForDisplay = user.typeOf2faForDisplay;
     this.userRoot = user.userRoot;
@@ -160,11 +162,11 @@ public class UserModel implements Serializable {
     this.passwordExpireAt = user.passwordExpireAt != null ? ZonedDateTime.ofInstant(user.passwordExpireAt.toInstant(), ZoneId.systemDefault()) : null;
     this.avatarDelete = Boolean.TRUE.equals(user.avatarDelete);
     this.changePassword = user.changePassword;
-    this.changePasswordConfirmation = user.changePasswordConfirmation;
-    this.grantPermission = user.grantPermission;
   }
 
   private void initGroup10(final User user) {
+    this.changePasswordConfirmation = user.changePasswordConfirmation;
+    this.grantPermission = user.grantPermission;
     this.groupId = user.groupId;
     this.importedPasswordHash = user.importedPasswordHash;
     this.password = user.password;
@@ -812,6 +814,26 @@ public class UserModel implements Serializable {
 
   public void setPasswordExpired(final boolean passwordExpired) {
     this.passwordExpired = passwordExpired;
+  }
+
+  private Long responsibleGroupId;
+
+  public Long getResponsibleGroupId() {
+    return responsibleGroupId;
+  }
+
+  public void setResponsibleGroupId(final Long responsibleGroupId) {
+    this.responsibleGroupId = responsibleGroupId;
+  }
+
+  private Long responsibleUserId;
+
+  public Long getResponsibleUserId() {
+    return responsibleUserId;
+  }
+
+  public void setResponsibleUserId(final Long responsibleUserId) {
+    this.responsibleUserId = responsibleUserId;
   }
 
   private boolean readonlySiteAdmin;

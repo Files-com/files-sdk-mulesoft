@@ -145,6 +145,10 @@ public class UserModelTest {
     assertThat(model.getRequirePasswordChange(), equalTo(true));
     model.setPasswordExpired(true);
     assertThat(model.getPasswordExpired(), equalTo(true));
+    model.setResponsibleGroupId(1L);
+    assertThat(model.getResponsibleGroupId(), equalTo(1L));
+    model.setResponsibleUserId(1L);
+    assertThat(model.getResponsibleUserId(), equalTo(1L));
     model.setReadonlySiteAdmin(true);
     assertThat(model.getReadonlySiteAdmin(), equalTo(true));
     model.setRestapiPermission(true);

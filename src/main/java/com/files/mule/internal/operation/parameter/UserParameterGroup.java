@@ -172,7 +172,7 @@ public class UserParameterGroup {
     @Parameter
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
-    @Summary("Root folder for FTP (and optionally SFTP if the appropriate site-wide setting is set).  Note that this is not used for API, Desktop, or Web interface.")
+    @Summary("If filesystem layout is user_root, this path is the root path the user is fixed to for all interfaces. If the filesystem layout is site_root or partner_root, this acts as a root folder only for FTP and SFTP (SFTP applicability also requires a site-wide setting to be set). For partner_root layout, this path is relative to the Partner root folder for all callers and blank opts out of an additional protocol root. In this situation, this path is not applied to the API, Desktop, or Web interface.")
     @Example("example")
     public String userRoot;
 
@@ -187,7 +187,7 @@ public class UserParameterGroup {
     @Parameter
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
-    @Summary("Home folder for FTP/SFTP.  Note that this is not used for API, Desktop, or Web interface.")
+    @Summary("Home folder for FTP/SFTP. For users with the partner_root filesystem layout, this path is relative to the Partner root folder. In all other cases, it is an absolute path. Only applies to FTP and SFTP, and not any other interface.")
     @Example("example")
     public String userHome;
 
@@ -339,7 +339,7 @@ public class UserParameterGroup {
     @Parameter
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
-    @Summary("Root folder for FTP (and optionally SFTP if the appropriate site-wide setting is set).  Note that this is not used for API, Desktop, or Web interface.")
+    @Summary("If filesystem layout is user_root, this path is the root path the user is fixed to for all interfaces. If the filesystem layout is site_root or partner_root, this acts as a root folder only for FTP and SFTP (SFTP applicability also requires a site-wide setting to be set). For partner_root layout, this path is relative to the Partner root folder for all callers and blank opts out of an additional protocol root. In this situation, this path is not applied to the API, Desktop, or Web interface.")
     @Example("example")
     public String userRoot;
 
@@ -354,7 +354,7 @@ public class UserParameterGroup {
     @Parameter
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
-    @Summary("Home folder for FTP/SFTP.  Note that this is not used for API, Desktop, or Web interface.")
+    @Summary("Home folder for FTP/SFTP. For users with the partner_root filesystem layout, this path is relative to the Partner root folder. In all other cases, it is an absolute path. Only applies to FTP and SFTP, and not any other interface.")
     @Example("example")
     public String userHome;
 
