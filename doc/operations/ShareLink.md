@@ -105,6 +105,9 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
     "workspaceId": 1,
     "hasInbox": true,
     "dontAllowFoldersInUploads": true,
+    "requestedUploadSlots": [
+      "example"
+    ],
     "paths": [
       "file.txt"
     ],
@@ -223,6 +226,9 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
   "workspaceId": 1,
   "hasInbox": true,
   "dontAllowFoldersInUploads": true,
+  "requestedUploadSlots": [
+    "example"
+  ],
   "paths": [
     "file.txt"
   ],
@@ -356,6 +362,9 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
   "workspaceId": 1,
   "hasInbox": true,
   "dontAllowFoldersInUploads": true,
+  "requestedUploadSlots": [
+    "example"
+  ],
   "paths": [
     "file.txt"
   ],
@@ -479,6 +488,9 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
   "workspaceId": 1,
   "hasInbox": true,
   "dontAllowFoldersInUploads": true,
+  "requestedUploadSlots": [
+    "example"
+  ],
   "paths": [
     "file.txt"
   ],
