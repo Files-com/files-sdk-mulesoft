@@ -37,12 +37,12 @@ public class UserModelTest {
     assertThat(model.getAvatarUrl(), equalTo("example"));
     model.setBillable(true);
     assertThat(model.getBillable(), equalTo(true));
-    model.setBillingPermission(true);
-    assertThat(model.getBillingPermission(), equalTo(true));
-    model.setBypassSiteAllowedIps(true);
-    assertThat(model.getBypassSiteAllowedIps(), equalTo(true));
-    model.setBypassUserLifecycleRules(true);
-    assertThat(model.getBypassUserLifecycleRules(), equalTo(true));
+    model.setBillingPermission(false);
+    assertThat(model.getBillingPermission(), equalTo(false));
+    model.setBypassSiteAllowedIps(false);
+    assertThat(model.getBypassSiteAllowedIps(), equalTo(false));
+    model.setBypassUserLifecycleRules(false);
+    assertThat(model.getBypassUserLifecycleRules(), equalTo(false));
     model.setCreatedAt(ZonedDateTime.parse("2000-01-01T01:00:00Z"));
     assertThat(model.getCreatedAt(), equalTo(ZonedDateTime.parse("2000-01-01T01:00:00Z")));
     model.setDavPermission(true);
