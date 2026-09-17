@@ -7,14 +7,17 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 import java.time.ZonedDateTime;
+import java.util.Map;
 
 import org.junit.Test;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.files.models.BundleRegistration;
 
 public class ShareLinkRegistrationModelTest {
   @Test
-  public void testShareLinkRegistrationModel() {
+  public void testShareLinkRegistrationModel() throws Exception {
     final ShareLinkRegistrationModel model = new ShareLinkRegistrationModel(new BundleRegistration());
     model.setCode("abc123");
     assertThat(model.getCode(), equalTo("abc123"));
@@ -32,8 +35,8 @@ public class ShareLinkRegistrationModelTest {
     assertThat(model.getClickwrapBody(), equalTo("example"));
     model.setFormFieldSetId(1L);
     assertThat(model.getFormFieldSetId(), equalTo(1L));
-    model.setFormFieldData(null);
-    assertThat(model.getFormFieldData(), equalTo(null));
+    model.setFormFieldData(new ObjectMapper().readValue("{\"key\":\"example value\"}", Map.class));
+    assertThat(model.getFormFieldData(), equalTo(new ObjectMapper().readValue("{\"key\":\"example value\"}", Map.class)));
     model.setBundleCode("example");
     assertThat(model.getBundleCode(), equalTo("example"));
     model.setBundleId(1L);

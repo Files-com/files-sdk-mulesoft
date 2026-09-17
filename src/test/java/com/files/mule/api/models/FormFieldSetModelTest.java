@@ -14,7 +14,7 @@ import com.files.models.FormFieldSet;
 
 public class FormFieldSetModelTest {
   @Test
-  public void testFormFieldSetModel() {
+  public void testFormFieldSetModel() throws Exception {
     final FormFieldSetModel model = new FormFieldSetModel(new FormFieldSet());
     model.setId(1L);
     assertThat(model.getId(), equalTo(1L));

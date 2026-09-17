@@ -12,7 +12,7 @@ import com.files.models.Image;
 
 public class ImageModelTest {
   @Test
-  public void testImageModel() {
+  public void testImageModel() throws Exception {
     final ImageModel model = new ImageModel(new Image());
     model.setName("My logo");
     assertThat(model.getName(), equalTo("My logo"));

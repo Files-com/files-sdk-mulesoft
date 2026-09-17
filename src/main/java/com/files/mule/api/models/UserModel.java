@@ -134,11 +134,12 @@ public class UserModel implements Serializable {
     this.responsibleUserId = user.responsibleUserId;
     this.readonlySiteAdmin = Boolean.TRUE.equals(user.readonlySiteAdmin);
     this.restapiPermission = Boolean.TRUE.equals(user.restapiPermission);
+    this.s3CompatibleEndpointPermission = Boolean.TRUE.equals(user.s3CompatibleEndpointPermission);
     this.selfManaged = Boolean.TRUE.equals(user.selfManaged);
-    this.sftpPermission = Boolean.TRUE.equals(user.sftpPermission);
   }
 
   private void initGroup8(final User user) {
+    this.sftpPermission = Boolean.TRUE.equals(user.sftpPermission);
     this.siteAdmin = Boolean.TRUE.equals(user.siteAdmin);
     this.workspaceAdmin = Boolean.TRUE.equals(user.workspaceAdmin);
     this.siteId = user.siteId;
@@ -148,10 +149,10 @@ public class UserModel implements Serializable {
     this.encryptionRequired = user.sslRequired;
     this.ssoStrategyId = user.ssoStrategyId;
     this.subscribeToNewsletter = Boolean.TRUE.equals(user.subscribeToNewsletter);
-    this.externallyManaged = Boolean.TRUE.equals(user.externallyManaged);
   }
 
   private void initGroup9(final User user) {
+    this.externallyManaged = Boolean.TRUE.equals(user.externallyManaged);
     this.tags = user.tags;
     this.timeZone = user.timeZone;
     this.typeOf2fa = user.typeOf2fa;
@@ -161,10 +162,10 @@ public class UserModel implements Serializable {
     this.daysRemainingUntilPasswordExpire = user.daysRemainingUntilPasswordExpire;
     this.passwordExpireAt = user.passwordExpireAt != null ? ZonedDateTime.ofInstant(user.passwordExpireAt.toInstant(), ZoneId.systemDefault()) : null;
     this.avatarDelete = Boolean.TRUE.equals(user.avatarDelete);
-    this.changePassword = user.changePassword;
   }
 
   private void initGroup10(final User user) {
+    this.changePassword = user.changePassword;
     this.changePasswordConfirmation = user.changePasswordConfirmation;
     this.grantPermission = user.grantPermission;
     this.groupId = user.groupId;
@@ -854,6 +855,16 @@ public class UserModel implements Serializable {
 
   public void setRestapiPermission(final boolean restapiPermission) {
     this.restapiPermission = restapiPermission;
+  }
+
+  private boolean s3CompatibleEndpointPermission;
+
+  public boolean getS3CompatibleEndpointPermission() {
+    return s3CompatibleEndpointPermission;
+  }
+
+  public void setS3CompatibleEndpointPermission(final boolean s3CompatibleEndpointPermission) {
+    this.s3CompatibleEndpointPermission = s3CompatibleEndpointPermission;
   }
 
   private boolean selfManaged;

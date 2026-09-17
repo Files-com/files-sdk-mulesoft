@@ -10,14 +10,14 @@ import org.junit.Test;
 
 public class GroupParameterGroupTest {
   @Test
-  public void testShow() {
+  public void testShow() throws Exception {
     final GroupParameterGroup.Show group = new GroupParameterGroup.Show();
     group.setId(1L);
     assertThat(group.getId(), equalTo(1L));
   }
 
   @Test
-  public void testCreate() {
+  public void testCreate() throws Exception {
     final GroupParameterGroup.Create group = new GroupParameterGroup.Create();
     group.setName("name");
     assertThat(group.getName(), equalTo("name"));
@@ -30,7 +30,7 @@ public class GroupParameterGroupTest {
   }
 
   @Test
-  public void testUpdate() {
+  public void testUpdate() throws Exception {
     final GroupParameterGroup.Update group = new GroupParameterGroup.Update();
     group.setId(1L);
     assertThat(group.getId(), equalTo(1L));
@@ -45,7 +45,7 @@ public class GroupParameterGroupTest {
   }
 
   @Test
-  public void testDelete() {
+  public void testDelete() throws Exception {
     final GroupParameterGroup.Delete group = new GroupParameterGroup.Delete();
     group.setId(1L);
     assertThat(group.getId(), equalTo(1L));

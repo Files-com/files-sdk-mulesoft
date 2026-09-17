@@ -8,14 +8,17 @@ import static org.hamcrest.Matchers.equalTo;
 
 import java.time.ZonedDateTime;
 import java.util.Arrays;
+import java.util.Map;
 
 import org.junit.Test;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.files.models.Bundle;
 
 public class ShareLinkModelTest {
   @Test
-  public void testShareLinkModel() {
+  public void testShareLinkModel() throws Exception {
     final ShareLinkModel model = new ShareLinkModel(new Bundle());
     model.setCode("abc123");
     assertThat(model.getCode(), equalTo("abc123"));
@@ -97,8 +100,8 @@ public class ShareLinkModelTest {
     assertThat(model.getInboxId(), equalTo(1L));
     model.setWatermarkAttachment(null);
     assertThat(model.getWatermarkAttachment(), equalTo(null));
-    model.setWatermarkValue(null);
-    assertThat(model.getWatermarkValue(), equalTo(null));
+    model.setWatermarkValue(new ObjectMapper().readValue("{\"gravity\":\"SouthWest\",\"max_height_or_width\":20,\"transparency\":25}", Map.class));
+    assertThat(model.getWatermarkValue(), equalTo(new ObjectMapper().readValue("{\"gravity\":\"SouthWest\",\"max_height_or_width\":20,\"transparency\":25}", Map.class)));
     model.setSendOneTimePasswordToRecipientAtRegistration(true);
     assertThat(model.getSendOneTimePasswordToRecipientAtRegistration(), equalTo(true));
     model.setWorkspaceId(1L);

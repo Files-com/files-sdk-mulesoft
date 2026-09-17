@@ -10,14 +10,14 @@ import org.junit.Test;
 
 public class ShareLinkRecipientParameterGroupTest {
   @Test
-  public void testList() {
+  public void testList() throws Exception {
     final ShareLinkRecipientParameterGroup.List group = new ShareLinkRecipientParameterGroup.List();
     group.setBundleId(1L);
     assertThat(group.getBundleId(), equalTo(1L));
   }
 
   @Test
-  public void testCreate() {
+  public void testCreate() throws Exception {
     final ShareLinkRecipientParameterGroup.Create group = new ShareLinkRecipientParameterGroup.Create();
     group.setBundleId(1L);
     assertThat(group.getBundleId(), equalTo(1L));

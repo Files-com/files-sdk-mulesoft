@@ -14,7 +14,7 @@ import com.files.models.BundleRecipient;
 
 public class ShareLinkRecipientModelTest {
   @Test
-  public void testShareLinkRecipientModel() {
+  public void testShareLinkRecipientModel() throws Exception {
     final ShareLinkRecipientModel model = new ShareLinkRecipientModel(new BundleRecipient());
     model.setCompany("Acme Inc.");
     assertThat(model.getCompany(), equalTo("Acme Inc."));

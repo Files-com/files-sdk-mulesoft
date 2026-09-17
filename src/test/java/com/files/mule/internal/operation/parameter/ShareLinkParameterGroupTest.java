@@ -12,14 +12,14 @@ import org.junit.Test;
 
 public class ShareLinkParameterGroupTest {
   @Test
-  public void testShow() {
+  public void testShow() throws Exception {
     final ShareLinkParameterGroup.Show group = new ShareLinkParameterGroup.Show();
     group.setId(1L);
     assertThat(group.getId(), equalTo(1L));
   }
 
   @Test
-  public void testCreate() {
+  public void testCreate() throws Exception {
     final ShareLinkParameterGroup.Create group = new ShareLinkParameterGroup.Create();
     group.setPaths(Arrays.asList("file.txt"));
     assertThat(group.getPaths(), equalTo(Arrays.asList("file.txt")));
@@ -40,7 +40,7 @@ public class ShareLinkParameterGroupTest {
   }
 
   @Test
-  public void testUpdate() {
+  public void testUpdate() throws Exception {
     final ShareLinkParameterGroup.Update group = new ShareLinkParameterGroup.Update();
     group.setId(1L);
     assertThat(group.getId(), equalTo(1L));
@@ -51,7 +51,7 @@ public class ShareLinkParameterGroupTest {
   }
 
   @Test
-  public void testDelete() {
+  public void testDelete() throws Exception {
     final ShareLinkParameterGroup.Delete group = new ShareLinkParameterGroup.Delete();
     group.setId(1L);
     assertThat(group.getId(), equalTo(1L));

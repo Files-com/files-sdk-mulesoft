@@ -39,6 +39,7 @@ public class GroupModel implements Serializable {
   private void initGroup2(final Group group) {
     this.davPermission = Boolean.TRUE.equals(group.davPermission);
     this.restapiPermission = Boolean.TRUE.equals(group.restapiPermission);
+    this.s3CompatibleEndpointPermission = Boolean.TRUE.equals(group.s3CompatibleEndpointPermission);
     this.desktopConfigurationProfileId = group.desktopConfigurationProfileId;
     this.integrationCentricProfileId = group.integrationCentricProfileId;
     this.siteId = group.siteId;
@@ -163,6 +164,16 @@ public class GroupModel implements Serializable {
 
   public void setRestapiPermission(final boolean restapiPermission) {
     this.restapiPermission = restapiPermission;
+  }
+
+  private boolean s3CompatibleEndpointPermission;
+
+  public boolean getS3CompatibleEndpointPermission() {
+    return s3CompatibleEndpointPermission;
+  }
+
+  public void setS3CompatibleEndpointPermission(final boolean s3CompatibleEndpointPermission) {
+    this.s3CompatibleEndpointPermission = s3CompatibleEndpointPermission;
   }
 
   private Long desktopConfigurationProfileId;

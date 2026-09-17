@@ -12,7 +12,7 @@ import com.files.models.FileAction;
 
 public class FileActionModelTest {
   @Test
-  public void testFileActionModel() {
+  public void testFileActionModel() throws Exception {
     final FileActionModel model = new FileActionModel(new FileAction());
     model.setStatus("pending");
     assertThat(model.getStatus(), equalTo("pending"));

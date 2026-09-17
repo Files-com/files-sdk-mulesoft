@@ -10,35 +10,35 @@ import org.junit.Test;
 
 public class FileParameterGroupTest {
   @Test
-  public void testDownload() {
+  public void testDownload() throws Exception {
     final FileParameterGroup.Download group = new FileParameterGroup.Download();
     group.setPath("path");
     assertThat(group.getPath(), equalTo("path"));
   }
 
   @Test
-  public void testUpload() {
+  public void testUpload() throws Exception {
     final FileParameterGroup.Upload group = new FileParameterGroup.Upload();
     group.setPath("path");
     assertThat(group.getPath(), equalTo("path"));
   }
 
   @Test
-  public void testDelete() {
+  public void testDelete() throws Exception {
     final FileParameterGroup.Delete group = new FileParameterGroup.Delete();
     group.setPath("path");
     assertThat(group.getPath(), equalTo("path"));
   }
 
   @Test
-  public void testShow() {
+  public void testShow() throws Exception {
     final FileParameterGroup.Show group = new FileParameterGroup.Show();
     group.setPath("path");
     assertThat(group.getPath(), equalTo("path"));
   }
 
   @Test
-  public void testCopy() {
+  public void testCopy() throws Exception {
     final FileParameterGroup.Copy group = new FileParameterGroup.Copy();
     group.setPath("path");
     assertThat(group.getPath(), equalTo("path"));
@@ -47,7 +47,7 @@ public class FileParameterGroupTest {
   }
 
   @Test
-  public void testMove() {
+  public void testMove() throws Exception {
     final FileParameterGroup.Move group = new FileParameterGroup.Move();
     group.setPath("path");
     assertThat(group.getPath(), equalTo("path"));

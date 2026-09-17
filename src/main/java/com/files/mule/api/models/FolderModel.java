@@ -9,6 +9,9 @@ import java.time.ZoneId;
 
 import com.files.models.Folder;
 
+/**
+ * A File object represents a file or folder on your Files.com site. The `type` field is `file` for files and `directory` for folders.
+ */
 public class FolderModel implements Serializable {
   public FolderModel() {
   }

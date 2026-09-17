@@ -14,7 +14,7 @@ import com.files.models.BundleDownload;
 
 public class ShareLinkDownloadModelTest {
   @Test
-  public void testShareLinkDownloadModel() {
+  public void testShareLinkDownloadModel() throws Exception {
     final ShareLinkDownloadModel model = new ShareLinkDownloadModel(new BundleDownload());
     model.setBundleRegistration(null);
     assertThat(model.getBundleRegistration(), equalTo(null));

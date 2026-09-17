@@ -12,7 +12,7 @@ import com.files.models.Preview;
 
 public class PreviewModelTest {
   @Test
-  public void testPreviewModel() {
+  public void testPreviewModel() throws Exception {
     final PreviewModel model = new PreviewModel(new Preview());
     model.setId(1L);
     assertThat(model.getId(), equalTo(1L));

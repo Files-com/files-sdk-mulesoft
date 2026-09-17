@@ -85,6 +85,7 @@ public class FilesComOperations {
   private static final String REQUIRE_PASSWORD_CHANGE = "require_password_change";
   private static final String REQUIRE_REGISTRATION = "require_registration";
   private static final String RESTAPI_PERMISSION = "restapi_permission";
+  private static final String S3_COMPATIBLE_ENDPOINT_PERMISSION = "s3_compatible_endpoint_permission";
   private static final String SFTP_PERMISSION = "sftp_permission";
   private static final String SHARE_AFTER_CREATE = "share_after_create";
   private static final String USER_HOME = "user_home";
@@ -946,6 +947,7 @@ public class FilesComOperations {
     requestParameters.put(DAV_PERMISSION, true);
     requestParameters.put(FTP_PERMISSION, true);
     requestParameters.put(RESTAPI_PERMISSION, true);
+    requestParameters.put(S3_COMPATIBLE_ENDPOINT_PERMISSION, true);
     requestParameters.put(SFTP_PERMISSION, true);
     return new UserModel(connection.createUser(requestParameters));
   }
@@ -1006,6 +1008,7 @@ public class FilesComOperations {
     requestParameters.put(DAV_PERMISSION, true);
     requestParameters.put(FTP_PERMISSION, true);
     requestParameters.put(RESTAPI_PERMISSION, true);
+    requestParameters.put(S3_COMPATIBLE_ENDPOINT_PERMISSION, true);
     requestParameters.put(SFTP_PERMISSION, true);
     return new UserModel(connection.updateUser(requestParameters));
   }

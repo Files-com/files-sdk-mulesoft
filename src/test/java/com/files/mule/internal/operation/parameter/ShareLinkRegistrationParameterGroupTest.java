@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class ShareLinkRegistrationParameterGroupTest {
   @Test
-  public void testList() {
+  public void testList() throws Exception {
     final ShareLinkRegistrationParameterGroup.List group = new ShareLinkRegistrationParameterGroup.List();
     group.setBundleId(1L);
     assertThat(group.getBundleId(), equalTo(1L));

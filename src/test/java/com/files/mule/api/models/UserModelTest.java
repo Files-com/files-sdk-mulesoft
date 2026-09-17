@@ -15,7 +15,7 @@ import com.files.models.User;
 
 public class UserModelTest {
   @Test
-  public void testUserModel() {
+  public void testUserModel() throws Exception {
     final UserModel model = new UserModel(new User());
     model.setId(1L);
     assertThat(model.getId(), equalTo(1L));
@@ -153,6 +153,8 @@ public class UserModelTest {
     assertThat(model.getReadonlySiteAdmin(), equalTo(true));
     model.setRestapiPermission(true);
     assertThat(model.getRestapiPermission(), equalTo(true));
+    model.setS3CompatibleEndpointPermission(true);
+    assertThat(model.getS3CompatibleEndpointPermission(), equalTo(true));
     model.setSelfManaged(true);
     assertThat(model.getSelfManaged(), equalTo(true));
     model.setSftpPermission(true);

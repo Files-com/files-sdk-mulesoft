@@ -14,7 +14,7 @@ import com.files.models.DirectConnectionInfo;
 
 public class DirectConnectionInfoModelTest {
   @Test
-  public void testDirectConnectionInfoModel() {
+  public void testDirectConnectionInfoModel() throws Exception {
     final DirectConnectionInfoModel model = new DirectConnectionInfoModel(new DirectConnectionInfo());
     model.setVersion(1L);
     assertThat(model.getVersion(), equalTo(1L));

@@ -12,7 +12,7 @@ import com.files.models.BundleNotification;
 
 public class ShareLinkNotificationModelTest {
   @Test
-  public void testShareLinkNotificationModel() {
+  public void testShareLinkNotificationModel() throws Exception {
     final ShareLinkNotificationModel model = new ShareLinkNotificationModel(new BundleNotification());
     model.setBundleId(1L);
     assertThat(model.getBundleId(), equalTo(1L));

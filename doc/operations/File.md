@@ -1,6 +1,6 @@
 # File
 
-
+A File object represents a file or folder on your Files.com site. The `type` field is `file` for files and `directory` for folders.
 
 ## Download File
 
@@ -72,7 +72,7 @@ The above example uses the payload as the content. You can also specify the cont
   "createdByRemoteServerId": 1,
   "createdBySyncId": 1,
   "customMetadata": {
-    "key": "value"
+    "department": "finance"
   },
   "displayName": "file.txt",
   "type": "file",
@@ -175,7 +175,7 @@ The above example uses the payload as the content. You can also specify the cont
   "createdByRemoteServerId": 1,
   "createdBySyncId": 1,
   "customMetadata": {
-    "key": "value"
+    "department": "finance"
   },
   "displayName": "file.txt",
   "type": "file",

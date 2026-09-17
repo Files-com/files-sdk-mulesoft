@@ -99,14 +99,18 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
       "uri": "https://mysite.files.com/.../my_image.png"
     },
     "watermarkValue": {
-      "key": "example value"
+      "gravity": "SouthWest",
+      "maxHeightOrWidth": 20,
+      "transparency": 25
     },
     "sendOneTimePasswordToRecipientAtRegistration": true,
     "workspaceId": 1,
     "hasInbox": true,
     "dontAllowFoldersInUploads": true,
     "requestedUploadSlots": [
-      "example"
+      {
+        "name": "Photo ID"
+      }
     ],
     "paths": [
       "file.txt"
@@ -220,14 +224,18 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
     "uri": "https://mysite.files.com/.../my_image.png"
   },
   "watermarkValue": {
-    "key": "example value"
+    "gravity": "SouthWest",
+    "maxHeightOrWidth": 20,
+    "transparency": 25
   },
   "sendOneTimePasswordToRecipientAtRegistration": true,
   "workspaceId": 1,
   "hasInbox": true,
   "dontAllowFoldersInUploads": true,
   "requestedUploadSlots": [
-    "example"
+    {
+      "name": "Photo ID"
+    }
   ],
   "paths": [
     "file.txt"
@@ -356,14 +364,18 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
     "uri": "https://mysite.files.com/.../my_image.png"
   },
   "watermarkValue": {
-    "key": "example value"
+    "gravity": "SouthWest",
+    "maxHeightOrWidth": 20,
+    "transparency": 25
   },
   "sendOneTimePasswordToRecipientAtRegistration": true,
   "workspaceId": 1,
   "hasInbox": true,
   "dontAllowFoldersInUploads": true,
   "requestedUploadSlots": [
-    "example"
+    {
+      "name": "Photo ID"
+    }
   ],
   "paths": [
     "file.txt"
@@ -482,14 +494,18 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
     "uri": "https://mysite.files.com/.../my_image.png"
   },
   "watermarkValue": {
-    "key": "example value"
+    "gravity": "SouthWest",
+    "maxHeightOrWidth": 20,
+    "transparency": 25
   },
   "sendOneTimePasswordToRecipientAtRegistration": true,
   "workspaceId": 1,
   "hasInbox": true,
   "dontAllowFoldersInUploads": true,
   "requestedUploadSlots": [
-    "example"
+    {
+      "name": "Photo ID"
+    }
   ],
   "paths": [
     "file.txt"

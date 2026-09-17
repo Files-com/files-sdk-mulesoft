@@ -7,14 +7,17 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 import java.time.ZonedDateTime;
+import java.util.Map;
 
 import org.junit.Test;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.files.models.Folder;
 
 public class FolderModelTest {
   @Test
-  public void testFolderModel() {
+  public void testFolderModel() throws Exception {
     final FolderModel model = new FolderModel(new Folder());
     model.setPath("path/file.txt");
     assertThat(model.getPath(), equalTo("path/file.txt"));
@@ -34,8 +37,8 @@ public class FolderModelTest {
     assertThat(model.getCreatedByRemoteServerId(), equalTo(1L));
     model.setCreatedBySyncId(1L);
     assertThat(model.getCreatedBySyncId(), equalTo(1L));
-    model.setCustomMetadata(null);
-    assertThat(model.getCustomMetadata(), equalTo(null));
+    model.setCustomMetadata(new ObjectMapper().readValue("{\"department\":\"finance\"}", Map.class));
+    assertThat(model.getCustomMetadata(), equalTo(new ObjectMapper().readValue("{\"department\":\"finance\"}", Map.class)));
     model.setDisplayName("file.txt");
     assertThat(model.getDisplayName(), equalTo("file.txt"));
     model.setFileType("file");

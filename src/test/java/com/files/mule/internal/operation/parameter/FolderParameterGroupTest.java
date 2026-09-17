@@ -10,35 +10,35 @@ import org.junit.Test;
 
 public class FolderParameterGroupTest {
   @Test
-  public void testList() {
+  public void testList() throws Exception {
     final FolderParameterGroup.List group = new FolderParameterGroup.List();
     group.setPath("path");
     assertThat(group.getPath(), equalTo("path"));
   }
 
   @Test
-  public void testCreate() {
+  public void testCreate() throws Exception {
     final FolderParameterGroup.Create group = new FolderParameterGroup.Create();
     group.setPath("path");
     assertThat(group.getPath(), equalTo("path"));
   }
 
   @Test
-  public void testDelete() {
+  public void testDelete() throws Exception {
     final FolderParameterGroup.Delete group = new FolderParameterGroup.Delete();
     group.setPath("path");
     assertThat(group.getPath(), equalTo("path"));
   }
 
   @Test
-  public void testShow() {
+  public void testShow() throws Exception {
     final FolderParameterGroup.Show group = new FolderParameterGroup.Show();
     group.setPath("path");
     assertThat(group.getPath(), equalTo("path"));
   }
 
   @Test
-  public void testCopy() {
+  public void testCopy() throws Exception {
     final FolderParameterGroup.Copy group = new FolderParameterGroup.Copy();
     group.setPath("path");
     assertThat(group.getPath(), equalTo("path"));
@@ -47,7 +47,7 @@ public class FolderParameterGroupTest {
   }
 
   @Test
-  public void testMove() {
+  public void testMove() throws Exception {
     final FolderParameterGroup.Move group = new FolderParameterGroup.Move();
     group.setPath("path");
     assertThat(group.getPath(), equalTo("path"));

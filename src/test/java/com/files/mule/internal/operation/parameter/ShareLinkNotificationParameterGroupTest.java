@@ -10,14 +10,14 @@ import org.junit.Test;
 
 public class ShareLinkNotificationParameterGroupTest {
   @Test
-  public void testShow() {
+  public void testShow() throws Exception {
     final ShareLinkNotificationParameterGroup.Show group = new ShareLinkNotificationParameterGroup.Show();
     group.setId(1L);
     assertThat(group.getId(), equalTo(1L));
   }
 
   @Test
-  public void testCreate() {
+  public void testCreate() throws Exception {
     final ShareLinkNotificationParameterGroup.Create group = new ShareLinkNotificationParameterGroup.Create();
     group.setBundleId(1L);
     assertThat(group.getBundleId(), equalTo(1L));
@@ -26,7 +26,7 @@ public class ShareLinkNotificationParameterGroupTest {
   }
 
   @Test
-  public void testUpdate() {
+  public void testUpdate() throws Exception {
     final ShareLinkNotificationParameterGroup.Update group = new ShareLinkNotificationParameterGroup.Update();
     group.setId(1L);
     assertThat(group.getId(), equalTo(1L));
@@ -37,7 +37,7 @@ public class ShareLinkNotificationParameterGroupTest {
   }
 
   @Test
-  public void testDelete() {
+  public void testDelete() throws Exception {
     final ShareLinkNotificationParameterGroup.Delete group = new ShareLinkNotificationParameterGroup.Delete();
     group.setId(1L);
     assertThat(group.getId(), equalTo(1L));

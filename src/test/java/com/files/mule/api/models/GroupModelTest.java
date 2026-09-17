@@ -12,7 +12,7 @@ import com.files.models.Group;
 
 public class GroupModelTest {
   @Test
-  public void testGroupModel() {
+  public void testGroupModel() throws Exception {
     final GroupModel model = new GroupModel(new Group());
     model.setId(1L);
     assertThat(model.getId(), equalTo(1L));
@@ -38,6 +38,8 @@ public class GroupModelTest {
     assertThat(model.getDavPermission(), equalTo(true));
     model.setRestapiPermission(true);
     assertThat(model.getRestapiPermission(), equalTo(true));
+    model.setS3CompatibleEndpointPermission(true);
+    assertThat(model.getS3CompatibleEndpointPermission(), equalTo(true));
     model.setDesktopConfigurationProfileId(1L);
     assertThat(model.getDesktopConfigurationProfileId(), equalTo(1L));
     model.setIntegrationCentricProfileId(1L);

@@ -1,6 +1,6 @@
 # Folder
 
-
+A File object represents a file or folder on your Files.com site. The `type` field is `file` for files and `directory` for folders.
 
 ## List Folders by Path
 
@@ -39,7 +39,7 @@
     "createdByRemoteServerId": 1,
     "createdBySyncId": 1,
     "customMetadata": {
-      "key": "value"
+      "department": "finance"
     },
     "displayName": "file.txt",
     "type": "file",
@@ -121,7 +121,7 @@
   "createdByRemoteServerId": 1,
   "createdBySyncId": 1,
   "customMetadata": {
-    "key": "value"
+    "department": "finance"
   },
   "displayName": "file.txt",
   "type": "file",
