@@ -69,7 +69,7 @@ public class ShareLinkParameterGroup {
     @Parameter
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
-    @Summary("Bundle expiration date/time")
+    @Summary("Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.")
     @Example("2000-01-01T01:00:00Z")
     public String expiresAt;
 
@@ -177,7 +177,7 @@ public class ShareLinkParameterGroup {
     @Parameter
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
-    @Summary("Bundle expiration date/time")
+    @Summary("Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply.")
     @Example("2000-01-01T01:00:00Z")
     public String expiresAt;
 

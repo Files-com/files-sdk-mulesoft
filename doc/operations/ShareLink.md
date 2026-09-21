@@ -82,6 +82,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
     "deleted": true,
     "deletedAt": "2000-01-01T01:00:00Z",
     "dontSeparateSubmissionsByFolder": true,
+    "effectiveExpiresAt": "2000-01-01T01:00:00Z",
     "maxUses": 1,
     "internalName": "Quarterly reports",
     "note": "The internal note on the bundle.",
@@ -207,6 +208,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
   "deleted": true,
   "deletedAt": "2000-01-01T01:00:00Z",
   "dontSeparateSubmissionsByFolder": true,
+  "effectiveExpiresAt": "2000-01-01T01:00:00Z",
   "maxUses": 1,
   "internalName": "Quarterly reports",
   "note": "The internal note on the bundle.",
@@ -263,7 +265,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
 | --------- | ----------- |
 | paths<br/>*List&lt;String&gt;*<br/>**Required** | A list of paths to include in this bundle. |
 | password<br/>*String* | Password for this bundle. |
-| expiresAt<br/>*String* | Bundle expiration date/time |
+| expiresAt<br/>*String* | Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply. |
 | maxUses<br/>*Long* | Maximum number of times bundle can be accessed |
 | description<br/>*String* | Public description |
 | note<br/>*String* | Bundle internal note |
@@ -347,6 +349,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
   "deleted": true,
   "deletedAt": "2000-01-01T01:00:00Z",
   "dontSeparateSubmissionsByFolder": true,
+  "effectiveExpiresAt": "2000-01-01T01:00:00Z",
   "maxUses": 1,
   "internalName": "Quarterly reports",
   "note": "The internal note on the bundle.",
@@ -402,7 +405,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
 | Parameter | Description |
 | --------- | ----------- |
 | id<br/>*Long*<br/>**Required** | Bundle ID. |
-| expiresAt<br/>*String* | Bundle expiration date/time |
+| expiresAt<br/>*String* | Explicit Bundle expiration date/time. If not set, the site-wide expiration setting may apply. |
 | permissions<br/>*String* | Permissions that apply to Folders in this Share Link.<br/>Possible values: `read`, `write`, `read_write`, `full`, `none`, `preview_only` |
 
 
@@ -477,6 +480,7 @@ Please note that we very closely monitor the E-Mailing feature and any abuse wil
   "deleted": true,
   "deletedAt": "2000-01-01T01:00:00Z",
   "dontSeparateSubmissionsByFolder": true,
+  "effectiveExpiresAt": "2000-01-01T01:00:00Z",
   "maxUses": 1,
   "internalName": "Quarterly reports",
   "note": "The internal note on the bundle.",

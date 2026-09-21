@@ -66,12 +66,13 @@ public class ShareLinkModel implements Serializable {
     this.deleted = Boolean.TRUE.equals(bundle.deleted);
     this.deletedAt = bundle.deletedAt != null ? ZonedDateTime.ofInstant(bundle.deletedAt.toInstant(), ZoneId.systemDefault()) : null;
     this.dontSeparateSubmissionsByFolder = Boolean.TRUE.equals(bundle.dontSeparateSubmissionsByFolder);
+    this.effectiveExpiresAt = bundle.effectiveExpiresAt != null ? ZonedDateTime.ofInstant(bundle.effectiveExpiresAt.toInstant(), ZoneId.systemDefault()) : null;
     this.maxUses = bundle.maxUses;
     this.internalName = bundle.internalName;
-    this.note = bundle.note;
   }
 
   private void initGroup4(final Bundle bundle) {
+    this.note = bundle.note;
     this.pathTemplate = bundle.pathTemplate;
     this.pathTemplateTimeZone = bundle.pathTemplateTimeZone;
     this.sendEmailReceiptToUploader = Boolean.TRUE.equals(bundle.sendEmailReceiptToUploader);
@@ -81,12 +82,12 @@ public class ShareLinkModel implements Serializable {
     this.groupId = bundle.groupId;
     this.clickwrapId = bundle.clickwrapId;
     this.inboxId = bundle.inboxId;
-    if (bundle.watermarkAttachment != null) {
-      this.watermarkAttachment = new ImageModel(bundle.watermarkAttachment);
-    }
   }
 
   private void initGroup5(final Bundle bundle) {
+    if (bundle.watermarkAttachment != null) {
+      this.watermarkAttachment = new ImageModel(bundle.watermarkAttachment);
+    }
     this.watermarkValue = bundle.watermarkValue;
     this.sendOneTimePasswordToRecipientAtRegistration = Boolean.TRUE.equals(bundle.sendOneTimePasswordToRecipientAtRegistration);
     this.workspaceId = bundle.workspaceId;
@@ -96,10 +97,10 @@ public class ShareLinkModel implements Serializable {
     this.password = bundle.password;
     this.formFieldSetId = bundle.formFieldSetId;
     this.createSnapshot = Boolean.TRUE.equals(bundle.createSnapshot);
-    this.finalizeSnapshot = Boolean.TRUE.equals(bundle.finalizeSnapshot);
   }
 
   private void initGroup6(final Bundle bundle) {
+    this.finalizeSnapshot = Boolean.TRUE.equals(bundle.finalizeSnapshot);
     this.watermarkAttachmentDelete = Boolean.TRUE.equals(bundle.watermarkAttachmentDelete);
   }
 
@@ -371,6 +372,16 @@ public class ShareLinkModel implements Serializable {
 
   public void setDontSeparateSubmissionsByFolder(final boolean dontSeparateSubmissionsByFolder) {
     this.dontSeparateSubmissionsByFolder = dontSeparateSubmissionsByFolder;
+  }
+
+  private ZonedDateTime effectiveExpiresAt;
+
+  public ZonedDateTime getEffectiveExpiresAt() {
+    return effectiveExpiresAt;
+  }
+
+  public void setEffectiveExpiresAt(final ZonedDateTime effectiveExpiresAt) {
+    this.effectiveExpiresAt = effectiveExpiresAt;
   }
 
   private Long maxUses;
