@@ -14,5 +14,5 @@ if command -v jenv &> /dev/null; then
   jenv local 1.8 # Force 1.8 with jenv
 fi
 mv LICENSE LICENSE.md
-mvn rewrite:run license:format
+mvn rewrite:run license:format || exit 1
 mvn -B -DskipTests -DnewVersion=$(cat ./_VERSION) -DgenerateBackupPoms=false versions:set && mvn -DskipTests clean package
