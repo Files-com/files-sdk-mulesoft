@@ -13,7 +13,7 @@
     <groupId>com.files</groupId>
     <artifactId>mule-filescom-connector</artifactId>
     <packaging>mule-extension</packaging>
-    <version>1.0.485</version>
+    <version>1.0.486</version>
 
     <name>Files.com Connector</name>
     <description>The Files.com MuleSoft Connector</description>
@@ -30,7 +30,7 @@
     <licenses>
         <license>
             <name>MIT License</name>
-            <url>https://github.com/Files-com/files-sdk-mulesoft/blob/main/LICENSE</url>
+            <url>https://github.com/Files-com/files-sdk-mulesoft/blob/master/LICENSE.md</url>
         </license>
     </licenses>
     <developers>
@@ -43,12 +43,29 @@
             <url>https://github.com/Files-com/files-sdk-mulesoft/blob/master/CONTRIBUTORS</url>
         </developer>
     </developers>
+    <scm>
+        <connection>scm:git:git://github.com/Files-com/files-sdk-mulesoft.git</connection>
+        <developerConnection>scm:git:git@github.com:Files-com/files-sdk-mulesoft.git</developerConnection>
+        <url>https://github.com/Files-com/files-sdk-mulesoft</url>
+    </scm>
     <properties>
         <jacoco.version>0.8.12</jacoco.version>
         <munit.extensions.maven.plugin.version>1.4.0</munit.extensions.maven.plugin.version>
     </properties>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.8.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <!-- Hold the first release for review in the Central Portal; switch to autoPublish/published once it passes validation. -->
+                    <autoPublish>false</autoPublish>
+                    <waitUntil>validated</waitUntil>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.openrewrite.maven</groupId>
                 <artifactId>rewrite-maven-plugin</artifactId>
@@ -115,7 +132,7 @@
         <dependency>
             <groupId>com.files</groupId>
             <artifactId>files-sdk</artifactId>
-            <version>1.7.324</version>
+            <version>1.7.325</version>
         </dependency>
         <dependency>
             <groupId>org.mule.sdk</groupId>
