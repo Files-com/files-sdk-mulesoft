@@ -18,10 +18,8 @@ Mule Runtime 4.3.0 or later is required to use the Files.com MuleSoft Connector.
 
 ### Installation
 
-It's recommended to use Anypoint Studio to install the Files.com MuleSoft Connector. This can be
-done by searching for "filescom" in the Anypoint Exchange and installing the connector from there.
-
-Alternatively, you can modify the `pom.xml` file to include the connector as a dependency:
+The Files.com MuleSoft Connector is published to Maven Central. To install it, add the connector as
+a dependency in your Mule application's `pom.xml` file:
 
 ```xml
 <dependency>
@@ -32,7 +30,10 @@ Alternatively, you can modify the `pom.xml` file to include the connector as a d
 </dependency>
 ```
 
-Replace `x.x.x` with the version of the connector you wish to use.
+Replace `x.x.x` with the version of the connector you wish to use. The latest version is listed on
+[Maven Central](https://central.sonatype.com/artifact/com.files/mule-filescom-connector).
+
+The connector is also listed on Anypoint Exchange, but new versions reach Maven Central first.
 
 ### Usage
 
