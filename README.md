@@ -363,3 +363,34 @@ Download the server as a Docker image via [Docker Hub](https://hub.docker.com/r/
 The Source Code is also available on [GitHub](https://github.com/Files-com/files-mock-server).
 
 A README is available on the GitHub link.
+
+## Running the Tests
+
+The tests run against the [Mock Server](#mock-server) at `http://localhost:4041` by default. Start it first:
+
+```bash
+docker run --rm -p 4041:4041 filescom/files-mock-server:latest
+```
+
+Then run the tests from the connector's directory:
+
+```bash
+./test.sh
+```
+
+`test.sh` runs Checkstyle and then `mvn verify`, switching to Java 8 first if jenv is installed.
+
+To use a mock server on a different host or port, set the `FILES_MOCK_SERVER_HOST` and
+`FILES_MOCK_SERVER_PORT` environment variables.
+
+To run against a real Files.com site instead, set these in
+`src/test/resources/automation-credentials.properties`:
+
+```properties
+apiKey=YOUR_SITE_ADMIN_API_KEY
+baseUrl=https://SUBDOMAIN.files.com
+mockServer=false
+```
+
+Use an API key that belongs to a site administrator. The tests create and delete a share link, a
+file, a folder, a group, and a user named `john.doe` on that site.

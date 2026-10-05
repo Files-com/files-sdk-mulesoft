@@ -13,7 +13,7 @@
     <groupId>com.files</groupId>
     <artifactId>mule-filescom-connector</artifactId>
     <packaging>mule-extension</packaging>
-    <version>1.0.504</version>
+    <version>1.0.505</version>
 
     <name>Files.com Connector</name>
     <description>The Files.com MuleSoft Connector</description>
@@ -118,6 +118,17 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- There are no MUnit suites, and the plugin requires Java 11 while the tests run on Java 8 -->
+            <plugin>
+                <groupId>com.mulesoft.munit</groupId>
+                <artifactId>munit-extensions-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-test</id>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
         <resources>
             <resource>
@@ -131,7 +142,7 @@
         <dependency>
             <groupId>com.files</groupId>
             <artifactId>files-sdk</artifactId>
-            <version>1.7.339</version>
+            <version>1.7.340</version>
         </dependency>
         <dependency>
             <groupId>org.mule.sdk</groupId>
