@@ -40,7 +40,9 @@ public class FilesComConnection {
 
   private final FilesComConfig config = new FilesComConfig();
   private final String apiKey;
-  private String apiRoot;
+  // Kept on the connection and sent with each request: the SDK's apiRoot property is shared by every
+  // configuration in the Mule runtime.
+  private volatile String apiRoot;
 
   public FilesComConnection(final String apiKey, final String apiRoot) {
     this.apiKey = apiKey;
@@ -52,6 +54,9 @@ public class FilesComConnection {
   private HashMap<String, Object> getRequestOptions() {
     final HashMap<String, Object> requestOptions = new HashMap<>();
     requestOptions.put("api_key", apiKey);
+    if (apiRoot != null) {
+      requestOptions.put("api_root", apiRoot);
+    }
     return requestOptions;
   }
 
@@ -59,7 +64,6 @@ public class FilesComConnection {
     if (apiRoot != null && !apiRoot.isEmpty()) {
       this.apiRoot = (apiRoot.startsWith("https://") || apiRoot.startsWith("http://") ? "" : "https://") + apiRoot;
       LOGGER.debug("Setting apiRoot to {}", this.apiRoot);
-      FilesClient.setProperty("apiRoot", this.apiRoot);
     }
   }
 
