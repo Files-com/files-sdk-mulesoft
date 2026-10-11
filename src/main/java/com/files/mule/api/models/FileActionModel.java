@@ -8,7 +8,7 @@ import java.io.Serializable;
 import com.files.models.FileAction;
 
 /**
- * A FileAction is an operation status for copy/move file. Copy and Move operations have File Migration associated with them.
+ * A FileAction is an operation status for a copy, move or delete. Operations that continue in the background have a File Migration associated with them.
  */
 public class FileActionModel implements Serializable {
   public FileActionModel() {
