@@ -6,6 +6,7 @@ package com.files.mule.api.models;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
+import java.util.Date;
 
 import com.files.models.Folder;
 
@@ -24,56 +25,55 @@ public class FolderModel implements Serializable {
   }
 
   private void initGroup1(final Folder folder) {
-    this.path = folder.path;
-    this.createdById = folder.createdById;
-    this.createdByApiKeyId = folder.createdByApiKeyId;
-    this.createdByAs2IncomingMessageId = folder.createdByAs2IncomingMessageId;
-    this.createdByAutomationId = folder.createdByAutomationId;
-    this.createdByBundleRegistrationId = folder.createdByBundleRegistrationId;
-    this.createdByInboxId = folder.createdByInboxId;
-    this.createdByRemoteServerId = folder.createdByRemoteServerId;
-    this.createdBySyncId = folder.createdBySyncId;
-    this.customMetadata = folder.customMetadata;
+    this.path = SdkFields.read(folder, "path", String.class);
+    this.createdById = SdkFields.read(folder, "createdById", Long.class);
+    this.createdByApiKeyId = SdkFields.read(folder, "createdByApiKeyId", Long.class);
+    this.createdByAs2IncomingMessageId = SdkFields.read(folder, "createdByAs2IncomingMessageId", Long.class);
+    this.createdByAutomationId = SdkFields.read(folder, "createdByAutomationId", Long.class);
+    this.createdByBundleRegistrationId = SdkFields.read(folder, "createdByBundleRegistrationId", Long.class);
+    this.createdByInboxId = SdkFields.read(folder, "createdByInboxId", Long.class);
+    this.createdByRemoteServerId = SdkFields.read(folder, "createdByRemoteServerId", Long.class);
+    this.createdBySyncId = SdkFields.read(folder, "createdBySyncId", Long.class);
+    this.customMetadata = SdkFields.read(folder, "customMetadata", Object.class);
   }
 
   private void initGroup2(final Folder folder) {
-    this.displayName = folder.displayName;
-    this.fileType = folder.type;
-    this.size = folder.size;
-    this.createdAt = folder.createdAt != null ? ZonedDateTime.ofInstant(folder.createdAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastModifiedById = folder.lastModifiedById;
-    this.lastModifiedByApiKeyId = folder.lastModifiedByApiKeyId;
-    this.lastModifiedByAutomationId = folder.lastModifiedByAutomationId;
-    this.lastModifiedByBundleRegistrationId = folder.lastModifiedByBundleRegistrationId;
-    this.lastModifiedByRemoteServerId = folder.lastModifiedByRemoteServerId;
-    this.lastModifiedBySyncId = folder.lastModifiedBySyncId;
+    this.displayName = SdkFields.read(folder, "displayName", String.class);
+    this.fileType = SdkFields.read(folder, "type", String.class);
+    this.size = SdkFields.read(folder, "size", Long.class);
+    this.createdAt = SdkFields.read(folder, "createdAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.lastModifiedById = SdkFields.read(folder, "lastModifiedById", Long.class);
+    this.lastModifiedByApiKeyId = SdkFields.read(folder, "lastModifiedByApiKeyId", Long.class);
+    this.lastModifiedByAutomationId = SdkFields.read(folder, "lastModifiedByAutomationId", Long.class);
+    this.lastModifiedByBundleRegistrationId = SdkFields.read(folder, "lastModifiedByBundleRegistrationId", Long.class);
+    this.lastModifiedByRemoteServerId = SdkFields.read(folder, "lastModifiedByRemoteServerId", Long.class);
+    this.lastModifiedBySyncId = SdkFields.read(folder, "lastModifiedBySyncId", Long.class);
   }
 
   private void initGroup3(final Folder folder) {
-    this.mtime = folder.mtime != null ? ZonedDateTime.ofInstant(folder.mtime.toInstant(), ZoneId.systemDefault()) : null;
-    this.providedMtime = folder.providedMtime != null ? ZonedDateTime.ofInstant(folder.providedMtime.toInstant(), ZoneId.systemDefault()) : null;
-    this.crc32 = folder.crc32;
-    this.md5 = folder.md5;
-    this.sha1 = folder.sha1;
-    this.sha256 = folder.sha256;
-    this.mimeType = folder.mimeType;
-    this.region = folder.region;
-    this.permissions = folder.permissions;
-    this.subfoldersLocked = Boolean.TRUE.equals(folder.subfoldersLocked);
+    this.mtime = SdkFields.read(folder, "mtime", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.providedMtime = SdkFields.read(folder, "providedMtime", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.crc32 = SdkFields.read(folder, "crc32", String.class);
+    this.md5 = SdkFields.read(folder, "md5", String.class);
+    this.sha1 = SdkFields.read(folder, "sha1", String.class);
+    this.sha256 = SdkFields.read(folder, "sha256", String.class);
+    this.mimeType = SdkFields.read(folder, "mimeType", String.class);
+    this.region = SdkFields.read(folder, "region", String.class);
+    this.permissions = SdkFields.read(folder, "permissions", String.class);
+    this.subfoldersLocked = Boolean.TRUE.equals(SdkFields.read(folder, "subfoldersLocked", Boolean.class));
   }
 
   private void initGroup4(final Folder folder) {
-    this.isLocked = Boolean.TRUE.equals(folder.isLocked);
-    this.downloadUri = folder.downloadUri;
-    if (folder.directConnectionInfo != null) {
-      this.directConnectionInfo = new DirectConnectionInfoModel(folder.directConnectionInfo);
-    }
-    this.priorityColor = folder.priorityColor;
-    this.previewId = folder.previewId;
-    if (folder.preview != null) {
-      this.preview = new PreviewModel(folder.preview);
-    }
-    this.mkdirParents = Boolean.TRUE.equals(folder.mkdirParents);
+    this.isLocked = Boolean.TRUE.equals(SdkFields.read(folder, "isLocked", Boolean.class));
+    this.downloadUri = SdkFields.read(folder, "downloadUri", String.class);
+    this.directConnectionInfo = SdkFields.read(folder, "directConnectionInfo", com.files.models.DirectConnectionInfo.class, DirectConnectionInfoModel::new);
+    this.priorityColor = SdkFields.read(folder, "priorityColor", String.class);
+    this.previewId = SdkFields.read(folder, "previewId", Long.class);
+    this.preview = SdkFields.read(folder, "preview", com.files.models.Preview.class, PreviewModel::new);
+    this.mkdirParents = Boolean.TRUE.equals(SdkFields.read(folder, "mkdirParents", Boolean.class));
   }
 
   private String path;

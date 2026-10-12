@@ -6,6 +6,7 @@ package com.files.mule.api.models;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
+import java.util.Date;
 
 import com.files.models.BundleRegistration;
 
@@ -22,23 +23,24 @@ public class ShareLinkRegistrationModel implements Serializable {
   }
 
   private void initGroup1(final BundleRegistration bundleRegistration) {
-    this.code = bundleRegistration.code;
-    this.name = bundleRegistration.name;
-    this.company = bundleRegistration.company;
-    this.email = bundleRegistration.email;
-    this.ip = bundleRegistration.ip;
-    this.inboxCode = bundleRegistration.inboxCode;
-    this.clickwrapBody = bundleRegistration.clickwrapBody;
-    this.formFieldSetId = bundleRegistration.formFieldSetId;
-    this.formFieldData = bundleRegistration.formFieldData;
-    this.bundleCode = bundleRegistration.bundleCode;
+    this.code = SdkFields.read(bundleRegistration, "code", String.class);
+    this.name = SdkFields.read(bundleRegistration, "name", String.class);
+    this.company = SdkFields.read(bundleRegistration, "company", String.class);
+    this.email = SdkFields.read(bundleRegistration, "email", String.class);
+    this.ip = SdkFields.read(bundleRegistration, "ip", String.class);
+    this.inboxCode = SdkFields.read(bundleRegistration, "inboxCode", String.class);
+    this.clickwrapBody = SdkFields.read(bundleRegistration, "clickwrapBody", String.class);
+    this.formFieldSetId = SdkFields.read(bundleRegistration, "formFieldSetId", Long.class);
+    this.formFieldData = SdkFields.read(bundleRegistration, "formFieldData", Object.class);
+    this.bundleCode = SdkFields.read(bundleRegistration, "bundleCode", String.class);
   }
 
   private void initGroup2(final BundleRegistration bundleRegistration) {
-    this.bundleId = bundleRegistration.bundleId;
-    this.bundleRecipientId = bundleRegistration.bundleRecipientId;
-    this.workspaceId = bundleRegistration.workspaceId;
-    this.createdAt = bundleRegistration.createdAt != null ? ZonedDateTime.ofInstant(bundleRegistration.createdAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.bundleId = SdkFields.read(bundleRegistration, "bundleId", Long.class);
+    this.bundleRecipientId = SdkFields.read(bundleRegistration, "bundleRecipientId", Long.class);
+    this.workspaceId = SdkFields.read(bundleRegistration, "workspaceId", Long.class);
+    this.createdAt = SdkFields.read(bundleRegistration, "createdAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
   }
 
   private String code;

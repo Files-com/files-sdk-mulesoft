@@ -19,8 +19,8 @@ public class FileActionModel implements Serializable {
   }
 
   private void initGroup1(final FileAction fileAction) {
-    this.status = fileAction.status;
-    this.fileMigrationId = fileAction.fileMigrationId;
+    this.status = SdkFields.read(fileAction, "status", String.class);
+    this.fileMigrationId = SdkFields.read(fileAction, "fileMigrationId", Long.class);
   }
 
   private String status;

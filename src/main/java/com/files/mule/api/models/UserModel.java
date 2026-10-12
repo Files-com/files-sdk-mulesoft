@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import com.files.models.User;
@@ -48,133 +49,149 @@ public class UserModel implements Serializable {
   }
 
   private void initGroup1(final User user) {
-    this.id = user.id;
-    this.username = user.username;
-    this.adminGroupIds = user.adminGroupIds != null ? Arrays.asList(user.adminGroupIds) : null;
-    this.allowedIps = user.allowedIps;
-    this.attachmentsPermission = Boolean.TRUE.equals(user.attachmentsPermission);
-    this.apiKeysCount = user.apiKeysCount;
-    this.authenticateUntil = user.authenticateUntil != null ? ZonedDateTime.ofInstant(user.authenticateUntil.toInstant(), ZoneId.systemDefault()) : null;
-    this.authenticationMethod = user.authenticationMethod;
-    this.avatarUrl = user.avatarUrl;
-    this.billable = Boolean.TRUE.equals(user.billable);
+    this.id = SdkFields.read(user, "id", Long.class);
+    this.username = SdkFields.read(user, "username", String.class);
+    this.adminGroupIds = SdkFields.read(user, "adminGroupIds", Long[].class, Arrays::asList);
+    this.allowedIps = SdkFields.read(user, "allowedIps", String.class);
+    this.attachmentsPermission = Boolean.TRUE.equals(SdkFields.read(user, "attachmentsPermission", Boolean.class));
+    this.apiKeysCount = SdkFields.read(user, "apiKeysCount", Long.class);
+    this.authenticateUntil = SdkFields.read(user, "authenticateUntil", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.authenticationMethod = SdkFields.read(user, "authenticationMethod", String.class);
+    this.avatarUrl = SdkFields.read(user, "avatarUrl", String.class);
+    this.billable = Boolean.TRUE.equals(SdkFields.read(user, "billable", Boolean.class));
   }
 
   private void initGroup2(final User user) {
-    this.billingPermission = Boolean.TRUE.equals(user.billingPermission);
-    this.bypassSiteAllowedIps = Boolean.TRUE.equals(user.bypassSiteAllowedIps);
-    this.bypassUserLifecycleRules = Boolean.TRUE.equals(user.bypassUserLifecycleRules);
-    this.createdAt = user.createdAt != null ? ZonedDateTime.ofInstant(user.createdAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.davPermission = Boolean.TRUE.equals(user.davPermission);
-    this.disabled = Boolean.TRUE.equals(user.disabled);
-    this.disabledExpiredOrInactive = Boolean.TRUE.equals(user.disabledExpiredOrInactive);
-    this.aiAssistantPersonalityId = user.aiAssistantPersonalityId;
-    this.desktopConfigurationProfileId = user.desktopConfigurationProfileId;
-    this.integrationCentricProfileId = user.integrationCentricProfileId;
+    this.billingPermission = Boolean.TRUE.equals(SdkFields.read(user, "billingPermission", Boolean.class));
+    this.bypassSiteAllowedIps = Boolean.TRUE.equals(SdkFields.read(user, "bypassSiteAllowedIps", Boolean.class));
+    this.bypassUserLifecycleRules = Boolean.TRUE.equals(SdkFields.read(user, "bypassUserLifecycleRules", Boolean.class));
+    this.createdAt = SdkFields.read(user, "createdAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.davPermission = Boolean.TRUE.equals(SdkFields.read(user, "davPermission", Boolean.class));
+    this.disabled = Boolean.TRUE.equals(SdkFields.read(user, "disabled", Boolean.class));
+    this.disabledExpiredOrInactive = Boolean.TRUE.equals(SdkFields.read(user, "disabledExpiredOrInactive", Boolean.class));
+    this.aiAssistantPersonalityId = SdkFields.read(user, "aiAssistantPersonalityId", Long.class);
+    this.desktopConfigurationProfileId = SdkFields.read(user, "desktopConfigurationProfileId", Long.class);
+    this.integrationCentricProfileId = SdkFields.read(user, "integrationCentricProfileId", Long.class);
   }
 
   private void initGroup3(final User user) {
-    this.email = user.email;
-    this.filesystemLayout = user.filesystemLayout;
-    this.firstLoginAt = user.firstLoginAt != null ? ZonedDateTime.ofInstant(user.firstLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.ftpPermission = Boolean.TRUE.equals(user.ftpPermission);
-    this.groupIds = user.groupIds;
-    this.headerText = user.headerText;
-    this.language = user.language;
-    this.lastLoginAt = user.lastLoginAt != null ? ZonedDateTime.ofInstant(user.lastLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastWebLoginAt = user.lastWebLoginAt != null ? ZonedDateTime.ofInstant(user.lastWebLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastFtpLoginAt = user.lastFtpLoginAt != null ? ZonedDateTime.ofInstant(user.lastFtpLoginAt.toInstant(), ZoneId.systemDefault()) : null;
+    this.email = SdkFields.read(user, "email", String.class);
+    this.filesystemLayout = SdkFields.read(user, "filesystemLayout", String.class);
+    this.firstLoginAt = SdkFields.read(user, "firstLoginAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.ftpPermission = Boolean.TRUE.equals(SdkFields.read(user, "ftpPermission", Boolean.class));
+    this.groupIds = SdkFields.read(user, "groupIds", String.class);
+    this.headerText = SdkFields.read(user, "headerText", String.class);
+    this.language = SdkFields.read(user, "language", String.class);
+    this.lastLoginAt = SdkFields.read(user, "lastLoginAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.lastWebLoginAt = SdkFields.read(user, "lastWebLoginAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.lastFtpLoginAt = SdkFields.read(user, "lastFtpLoginAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
   }
 
   private void initGroup4(final User user) {
-    this.lastSftpLoginAt = user.lastSftpLoginAt != null ? ZonedDateTime.ofInstant(user.lastSftpLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastDavLoginAt = user.lastDavLoginAt != null ? ZonedDateTime.ofInstant(user.lastDavLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastDesktopLoginAt = user.lastDesktopLoginAt != null ? ZonedDateTime.ofInstant(user.lastDesktopLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastRestapiLoginAt = user.lastRestapiLoginAt != null ? ZonedDateTime.ofInstant(user.lastRestapiLoginAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastApiUseAt = user.lastApiUseAt != null ? ZonedDateTime.ofInstant(user.lastApiUseAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastActiveAt = user.lastActiveAt != null ? ZonedDateTime.ofInstant(user.lastActiveAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastProtocolCipher = user.lastProtocolCipher;
-    this.lockoutExpires = user.lockoutExpires != null ? ZonedDateTime.ofInstant(user.lockoutExpires.toInstant(), ZoneId.systemDefault()) : null;
-    this.name = user.name;
-    this.company = user.company;
+    this.lastSftpLoginAt = SdkFields.read(user, "lastSftpLoginAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.lastDavLoginAt = SdkFields.read(user, "lastDavLoginAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.lastDesktopLoginAt = SdkFields.read(user, "lastDesktopLoginAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.lastRestapiLoginAt = SdkFields.read(user, "lastRestapiLoginAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.lastApiUseAt = SdkFields.read(user, "lastApiUseAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.lastActiveAt = SdkFields.read(user, "lastActiveAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.lastProtocolCipher = SdkFields.read(user, "lastProtocolCipher", String.class);
+    this.lockoutExpires = SdkFields.read(user, "lockoutExpires", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.name = SdkFields.read(user, "name", String.class);
+    this.company = SdkFields.read(user, "company", String.class);
   }
 
   private void initGroup5(final User user) {
-    this.notes = user.notes;
-    this.notificationDailySendTime = user.notificationDailySendTime;
-    this.officeIntegrationEnabled = Boolean.TRUE.equals(user.officeIntegrationEnabled);
-    this.partnerAdmin = Boolean.TRUE.equals(user.partnerAdmin);
-    this.partnerId = user.partnerId;
-    this.partnerName = user.partnerName;
-    this.passwordSetAt = user.passwordSetAt != null ? ZonedDateTime.ofInstant(user.passwordSetAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.passwordValidityDays = user.passwordValidityDays;
-    this.primaryGroupId = user.primaryGroupId;
-    this.publicKeysCount = user.publicKeysCount;
+    this.notes = SdkFields.read(user, "notes", String.class);
+    this.notificationDailySendTime = SdkFields.read(user, "notificationDailySendTime", Long.class);
+    this.officeIntegrationEnabled = Boolean.TRUE.equals(SdkFields.read(user, "officeIntegrationEnabled", Boolean.class));
+    this.partnerAdmin = Boolean.TRUE.equals(SdkFields.read(user, "partnerAdmin", Boolean.class));
+    this.partnerId = SdkFields.read(user, "partnerId", Long.class);
+    this.partnerName = SdkFields.read(user, "partnerName", String.class);
+    this.passwordSetAt = SdkFields.read(user, "passwordSetAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.passwordValidityDays = SdkFields.read(user, "passwordValidityDays", Long.class);
+    this.primaryGroupId = SdkFields.read(user, "primaryGroupId", Long.class);
+    this.publicKeysCount = SdkFields.read(user, "publicKeysCount", Long.class);
   }
 
   private void initGroup6(final User user) {
-    this.receiveAdminAlerts = Boolean.TRUE.equals(user.receiveAdminAlerts);
-    this.notifyOnAllSiteWarnings = Boolean.TRUE.equals(user.notifyOnAllSiteWarnings);
-    this.notifyOnAllSsoFailures = Boolean.TRUE.equals(user.notifyOnAllSsoFailures);
-    this.notifyOnAllUserSecurityEvents = Boolean.TRUE.equals(user.notifyOnAllUserSecurityEvents);
-    this.notifyOnAllPendingWorkFailures = Boolean.TRUE.equals(user.notifyOnAllPendingWorkFailures);
-    this.notifyOnAllSiemHttpDestinationFailures = Boolean.TRUE.equals(user.notifyOnAllSiemHttpDestinationFailures);
-    this.notifyOnAllSyncFailures = Boolean.TRUE.equals(user.notifyOnAllSyncFailures);
-    this.notifyOnAllAutomationFailures = Boolean.TRUE.equals(user.notifyOnAllAutomationFailures);
-    this.notifyOnAllExpectationFailures = Boolean.TRUE.equals(user.notifyOnAllExpectationFailures);
-    this.require2fa = user.require2fa;
+    this.receiveAdminAlerts = Boolean.TRUE.equals(SdkFields.read(user, "receiveAdminAlerts", Boolean.class));
+    this.notifyOnAllSiteWarnings = Boolean.TRUE.equals(SdkFields.read(user, "notifyOnAllSiteWarnings", Boolean.class));
+    this.notifyOnAllSsoFailures = Boolean.TRUE.equals(SdkFields.read(user, "notifyOnAllSsoFailures", Boolean.class));
+    this.notifyOnAllUserSecurityEvents = Boolean.TRUE.equals(SdkFields.read(user, "notifyOnAllUserSecurityEvents", Boolean.class));
+    this.notifyOnAllPendingWorkFailures = Boolean.TRUE.equals(SdkFields.read(user, "notifyOnAllPendingWorkFailures", Boolean.class));
+    this.notifyOnAllSiemHttpDestinationFailures = Boolean.TRUE.equals(SdkFields.read(user, "notifyOnAllSiemHttpDestinationFailures", Boolean.class));
+    this.notifyOnAllSyncFailures = Boolean.TRUE.equals(SdkFields.read(user, "notifyOnAllSyncFailures", Boolean.class));
+    this.notifyOnAllAutomationFailures = Boolean.TRUE.equals(SdkFields.read(user, "notifyOnAllAutomationFailures", Boolean.class));
+    this.notifyOnAllExpectationFailures = Boolean.TRUE.equals(SdkFields.read(user, "notifyOnAllExpectationFailures", Boolean.class));
+    this.require2fa = SdkFields.read(user, "require2fa", String.class);
   }
 
   private void initGroup7(final User user) {
-    this.requireLoginBy = user.requireLoginBy != null ? ZonedDateTime.ofInstant(user.requireLoginBy.toInstant(), ZoneId.systemDefault()) : null;
-    this.active2fa = Boolean.TRUE.equals(user.active2fa);
-    this.requirePasswordChange = Boolean.TRUE.equals(user.requirePasswordChange);
-    this.passwordExpired = Boolean.TRUE.equals(user.passwordExpired);
-    this.responsibleGroupId = user.responsibleGroupId;
-    this.responsibleUserId = user.responsibleUserId;
-    this.readonlySiteAdmin = Boolean.TRUE.equals(user.readonlySiteAdmin);
-    this.restapiPermission = Boolean.TRUE.equals(user.restapiPermission);
-    this.s3CompatibleEndpointPermission = Boolean.TRUE.equals(user.s3CompatibleEndpointPermission);
-    this.selfManaged = Boolean.TRUE.equals(user.selfManaged);
+    this.requireLoginBy = SdkFields.read(user, "requireLoginBy", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.active2fa = Boolean.TRUE.equals(SdkFields.read(user, "active2fa", Boolean.class));
+    this.requirePasswordChange = Boolean.TRUE.equals(SdkFields.read(user, "requirePasswordChange", Boolean.class));
+    this.passwordExpired = Boolean.TRUE.equals(SdkFields.read(user, "passwordExpired", Boolean.class));
+    this.responsibleGroupId = SdkFields.read(user, "responsibleGroupId", Long.class);
+    this.responsibleUserId = SdkFields.read(user, "responsibleUserId", Long.class);
+    this.readonlySiteAdmin = Boolean.TRUE.equals(SdkFields.read(user, "readonlySiteAdmin", Boolean.class));
+    this.restapiPermission = Boolean.TRUE.equals(SdkFields.read(user, "restapiPermission", Boolean.class));
+    this.s3CompatibleEndpointPermission = Boolean.TRUE.equals(SdkFields.read(user, "s3CompatibleEndpointPermission", Boolean.class));
+    this.selfManaged = Boolean.TRUE.equals(SdkFields.read(user, "selfManaged", Boolean.class));
   }
 
   private void initGroup8(final User user) {
-    this.sftpPermission = Boolean.TRUE.equals(user.sftpPermission);
-    this.siteAdmin = Boolean.TRUE.equals(user.siteAdmin);
-    this.workspaceAdmin = Boolean.TRUE.equals(user.workspaceAdmin);
-    this.siteId = user.siteId;
-    this.workspaceId = user.workspaceId;
-    this.defaultWorkspaceId = user.defaultWorkspaceId;
-    this.skipWelcomeScreen = Boolean.TRUE.equals(user.skipWelcomeScreen);
-    this.encryptionRequired = user.sslRequired;
-    this.ssoStrategyId = user.ssoStrategyId;
-    this.subscribeToNewsletter = Boolean.TRUE.equals(user.subscribeToNewsletter);
+    this.sftpPermission = Boolean.TRUE.equals(SdkFields.read(user, "sftpPermission", Boolean.class));
+    this.siteAdmin = Boolean.TRUE.equals(SdkFields.read(user, "siteAdmin", Boolean.class));
+    this.workspaceAdmin = Boolean.TRUE.equals(SdkFields.read(user, "workspaceAdmin", Boolean.class));
+    this.siteId = SdkFields.read(user, "siteId", Long.class);
+    this.workspaceId = SdkFields.read(user, "workspaceId", Long.class);
+    this.defaultWorkspaceId = SdkFields.read(user, "defaultWorkspaceId", Long.class);
+    this.skipWelcomeScreen = Boolean.TRUE.equals(SdkFields.read(user, "skipWelcomeScreen", Boolean.class));
+    this.encryptionRequired = SdkFields.read(user, "sslRequired", String.class);
+    this.ssoStrategyId = SdkFields.read(user, "ssoStrategyId", Long.class);
+    this.subscribeToNewsletter = Boolean.TRUE.equals(SdkFields.read(user, "subscribeToNewsletter", Boolean.class));
   }
 
   private void initGroup9(final User user) {
-    this.externallyManaged = Boolean.TRUE.equals(user.externallyManaged);
-    this.tags = user.tags;
-    this.timeZone = user.timeZone;
-    this.typeOf2fa = user.typeOf2fa;
-    this.typeOf2faForDisplay = user.typeOf2faForDisplay;
-    this.userRoot = user.userRoot;
-    this.userHome = user.userHome;
-    this.daysRemainingUntilPasswordExpire = user.daysRemainingUntilPasswordExpire;
-    this.passwordExpireAt = user.passwordExpireAt != null ? ZonedDateTime.ofInstant(user.passwordExpireAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.avatarDelete = Boolean.TRUE.equals(user.avatarDelete);
+    this.externallyManaged = Boolean.TRUE.equals(SdkFields.read(user, "externallyManaged", Boolean.class));
+    this.tags = SdkFields.read(user, "tags", String.class);
+    this.timeZone = SdkFields.read(user, "timeZone", String.class);
+    this.typeOf2fa = SdkFields.read(user, "typeOf2fa", String.class);
+    this.typeOf2faForDisplay = SdkFields.read(user, "typeOf2faForDisplay", String.class);
+    this.userRoot = SdkFields.read(user, "userRoot", String.class);
+    this.userHome = SdkFields.read(user, "userHome", String.class);
+    this.daysRemainingUntilPasswordExpire = SdkFields.read(user, "daysRemainingUntilPasswordExpire", Long.class);
+    this.passwordExpireAt = SdkFields.read(user, "passwordExpireAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.avatarDelete = Boolean.TRUE.equals(SdkFields.read(user, "avatarDelete", Boolean.class));
   }
 
   private void initGroup10(final User user) {
-    this.changePassword = user.changePassword;
-    this.changePasswordConfirmation = user.changePasswordConfirmation;
-    this.grantPermission = user.grantPermission;
-    this.groupId = user.groupId;
-    this.importedPasswordHash = user.importedPasswordHash;
-    this.password = user.password;
-    this.passwordConfirmation = user.passwordConfirmation;
-    this.announcementsRead = Boolean.TRUE.equals(user.announcementsRead);
-    this.clear2fa = Boolean.TRUE.equals(user.clear2fa);
-    this.convertToPartnerUser = Boolean.TRUE.equals(user.convertToPartnerUser);
+    this.changePassword = SdkFields.read(user, "changePassword", String.class);
+    this.changePasswordConfirmation = SdkFields.read(user, "changePasswordConfirmation", String.class);
+    this.grantPermission = SdkFields.read(user, "grantPermission", String.class);
+    this.groupId = SdkFields.read(user, "groupId", Long.class);
+    this.importedPasswordHash = SdkFields.read(user, "importedPasswordHash", String.class);
+    this.password = SdkFields.read(user, "password", String.class);
+    this.passwordConfirmation = SdkFields.read(user, "passwordConfirmation", String.class);
+    this.announcementsRead = Boolean.TRUE.equals(SdkFields.read(user, "announcementsRead", Boolean.class));
+    this.clear2fa = Boolean.TRUE.equals(SdkFields.read(user, "clear2fa", Boolean.class));
+    this.convertToPartnerUser = Boolean.TRUE.equals(SdkFields.read(user, "convertToPartnerUser", Boolean.class));
   }
 
   private Long id;

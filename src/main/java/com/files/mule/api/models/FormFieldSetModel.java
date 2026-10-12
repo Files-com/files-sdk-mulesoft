@@ -33,16 +33,16 @@ public class FormFieldSetModel implements Serializable {
   }
 
   private void initGroup1(final FormFieldSet formFieldSet) {
-    this.id = formFieldSet.id;
-    this.title = formFieldSet.title;
-    this.requireCompleteMetadataCapture = Boolean.TRUE.equals(formFieldSet.requireCompleteMetadataCapture);
-    this.formLayouts = formFieldSet.formLayout != null ? Arrays.asList(formFieldSet.formLayout) : null;
-    this.skipName = Boolean.TRUE.equals(formFieldSet.skipName);
-    this.skipEmail = Boolean.TRUE.equals(formFieldSet.skipEmail);
-    this.skipCompany = Boolean.TRUE.equals(formFieldSet.skipCompany);
-    this.inUse = Boolean.TRUE.equals(formFieldSet.inUse);
-    this.userId = formFieldSet.userId;
-    this.workspaceId = formFieldSet.workspaceId;
+    this.id = SdkFields.read(formFieldSet, "id", Long.class);
+    this.title = SdkFields.read(formFieldSet, "title", String.class);
+    this.requireCompleteMetadataCapture = Boolean.TRUE.equals(SdkFields.read(formFieldSet, "requireCompleteMetadataCapture", Boolean.class));
+    this.formLayouts = SdkFields.read(formFieldSet, "formLayout", Long[].class, Arrays::asList);
+    this.skipName = Boolean.TRUE.equals(SdkFields.read(formFieldSet, "skipName", Boolean.class));
+    this.skipEmail = Boolean.TRUE.equals(SdkFields.read(formFieldSet, "skipEmail", Boolean.class));
+    this.skipCompany = Boolean.TRUE.equals(SdkFields.read(formFieldSet, "skipCompany", Boolean.class));
+    this.inUse = Boolean.TRUE.equals(SdkFields.read(formFieldSet, "inUse", Boolean.class));
+    this.userId = SdkFields.read(formFieldSet, "userId", Long.class);
+    this.workspaceId = SdkFields.read(formFieldSet, "workspaceId", Long.class);
   }
 
   private Long id;

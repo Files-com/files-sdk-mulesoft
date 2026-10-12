@@ -24,26 +24,26 @@ public class GroupModel implements Serializable {
   }
 
   private void initGroup1(final Group group) {
-    this.id = group.id;
-    this.name = group.name;
-    this.allowedIps = group.allowedIps;
-    this.adminIds = group.adminIds;
-    this.notes = group.notes;
-    this.userIds = group.userIds;
-    this.usernames = group.usernames;
-    this.aiAssistantPersonalityId = group.aiAssistantPersonalityId;
-    this.ftpPermission = Boolean.TRUE.equals(group.ftpPermission);
-    this.sftpPermission = Boolean.TRUE.equals(group.sftpPermission);
+    this.id = SdkFields.read(group, "id", Long.class);
+    this.name = SdkFields.read(group, "name", String.class);
+    this.allowedIps = SdkFields.read(group, "allowedIps", String.class);
+    this.adminIds = SdkFields.read(group, "adminIds", String.class);
+    this.notes = SdkFields.read(group, "notes", String.class);
+    this.userIds = SdkFields.read(group, "userIds", String.class);
+    this.usernames = SdkFields.read(group, "usernames", String.class);
+    this.aiAssistantPersonalityId = SdkFields.read(group, "aiAssistantPersonalityId", Long.class);
+    this.ftpPermission = Boolean.TRUE.equals(SdkFields.read(group, "ftpPermission", Boolean.class));
+    this.sftpPermission = Boolean.TRUE.equals(SdkFields.read(group, "sftpPermission", Boolean.class));
   }
 
   private void initGroup2(final Group group) {
-    this.davPermission = Boolean.TRUE.equals(group.davPermission);
-    this.restapiPermission = Boolean.TRUE.equals(group.restapiPermission);
-    this.s3CompatibleEndpointPermission = Boolean.TRUE.equals(group.s3CompatibleEndpointPermission);
-    this.desktopConfigurationProfileId = group.desktopConfigurationProfileId;
-    this.integrationCentricProfileId = group.integrationCentricProfileId;
-    this.siteId = group.siteId;
-    this.workspaceId = group.workspaceId;
+    this.davPermission = Boolean.TRUE.equals(SdkFields.read(group, "davPermission", Boolean.class));
+    this.restapiPermission = Boolean.TRUE.equals(SdkFields.read(group, "restapiPermission", Boolean.class));
+    this.s3CompatibleEndpointPermission = Boolean.TRUE.equals(SdkFields.read(group, "s3CompatibleEndpointPermission", Boolean.class));
+    this.desktopConfigurationProfileId = SdkFields.read(group, "desktopConfigurationProfileId", Long.class);
+    this.integrationCentricProfileId = SdkFields.read(group, "integrationCentricProfileId", Long.class);
+    this.siteId = SdkFields.read(group, "siteId", Long.class);
+    this.workspaceId = SdkFields.read(group, "workspaceId", Long.class);
   }
 
   private Long id;

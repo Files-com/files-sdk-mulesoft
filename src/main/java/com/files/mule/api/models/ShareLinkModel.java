@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import com.files.models.Bundle;
@@ -31,77 +32,78 @@ public class ShareLinkModel implements Serializable {
   }
 
   private void initGroup1(final Bundle bundle) {
-    this.code = bundle.code;
-    this.colorLeft = bundle.colorLeft;
-    this.colorLink = bundle.colorLink;
-    this.colorText = bundle.colorText;
-    this.colorTop = bundle.colorTop;
-    this.colorTopText = bundle.colorTopText;
-    this.url = bundle.url;
-    this.description = bundle.description;
-    this.expiresAt = bundle.expiresAt != null ? ZonedDateTime.ofInstant(bundle.expiresAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.passwordProtected = Boolean.TRUE.equals(bundle.passwordProtected);
+    this.code = SdkFields.read(bundle, "code", String.class);
+    this.colorLeft = SdkFields.read(bundle, "colorLeft", String.class);
+    this.colorLink = SdkFields.read(bundle, "colorLink", String.class);
+    this.colorText = SdkFields.read(bundle, "colorText", String.class);
+    this.colorTop = SdkFields.read(bundle, "colorTop", String.class);
+    this.colorTopText = SdkFields.read(bundle, "colorTopText", String.class);
+    this.url = SdkFields.read(bundle, "url", String.class);
+    this.description = SdkFields.read(bundle, "description", String.class);
+    this.expiresAt = SdkFields.read(bundle, "expiresAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.passwordProtected = Boolean.TRUE.equals(SdkFields.read(bundle, "passwordProtected", Boolean.class));
   }
 
   private void initGroup2(final Bundle bundle) {
-    this.permissions = bundle.permissions;
-    this.previewOnly = Boolean.TRUE.equals(bundle.previewOnly);
-    this.requireRegistration = Boolean.TRUE.equals(bundle.requireRegistration);
-    this.requireShareRecipient = Boolean.TRUE.equals(bundle.requireShareRecipient);
-    this.requireLogout = Boolean.TRUE.equals(bundle.requireLogout);
-    this.clickwrapBody = bundle.clickwrapBody;
-    if (bundle.formFieldSet != null) {
-      this.formFieldSet = new FormFieldSetModel(bundle.formFieldSet);
-    }
-    this.skipName = Boolean.TRUE.equals(bundle.skipName);
-    this.skipEmail = Boolean.TRUE.equals(bundle.skipEmail);
-    this.startAccessOnDate = bundle.startAccessOnDate != null ? ZonedDateTime.ofInstant(bundle.startAccessOnDate.toInstant(), ZoneId.systemDefault()) : null;
+    this.permissions = SdkFields.read(bundle, "permissions", String.class);
+    this.previewOnly = Boolean.TRUE.equals(SdkFields.read(bundle, "previewOnly", Boolean.class));
+    this.requireRegistration = Boolean.TRUE.equals(SdkFields.read(bundle, "requireRegistration", Boolean.class));
+    this.requireShareRecipient = Boolean.TRUE.equals(SdkFields.read(bundle, "requireShareRecipient", Boolean.class));
+    this.requireLogout = Boolean.TRUE.equals(SdkFields.read(bundle, "requireLogout", Boolean.class));
+    this.clickwrapBody = SdkFields.read(bundle, "clickwrapBody", String.class);
+    this.formFieldSet = SdkFields.read(bundle, "formFieldSet", com.files.models.FormFieldSet.class, FormFieldSetModel::new);
+    this.skipName = Boolean.TRUE.equals(SdkFields.read(bundle, "skipName", Boolean.class));
+    this.skipEmail = Boolean.TRUE.equals(SdkFields.read(bundle, "skipEmail", Boolean.class));
+    this.startAccessOnDate = SdkFields.read(bundle, "startAccessOnDate", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
   }
 
   private void initGroup3(final Bundle bundle) {
-    this.skipCompany = Boolean.TRUE.equals(bundle.skipCompany);
-    this.id = bundle.id;
-    this.bypassesSiteExpirationRules = Boolean.TRUE.equals(bundle.bypassesSiteExpirationRules);
-    this.createdAt = bundle.createdAt != null ? ZonedDateTime.ofInstant(bundle.createdAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.deleted = Boolean.TRUE.equals(bundle.deleted);
-    this.deletedAt = bundle.deletedAt != null ? ZonedDateTime.ofInstant(bundle.deletedAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.dontSeparateSubmissionsByFolder = Boolean.TRUE.equals(bundle.dontSeparateSubmissionsByFolder);
-    this.effectiveExpiresAt = bundle.effectiveExpiresAt != null ? ZonedDateTime.ofInstant(bundle.effectiveExpiresAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.maxUses = bundle.maxUses;
-    this.internalName = bundle.internalName;
+    this.skipCompany = Boolean.TRUE.equals(SdkFields.read(bundle, "skipCompany", Boolean.class));
+    this.id = SdkFields.read(bundle, "id", Long.class);
+    this.bypassesSiteExpirationRules = Boolean.TRUE.equals(SdkFields.read(bundle, "bypassesSiteExpirationRules", Boolean.class));
+    this.createdAt = SdkFields.read(bundle, "createdAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.deleted = Boolean.TRUE.equals(SdkFields.read(bundle, "deleted", Boolean.class));
+    this.deletedAt = SdkFields.read(bundle, "deletedAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.dontSeparateSubmissionsByFolder = Boolean.TRUE.equals(SdkFields.read(bundle, "dontSeparateSubmissionsByFolder", Boolean.class));
+    this.effectiveExpiresAt = SdkFields.read(bundle, "effectiveExpiresAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.maxUses = SdkFields.read(bundle, "maxUses", Long.class);
+    this.internalName = SdkFields.read(bundle, "internalName", String.class);
   }
 
   private void initGroup4(final Bundle bundle) {
-    this.note = bundle.note;
-    this.pathTemplate = bundle.pathTemplate;
-    this.pathTemplateTimeZone = bundle.pathTemplateTimeZone;
-    this.sendEmailReceiptToUploader = Boolean.TRUE.equals(bundle.sendEmailReceiptToUploader);
-    this.snapshotId = bundle.snapshotId;
-    this.userId = bundle.userId;
-    this.username = bundle.username;
-    this.groupId = bundle.groupId;
-    this.clickwrapId = bundle.clickwrapId;
-    this.inboxId = bundle.inboxId;
+    this.note = SdkFields.read(bundle, "note", String.class);
+    this.pathTemplate = SdkFields.read(bundle, "pathTemplate", String.class);
+    this.pathTemplateTimeZone = SdkFields.read(bundle, "pathTemplateTimeZone", String.class);
+    this.sendEmailReceiptToUploader = Boolean.TRUE.equals(SdkFields.read(bundle, "sendEmailReceiptToUploader", Boolean.class));
+    this.snapshotId = SdkFields.read(bundle, "snapshotId", Long.class);
+    this.userId = SdkFields.read(bundle, "userId", Long.class);
+    this.username = SdkFields.read(bundle, "username", String.class);
+    this.groupId = SdkFields.read(bundle, "groupId", Long.class);
+    this.clickwrapId = SdkFields.read(bundle, "clickwrapId", Long.class);
+    this.inboxId = SdkFields.read(bundle, "inboxId", Long.class);
   }
 
   private void initGroup5(final Bundle bundle) {
-    if (bundle.watermarkAttachment != null) {
-      this.watermarkAttachment = new ImageModel(bundle.watermarkAttachment);
-    }
-    this.watermarkValue = bundle.watermarkValue;
-    this.sendOneTimePasswordToRecipientAtRegistration = Boolean.TRUE.equals(bundle.sendOneTimePasswordToRecipientAtRegistration);
-    this.workspaceId = bundle.workspaceId;
-    this.hasInbox = Boolean.TRUE.equals(bundle.hasInbox);
-    this.dontAllowFoldersInUploads = Boolean.TRUE.equals(bundle.dontAllowFoldersInUploads);
-    this.paths = bundle.paths != null ? Arrays.asList(bundle.paths) : null;
-    this.password = bundle.password;
-    this.formFieldSetId = bundle.formFieldSetId;
-    this.createSnapshot = Boolean.TRUE.equals(bundle.createSnapshot);
+    this.watermarkAttachment = SdkFields.read(bundle, "watermarkAttachment", com.files.models.Image.class, ImageModel::new);
+    this.watermarkValue = SdkFields.read(bundle, "watermarkValue", Object.class);
+    this.sendOneTimePasswordToRecipientAtRegistration = Boolean.TRUE.equals(SdkFields.read(bundle, "sendOneTimePasswordToRecipientAtRegistration", Boolean.class));
+    this.workspaceId = SdkFields.read(bundle, "workspaceId", Long.class);
+    this.hasInbox = Boolean.TRUE.equals(SdkFields.read(bundle, "hasInbox", Boolean.class));
+    this.dontAllowFoldersInUploads = Boolean.TRUE.equals(SdkFields.read(bundle, "dontAllowFoldersInUploads", Boolean.class));
+    this.paths = SdkFields.read(bundle, "paths", String[].class, Arrays::asList);
+    this.password = SdkFields.read(bundle, "password", String.class);
+    this.formFieldSetId = SdkFields.read(bundle, "formFieldSetId", Long.class);
+    this.createSnapshot = Boolean.TRUE.equals(SdkFields.read(bundle, "createSnapshot", Boolean.class));
   }
 
   private void initGroup6(final Bundle bundle) {
-    this.finalizeSnapshot = Boolean.TRUE.equals(bundle.finalizeSnapshot);
-    this.watermarkAttachmentDelete = Boolean.TRUE.equals(bundle.watermarkAttachmentDelete);
+    this.finalizeSnapshot = Boolean.TRUE.equals(SdkFields.read(bundle, "finalizeSnapshot", Boolean.class));
+    this.watermarkAttachmentDelete = Boolean.TRUE.equals(SdkFields.read(bundle, "watermarkAttachmentDelete", Boolean.class));
   }
 
   private String code;

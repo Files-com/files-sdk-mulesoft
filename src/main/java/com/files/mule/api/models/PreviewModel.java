@@ -19,11 +19,11 @@ public class PreviewModel implements Serializable {
   }
 
   private void initGroup1(final Preview preview) {
-    this.id = preview.id;
-    this.status = preview.status;
-    this.downloadUri = preview.downloadUri;
-    this.previewType = preview.type;
-    this.size = preview.size;
+    this.id = SdkFields.read(preview, "id", Long.class);
+    this.status = SdkFields.read(preview, "status", String.class);
+    this.downloadUri = SdkFields.read(preview, "downloadUri", String.class);
+    this.previewType = SdkFields.read(preview, "type", String.class);
+    this.size = SdkFields.read(preview, "size", String.class);
   }
 
   private Long id;

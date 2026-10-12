@@ -6,6 +6,7 @@ package com.files.mule.api.models;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
+import java.util.Date;
 
 import com.files.models.BundleRecipient;
 
@@ -23,15 +24,16 @@ public class ShareLinkRecipientModel implements Serializable {
   }
 
   private void initGroup1(final BundleRecipient bundleRecipient) {
-    this.company = bundleRecipient.company;
-    this.name = bundleRecipient.name;
-    this.note = bundleRecipient.note;
-    this.recipient = bundleRecipient.recipient;
-    this.sentAt = bundleRecipient.sentAt != null ? ZonedDateTime.ofInstant(bundleRecipient.sentAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.workspaceId = bundleRecipient.workspaceId;
-    this.userId = bundleRecipient.userId;
-    this.bundleId = bundleRecipient.bundleId;
-    this.shareAfterCreate = Boolean.TRUE.equals(bundleRecipient.shareAfterCreate);
+    this.company = SdkFields.read(bundleRecipient, "company", String.class);
+    this.name = SdkFields.read(bundleRecipient, "name", String.class);
+    this.note = SdkFields.read(bundleRecipient, "note", String.class);
+    this.recipient = SdkFields.read(bundleRecipient, "recipient", String.class);
+    this.sentAt = SdkFields.read(bundleRecipient, "sentAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.workspaceId = SdkFields.read(bundleRecipient, "workspaceId", Long.class);
+    this.userId = SdkFields.read(bundleRecipient, "userId", Long.class);
+    this.bundleId = SdkFields.read(bundleRecipient, "bundleId", Long.class);
+    this.shareAfterCreate = Boolean.TRUE.equals(SdkFields.read(bundleRecipient, "shareAfterCreate", Boolean.class));
   }
 
   private String company;

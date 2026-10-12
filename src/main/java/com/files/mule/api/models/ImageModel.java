@@ -16,8 +16,8 @@ public class ImageModel implements Serializable {
   }
 
   private void initGroup1(final Image image) {
-    this.name = image.name;
-    this.uri = image.uri;
+    this.name = SdkFields.read(image, "name", String.class);
+    this.uri = SdkFields.read(image, "uri", String.class);
   }
 
   private String name;

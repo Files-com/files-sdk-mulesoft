@@ -6,6 +6,7 @@ package com.files.mule.api.models;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.time.ZoneId;
+import java.util.Date;
 
 import com.files.models.File;
 
@@ -25,70 +26,69 @@ public class FileModel implements Serializable {
   }
 
   private void initGroup1(final File file) {
-    this.path = file.path;
-    this.createdById = file.createdById;
-    this.createdByApiKeyId = file.createdByApiKeyId;
-    this.createdByAs2IncomingMessageId = file.createdByAs2IncomingMessageId;
-    this.createdByAutomationId = file.createdByAutomationId;
-    this.createdByBundleRegistrationId = file.createdByBundleRegistrationId;
-    this.createdByInboxId = file.createdByInboxId;
-    this.createdByRemoteServerId = file.createdByRemoteServerId;
-    this.createdBySyncId = file.createdBySyncId;
-    this.customMetadata = file.customMetadata;
+    this.path = SdkFields.read(file, "path", String.class);
+    this.createdById = SdkFields.read(file, "createdById", Long.class);
+    this.createdByApiKeyId = SdkFields.read(file, "createdByApiKeyId", Long.class);
+    this.createdByAs2IncomingMessageId = SdkFields.read(file, "createdByAs2IncomingMessageId", Long.class);
+    this.createdByAutomationId = SdkFields.read(file, "createdByAutomationId", Long.class);
+    this.createdByBundleRegistrationId = SdkFields.read(file, "createdByBundleRegistrationId", Long.class);
+    this.createdByInboxId = SdkFields.read(file, "createdByInboxId", Long.class);
+    this.createdByRemoteServerId = SdkFields.read(file, "createdByRemoteServerId", Long.class);
+    this.createdBySyncId = SdkFields.read(file, "createdBySyncId", Long.class);
+    this.customMetadata = SdkFields.read(file, "customMetadata", Object.class);
   }
 
   private void initGroup2(final File file) {
-    this.displayName = file.displayName;
-    this.fileType = file.type;
-    this.size = file.size;
-    this.createdAt = file.createdAt != null ? ZonedDateTime.ofInstant(file.createdAt.toInstant(), ZoneId.systemDefault()) : null;
-    this.lastModifiedById = file.lastModifiedById;
-    this.lastModifiedByApiKeyId = file.lastModifiedByApiKeyId;
-    this.lastModifiedByAutomationId = file.lastModifiedByAutomationId;
-    this.lastModifiedByBundleRegistrationId = file.lastModifiedByBundleRegistrationId;
-    this.lastModifiedByRemoteServerId = file.lastModifiedByRemoteServerId;
-    this.lastModifiedBySyncId = file.lastModifiedBySyncId;
+    this.displayName = SdkFields.read(file, "displayName", String.class);
+    this.fileType = SdkFields.read(file, "type", String.class);
+    this.size = SdkFields.read(file, "size", Long.class);
+    this.createdAt = SdkFields.read(file, "createdAt", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.lastModifiedById = SdkFields.read(file, "lastModifiedById", Long.class);
+    this.lastModifiedByApiKeyId = SdkFields.read(file, "lastModifiedByApiKeyId", Long.class);
+    this.lastModifiedByAutomationId = SdkFields.read(file, "lastModifiedByAutomationId", Long.class);
+    this.lastModifiedByBundleRegistrationId = SdkFields.read(file, "lastModifiedByBundleRegistrationId", Long.class);
+    this.lastModifiedByRemoteServerId = SdkFields.read(file, "lastModifiedByRemoteServerId", Long.class);
+    this.lastModifiedBySyncId = SdkFields.read(file, "lastModifiedBySyncId", Long.class);
   }
 
   private void initGroup3(final File file) {
-    this.mtime = file.mtime != null ? ZonedDateTime.ofInstant(file.mtime.toInstant(), ZoneId.systemDefault()) : null;
-    this.providedMtime = file.providedMtime != null ? ZonedDateTime.ofInstant(file.providedMtime.toInstant(), ZoneId.systemDefault()) : null;
-    this.crc32 = file.crc32;
-    this.md5 = file.md5;
-    this.sha1 = file.sha1;
-    this.sha256 = file.sha256;
-    this.mimeType = file.mimeType;
-    this.region = file.region;
-    this.permissions = file.permissions;
-    this.subfoldersLocked = Boolean.TRUE.equals(file.subfoldersLocked);
+    this.mtime = SdkFields.read(file, "mtime", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.providedMtime = SdkFields.read(file, "providedMtime", Date.class,
+        value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
+    this.crc32 = SdkFields.read(file, "crc32", String.class);
+    this.md5 = SdkFields.read(file, "md5", String.class);
+    this.sha1 = SdkFields.read(file, "sha1", String.class);
+    this.sha256 = SdkFields.read(file, "sha256", String.class);
+    this.mimeType = SdkFields.read(file, "mimeType", String.class);
+    this.region = SdkFields.read(file, "region", String.class);
+    this.permissions = SdkFields.read(file, "permissions", String.class);
+    this.subfoldersLocked = Boolean.TRUE.equals(SdkFields.read(file, "subfoldersLocked", Boolean.class));
   }
 
   private void initGroup4(final File file) {
-    this.isLocked = Boolean.TRUE.equals(file.isLocked);
-    this.downloadUri = file.downloadUri;
-    if (file.directConnectionInfo != null) {
-      this.directConnectionInfo = new DirectConnectionInfoModel(file.directConnectionInfo);
-    }
-    this.priorityColor = file.priorityColor;
-    this.previewId = file.previewId;
-    if (file.preview != null) {
-      this.preview = new PreviewModel(file.preview);
-    }
-    this.action = file.action;
-    this.length = file.length;
-    this.mkdirParents = Boolean.TRUE.equals(file.mkdirParents);
-    this.part = file.part;
+    this.isLocked = Boolean.TRUE.equals(SdkFields.read(file, "isLocked", Boolean.class));
+    this.downloadUri = SdkFields.read(file, "downloadUri", String.class);
+    this.directConnectionInfo = SdkFields.read(file, "directConnectionInfo", com.files.models.DirectConnectionInfo.class, DirectConnectionInfoModel::new);
+    this.priorityColor = SdkFields.read(file, "priorityColor", String.class);
+    this.previewId = SdkFields.read(file, "previewId", Long.class);
+    this.preview = SdkFields.read(file, "preview", com.files.models.Preview.class, PreviewModel::new);
+    this.action = SdkFields.read(file, "action", String.class);
+    this.length = SdkFields.read(file, "length", Long.class);
+    this.mkdirParents = Boolean.TRUE.equals(SdkFields.read(file, "mkdirParents", Boolean.class));
+    this.part = SdkFields.read(file, "part", Long.class);
   }
 
   private void initGroup5(final File file) {
-    this.parts = file.parts;
-    this.ref = file.ref;
-    this.restart = file.restart;
-    this.copyBehaviors = Boolean.TRUE.equals(file.copyBehaviors);
-    this.structure = file.structure;
-    this.withRename = Boolean.TRUE.equals(file.withRename);
-    this.bufferedUpload = Boolean.TRUE.equals(file.bufferedUpload);
-    this.withDirectConnectionInfo = Boolean.TRUE.equals(file.withDirectConnectionInfo);
+    this.parts = SdkFields.read(file, "parts", Long.class);
+    this.ref = SdkFields.read(file, "ref", String.class);
+    this.restart = SdkFields.read(file, "restart", Long.class);
+    this.copyBehaviors = Boolean.TRUE.equals(SdkFields.read(file, "copyBehaviors", Boolean.class));
+    this.structure = SdkFields.read(file, "structure", String.class);
+    this.withRename = Boolean.TRUE.equals(SdkFields.read(file, "withRename", Boolean.class));
+    this.bufferedUpload = Boolean.TRUE.equals(SdkFields.read(file, "bufferedUpload", Boolean.class));
+    this.withDirectConnectionInfo = Boolean.TRUE.equals(SdkFields.read(file, "withDirectConnectionInfo", Boolean.class));
   }
 
   private String path;

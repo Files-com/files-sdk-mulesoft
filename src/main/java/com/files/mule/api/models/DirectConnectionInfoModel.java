@@ -18,11 +18,11 @@ public class DirectConnectionInfoModel implements Serializable {
   }
 
   private void initGroup1(final DirectConnectionInfo directConnectionInfo) {
-    this.version = directConnectionInfo.version;
-    this.serverName = directConnectionInfo.serverName;
-    this.addresses = directConnectionInfo.addresses != null ? Arrays.asList(directConnectionInfo.addresses) : null;
-    this.directUri = directConnectionInfo.directUri;
-    this.caPem = directConnectionInfo.caPem;
+    this.version = SdkFields.read(directConnectionInfo, "version", Long.class);
+    this.serverName = SdkFields.read(directConnectionInfo, "serverName", String.class);
+    this.addresses = SdkFields.read(directConnectionInfo, "addresses", String[].class, Arrays::asList);
+    this.directUri = SdkFields.read(directConnectionInfo, "directUri", String.class);
+    this.caPem = SdkFields.read(directConnectionInfo, "caPem", String.class);
   }
 
   private Long version;

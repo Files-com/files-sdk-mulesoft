@@ -19,14 +19,14 @@ public class ShareLinkNotificationModel implements Serializable {
   }
 
   private void initGroup1(final BundleNotification bundleNotification) {
-    this.bundleId = bundleNotification.bundleId;
-    this.id = bundleNotification.id;
-    this.notifyOnRegistration = Boolean.TRUE.equals(bundleNotification.notifyOnRegistration);
-    this.notifyOnUpload = Boolean.TRUE.equals(bundleNotification.notifyOnUpload);
-    this.notifyCurrentUser = Boolean.TRUE.equals(bundleNotification.notifyCurrentUser);
-    this.notifyUserId = bundleNotification.notifyUserId;
-    this.workspaceId = bundleNotification.workspaceId;
-    this.userId = bundleNotification.userId;
+    this.bundleId = SdkFields.read(bundleNotification, "bundleId", Long.class);
+    this.id = SdkFields.read(bundleNotification, "id", Long.class);
+    this.notifyOnRegistration = Boolean.TRUE.equals(SdkFields.read(bundleNotification, "notifyOnRegistration", Boolean.class));
+    this.notifyOnUpload = Boolean.TRUE.equals(SdkFields.read(bundleNotification, "notifyOnUpload", Boolean.class));
+    this.notifyCurrentUser = Boolean.TRUE.equals(SdkFields.read(bundleNotification, "notifyCurrentUser", Boolean.class));
+    this.notifyUserId = SdkFields.read(bundleNotification, "notifyUserId", Long.class);
+    this.workspaceId = SdkFields.read(bundleNotification, "workspaceId", Long.class);
+    this.userId = SdkFields.read(bundleNotification, "userId", Long.class);
   }
 
   private Long bundleId;
