@@ -16,6 +16,10 @@ import com.files.models.FormFieldSet;
  *
  * Once created, a form field set can then be associated with one or more bundle(s) and/or inbox(s). Once associated, you will be required to submit well-formatted form-data when creating a bundle-registration or inbox registration.
  *
+ * Custom answers saved on a registration are saved as Custom Metadata on each file uploaded through that registration, with field labels as keys. This applies to existing registrations as well as new ones. Unanswered optional fields and values exceeding 1024 characters are omitted; the first 32 remaining answers in saved form-answer order are captured. Dates use YYYY-MM-DD. Existing answers with unavailable field definitions or unparseable dates are omitted. Built-in name, email, and company fields are excluded. Form answers take precedence over explicit upload metadata with matching keys, including keeping omitted answer labels absent.
+ *
+ * Enable require_complete_metadata_capture to reject answers exceeding these value or count limits instead of omitting them. Uploaded files use the labels and answers accepted at registration even if the form is edited later.
+ *
  * Editing a field definition creates a replacement field with a new ID and preserves the original definition for existing registration answers. Unchanged fields and fields moved within the layout retain their IDs. Use the returned form_layout when submitting new answers or editing the form again.
  *
  * Authenticated form field set responses include historical definitions in form_fields so existing answers can still be interpreted. Only IDs in form_layout are current fields. Forms embedded in Share Link and Inbox responses contain current definitions only.
@@ -31,6 +35,7 @@ public class FormFieldSetModel implements Serializable {
   private void initGroup1(final FormFieldSet formFieldSet) {
     this.id = formFieldSet.id;
     this.title = formFieldSet.title;
+    this.requireCompleteMetadataCapture = Boolean.TRUE.equals(formFieldSet.requireCompleteMetadataCapture);
     this.formLayouts = formFieldSet.formLayout != null ? Arrays.asList(formFieldSet.formLayout) : null;
     this.skipName = Boolean.TRUE.equals(formFieldSet.skipName);
     this.skipEmail = Boolean.TRUE.equals(formFieldSet.skipEmail);
@@ -58,6 +63,16 @@ public class FormFieldSetModel implements Serializable {
 
   public void setTitle(final String title) {
     this.title = title;
+  }
+
+  private boolean requireCompleteMetadataCapture;
+
+  public boolean getRequireCompleteMetadataCapture() {
+    return requireCompleteMetadataCapture;
+  }
+
+  public void setRequireCompleteMetadataCapture(final boolean requireCompleteMetadataCapture) {
+    this.requireCompleteMetadataCapture = requireCompleteMetadataCapture;
   }
 
   private List<Long> formLayouts;

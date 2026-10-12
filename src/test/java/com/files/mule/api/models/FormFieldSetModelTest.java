@@ -20,6 +20,8 @@ public class FormFieldSetModelTest {
     assertThat(model.getId(), equalTo(1L));
     model.setTitle("Sample Form Title");
     assertThat(model.getTitle(), equalTo("Sample Form Title"));
+    model.setRequireCompleteMetadataCapture(false);
+    assertThat(model.getRequireCompleteMetadataCapture(), equalTo(false));
     model.setFormLayouts(Arrays.asList(1L, 2L, 3L, 4L));
     assertThat(model.getFormLayouts(), equalTo(Arrays.asList(1L, 2L, 3L, 4L)));
     model.setSkipName(true);
