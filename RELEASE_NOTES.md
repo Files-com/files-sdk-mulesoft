@@ -2,6 +2,12 @@
 
 The Files.com Connector allows you to interact with the Files.com API using MuleSoft, providing access to a wide range resources, including users, groups, folders, files, and more.
 
+## 1.1.0
+
+### New Features
+
+* Share Link - Create and Share Link - Update have a new optional Permissions parameter. It sets the permissions that apply to folders in the share link: `read`, `write`, `read_write`, `full`, `none` or `preview_only`. Without it, Share Link - Create makes read-only share links, as in 1.0.0.
+
 ## 1.0.0
 
 The Files.com Connector is available on Mule 4.3 or later.
