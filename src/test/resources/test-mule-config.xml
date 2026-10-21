@@ -14,6 +14,12 @@
     <filescom:connection apiKey="${apiKey}" baseUrl="${baseUrl}" />
   </filescom:config>
 
+  <!-- The download alone runs against a test-owned fixture on 127.0.0.1 (DownloadFixture), not the Mock: the test gives
+       the fixture's origin as vars.downloadBaseUrl, so this configuration is dynamic, with a synthetic key. -->
+  <filescom:config name="FilesComDownload">
+    <filescom:connection apiKey="filesmock-download-fixture-key" baseUrl="#[vars.downloadBaseUrl]" />
+  </filescom:config>
+
   <flow name="ShareLinkFlow">
     <filescom:create-share-link config-ref="FilesCom" paths='#[[""]]' />
     <set-variable variableName="bundleId" value="#[payload.id]" />
@@ -39,8 +45,14 @@
       </when>
     </choice>
     <filescom:show-file config-ref="FilesCom" path="file-path" />
-    <filescom:download-file config-ref="FilesCom" path="file-path" />
     <filescom:delete-file config-ref="FilesCom" path="file-path" />
+  </flow>
+
+  <!-- Downloads vars.downloadPath through the fixture, then reads the whole stream, before the flow ends and closes it,
+       into a String: the flow's payload, which the test compares with the fixture's content. -->
+  <flow name="FileDownloadFlow">
+    <filescom:download-file config-ref="FilesComDownload" path="#[vars.downloadPath]" />
+    <set-payload value="#[output application/java --- read(payload, 'text/plain')]" />
   </flow>
 
   <flow name="FolderFlow">
