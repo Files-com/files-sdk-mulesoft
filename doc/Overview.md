@@ -12,6 +12,8 @@ The Files.com MuleSoft Connector allows you to interact with the Files.com API u
 connector provides access to a wide range resources, including users, groups, folders, files, and
 more.
 
+The [MuleSoft product guide](https://www.files.com/docs/application-integrations/workflow-platforms-ipaas/mulesoft) explains workflow ownership, credential scope, retries, and delivery verification. Use this reference for connector configuration, operation parameters, and errors.
+
 ### Requirements
 
 Mule Runtime 4.3.0 or later is required to use the Files.com MuleSoft Connector.
@@ -68,12 +70,10 @@ Authenticating with an API key is the recommended authentication method for most
 the method used in the examples on this site.
 
 To use the Files.com connector with an API Key, first generate an API key from the [web
-interface](https://www.files.com/docs/sdk-and-apis/api-keys) or [via the API or an
+interface](https://www.files.com/docs/security/authentication-and-credentials/api-keys) or [via the API or an
 SDK](/rest/resources/developers/api-keys).
 
-Note that when using a user-specific API key, if the user is an administrator, you will have full
-access to the entire API. If the user is not an administrator, you will only be able to access files
-that user can access, and no access will be granted to site administration functions in the API.
+The key's permission scope and Workspace limit the operations it can perform. A user key also follows its account's permissions, including any delegated administrative access. A successful connection does not grant additional access. [API Keys](https://www.files.com/docs/security/authentication-and-credentials/api-keys) explains how to choose the scope and manage the credential's lifecycle.
 
 #### Configuring in AnyPoint Studio
 
@@ -175,7 +175,7 @@ This behavior applies across:
 - Folder and file lookup operations
 - Automations and workflows
 
-See also: [Case Sensitivity Documentation](https://www.files.com/docs/files-and-folders/case-sensitivity/)
+See also: [Case Sensitivity Documentation](https://www.files.com/docs/files-and-folders/file-system-semantics/case-sensitivity)
 
 ### Slashes
 
