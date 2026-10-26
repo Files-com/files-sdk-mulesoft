@@ -164,11 +164,10 @@ public class UserModel implements Serializable {
     this.skipWelcomeScreen = Boolean.TRUE.equals(SdkFields.read(user, "skipWelcomeScreen", Boolean.class));
     this.encryptionRequired = SdkFields.read(user, "sslRequired", String.class);
     this.ssoStrategyId = SdkFields.read(user, "ssoStrategyId", Long.class);
-    this.subscribeToNewsletter = Boolean.TRUE.equals(SdkFields.read(user, "subscribeToNewsletter", Boolean.class));
+    this.externallyManaged = Boolean.TRUE.equals(SdkFields.read(user, "externallyManaged", Boolean.class));
   }
 
   private void initGroup9(final User user) {
-    this.externallyManaged = Boolean.TRUE.equals(SdkFields.read(user, "externallyManaged", Boolean.class));
     this.tags = SdkFields.read(user, "tags", String.class);
     this.timeZone = SdkFields.read(user, "timeZone", String.class);
     this.typeOf2fa = SdkFields.read(user, "typeOf2fa", String.class);
@@ -179,10 +178,10 @@ public class UserModel implements Serializable {
     this.passwordExpireAt = SdkFields.read(user, "passwordExpireAt", Date.class,
         value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
     this.avatarDelete = Boolean.TRUE.equals(SdkFields.read(user, "avatarDelete", Boolean.class));
+    this.changePassword = SdkFields.read(user, "changePassword", String.class);
   }
 
   private void initGroup10(final User user) {
-    this.changePassword = SdkFields.read(user, "changePassword", String.class);
     this.changePasswordConfirmation = SdkFields.read(user, "changePasswordConfirmation", String.class);
     this.grantPermission = SdkFields.read(user, "grantPermission", String.class);
     this.groupId = SdkFields.read(user, "groupId", Long.class);
@@ -982,16 +981,6 @@ public class UserModel implements Serializable {
 
   public void setSsoStrategyId(final Long ssoStrategyId) {
     this.ssoStrategyId = ssoStrategyId;
-  }
-
-  private boolean subscribeToNewsletter;
-
-  public boolean getSubscribeToNewsletter() {
-    return subscribeToNewsletter;
-  }
-
-  public void setSubscribeToNewsletter(final boolean subscribeToNewsletter) {
-    this.subscribeToNewsletter = subscribeToNewsletter;
   }
 
   private boolean externallyManaged;

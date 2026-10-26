@@ -175,8 +175,6 @@ public class UserModelTest {
     assertThat(model.getEncryptionRequired(), equalTo("always_require"));
     model.setSsoStrategyId(1L);
     assertThat(model.getSsoStrategyId(), equalTo(1L));
-    model.setSubscribeToNewsletter(true);
-    assertThat(model.getSubscribeToNewsletter(), equalTo(true));
     model.setExternallyManaged(true);
     assertThat(model.getExternallyManaged(), equalTo(true));
     model.setTags("example");
