@@ -171,6 +171,8 @@ public class UserModelTest {
     assertThat(model.getDefaultWorkspaceId(), equalTo(1L));
     model.setSkipWelcomeScreen(true);
     assertThat(model.getSkipWelcomeScreen(), equalTo(true));
+    model.setFtpTlsSessionReuseRequired("use_system_setting");
+    assertThat(model.getFtpTlsSessionReuseRequired(), equalTo("use_system_setting"));
     model.setEncryptionRequired("always_require");
     assertThat(model.getEncryptionRequired(), equalTo("always_require"));
     model.setSsoStrategyId(1L);

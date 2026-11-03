@@ -162,12 +162,13 @@ public class UserModel implements Serializable {
     this.workspaceId = SdkFields.read(user, "workspaceId", Long.class);
     this.defaultWorkspaceId = SdkFields.read(user, "defaultWorkspaceId", Long.class);
     this.skipWelcomeScreen = Boolean.TRUE.equals(SdkFields.read(user, "skipWelcomeScreen", Boolean.class));
+    this.ftpTlsSessionReuseRequired = SdkFields.read(user, "ftpTlsSessionReuseRequired", String.class);
     this.encryptionRequired = SdkFields.read(user, "sslRequired", String.class);
     this.ssoStrategyId = SdkFields.read(user, "ssoStrategyId", Long.class);
-    this.externallyManaged = Boolean.TRUE.equals(SdkFields.read(user, "externallyManaged", Boolean.class));
   }
 
   private void initGroup9(final User user) {
+    this.externallyManaged = Boolean.TRUE.equals(SdkFields.read(user, "externallyManaged", Boolean.class));
     this.tags = SdkFields.read(user, "tags", String.class);
     this.timeZone = SdkFields.read(user, "timeZone", String.class);
     this.typeOf2fa = SdkFields.read(user, "typeOf2fa", String.class);
@@ -178,10 +179,10 @@ public class UserModel implements Serializable {
     this.passwordExpireAt = SdkFields.read(user, "passwordExpireAt", Date.class,
         value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
     this.avatarDelete = Boolean.TRUE.equals(SdkFields.read(user, "avatarDelete", Boolean.class));
-    this.changePassword = SdkFields.read(user, "changePassword", String.class);
   }
 
   private void initGroup10(final User user) {
+    this.changePassword = SdkFields.read(user, "changePassword", String.class);
     this.changePasswordConfirmation = SdkFields.read(user, "changePasswordConfirmation", String.class);
     this.grantPermission = SdkFields.read(user, "grantPermission", String.class);
     this.groupId = SdkFields.read(user, "groupId", Long.class);
@@ -961,6 +962,16 @@ public class UserModel implements Serializable {
 
   public void setSkipWelcomeScreen(final boolean skipWelcomeScreen) {
     this.skipWelcomeScreen = skipWelcomeScreen;
+  }
+
+  private String ftpTlsSessionReuseRequired;
+
+  public String getFtpTlsSessionReuseRequired() {
+    return ftpTlsSessionReuseRequired;
+  }
+
+  public void setFtpTlsSessionReuseRequired(final String ftpTlsSessionReuseRequired) {
+    this.ftpTlsSessionReuseRequired = ftpTlsSessionReuseRequired;
   }
 
   private String encryptionRequired;
