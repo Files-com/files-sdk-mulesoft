@@ -569,25 +569,6 @@ public class FilesComOperations {
   }
 
   /**
-   * Copy File/Folder
-   */
-  @DisplayName("File - Copy")
-  @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorsProvider.class)
-  public FileActionModel copyFile(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Copy parameters) {
-    final HashMap<String, Object> requestParameters = new HashMap<>();
-    if (parameters.path != null) {
-      requestParameters.put(PATH, parameters.getPath());
-    }
-
-    if (parameters.destination != null) {
-      requestParameters.put(DESTINATION, parameters.getDestination());
-    }
-
-    return new FileActionModel(connection.copyFile(requestParameters));
-  }
-
-  /**
    * Move File/Folder
    */
   @DisplayName("File - Move")
@@ -604,6 +585,25 @@ public class FilesComOperations {
     }
 
     return new FileActionModel(connection.moveFile(requestParameters));
+  }
+
+  /**
+   * Copy File/Folder
+   */
+  @DisplayName("File - Copy")
+  @MediaType(value = ANY, strict = false)
+  @Throws(FilesComErrorsProvider.class)
+  public FileActionModel copyFile(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Copy parameters) {
+    final HashMap<String, Object> requestParameters = new HashMap<>();
+    if (parameters.path != null) {
+      requestParameters.put(PATH, parameters.getPath());
+    }
+
+    if (parameters.destination != null) {
+      requestParameters.put(DESTINATION, parameters.getDestination());
+    }
+
+    return new FileActionModel(connection.copyFile(requestParameters));
   }
 
   /**
@@ -688,16 +688,6 @@ public class FilesComOperations {
   }
 
   /**
-   * Copy File/Folder
-   */
-  @DisplayName("Folder - Copy")
-  @MediaType(value = ANY, strict = false)
-  @Throws(FilesComErrorsProvider.class)
-  public FileActionModel copyFolder(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Copy parameters) {
-    return copyFile(connection, parameters);
-  }
-
-  /**
    * Move File/Folder
    */
   @DisplayName("Folder - Move")
@@ -705,6 +695,16 @@ public class FilesComOperations {
   @Throws(FilesComErrorsProvider.class)
   public FileActionModel moveFolder(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Move parameters) {
     return moveFile(connection, parameters);
+  }
+
+  /**
+   * Copy File/Folder
+   */
+  @DisplayName("Folder - Copy")
+  @MediaType(value = ANY, strict = false)
+  @Throws(FilesComErrorsProvider.class)
+  public FileActionModel copyFolder(final @Connection FilesComConnection connection, final @ParameterGroup(name = "Parameters") FileParameterGroup.Copy parameters) {
+    return copyFile(connection, parameters);
   }
 
   /**

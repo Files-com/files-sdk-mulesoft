@@ -80,37 +80,6 @@ public class FileParameterGroup {
 
   }
 
-  public static class Copy {
-    @Parameter
-    @Placement(tab = Placement.DEFAULT_TAB)
-    @Summary("Path to operate on.")
-    @Example("path")
-    public String path;
-
-    public String getPath() {
-      return path;
-    }
-
-    public void setPath(final String path) {
-      this.path = path;
-    }
-
-    @Parameter
-    @Placement(tab = Placement.DEFAULT_TAB)
-    @Summary("Copy destination path.")
-    @Example("destination")
-    public String destination;
-
-    public String getDestination() {
-      return destination;
-    }
-
-    public void setDestination(final String destination) {
-      this.destination = destination;
-    }
-
-  }
-
   public static class Move {
     @Parameter
     @Placement(tab = Placement.DEFAULT_TAB)
@@ -129,6 +98,37 @@ public class FileParameterGroup {
     @Parameter
     @Placement(tab = Placement.DEFAULT_TAB)
     @Summary("Move destination path.")
+    @Example("destination")
+    public String destination;
+
+    public String getDestination() {
+      return destination;
+    }
+
+    public void setDestination(final String destination) {
+      this.destination = destination;
+    }
+
+  }
+
+  public static class Copy {
+    @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
+    @Summary("Path to operate on.")
+    @Example("path")
+    public String path;
+
+    public String getPath() {
+      return path;
+    }
+
+    public void setPath(final String path) {
+      this.path = path;
+    }
+
+    @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
+    @Summary("Copy destination path.")
     @Example("destination")
     public String destination;
 

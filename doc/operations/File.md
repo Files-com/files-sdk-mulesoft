@@ -220,41 +220,6 @@ The above example uses the payload as the content. You can also specify the cont
 }
 ```
 
-## Copy File/Folder
-
-### XML Element
-
-```xml
-<filescom:copy-file />
-```
-
-### Parameters
-
-| Parameter | Description |
-| --------- | ----------- |
-| path<br/>*String*<br/>**Required** | Path to operate on. |
-| destination<br/>*String*<br/>**Required** | Copy destination path. |
-
-
-### Example Operation
-
-```xml
-<filescom:copy-file config-ref="FilesCom"
- path="path"
- destination="destination"
-/>
-```
-
-
-### Example Response Payload
-
-```json
-{
-  "status": "pending",
-  "fileMigrationId": 1
-}
-```
-
 ## Move File/Folder
 
 ### XML Element
@@ -275,6 +240,41 @@ The above example uses the payload as the content. You can also specify the cont
 
 ```xml
 <filescom:move-file config-ref="FilesCom"
+ path="path"
+ destination="destination"
+/>
+```
+
+
+### Example Response Payload
+
+```json
+{
+  "status": "pending",
+  "fileMigrationId": 1
+}
+```
+
+## Copy File/Folder
+
+### XML Element
+
+```xml
+<filescom:copy-file />
+```
+
+### Parameters
+
+| Parameter | Description |
+| --------- | ----------- |
+| path<br/>*String*<br/>**Required** | Path to operate on. |
+| destination<br/>*String*<br/>**Required** | Copy destination path. |
+
+
+### Example Operation
+
+```xml
+<filescom:copy-file config-ref="FilesCom"
  path="path"
  destination="destination"
 />

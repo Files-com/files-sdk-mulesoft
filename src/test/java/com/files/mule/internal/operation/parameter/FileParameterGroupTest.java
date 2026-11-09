@@ -38,8 +38,8 @@ public class FileParameterGroupTest {
   }
 
   @Test
-  public void testCopy() throws Exception {
-    final FileParameterGroup.Copy group = new FileParameterGroup.Copy();
+  public void testMove() throws Exception {
+    final FileParameterGroup.Move group = new FileParameterGroup.Move();
     group.setPath("path");
     assertThat(group.getPath(), equalTo("path"));
     group.setDestination("destination");
@@ -47,8 +47,8 @@ public class FileParameterGroupTest {
   }
 
   @Test
-  public void testMove() throws Exception {
-    final FileParameterGroup.Move group = new FileParameterGroup.Move();
+  public void testCopy() throws Exception {
+    final FileParameterGroup.Copy group = new FileParameterGroup.Copy();
     group.setPath("path");
     assertThat(group.getPath(), equalTo("path"));
     group.setDestination("destination");

@@ -171,12 +171,12 @@ public class FilesComConnection {
     return executeWithRegionRetry(() -> File.find(parameters, getRequestOptions()));
   }
 
-  public FileAction copyFile(final HashMap<String, Object> parameters) {
-    return executeWithRegionRetry(() -> File.copy(parameters, getRequestOptions()));
-  }
-
   public FileAction moveFile(final HashMap<String, Object> parameters) {
     return executeWithRegionRetry(() -> File.move(parameters, getRequestOptions()));
+  }
+
+  public FileAction copyFile(final HashMap<String, Object> parameters) {
+    return executeWithRegionRetry(() -> File.copy(parameters, getRequestOptions()));
   }
 
   public ListIterator<File> listForFolder(final HashMap<String, Object> parameters) {
