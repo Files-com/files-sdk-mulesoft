@@ -20,6 +20,10 @@
     <filescom:connection apiKey="filesmock-download-fixture-key" baseUrl="#[vars.downloadBaseUrl]" />
   </filescom:config>
 
+  <filescom:config name="FilesComUser">
+    <filescom:connection apiKey="mock-user-test-key" baseUrl="#[vars.userBaseUrl]" />
+  </filescom:config>
+
   <flow name="ShareLinkFlow">
     <filescom:create-share-link config-ref="FilesCom" paths='#[[""]]' />
     <set-variable variableName="bundleId" value="#[payload.id]" />
@@ -90,5 +94,19 @@
 
     <filescom:list-users config-ref="FilesCom" />
     <filescom:delete-user config-ref="FilesCom" id="#[vars.userId]" />
+  </flow>
+  <flow name="UserNotesOnlyFlow">
+    <filescom:update-user config-ref="FilesComUser" id="1" notes="Updated notes" />
+  </flow>
+
+  <flow name="UserCreationPermissionsFlow">
+    <filescom:create-user config-ref="FilesComUser" username="john.doe" />
+  </flow>
+
+  <flow name="UserBooleanInputsFlow">
+    <filescom:update-user config-ref="FilesComUser" id="1"
+      davPermission="#[vars.allowed]" ftpPermission="#[vars.allowed]" restapiPermission="#[vars.allowed]"
+      s3CompatibleEndpointPermission="#[vars.allowed]" sftpPermission="#[vars.allowed]"
+      requirePasswordChange="#[vars.allowed]" />
   </flow>
 </mule>

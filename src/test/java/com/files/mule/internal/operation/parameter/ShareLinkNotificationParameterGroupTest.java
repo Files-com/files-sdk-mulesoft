@@ -30,10 +30,10 @@ public class ShareLinkNotificationParameterGroupTest {
     final ShareLinkNotificationParameterGroup.Update group = new ShareLinkNotificationParameterGroup.Update();
     group.setId(1L);
     assertThat(group.getId(), equalTo(1L));
-    group.setNotifyOnRegistration(true);
-    assertThat(group.getNotifyOnRegistration(), equalTo(true));
-    group.setNotifyOnUpload(true);
-    assertThat(group.getNotifyOnUpload(), equalTo(true));
+    group.setNotifyOnRegistration("true");
+    assertThat(group.getNotifyOnRegistration(), equalTo("true"));
+    group.setNotifyOnUpload("true");
+    assertThat(group.getNotifyOnUpload(), equalTo("true"));
   }
 
   @Test

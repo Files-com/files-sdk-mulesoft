@@ -10,6 +10,7 @@ import org.mule.runtime.extension.api.annotation.param.display.Placement;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 import org.mule.runtime.extension.api.annotation.values.OfValues;
 
+import com.files.mule.internal.values.BooleanValueProvider;
 import com.files.mule.internal.values.UserValueProviders;
 import com.files.mule.internal.values.UserValueProviders.AuthenticationMethod;
 
@@ -158,14 +159,15 @@ public class UserParameterGroup {
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Is a password change required upon next user login?")
+    @OfValues(BooleanValueProvider.class)
     @Example("true")
-    public boolean requirePasswordChange;
+    public String requirePasswordChange;
 
-    public boolean getRequirePasswordChange() {
+    public String getRequirePasswordChange() {
       return requirePasswordChange;
     }
 
-    public void setRequirePasswordChange(final boolean requirePasswordChange) {
+    public void setRequirePasswordChange(final String requirePasswordChange) {
       this.requirePasswordChange = requirePasswordChange;
     }
 
@@ -280,14 +282,15 @@ public class UserParameterGroup {
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Can the user connect with WebDAV?")
+    @OfValues(BooleanValueProvider.class)
     @Example("true")
-    public boolean davPermission;
+    public String davPermission;
 
-    public boolean getDavPermission() {
+    public String getDavPermission() {
       return davPermission;
     }
 
-    public void setDavPermission(final boolean davPermission) {
+    public void setDavPermission(final String davPermission) {
       this.davPermission = davPermission;
     }
 
@@ -295,14 +298,15 @@ public class UserParameterGroup {
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Can the user access with FTP/FTPS?")
+    @OfValues(BooleanValueProvider.class)
     @Example("true")
-    public boolean ftpPermission;
+    public String ftpPermission;
 
-    public boolean getFtpPermission() {
+    public String getFtpPermission() {
       return ftpPermission;
     }
 
-    public void setFtpPermission(final boolean ftpPermission) {
+    public void setFtpPermission(final String ftpPermission) {
       this.ftpPermission = ftpPermission;
     }
 
@@ -355,14 +359,15 @@ public class UserParameterGroup {
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Is a password change required upon next user login?")
+    @OfValues(BooleanValueProvider.class)
     @Example("true")
-    public boolean requirePasswordChange;
+    public String requirePasswordChange;
 
-    public boolean getRequirePasswordChange() {
+    public String getRequirePasswordChange() {
       return requirePasswordChange;
     }
 
-    public void setRequirePasswordChange(final boolean requirePasswordChange) {
+    public void setRequirePasswordChange(final String requirePasswordChange) {
       this.requirePasswordChange = requirePasswordChange;
     }
 
@@ -370,14 +375,15 @@ public class UserParameterGroup {
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Can this user access the Web app, Desktop app, SDKs, or REST API?  (All of these tools use the API internally, so this is one unified permission set.)")
+    @OfValues(BooleanValueProvider.class)
     @Example("true")
-    public boolean restapiPermission;
+    public String restapiPermission;
 
-    public boolean getRestapiPermission() {
+    public String getRestapiPermission() {
       return restapiPermission;
     }
 
-    public void setRestapiPermission(final boolean restapiPermission) {
+    public void setRestapiPermission(final String restapiPermission) {
       this.restapiPermission = restapiPermission;
     }
 
@@ -385,14 +391,15 @@ public class UserParameterGroup {
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Can the user access the S3-compatible endpoint? Defaults to true.")
+    @OfValues(BooleanValueProvider.class)
     @Example("true")
-    public boolean s3CompatibleEndpointPermission;
+    public String s3CompatibleEndpointPermission;
 
-    public boolean getS3CompatibleEndpointPermission() {
+    public String getS3CompatibleEndpointPermission() {
       return s3CompatibleEndpointPermission;
     }
 
-    public void setS3CompatibleEndpointPermission(final boolean s3CompatibleEndpointPermission) {
+    public void setS3CompatibleEndpointPermission(final String s3CompatibleEndpointPermission) {
       this.s3CompatibleEndpointPermission = s3CompatibleEndpointPermission;
     }
 
@@ -400,14 +407,15 @@ public class UserParameterGroup {
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Can the user access with SFTP?")
+    @OfValues(BooleanValueProvider.class)
     @Example("true")
-    public boolean sftpPermission;
+    public String sftpPermission;
 
-    public boolean getSftpPermission() {
+    public String getSftpPermission() {
       return sftpPermission;
     }
 
-    public void setSftpPermission(final boolean sftpPermission) {
+    public void setSftpPermission(final String sftpPermission) {
       this.sftpPermission = sftpPermission;
     }
 

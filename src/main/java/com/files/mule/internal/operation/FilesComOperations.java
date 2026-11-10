@@ -11,7 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.inject.Inject;
+
 import org.mule.runtime.api.exception.MuleException;
+import org.mule.runtime.api.metadata.DataType;
+import org.mule.runtime.api.transformation.TransformationService;
 import org.mule.runtime.extension.api.annotation.error.Throws;
 import org.mule.runtime.extension.api.annotation.param.Connection;
 import org.mule.runtime.extension.api.annotation.param.Content;
@@ -92,6 +96,9 @@ public class FilesComOperations {
   private static final String USER_IDS = "user_ids";
   private static final String USER_ROOT = "user_root";
   private static final String USERNAME = "username";
+
+  @Inject
+  private TransformationService transformationService;
 
   /**
    * List Share Links
@@ -187,7 +194,10 @@ public class FilesComOperations {
       requestParameters.put(PERMISSIONS, parameters.getPermissions());
     }
 
-    requestParameters.put(REQUIRE_REGISTRATION, parameters.getRequireRegistration());
+    if (parameters.requireRegistration != null) {
+      requestParameters.put(REQUIRE_REGISTRATION, transformationService.transform(parameters.getRequireRegistration(), DataType.STRING, DataType.BOOLEAN));
+    }
+
     return new ShareLinkModel(connection.createBundle(requestParameters));
   }
 
@@ -365,8 +375,14 @@ public class FilesComOperations {
       requestParameters.put(ID, parameters.getId());
     }
 
-    requestParameters.put(NOTIFY_ON_REGISTRATION, parameters.getNotifyOnRegistration());
-    requestParameters.put(NOTIFY_ON_UPLOAD, parameters.getNotifyOnUpload());
+    if (parameters.notifyOnRegistration != null) {
+      requestParameters.put(NOTIFY_ON_REGISTRATION, transformationService.transform(parameters.getNotifyOnRegistration(), DataType.STRING, DataType.BOOLEAN));
+    }
+
+    if (parameters.notifyOnUpload != null) {
+      requestParameters.put(NOTIFY_ON_UPLOAD, transformationService.transform(parameters.getNotifyOnUpload(), DataType.STRING, DataType.BOOLEAN));
+    }
+
     return new ShareLinkNotificationModel(connection.updateBundleNotification(requestParameters));
   }
 
@@ -935,7 +951,10 @@ public class FilesComOperations {
       requestParameters.put(NOTES, parameters.getNotes());
     }
 
-    requestParameters.put(REQUIRE_PASSWORD_CHANGE, parameters.getRequirePasswordChange());
+    if (parameters.requirePasswordChange != null) {
+      requestParameters.put(REQUIRE_PASSWORD_CHANGE, transformationService.transform(parameters.getRequirePasswordChange(), DataType.STRING, DataType.BOOLEAN));
+    }
+
     if (parameters.userRoot != null) {
       requestParameters.put(USER_ROOT, parameters.getUserRoot());
     }
@@ -980,8 +999,14 @@ public class FilesComOperations {
       requestParameters.put(AUTHENTICATION_METHOD, parameters.getAuthenticationMethod());
     }
 
-    requestParameters.put(DAV_PERMISSION, parameters.getDavPermission());
-    requestParameters.put(FTP_PERMISSION, parameters.getFtpPermission());
+    if (parameters.davPermission != null) {
+      requestParameters.put(DAV_PERMISSION, transformationService.transform(parameters.getDavPermission(), DataType.STRING, DataType.BOOLEAN));
+    }
+
+    if (parameters.ftpPermission != null) {
+      requestParameters.put(FTP_PERMISSION, transformationService.transform(parameters.getFtpPermission(), DataType.STRING, DataType.BOOLEAN));
+    }
+
     if (parameters.name != null) {
       requestParameters.put(NAME, parameters.getName());
     }
@@ -994,10 +1019,22 @@ public class FilesComOperations {
       requestParameters.put(NOTES, parameters.getNotes());
     }
 
-    requestParameters.put(REQUIRE_PASSWORD_CHANGE, parameters.getRequirePasswordChange());
-    requestParameters.put(RESTAPI_PERMISSION, parameters.getRestapiPermission());
-    requestParameters.put(S3_COMPATIBLE_ENDPOINT_PERMISSION, parameters.getS3CompatibleEndpointPermission());
-    requestParameters.put(SFTP_PERMISSION, parameters.getSftpPermission());
+    if (parameters.requirePasswordChange != null) {
+      requestParameters.put(REQUIRE_PASSWORD_CHANGE, transformationService.transform(parameters.getRequirePasswordChange(), DataType.STRING, DataType.BOOLEAN));
+    }
+
+    if (parameters.restapiPermission != null) {
+      requestParameters.put(RESTAPI_PERMISSION, transformationService.transform(parameters.getRestapiPermission(), DataType.STRING, DataType.BOOLEAN));
+    }
+
+    if (parameters.s3CompatibleEndpointPermission != null) {
+      requestParameters.put(S3_COMPATIBLE_ENDPOINT_PERMISSION, transformationService.transform(parameters.getS3CompatibleEndpointPermission(), DataType.STRING, DataType.BOOLEAN));
+    }
+
+    if (parameters.sftpPermission != null) {
+      requestParameters.put(SFTP_PERMISSION, transformationService.transform(parameters.getSftpPermission(), DataType.STRING, DataType.BOOLEAN));
+    }
+
     if (parameters.userRoot != null) {
       requestParameters.put(USER_ROOT, parameters.getUserRoot());
     }

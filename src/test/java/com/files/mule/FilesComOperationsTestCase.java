@@ -6,11 +6,19 @@ package com.files.mule;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+import com.sun.net.httpserver.HttpServer;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
@@ -165,6 +173,65 @@ public class FilesComOperationsTestCase extends MuleArtifactFunctionalTestCase {
       }
 
       reportCleanup(failure, cleanup);
+    }
+  }
+
+  @Test
+  @SuppressWarnings("unchecked")
+  public void testUserCreationDefaultsAndOptionalUpdates() throws Exception {
+    final List<String> bodies = Collections.synchronizedList(new ArrayList<String>());
+    final HttpServer server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
+    server.createContext("/", exchange -> {
+      final String path = exchange.getRequestURI().getPath();
+      final boolean userRequest = path.equals("/api/rest/v1/users") || path.startsWith("/api/rest/v1/users/");
+      if (userRequest) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody(), StandardCharsets.UTF_8))) {
+          bodies.add(reader.lines().collect(Collectors.joining("\n")));
+        }
+      }
+      final byte[] response = (userRequest ? "{\"id\":1}" : "[]").getBytes(StandardCharsets.UTF_8);
+      exchange.getResponseHeaders().set("Content-Type", "application/json");
+      exchange.sendResponseHeaders("POST".equals(exchange.getRequestMethod()) ? 201 : 200, response.length);
+      try (OutputStream output = exchange.getResponseBody()) {
+        output.write(response);
+      } finally {
+        exchange.close();
+      }
+    });
+    server.start();
+    try {
+      final String baseUrl = "http://127.0.0.1:" + server.getAddress().getPort();
+      flowRunner("UserCreationPermissionsFlow").withVariable("userBaseUrl", baseUrl).run();
+      final Object updated = flowRunner("UserNotesOnlyFlow").withVariable("userBaseUrl", baseUrl)
+          .run().getMessage().getPayload().getValue();
+      final Object[][] cases = {{false, false}, {true, true}, {0, false}, {1, true}};
+      for (final Object[] input : cases) {
+        flowRunner("UserBooleanInputsFlow").withVariable("userBaseUrl", baseUrl).withVariable("allowed", input[0]).run();
+      }
+      assertThat(bodies.size(), is(2 + cases.length));
+      final Class<?> mapperClass = updated.getClass().getClassLoader().loadClass("com.fasterxml.jackson.databind.ObjectMapper");
+      final Object mapper = mapperClass.getConstructor().newInstance();
+      final Method readValue = mapperClass.getMethod("readValue", String.class, Class.class);
+      final Map<String, Object> creation = (Map<String, Object>) readValue.invoke(mapper, bodies.get(0), Map.class);
+      final Map<String, Object> notesUpdate = (Map<String, Object>) readValue.invoke(mapper, bodies.get(1), Map.class);
+      assertThat(notesUpdate.get("notes"), is((Object) "Updated notes"));
+      assertThat(creation.containsKey("require_password_change"), is(false));
+      assertThat(notesUpdate.containsKey("require_password_change"), is(false));
+      for (final String name : new String[]{"dav_permission", "ftp_permission", "restapi_permission",
+          "s3_compatible_endpoint_permission", "sftp_permission"}) {
+        assertThat(name + " on creation", creation.get(name), is((Object) Boolean.TRUE));
+        assertThat(name + " sent by notes-only update", notesUpdate.containsKey(name), is(false));
+        for (int i = 0; i < cases.length; i++) {
+          final Map<String, Object> request = (Map<String, Object>) readValue.invoke(mapper, bodies.get(i + 2), Map.class);
+          assertThat(name + " sent for " + cases[i][0], request.get(name), is(cases[i][1]));
+        }
+      }
+      for (int i = 0; i < cases.length; i++) {
+        final Map<String, Object> request = (Map<String, Object>) readValue.invoke(mapper, bodies.get(i + 2), Map.class);
+        assertThat("require_password_change sent for " + cases[i][0], request.get("require_password_change"), is(cases[i][1]));
+      }
+    } finally {
+      server.stop(0);
     }
   }
 

@@ -12,6 +12,7 @@ import org.mule.runtime.extension.api.annotation.param.display.Placement;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
 import org.mule.runtime.extension.api.annotation.values.OfValues;
 
+import com.files.mule.internal.values.BooleanValueProvider;
 import com.files.mule.internal.values.ShareLinkValueProviders;
 import com.files.mule.internal.values.ShareLinkValueProviders.Permissions;
 
@@ -146,14 +147,15 @@ public class ShareLinkParameterGroup {
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Show a registration page that captures the downloader's name and email address?")
+    @OfValues(BooleanValueProvider.class)
     @Example("false")
-    public boolean requireRegistration;
+    public String requireRegistration;
 
-    public boolean getRequireRegistration() {
+    public String getRequireRegistration() {
       return requireRegistration;
     }
 
-    public void setRequireRegistration(final boolean requireRegistration) {
+    public void setRequireRegistration(final String requireRegistration) {
       this.requireRegistration = requireRegistration;
     }
 

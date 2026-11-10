@@ -8,6 +8,9 @@ import org.mule.runtime.extension.api.annotation.param.Parameter;
 import org.mule.runtime.extension.api.annotation.param.display.Example;
 import org.mule.runtime.extension.api.annotation.param.display.Placement;
 import org.mule.runtime.extension.api.annotation.param.display.Summary;
+import org.mule.runtime.extension.api.annotation.values.OfValues;
+
+import com.files.mule.internal.values.BooleanValueProvider;
 
 public class ShareLinkNotificationParameterGroup {
   private ShareLinkNotificationParameterGroup() {
@@ -81,14 +84,15 @@ public class ShareLinkNotificationParameterGroup {
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Triggers bundle notification when a registration action occurs for it.")
+    @OfValues(BooleanValueProvider.class)
     @Example("true")
-    public boolean notifyOnRegistration;
+    public String notifyOnRegistration;
 
-    public boolean getNotifyOnRegistration() {
+    public String getNotifyOnRegistration() {
       return notifyOnRegistration;
     }
 
-    public void setNotifyOnRegistration(final boolean notifyOnRegistration) {
+    public void setNotifyOnRegistration(final String notifyOnRegistration) {
       this.notifyOnRegistration = notifyOnRegistration;
     }
 
@@ -96,14 +100,15 @@ public class ShareLinkNotificationParameterGroup {
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
     @Summary("Triggers bundle notification when a upload action occurs for it.")
+    @OfValues(BooleanValueProvider.class)
     @Example("true")
-    public boolean notifyOnUpload;
+    public String notifyOnUpload;
 
-    public boolean getNotifyOnUpload() {
+    public String getNotifyOnUpload() {
       return notifyOnUpload;
     }
 
-    public void setNotifyOnUpload(final boolean notifyOnUpload) {
+    public void setNotifyOnUpload(final String notifyOnUpload) {
       this.notifyOnUpload = notifyOnUpload;
     }
 
