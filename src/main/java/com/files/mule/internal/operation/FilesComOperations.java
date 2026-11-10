@@ -980,6 +980,8 @@ public class FilesComOperations {
       requestParameters.put(AUTHENTICATION_METHOD, parameters.getAuthenticationMethod());
     }
 
+    requestParameters.put(DAV_PERMISSION, parameters.getDavPermission());
+    requestParameters.put(FTP_PERMISSION, parameters.getFtpPermission());
     if (parameters.name != null) {
       requestParameters.put(NAME, parameters.getName());
     }
@@ -993,6 +995,9 @@ public class FilesComOperations {
     }
 
     requestParameters.put(REQUIRE_PASSWORD_CHANGE, parameters.getRequirePasswordChange());
+    requestParameters.put(RESTAPI_PERMISSION, parameters.getRestapiPermission());
+    requestParameters.put(S3_COMPATIBLE_ENDPOINT_PERMISSION, parameters.getS3CompatibleEndpointPermission());
+    requestParameters.put(SFTP_PERMISSION, parameters.getSftpPermission());
     if (parameters.userRoot != null) {
       requestParameters.put(USER_ROOT, parameters.getUserRoot());
     }
@@ -1005,11 +1010,6 @@ public class FilesComOperations {
       requestParameters.put(USERNAME, parameters.getUsername());
     }
 
-    requestParameters.put(DAV_PERMISSION, true);
-    requestParameters.put(FTP_PERMISSION, true);
-    requestParameters.put(RESTAPI_PERMISSION, true);
-    requestParameters.put(S3_COMPATIBLE_ENDPOINT_PERMISSION, true);
-    requestParameters.put(SFTP_PERMISSION, true);
     return new UserModel(connection.updateUser(requestParameters));
   }
 

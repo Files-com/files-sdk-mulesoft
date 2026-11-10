@@ -279,6 +279,36 @@ public class UserParameterGroup {
     @Parameter
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
+    @Summary("Can the user connect with WebDAV?")
+    @Example("true")
+    public boolean davPermission;
+
+    public boolean getDavPermission() {
+      return davPermission;
+    }
+
+    public void setDavPermission(final boolean davPermission) {
+      this.davPermission = davPermission;
+    }
+
+    @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
+    @Optional
+    @Summary("Can the user access with FTP/FTPS?")
+    @Example("true")
+    public boolean ftpPermission;
+
+    public boolean getFtpPermission() {
+      return ftpPermission;
+    }
+
+    public void setFtpPermission(final boolean ftpPermission) {
+      this.ftpPermission = ftpPermission;
+    }
+
+    @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
+    @Optional
     @Summary("User's full name")
     @Example("John Doe")
     public String name;
@@ -334,6 +364,51 @@ public class UserParameterGroup {
 
     public void setRequirePasswordChange(final boolean requirePasswordChange) {
       this.requirePasswordChange = requirePasswordChange;
+    }
+
+    @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
+    @Optional
+    @Summary("Can this user access the Web app, Desktop app, SDKs, or REST API?  (All of these tools use the API internally, so this is one unified permission set.)")
+    @Example("true")
+    public boolean restapiPermission;
+
+    public boolean getRestapiPermission() {
+      return restapiPermission;
+    }
+
+    public void setRestapiPermission(final boolean restapiPermission) {
+      this.restapiPermission = restapiPermission;
+    }
+
+    @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
+    @Optional
+    @Summary("Can the user access the S3-compatible endpoint? Defaults to true.")
+    @Example("true")
+    public boolean s3CompatibleEndpointPermission;
+
+    public boolean getS3CompatibleEndpointPermission() {
+      return s3CompatibleEndpointPermission;
+    }
+
+    public void setS3CompatibleEndpointPermission(final boolean s3CompatibleEndpointPermission) {
+      this.s3CompatibleEndpointPermission = s3CompatibleEndpointPermission;
+    }
+
+    @Parameter
+    @Placement(tab = Placement.DEFAULT_TAB)
+    @Optional
+    @Summary("Can the user access with SFTP?")
+    @Example("true")
+    public boolean sftpPermission;
+
+    public boolean getSftpPermission() {
+      return sftpPermission;
+    }
+
+    public void setSftpPermission(final boolean sftpPermission) {
+      this.sftpPermission = sftpPermission;
     }
 
     @Parameter

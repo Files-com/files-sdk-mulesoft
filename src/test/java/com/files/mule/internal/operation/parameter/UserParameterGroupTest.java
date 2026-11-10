@@ -56,6 +56,10 @@ public class UserParameterGroupTest {
     assertThat(group.getPassword(), equalTo(""));
     group.setAuthenticationMethod("password");
     assertThat(group.getAuthenticationMethod(), equalTo("password"));
+    group.setDavPermission(true);
+    assertThat(group.getDavPermission(), equalTo(true));
+    group.setFtpPermission(true);
+    assertThat(group.getFtpPermission(), equalTo(true));
     group.setName("John Doe");
     assertThat(group.getName(), equalTo("John Doe"));
     group.setCompany("ACME Corp.");
@@ -64,6 +68,12 @@ public class UserParameterGroupTest {
     assertThat(group.getNotes(), equalTo("Internal notes on this user."));
     group.setRequirePasswordChange(true);
     assertThat(group.getRequirePasswordChange(), equalTo(true));
+    group.setRestapiPermission(true);
+    assertThat(group.getRestapiPermission(), equalTo(true));
+    group.setS3CompatibleEndpointPermission(true);
+    assertThat(group.getS3CompatibleEndpointPermission(), equalTo(true));
+    group.setSftpPermission(true);
+    assertThat(group.getSftpPermission(), equalTo(true));
     group.setUserRoot("example");
     assertThat(group.getUserRoot(), equalTo("example"));
     group.setUserHome("example");

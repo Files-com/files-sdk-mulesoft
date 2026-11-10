@@ -412,10 +412,15 @@ These authentication methods can be configured during user creation and can be m
 | groupIds<br/>*String* | A list of group ids to associate this user with.  Comma delimited. |
 | password<br/>*String* | User password. |
 | authenticationMethod<br/>*String* | How is this user authenticated?<br/>Possible values: `password`, `email_signup` |
+| davPermission<br/>*boolean* | Can the user connect with WebDAV? |
+| ftpPermission<br/>*boolean* | Can the user access with FTP/FTPS? |
 | name<br/>*String* | User's full name |
 | company<br/>*String* | User's company |
 | notes<br/>*String* | Any internal notes on the user |
 | requirePasswordChange<br/>*boolean* | Is a password change required upon next user login? |
+| restapiPermission<br/>*boolean* | Can this user access the Web app, Desktop app, SDKs, or REST API?  (All of these tools use the API internally, so this is one unified permission set.) |
+| s3CompatibleEndpointPermission<br/>*boolean* | Can the user access the S3-compatible endpoint? Defaults to true. |
+| sftpPermission<br/>*boolean* | Can the user access with SFTP? |
 | userRoot<br/>*String* | If filesystem layout is user_root, this path is the root path the user is fixed to for all interfaces. If the filesystem layout is site_root or partner_root, this acts as a root folder only for FTP and SFTP (SFTP applicability also requires a site-wide setting to be set). For partner_root layout, this path is relative to the Partner root folder for all callers and blank opts out of an additional protocol root. In this situation, this path is not applied to the API, Desktop, or Web interface. |
 | userHome<br/>*String* | Home folder for FTP/SFTP. For users with the partner_root filesystem layout, this path is relative to the Partner root folder. In all other cases, it is an absolute path. Only applies to FTP and SFTP, and not any other interface. |
 | username<br/>*String* | User's username |
@@ -429,10 +434,15 @@ These authentication methods can be configured during user creation and can be m
  email="john.doe@files.com"
  groupIds="example"
  authenticationMethod="password"
+ davPermission="true"
+ ftpPermission="true"
  name="John Doe"
  company="ACME Corp."
  notes="Internal notes on this user."
  requirePasswordChange="true"
+ restapiPermission="true"
+ s3CompatibleEndpointPermission="true"
+ sftpPermission="true"
  userRoot="example"
  userHome="example"
  username="user"
