@@ -2,6 +2,12 @@
 
 The Files.com Connector allows you to interact with the Files.com API using MuleSoft, providing access to a wide range resources, including users, groups, folders, files, and more.
 
+## 1.1.1
+
+### Bug Fixes
+
+* User - Update preserves existing protocol permissions and Require Password Change when those inputs are omitted. Explicit `true` and `false` values are applied. User - Create continues to enable protocol permissions.
+
 ## 1.1.0
 
 ### New Features
