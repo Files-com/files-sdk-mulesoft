@@ -17,7 +17,11 @@ public class FilesComConfig {
 
   public FilesComConfig() {
     try (final InputStream file = FilesComConfig.class.getResourceAsStream("/filescom-connector.properties")) {
-      properties.load(file);
+      if (file == null) {
+        LOGGER.warn("could not find configurator properties /filescom-connector.properties on the classpath");
+      } else {
+        properties.load(file);
+      }
     } catch (IOException e) {
       LOGGER.warn("could not load configurator properties");
     }
