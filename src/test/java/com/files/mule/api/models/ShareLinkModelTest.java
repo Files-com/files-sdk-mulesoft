@@ -78,6 +78,8 @@ public class ShareLinkModelTest {
     assertThat(model.getEffectiveExpiresAt(), equalTo(ZonedDateTime.parse("2000-01-01T01:00:00Z")));
     model.setMaxUses(1L);
     assertThat(model.getMaxUses(), equalTo(1L));
+    model.setEffectiveMaxUses(1L);
+    assertThat(model.getEffectiveMaxUses(), equalTo(1L));
     model.setInternalName("Quarterly reports");
     assertThat(model.getInternalName(), equalTo("Quarterly reports"));
     model.setNote("The internal note on the bundle.");

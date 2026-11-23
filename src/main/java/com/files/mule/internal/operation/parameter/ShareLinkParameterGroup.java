@@ -85,7 +85,7 @@ public class ShareLinkParameterGroup {
     @Parameter
     @Placement(tab = Placement.DEFAULT_TAB)
     @Optional
-    @Summary("Maximum number of times bundle can be accessed")
+    @Summary("Visitor limit configured for this Share Link. Null uses the Site-wide cap, if set. The configured limit cannot exceed the Site-wide cap.")
     @Example("1")
     public Long maxUses;
 

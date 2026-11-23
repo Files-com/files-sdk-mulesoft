@@ -72,10 +72,11 @@ public class ShareLinkModel implements Serializable {
     this.effectiveExpiresAt = SdkFields.read(bundle, "effectiveExpiresAt", Date.class,
         value -> ZonedDateTime.ofInstant(value.toInstant(), ZoneId.systemDefault()));
     this.maxUses = SdkFields.read(bundle, "maxUses", Long.class);
-    this.internalName = SdkFields.read(bundle, "internalName", String.class);
+    this.effectiveMaxUses = SdkFields.read(bundle, "effectiveMaxUses", Long.class);
   }
 
   private void initGroup4(final Bundle bundle) {
+    this.internalName = SdkFields.read(bundle, "internalName", String.class);
     this.note = SdkFields.read(bundle, "note", String.class);
     this.pathTemplate = SdkFields.read(bundle, "pathTemplate", String.class);
     this.pathTemplateTimeZone = SdkFields.read(bundle, "pathTemplateTimeZone", String.class);
@@ -85,10 +86,10 @@ public class ShareLinkModel implements Serializable {
     this.username = SdkFields.read(bundle, "username", String.class);
     this.groupId = SdkFields.read(bundle, "groupId", Long.class);
     this.clickwrapId = SdkFields.read(bundle, "clickwrapId", Long.class);
-    this.inboxId = SdkFields.read(bundle, "inboxId", Long.class);
   }
 
   private void initGroup5(final Bundle bundle) {
+    this.inboxId = SdkFields.read(bundle, "inboxId", Long.class);
     this.watermarkAttachment = SdkFields.read(bundle, "watermarkAttachment", com.files.models.Image.class, ImageModel::new);
     this.watermarkValue = SdkFields.read(bundle, "watermarkValue", Object.class);
     this.sendOneTimePasswordToRecipientAtRegistration = Boolean.TRUE.equals(SdkFields.read(bundle, "sendOneTimePasswordToRecipientAtRegistration", Boolean.class));
@@ -98,10 +99,10 @@ public class ShareLinkModel implements Serializable {
     this.paths = SdkFields.read(bundle, "paths", String[].class, Arrays::asList);
     this.password = SdkFields.read(bundle, "password", String.class);
     this.formFieldSetId = SdkFields.read(bundle, "formFieldSetId", Long.class);
-    this.createSnapshot = Boolean.TRUE.equals(SdkFields.read(bundle, "createSnapshot", Boolean.class));
   }
 
   private void initGroup6(final Bundle bundle) {
+    this.createSnapshot = Boolean.TRUE.equals(SdkFields.read(bundle, "createSnapshot", Boolean.class));
     this.finalizeSnapshot = Boolean.TRUE.equals(SdkFields.read(bundle, "finalizeSnapshot", Boolean.class));
     this.watermarkAttachmentDelete = Boolean.TRUE.equals(SdkFields.read(bundle, "watermarkAttachmentDelete", Boolean.class));
   }
@@ -394,6 +395,16 @@ public class ShareLinkModel implements Serializable {
 
   public void setMaxUses(final Long maxUses) {
     this.maxUses = maxUses;
+  }
+
+  private Long effectiveMaxUses;
+
+  public Long getEffectiveMaxUses() {
+    return effectiveMaxUses;
+  }
+
+  public void setEffectiveMaxUses(final Long effectiveMaxUses) {
+    this.effectiveMaxUses = effectiveMaxUses;
   }
 
   private String internalName;
