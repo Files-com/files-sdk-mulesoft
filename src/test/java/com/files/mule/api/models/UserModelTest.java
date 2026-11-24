@@ -167,8 +167,8 @@ public class UserModelTest {
     assertThat(model.getSiteId(), equalTo(1L));
     model.setWorkspaceId(1L);
     assertThat(model.getWorkspaceId(), equalTo(1L));
-    model.setDefaultWorkspaceId(1L);
-    assertThat(model.getDefaultWorkspaceId(), equalTo(1L));
+    model.setPreferredWorkspaceId(1L);
+    assertThat(model.getPreferredWorkspaceId(), equalTo(1L));
     model.setSkipWelcomeScreen(true);
     assertThat(model.getSkipWelcomeScreen(), equalTo(true));
     model.setFtpTlsSessionReuseRequired("use_system_setting");

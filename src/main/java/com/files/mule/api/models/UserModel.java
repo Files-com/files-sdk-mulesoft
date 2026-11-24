@@ -160,7 +160,7 @@ public class UserModel implements Serializable {
     this.workspaceAdmin = Boolean.TRUE.equals(SdkFields.read(user, "workspaceAdmin", Boolean.class));
     this.siteId = SdkFields.read(user, "siteId", Long.class);
     this.workspaceId = SdkFields.read(user, "workspaceId", Long.class);
-    this.defaultWorkspaceId = SdkFields.read(user, "defaultWorkspaceId", Long.class);
+    this.preferredWorkspaceId = SdkFields.read(user, "preferredWorkspaceId", Long.class);
     this.skipWelcomeScreen = Boolean.TRUE.equals(SdkFields.read(user, "skipWelcomeScreen", Boolean.class));
     this.ftpTlsSessionReuseRequired = SdkFields.read(user, "ftpTlsSessionReuseRequired", String.class);
     this.encryptionRequired = SdkFields.read(user, "sslRequired", String.class);
@@ -944,14 +944,14 @@ public class UserModel implements Serializable {
     this.workspaceId = workspaceId;
   }
 
-  private Long defaultWorkspaceId;
+  private Long preferredWorkspaceId;
 
-  public Long getDefaultWorkspaceId() {
-    return defaultWorkspaceId;
+  public Long getPreferredWorkspaceId() {
+    return preferredWorkspaceId;
   }
 
-  public void setDefaultWorkspaceId(final Long defaultWorkspaceId) {
-    this.defaultWorkspaceId = defaultWorkspaceId;
+  public void setPreferredWorkspaceId(final Long preferredWorkspaceId) {
+    this.preferredWorkspaceId = preferredWorkspaceId;
   }
 
   private boolean skipWelcomeScreen;
