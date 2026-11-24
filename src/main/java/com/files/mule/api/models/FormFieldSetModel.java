@@ -10,7 +10,7 @@ import java.util.List;
 import com.files.models.FormFieldSet;
 
 /**
- * A Form Field Set is a custom form to be used for bundle and inbox registrations.
+ * A Form Field Set is a custom form that can be used for Share Link and Inbox registrations, Partner Channel uploads, and Shared Workflows.
  *
  * Each Form Field Set contains one or more Form Fields. A form and all of its form fields are submitted in a single create request. The order of form fields in the array is the order they will be displayed.
  *
