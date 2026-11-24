@@ -42,6 +42,7 @@ public class GroupModel implements Serializable {
     this.s3CompatibleEndpointPermission = Boolean.TRUE.equals(SdkFields.read(group, "s3CompatibleEndpointPermission", Boolean.class));
     this.desktopConfigurationProfileId = SdkFields.read(group, "desktopConfigurationProfileId", Long.class);
     this.integrationCentricProfileId = SdkFields.read(group, "integrationCentricProfileId", Long.class);
+    this.preferredWorkspaceId = SdkFields.read(group, "preferredWorkspaceId", Long.class);
     this.siteId = SdkFields.read(group, "siteId", Long.class);
     this.workspaceId = SdkFields.read(group, "workspaceId", Long.class);
   }
@@ -194,6 +195,16 @@ public class GroupModel implements Serializable {
 
   public void setIntegrationCentricProfileId(final Long integrationCentricProfileId) {
     this.integrationCentricProfileId = integrationCentricProfileId;
+  }
+
+  private Long preferredWorkspaceId;
+
+  public Long getPreferredWorkspaceId() {
+    return preferredWorkspaceId;
+  }
+
+  public void setPreferredWorkspaceId(final Long preferredWorkspaceId) {
+    this.preferredWorkspaceId = preferredWorkspaceId;
   }
 
   private Long siteId;
